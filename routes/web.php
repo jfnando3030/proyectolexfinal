@@ -51,10 +51,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 	Route::get('administracion','WelcomeController@admin');
 	Route::get('administracion/mired','WelcomeController@mired');
-
-
-	// para abogados 
-
 	
 	Route::get('administracion/invita/bango','WelcomeController@invita_bango');
 	Route::get('administracion/saber_niveles/{id}','WelcomeController@saber_niveles');
@@ -67,6 +63,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::resource('administracion/perfil', 'PerfilController');
 	Route::resource('administracion/herramientas', 'HerramientasController');
 	Route::resource('administracion/documentos', 'DocumentoController');
+	Route::resource('administracion/usuarios', 'UserController');
+
+
+
 
 
 
