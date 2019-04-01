@@ -15,7 +15,6 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('codpatrocinador');
             $table->string('nombres');
             $table->string('apellidos');
             $table->string('cedula')->unique();
@@ -23,25 +22,11 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('direccion')->nullable();
-            $table->integer('idciudad')->nullable();
-            $table->integer('idprovincia')->nullable();
             $table->string('telefono')->nullable();
-            $table->date('fechanacim')->nullable();
-            $table->string('sexo')->nullable();
-            $table->char('estado',1)->default(1);
-            $table->string('activado')->nullable();
             $table->string('celular')->nullable();
-            $table->string('emailrecupera')->nullable();
+            $table->char('estado',1)->default(1);
             $table->rememberToken();
             $table->timestamps();
-            $table->date('fechaactivacion')->nullable();
-            $table->time('horaactivacion')->nullable();
-            $table->string('tipopagos')->nullable();
-            $table->string('titular')->nullable();
-            $table->integer('codigobco')->nullable();
-            $table->string('numctatarjeta')->nullable();
-            $table->string('codigoseguridad')->nullable();
-            $table->string('fechavencimiento')->nullable();
             $table->string('rol');
             $table->string('path')->nullable(); //nullable significa que permite valores nulos
         });
