@@ -57,10 +57,19 @@
                         <div class="brand_logo_container">
                             <a href="{{url('/')}}" onclick="return myFunction();" title="Ir al inicio">  <img src="{{url('frontend/images/redondo.png')}}" class="brand_logo" alt="Logo"> </a>
                         </div> 
+
+                     
                     </div>
                     <div class="d-flex justify-content-center form_container">
+
+                         
+                        
                            
                         <form style="width: 100%;" method="POST" action="{{ route('login') }}">
+                                <div align="center">
+                                        <label style="color:white;     font-weight: bold;font-size: 20px;"> Wilson Merino & Asociados </label>
+        
+                                        </div>
                         @csrf
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
                                     <div class="row">
@@ -82,7 +91,10 @@
                                      @endif
 
                                      <br>
+                                    
                             <div class="input-group mb-3{{ $errors->has('cedula') ? ' has-error' : '' }}">
+
+                             
                                 
                     
                                     <span  class="input-group-text"><i class="fas fa-user" style="    padding-right: 3px;"></i></span>

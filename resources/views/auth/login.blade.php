@@ -85,6 +85,7 @@
 
                                      <br>
                             <div class="input-group mb-3{{ $errors->has('cedula') ? ' has-error' : '' }}">
+                              
                                 
                     
                                     <span  class="input-group-text"><i class="fas fa-user" style="    padding-right: 3px;"></i></span>
