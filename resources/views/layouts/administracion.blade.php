@@ -131,6 +131,26 @@
                             <i class="fa fa-users"></i>¡ Invita gente a BanGo !</a>
                         </li>
 
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#" id="menu_letras">
+                                <i class="fas fa-user"></i>Usuarios
+                                <span class="arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a id="menu_letras" href="{{route('usuarios.create')}}" onclick="return myFunction();">
+                                        <i class="fas fa-file"></i>Agregar</a>
+                                </li>
+                                <li>
+                                    <a id="menu_letras"  href="{{route('usuarios.index')}}" onclick="return myFunction();">
+                                        <i class="fas fa-table"></i>Listado</a>
+                                </li>
+                            
+                            </ul>
+                        </li>
+
                         
 
                         <li class="has-sub">

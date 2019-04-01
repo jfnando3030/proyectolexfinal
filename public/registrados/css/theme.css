@@ -2275,7 +2275,7 @@ section {
     z-index: 1001;
     top: 0;
     right: 0;
-    left: 210px;
+    left: 190px;
 }
 
 @media (max-width: 991px) {
@@ -14700,7 +14700,7 @@ section {
 .img_bango{
     width: 100%;
     height: 60%;
-    padding-left: 30px;
+    padding-left: 10px;
 
   }
 
