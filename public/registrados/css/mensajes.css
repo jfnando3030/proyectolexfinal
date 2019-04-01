@@ -1,0 +1,30 @@
+.aprobado{
+
+    background-color: #E9FCFA;
+    border: 1px dashed #006600;
+    padding: 8px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: black;
+    font-weight: bold;
+}
+
+.rechazado{
+
+    background-color: #ff4040;
+
+    padding: 8px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: black;
+    font-weight: bold;
+}
+
+.disabled {
+    pointer-events:none; 
+    opacity:0.6;        
+}
+
+ 

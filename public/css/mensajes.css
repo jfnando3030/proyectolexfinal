@@ -1,0 +1,26 @@
+.aprobado{
+
+    background-color: #E9FCFA;
+    padding: 8px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+}
+
+.rechazado{
+
+    background-color: #FFEDED;
+    border: 1px dashed #FA206A;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.disabled {
+    pointer-events:none; 
+    opacity:0.6;        
+}
+
+
+
+ 

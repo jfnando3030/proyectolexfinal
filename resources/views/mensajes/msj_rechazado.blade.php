@@ -1,0 +1,2 @@
+<br/><div class="error" style='background-color: #e11a20;padding: 8px;margin-bottom: 10px;margin-left: 10px;margin-right: 10px;color: black;font-weight: bold; 
+text-align: center;width: 100%;'><label style='color:white;'>  {{ session('mensaje-error') }}</label>  </div> 
