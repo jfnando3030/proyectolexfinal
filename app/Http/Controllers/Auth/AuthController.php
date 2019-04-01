@@ -27,43 +27,18 @@ class AuthController extends Controller
 
     public function postRegister(UserFrontendRequest $request)
     {
-
-        if($request['patrocinador'] == "N"){
-            User::create([
-                'nombres' => $request['nombres'],
-                'email' => $request['email'],
-                'password' => Hash::make($request['password']),
-                'codpatrocinador' => $request['cod_patrocinador'],
-                'apellidos' => $request['apellidos'],
-                'cedula' => $request['cedula'],
-                'rol' => "Afiliado",
-            ]);
-
-            //$this->notify(new Notifications\VerifyEmail);
-
-            return Redirect::to('login')->with('mensaje-registro', 'Usuario Registrado Correctamente, proceda a logearse');
-        }else{
-            
-            $existe_codigo = User::where('cedula', $request['cod_patrocinador'] )->get();
-
-            if ($existe_codigo->count() == 0){
-                $msj = 'El código patrocinador ' . $request['cod_patrocinador'] . '  no esta Registrado';
-                return back()->withInput()->with('warning', $msj);
-            }else{
-                User::create([
-                    'nombres' => $request['nombres'],
-                    'email' => $request['email'],
-                    'password' => Hash::make($request['password']),
-                    'codpatrocinador' => $request['cod_patrocinador'],
-                    'apellidos' => $request['apellidos'],
-                    'cedula' => $request['cedula'],
-                    'rol' => "Afiliado",
-                ]);
                 
-                return Redirect::to('login')->with('mensaje-registro', 'Usuario Registrado Correctamente, proceda a logearse');
+        User::create([
+            'nombres' => $request['nombres'],
+            'apellidos' => $request['apellidos'],
+            'cedula' => $request['cedula'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+            'rol' => "Registrado",
+            'telefono' => $request['telefono'],
+            'celular' => $request['celular'],
+        ]);
 
-            }
-    
-        }
+        return Redirect::to('login')->with('mensaje-registro', 'Usuario Registrado Correctamente, proceda a logearse');
     }
 }

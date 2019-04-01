@@ -69,7 +69,6 @@
                                         @if (session('mensaje-error'))
                                             @include('mensajes.msj_rechazado')
                                         @endif
-                                        
 
 
                                     </div>
@@ -85,36 +84,6 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12" style="padding-bottom:15px">
-                                            <div class="row">
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                                                    <label align="center"> ¿ Tiene código de patrocinador ?
-                                                </div>
-
-                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
-                                                    <label class="top-label container_radio">Si
-                                                        <input type="radio" onclick="OnChangeRadio (this)" name="patrocinador" id="patrocinador" value="S">
-                                                        <span class="checkmark2"></span>
-                                                    </label>
-                                                    <label class="top-label container_radio">No
-                                                        <input type="radio" checked="checked" onclick="OnChangeRadio (this)" name="patrocinador" id="patrocinador" value="N">
-                                                        <span class="checkmark2"></span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <div class="input-group mb-3{{ $errors->has('cod_patrocinador') ? ' has-error' : '' }}">
-                                                <span  class="input-group-text"><i class="fas fa-ad" style="    padding-right: 3px;"></i></span>   
-                                                <input id="cod_patrocinador" type="text" class="form-control" name="cod_patrocinador" value="0992760621001" placeholder="Ingrese el codigo patrocinador"  value="{{ old('cod_patrocinador') }}" required maxlength="10" readonly=""> 
-                                            </div>
-                                            @if ($errors->has('cod_patrocinador'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('cod_patrocinador') }}</strong>
-                                                </span>
-                                            @endif
-                                        </div>
 
                                         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="input-group mb-3{{ $errors->has('cedula') ? ' has-error' : '' }}">
@@ -166,6 +135,33 @@
                                             @if ($errors->has('email'))
                                                 <span >
                                                     <strong style="color:white; padding-bottom:10px;">{{ $errors->first('email') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+
+
+                                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div class="input-group mb-3{{ $errors->has('telefono') ? ' has-error' : '' }}">
+                                                <span  class="input-group-text"><i class="fas fa-phone" style="    padding-right: 3px;"></i></span>   
+                                                <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Ingrese número de teléfono"  value="{{ old('telefono') }}" required >
+                                            </div>
+
+                                            @if ($errors->has('telefono'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('telefono') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div>
+
+                                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div class="input-group mb-3{{ $errors->has('celular') ? ' has-error' : '' }}">
+                                                <span  class="input-group-text"><i class="fas fa-phone" style="    padding-right: 3px;"></i></span>   
+                                                <input id="celular" type="text" class="form-control" name="celular" placeholder="Ingrese su número de celular"  value="{{ old('celular') }}" required >
+                                            </div>
+
+                                            @if ($errors->has('celular'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('celular') }}</strong>
                                                 </span>
                                             @endif
                                         </div>
