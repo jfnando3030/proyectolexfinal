@@ -51,6 +51,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 	Route::get('administracion','WelcomeController@admin');
 	Route::get('administracion/mired','WelcomeController@mired');
+
+
+	// para abogados 
+
 	
 	Route::get('administracion/invita/bango','WelcomeController@invita_bango');
 	Route::get('administracion/saber_niveles/{id}','WelcomeController@saber_niveles');
