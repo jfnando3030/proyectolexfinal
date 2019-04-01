@@ -35,8 +35,6 @@
 
         <div class="loader"></div>
 
-
-    <!--welcome area start-->
     <div class="welcome-area" id="home">
       
         <div class="container banner2">
