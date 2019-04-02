@@ -89,10 +89,15 @@ class TarifaController extends Controller
      * @param  \App\Tarifa  $tarifa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tarifa $tarifa)
+    public function update(Request $request, $id)
     {
         //
+        $this->show($id);
+        $tarifa->fill($request->all());
 
+        if($tarifa->save()){
+            return $this->index();
+        }
     }
 
     /**
