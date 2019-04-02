@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Tarifa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class TarifaController extends Controller
 {
@@ -20,7 +21,9 @@ class TarifaController extends Controller
     public function index()
     {
         //
-        //return view('tarifa.tarifa');
+        $tarifas = Tarifa::where('estado',1)->orderBy('id')->paginate(2);
+        // dd($tarifas[0]->tarifa);
+        return view('tarifa.index')->with( 'tarifas' , $tarifas);
     }
 
     /**
@@ -31,7 +34,7 @@ class TarifaController extends Controller
     public function create()
     {
         //
-        return view('tarifa.tarifa');
+        return view('tarifa.create');
     }
 
     /**
@@ -43,10 +46,14 @@ class TarifaController extends Controller
     public function store(Request $request)
     {
         //
-        $tarifaM = new Tarifa;
-        /* $tarfiM->create([
-            ''
-        ]);*/
+        $tarifaCreada = Tarifa::create([
+            'tarifa'=>$request->nombre,
+            'precio'=>$request->precio,
+            'descripcion'=>$request->descripcion
+        ]);
+
+        if($tarifaCreada->tarifa != null){ echo("Guardado con éxito");}
+        else{ echo("Error al guardar");}
     } 
 
     /**
@@ -63,12 +70,16 @@ class TarifaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Tarifa  $tarifa
+     * @param $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tarifa $tarifa)
+    public function edit($id)
     {
         //
+        $_id= Crypt::decrypt($id);
+        $tarifa = Tarifa::find($_id);
+        return view('administracion.herramientas.edit',$tarifa);
+
     }
 
     /**
