@@ -93,6 +93,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 	Route::get('administracion/ganancia/historial','WelcomeController@historial_ganancia_vista');
 
+	Route::resource('administracion/tarifa', 'TarifaController');
+
 });
 
 Route::match(['get', 'post'], 'ajax-image-upload', 'ImageController@ajaxImage');
