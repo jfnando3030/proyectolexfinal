@@ -9,12 +9,11 @@
 
                             <th>Nombres</th>
 
-                            <th>Apellidos</th>
+                           
                             <th>Cédula</th>
                             <th>Email</th>
-                            <th>Dirección</th>
-                            <th>Teléfono</th>
-                            <th>Celular</th> 
+                            <th>Rol</th>
+
                             <th>Acción</th>
                         </tr>
                     </thead>
@@ -34,15 +33,13 @@
                                         <img src="{{url('images/no-avatar.png')}}" alt="" style="width:50px; height: 50px;"/>
                                     </td>
                                 @endif
-                                   <td style="vertical-align:middle; font-size: 16px;">{{$user->nombres}}</td>
-                                   <td style="vertical-align:middle; font-size: 16px;">{{$user->apellidos}}</td>
-       
+                                   <td style="vertical-align:middle; font-size: 16px;">{{$user->nombres}} {{$user->apellidos}}</td>
+                                  
 
                                    <td style="vertical-align:middle; font-size: 16px;">{{$user->cedula}} </td>
                                    <td style="vertical-align:middle; font-size: 16px;">{{$user->email}} </td>
-                                   <td style="vertical-align:middle; font-size: 16px;">{{$user->direccion}} </td>
-                                   <td style="vertical-align:middle; font-size: 16px;">{{$user->telefono}} </td>
-                                   <td style="vertical-align:middle; font-size: 16px;">{{$user->celular}} </td>
+                                   <td style="vertical-align:middle; font-size: 16px;">{{$user->rol}} </td>
+
                                    
                                    <td>
 

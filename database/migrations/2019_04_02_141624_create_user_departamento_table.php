@@ -13,10 +13,10 @@ class CreateUserDepartamentoTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_departamento', function (Blueprint $table) {
+        Schema::create('departamento_user', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id')->unsigned();
-            $table->string('departamento_id')->unsigned();
+            $table->integer('departamento_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')
                     ->onDelete('cascade');
             $table->foreign('departamento_id')->references('id')->on('departamento')
@@ -31,6 +31,6 @@ class CreateUserDepartamentoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_departamento');
+        Schema::dropIfExists('departamento_user');
     }
 }

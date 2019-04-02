@@ -125,10 +125,12 @@ class UserController extends Controller
         $nuevo_id= Crypt::decrypt($id);
        
         $usuario = User::find($nuevo_id);
+
+        $departamentos = Departamento::where('estado_departamento',1)->get();
       
         
        
-        return view('administracion.usuarios.edit',compact('usuario'));
+        return view('administracion.usuarios.edit',compact('usuario', 'departamentos'));
 
     }
 
