@@ -26,10 +26,12 @@ class UsuarioRequest extends FormRequest
         return [
             'nombres' => 'required|max:255',
             'apellidos' => 'required|max:255',
+            'celular' => 'required',
+            'id_roles'=>'required',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|between:6,30',
             'path'=>'file|mimes:jpeg,bmp,png|max:10240',
-            'cedula' => 'required',
+            'cedula' => 'required|max:10',
 
              
         ];

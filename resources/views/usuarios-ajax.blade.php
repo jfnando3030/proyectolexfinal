@@ -27,11 +27,11 @@
                                    
                               @if($user->path!=null)
                                     <td>
-                                        <img src="{{url('images/'.$user->path)}}" alt="" style="width:50px;"/>
+                                        <img src="{{url('images/'.$user->path)}}" alt="" style="width:50px; height: 50px;"/>
                                     </td>
                                 @else
                                     <td>
-                                        <img src="{{url('images/no-avatar.png')}}" alt="" style="width:50px;"/>
+                                        <img src="{{url('images/no-avatar.png')}}" alt="" style="width:50px; height: 50px;"/>
                                     </td>
                                 @endif
                                    <td style="vertical-align:middle; font-size: 16px;">{{$user->nombres}}</td>

@@ -26,8 +26,9 @@ class UsuarioEditRequest extends FormRequest
         return [
             'nombres' => 'required|max:255',
             'apellidos' => 'required|max:255',
-            'cedula' => 'required',
-
+            'celular' => 'required',
+            'id_roles'=>'required',
+            'cedula' => 'required|max:10',
              
         ];
     }

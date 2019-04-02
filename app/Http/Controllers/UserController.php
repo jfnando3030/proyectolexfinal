@@ -11,6 +11,7 @@ use App\User;
 use App\Http\Requests\UsuarioRequest;
 use App\Http\Requests\UsuarioEditRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
@@ -32,7 +33,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
 
-        $usuarios = User::where('estado',1)->orderBy('id')->paginate(6);
+        $usuarios = User::where('estado',1)->orderBy('id')->paginate(5);
   
         if ($request->ajax()) {
             return view('usuarios-ajax', compact('usuarios'));
