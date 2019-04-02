@@ -134,4 +134,27 @@ class WelcomeController extends Controller
         }
     }
 
+    public function registrar_solicitud(Request $request)
+    {
+    	return view('administracion.solicitudes.registrar');
+    }
+
+    public function store_solicitud(Request $request)
+    {
+    	$departamento = new Departamento();
+    	$departamento->nombre_departamento = $request->nombres;
+    	$departamento->descripcion_departamento = $request->descripcion;
+
+        if( $departamento->save() ){
+        	Session::flash('message', 'Los datos se han guardado satisfactoriamente.');   
+        	return redirect('administracion/departamento/registrar')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
+        }else{
+        	Session::flash('message', 'Problemas al registrar los datos.');            
+        	return redirect('administracion/departamento/registrar')->with('mensaje-registro2', 'Problemas al registrar los datos.');
+        }
+    }
+
+
+
+
 }

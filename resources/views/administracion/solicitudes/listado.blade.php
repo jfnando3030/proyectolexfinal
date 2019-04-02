@@ -50,6 +50,7 @@
                             <th>ID</th>
                             <th>Nombre del departamento</th>
                             <th>Descripción</th>
+                            <th>Estado</th>
                             <th>Acción</th>
                         </tr>
                     </thead>
@@ -59,6 +60,13 @@
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$departamento->id}} </td>
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$departamento->nombre_departamento}}</td>
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$departamento->descripcion_departamento}} </td>
+                                
+                                @if( $departamento->estado_departamento == "1")
+                                    <td style="vertical-align:middle; font-size: 16px;"> <span class="label label-primary" style="color: white; padding: 5px 15px; font-size: 12px;"> Activo </span> </td>
+                                @else
+                                    <td style="vertical-align:middle; font-size: 16px;"> <span class="label label-danger" style="color: white; padding: 5px 15px; font-size: 12px;"> Inactivo </span> </td>
+                                @endif
+
                                 <td> 
                                     <a href="{{ url('/administracion/departamento/actualizar/') }}/{{ Crypt::encrypt($departamento->id) }}" id="editar" class="btn btn-sm btn-warning"> Actualizar datos </a>
                                     <a href="#" id="del-{{ $departamento->id }}" class="btn btn-sm btn-primary">Eliminar</a>
