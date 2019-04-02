@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Recuperar contraseña - BanGoEnergyGel</title>
+    <title>Recuperar contraseña - Lex 4.0</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -126,7 +126,7 @@
 
                           <div class="mt-2">
                               <div class="d-flex justify-content-center links">
-                                 ¿Ya tienes una cuenta? <a href="{{ route('register') }}" onclick="return myFunction();" class="ml-2">Inicia sesión aqui</a>
+                                 ¿Ya tienes una cuenta? <a href="{{ route('login') }}" onclick="return myFunction();" class="ml-2">Inicia sesión aqui</a>
                               </div>
                               
                           </div>
