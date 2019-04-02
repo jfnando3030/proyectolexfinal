@@ -14,7 +14,7 @@
         @endif
 
         <div class="emp-profile" style="padding: 3%;">
-            {!! Form::open(['route' => ['store_departamento'],'method'=>'POST']) !!}
+            <form action="{{ route('store_solicitud') }}" method="post" enctype="multipart/form-data">
 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
 
@@ -27,22 +27,44 @@
                                         <div class="row">
                                             <div class="col-md-6" style="padding-bottom: 15px;">
                                                 <label>Nombres del departamento:</label>
-                                                <textarea name="solicitud" id="solicitud" rows="5" placeholder="Escriba su solicitud" class="form-control"></textarea> 
+                                                <textarea name="solicitud" id="solicitud" rows="10" placeholder="Escriba su solicitud...    " class="form-control"></textarea> 
+                                                <label>Nombres del departamento:</label>
+                                                <textarea name="solicitud" id="solicitud" rows="10" placeholder="Escriba su solicitud...    " class="form-control"></textarea> 
                                             </div>
 
                                             <div class="col-md-6" style="padding-bottom: 15px;">
                                                 <label>Cargar archivos:</label><br>
-                                                <div class="control-group input-group" style="margin-top:10px">
-                                                    <input type="file" name="filename[]" class="form-control">
-                                                    <div class="input-group-btn"> 
-                                                      <button class="btn btn-danger" type="button"><i class="glyphicon glyphicon-remove"></i> Remove</button>
-                                                    </div>
-                                                </div>      
-                                            </div>
-
-                                                                                   
-
-                                            
+                                                <div class="input-group control-group increment" >
+                                                  <input  type="file" name="archivo1" id="archivo1" class="form-control" style="font-size: 13px;">
+                                                  <div class="input-group-btn"> 
+                                                    <button class="btn btn-success" type="button" style="color: white; background-color: red; font-size: 11px;">X</button>
+                                                  </div>
+                                                </div>
+                                                <div class="input-group control-group increment" >
+                                                  <input  type="file" name="archivo1" id="archivo1" class="form-control" style="font-size: 13px;">
+                                                  <div class="input-group-btn"> 
+                                                    <button class="btn btn-success" type="button" style="color: white; background-color: red; font-size: 11px;"></i>X</button>
+                                                  </div>
+                                                </div>
+                                                <div class="input-group control-group increment" >
+                                                  <input  type="file" name="archivo1" id="archivo1" class="form-control" style="font-size: 13px;">
+                                                  <div class="input-group-btn"> 
+                                                    <button class="btn btn-success" type="button" style="color: white; background-color: red; font-size: 11px;"></i>X</button>
+                                                  </div>
+                                                </div>
+                                                <div class="input-group control-group increment" >
+                                                  <input  type="file" name="archivo1" id="archivo1" class="form-control" style="font-size: 13px;">
+                                                  <div class="input-group-btn"> 
+                                                    <button class="btn btn-success" type="button" style="color: white; background-color: red; font-size: 11px;"></i>X</button>
+                                                  </div>
+                                                </div>
+                                                <div class="input-group control-group increment" >
+                                                  <input  type="file" name="archivo1" id="archivo1" class="form-control" style="font-size: 13px;">
+                                                  <div class="input-group-btn"> 
+                                                    <button class="btn btn-success" type="button" style="color: white; background-color: red; font-size: 11px;"></i>X</button>
+                                                  </div>
+                                                </div>
+                                            </div>                                            
                                         </div>
                                     </div>
                                 </div>
