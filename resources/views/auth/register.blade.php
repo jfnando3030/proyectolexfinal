@@ -204,12 +204,12 @@
                                     </div>
 
                                     <div align="center" class="form-group">
-                                        <a href="https://www.bangoenergygel.com/index.php/terminos-de-servicio/" target="_blank"> Leer Términos y condiciones </a>
+                                        <a href="#" target="_blank"> Leer Términos y condiciones </a>
                                     </div>
 
                                     <div align="center" class="form-group">
                                         <div class="custom-control custom-checkbox">
-                                            <label class="container_check">Confirmo que he leído y aceptado los términos y condiciones de BanGo Energy Gel
+                                            <label class="container_check">Confirmo que he leído y aceptado los términos y condiciones de Lex 4.0
                                                 <input type="checkbox" id="myCheck" onclick="terminos()">
                                                 <span class="checkmark"></span>
                                             </label>

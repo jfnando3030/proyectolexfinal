@@ -31,13 +31,17 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+
         $usuarios = User::where('estado',1)->orderBy('id')->paginate(6);
-    
+  
+        if ($request->ajax()) {
+            return view('usuarios-ajax', compact('usuarios'));
+        }
+  
+        return view('administracion.usuarios.index',compact('usuarios'));
 
-            
-       
 
-        return View('administracion.usuarios.index',compact('usuarios'));
+  
     }
 
 
