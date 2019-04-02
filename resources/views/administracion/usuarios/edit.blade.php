@@ -101,7 +101,7 @@
                                
         
                                 <select class="form-control" name="id_roles" id="id_roles" style="width: 100%;" >
-                                        @if(Auth::user()->rol=="Administrador")
+                                        @if($usuario->rol=="Administrador")
 
                                           <option value="Administrador" selected>Administrador</option>
                                           <option value="Registrado">  Registrado </option>
@@ -110,7 +110,7 @@
 
 
                                         @else     
-                                        @if(Auth::user()->rol=="Registrado")
+                                        @if($usuario->rol=="Registrado")
 
                                         <option value="Administrador" >Administrador</option>
                                         <option value="Registrado" selected>  Registrado </option>
@@ -157,7 +157,7 @@
                                                             @if(in_array($departamento->id,$array) )
                                                                 <option value="{{$departamento->id}}" selected> {{ $departamento->nombre_departamento }} </option>
                                                             @else
-                                                                <option value="{{$departamento->id}}" > {{ $expositor->nombre_departamento }} </option>
+                                                                <option value="{{$departamento->id}}" > {{ $departamento->nombre_departamento }} </option>
                                                             @endif
                                                         @endforeach
                                 
