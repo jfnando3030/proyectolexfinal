@@ -52,19 +52,21 @@ class TarifaController extends Controller
             'descripcion'=>$request->descripcion
         ]);
 
-        if($tarifaCreada->tarifa != null){ echo("Guardado con éxito");}
-        else{ echo("Error al guardar");}
+        if($tarifaCreada->tarifa != null){ return $this->index();}
     } 
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Tarifa  $tarifa
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Tarifa $tarifa)
+    public function show($id)
     {
         //
+        $_id= Crypt::decrypt($id);
+        $tarifa = Tarifa::find($_id);
+        return $tarifa;
     }
 
     /**
@@ -76,10 +78,8 @@ class TarifaController extends Controller
     public function edit($id)
     {
         //
-        $_id= Crypt::decrypt($id);
-        $tarifa = Tarifa::find($_id);
-        return view('administracion.herramientas.edit',$tarifa);
-
+        $tarifa = $this->show($id);
+        return view('tarifa.edit')->with('tarifa', $tarifa);
     }
 
     /**
@@ -92,16 +92,20 @@ class TarifaController extends Controller
     public function update(Request $request, Tarifa $tarifa)
     {
         //
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Tarifa  $tarifa
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tarifa $tarifa)
+    public function destroy($id)
     {
         //
+        $tarifa= $this->show($id);
+        $tarifa->delete();
+        return $this->index();
     }
 }
