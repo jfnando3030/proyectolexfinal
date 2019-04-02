@@ -101,7 +101,7 @@ class WelcomeController extends Controller
     
     public function listado_departamento()
     {
-    	$departamento = Departamento::all();
+    	$departamento = Departamento::where('estado_departamento',1)->get();
 
 		return view('administracion.departamento.listado', ['departamento' => $departamento]);
     }

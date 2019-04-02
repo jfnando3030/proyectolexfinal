@@ -15,4 +15,8 @@ class Departamento extends Model
         'descripcion_departamento',
         'estado_departamento',
     ];
+
+    public function usuarios(){
+        return $this->belongsToMany(User::class);
+    }
 }

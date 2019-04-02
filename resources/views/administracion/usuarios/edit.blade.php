@@ -135,7 +135,7 @@
 
                      <div class="row">
 
-                            <div class="col-md-4 col-xs-12">
+                            <div class="col-md-4 col-xs-12 col-12">
                                     <div class="form-group">
                                         {!! Form::label('*Contraseña:', '', ['class' => 'negrita']) !!}
                                         <input id="password" type="password" class="form-control" placeholder="Ingrese su contraseña" name="password">
@@ -144,13 +144,42 @@
                                 </div>
         
         
-                                <div class="col-xs-12 col-md-4">
+                                <div class="col-xs-12 col-md-8 col-12">
+
+                                        <div class="form-group">
+                                                {!! Form::label('Departamentos:', '', ['class' => 'negrita']) !!}
+                                                <select class="form-control select2" multiple="multiple" data-placeholder="Selecione los departamentos" name ="departamentos[]" style="width: 100%;">
+                                                        <?php $array = array(); ?>
+                                                        @foreach($usuario->departamentos as $departamento)
+                                                            <?php $array[] = $departamento->id;?>
+                                                        @endforeach
+                                                        @foreach($departamentos as $departamento)
+                                                            @if(in_array($departamento->id,$array) )
+                                                                <option value="{{$departamento->id}}" selected> {{ $departamento->nombre_departamento }} </option>
+                                                            @else
+                                                                <option value="{{$departamento->id}}" > {{ $expositor->nombre_departamento }} </option>
+                                                            @endif
+                                                        @endforeach
+                                
+                                                </select>
+                                            </div>
         
-                                        {!! Form::submit('Actualizar',['class'=>'btn btn-primary']) !!}
+                                      
         
                                </div>
 
                      </div>
+
+                     <div class="row">
+                           
+                            
+
+                            <div class="col-md-12 col-xs-12" align="center" style="padding-top:20px;">
+                                    {!! Form::submit('Actualizar',['class'=>'btn btn-primary']) !!}
+                            </div>
+                        </div>
+
+                    
 
 
 

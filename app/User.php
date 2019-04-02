@@ -71,5 +71,9 @@ class User extends Authenticatable  implements MustVerifyEmailContract
         $this->notify(new ResetPasswordNotification($token));
     }
 
+    public function departamentos(){
+        return $this->belongsToMany(Departamento::class);
+   }
+
     
 }

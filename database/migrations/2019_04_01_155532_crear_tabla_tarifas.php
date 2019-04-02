@@ -14,7 +14,7 @@ class CrearTablaTarifas extends Migration
     public function up()
     {
         Schema::create('tarifas', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('tarifa');
             $table->decimal('precio', 6,2);
             $table->string('descripcion');
