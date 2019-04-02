@@ -1,6 +1,6 @@
 
             <div class="table-responsive table--no-card m-b-30">
-                <table class="table table-borderless table-striped table-earning">
+                <table id="example2" class="table table-borderless table-striped table-earning">
                     <thead>
                         <tr>
                             

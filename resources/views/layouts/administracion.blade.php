@@ -53,6 +53,9 @@
    
     <link rel="stylesheet" href="{{url('registrados/css/theme.css')}}">
     
+    <link rel="stylesheet" href="{{url('registrados/vendor/datatables/dataTables.bootstrap.css')}}">
+
+    
     <link rel="icon" href="{{ asset('frontend/images/icon.png') }}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
@@ -189,6 +192,8 @@
                                 </li>
                             </ul>
                         </li>
+
+                        @endif
 
                         @if(Auth::user()->rol == "Administrador")
                         <li class="has-sub">
@@ -493,6 +498,9 @@
     
     <!-- Vendor JS       -->
     <script src="{{url('registrados/vendor/slick/slick.min.js')}}"></script>
+    <script src="{{url('registrados/vendor/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{url('registrados/vendor/datatables/dataTables.bootstrap.min.js')}}"></script>
+
 
     <script src="{{url('registrados/vendor/wow/wow.min.js')}}"></script>
     <script src="{{url('registrados/vendor/animsition/animsition.min.js')}}"></script>
@@ -539,6 +547,50 @@
             }
        
     </script>
+
+<script>
+    $(function() {
+        $(".select2").select2();
+        $(".select3").select2();
+
+
+    
+    });
+
+
+</script>
+
+
+<script>
+
+$(function () {
+$("#example1").DataTable();
+$('#example2').DataTable({
+"paging": false,
+"lengthChange": false,
+"searching": true,
+"ordering": false,
+"info": true,
+"autoWidth": false,
+"language": {
+"search": "Buscar:",
+"LengthMenu": "Display _MENU_ records",
+},
+});
+
+$('#example3').DataTable({
+"paging": false,
+"lengthChange": false,
+"searching": true,
+"ordering": false,
+"info": true,
+"autoWidth": false
+});
+});
+</script>
+
+
+
 
     <script>
 

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Redirect;
 
 
 use App\User;
+use App\Departamento;
+use App\UserDepartamento;
 use App\Http\Requests\UsuarioRequest;
 use App\Http\Requests\UsuarioEditRequest;
 use Illuminate\Validation\Rule;
@@ -53,10 +55,10 @@ class UserController extends Controller
      */
     public function create()
     {
-            
+        $departamentos = Departamento::where('estado_departamento',1)->get();
 
         
-        return View('administracion.usuarios.create');
+        return View('administracion.usuarios.create', compact('departamentos'));
     }
 
     /**
@@ -83,6 +85,14 @@ class UserController extends Controller
 
                 
                 ]);
+            
+                $total_departamentos = $request->departamentos;
+                foreach($total_departamentos as $depatamento){
+                    UserDepartamento::create([
+                        'user_id'=>$usuario->id,
+                        'departamento_id'=>$depatamento,
+                    ]);
+                }
 
                 
 
@@ -172,6 +182,7 @@ class UserController extends Controller
 
           
        ]);
+       
 
    }else{ 
 
@@ -193,13 +204,15 @@ class UserController extends Controller
 
       
    ]);
+
+  
        
   
        
    }
 
 
-        
+   $usuario->departamentos()->sync($request->get('departamentos'));
      
         if($usuario->save()){
             return Redirect::to('administracion/usuarios')->with('mensaje-registro', 'Usuario Actualizado Correctamente');
