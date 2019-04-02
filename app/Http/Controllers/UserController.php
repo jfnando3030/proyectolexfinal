@@ -110,8 +110,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+
+        $nuevo_id= Crypt::decrypt($id);
        
-        $usuario = User::find($id);
+        $usuario = User::find($nuevo_id);
       
         
        

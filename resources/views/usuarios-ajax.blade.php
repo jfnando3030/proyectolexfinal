@@ -25,7 +25,7 @@
                                <tr data-id="{{$user->id}}">
                             
                                    
-                              @if($usuario->path!=null)
+                              @if($user->path!=null)
                                     <td>
                                         <img src="{{url('images/'.$user->path)}}" alt="" style="width:50px;"/>
                                     </td>
@@ -34,36 +34,22 @@
                                         <img src="{{url('images/no-avatar.png')}}" alt="" style="width:50px;"/>
                                     </td>
                                 @endif
-                                   <td style="vertical-align:middle; font-size: 16px;">{{$herramienta->titulo}}</td>
-                                   <td style="vertical-align:middle; font-size: 16px;">{{$herramienta->descripcion}}</td>
-                   
-                                   <?php
+                                   <td style="vertical-align:middle; font-size: 16px;">{{$user->nombres}}</td>
+                                   <td style="vertical-align:middle; font-size: 16px;">{{$user->apellidos}}</td>
+       
 
-                                   list($width, $height, $type, $attr) = getimagesize(url('images/'.$herramienta->path));
-
-                                 
-
-                                   
-                                   ?>
-
-                                   <td style="vertical-align:middle; font-size: 16px;">Ancho: {{$width}}px <br>  Alto {{$height}}px </td>
+                                   <td style="vertical-align:middle; font-size: 16px;">{{$user->cedula}} </td>
+                                   <td style="vertical-align:middle; font-size: 16px;">{{$user->email}} </td>
+                                   <td style="vertical-align:middle; font-size: 16px;">{{$user->direccion}} </td>
+                                   <td style="vertical-align:middle; font-size: 16px;">{{$user->telefono}} </td>
+                                   <td style="vertical-align:middle; font-size: 16px;">{{$user->celular}} </td>
                                    
                                    <td>
 
-                                    @if(Auth::user()->rol == "Administrador")
-                                    <a title="Editar" class="btn btn-primary btn-circle btn-lg" href="{{ route('herramientas.edit',['parameters' => Crypt::encrypt($herramienta->id)])}}" role="button"><i class="fa fa-edit"></i></a>
+                                 
+                                    <a title="Editar" class="btn btn-primary btn-circle btn-lg" href="{{ route('usuarios.edit',['parameters' => Crypt::encrypt($user->id)])}}" role="button"><i class="fa fa-edit"></i></a>
                                     <button title="Eliminar" type="button" class="btn btn-danger btn-circle btn-lg btn-delete"  ><i class="fa fa-trash"></i></button>
 
-                                    @endif
-
-                                       
-
-                                      
-                                        <a title="Descargar Recurso" class="btn btn-download btn-circle btn-lg" href="{{url('images/'.$herramienta->path)}}" download="{{$herramienta->path}}" role="button"><i class="fa fa-download"></i></a>
-                                        
-                                        <a title="Compartir" data-toggle="modal" data-target="#{{$herramienta->id}}" class="btn btn-shared btn-circle btn-lg"  role="button"><i class="fa fa-share-alt"></i></a>
-                                       
-                                      
 
                                    </td>
 
@@ -87,6 +73,6 @@
 
                
 
-                {{ $herramientas->links('pagination') }}
+                {{ $usuarios->links('pagination') }}
 
   
