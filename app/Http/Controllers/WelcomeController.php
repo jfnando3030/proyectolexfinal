@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+
+use App\Departamento;
+
 use App\Comisiones;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -13,6 +16,7 @@ use PHPMailer\PHPMailer\Exception;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 
+use Illuminate\Support\Facades\Crypt;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;
@@ -52,112 +56,7 @@ class WelcomeController extends Controller
     {
     	return view('administracion.invita_bango');
     }
-
-    public function enviar_mail_invitacion(Request $request)
-    {
-        $url = $request->root();    
-        $unir_url= $url . '/administracion/invita/bango/'. $request->user()->nombres . ' ' . $request->user()->apellidos . '/' . $request->user()->cedula;
-        $emailto = $request->email;
-
-        $codigohtml = '<!doctype html>
-			<html lang="en">
-			  <head>
-			    <meta charset="utf-8">
-			    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-			    <link rel="stylesheet" href="http://localhost/proyectobango/frontend/css/font-awesome.min.css">
-			    <link rel="stylesheet" href="http://localhost/proyectobango/frontend/css/bootstrap.min.css">
-			    <link rel="stylesheet" href="http://localhost/proyectobango/frontend/css/material-design-iconic-font.min.css">
-			    <link rel="stylesheet" href="http://localhost/proyectobango/frontend/css/style.css">
-			    <link rel="stylesheet" href="http://localhost/proyectobango/frontend/css/responsive.css">
-			    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-			  </head>
-			  <body>
-			    <div class="welcome-area" id="home">
-			        <div class="container banner3">
-			            <div class="row">
-			                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12 col-12">
-
-			                </div>
-
-			                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
-
-			                    <div class="user_card">
-			                        <div class="d-flex justify-content-center">
-			                            <div class="brand_logo_container">
-			                               
-			                            </div> 
-			                        </div>
-			                        <div class="d-flex justify-content-center form_container">
-			                            <form style="width: 100%;" method="POST" action="">
-			                                <div class="row">
-			                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-
-			                                        <table width="100%" border="0" cellspacing="2" cellpadding="0" style="background-color: black;">
-			                                            <tr>
-			                                                <td valign="top">
-			                                                    <p style=" text-align:center;">
-			                                                    	<img  width="150px" height="150px" src="http://afiliados.bangoenergygel.com/frontend/images/redondo.png" class="brand_logo" alt="Logo">
-			                                                    </p>
-			                                                    <p style="color: white; font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:center;">
-			                                                        <strong>¡Hola ' . $request->nombres . '!</strong>
-			                                                        <br>
-			                                                        <br> ' . $request->user()->nombres . ' ' . $request->user()->apellidos . ' te ha invitado para que te unas a Bango Energy Gel.
-			                                                    </p> 
-			                                                    <p style="color: white; font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:center">Haz clic en este v&iacute;nculo para que te inscribas:
-			                                                        <br>
-			                                                        <br>
-			                                                        <a href="'. $unir_url .'" title="Invita a tus amigos" target="_blank" style="border:medium; font-family:Verdana, Geneva, sans-serif; font-size:12px; color:white;"> <strong> ' . $unir_url . ' </strong> </a>
-			                                                    </p>
-			                                                    <br>
-			                                                </td>
-			                                            </tr>
-			                                        </table>
-			                                        
-			                                    </div>
-			                                </div>
-			                            </form>
-			                        </div>
-			                    </div>     
-			                </div>
-			            </div>
-			        </div>
-			    </div>
-			    </body>
-			    <!--welcome area end-->
-			</html>
-			';
-
-        $mail = new PHPMailer(true);
-        $mail->IsSMTP();
-        $mail->SMTPDebug = 0;
-        $mail->SMTPAuth = true; //'login'
-        $mail->SMTPSecure = 'tls';
-        $mail->Host = 'smtp.mandrillapp.com';
-        $mail->Port = 587;              
-        $mail->IsHTML(true);
-        $mail->CharSet = 'UTF-8';
-
-        //confirmaciones
-        $mail->Username = 'Guayas Emprende por Internet';
-        $mail->Password = '5luKaRwGdN_5wKEUWTfc6w';
-        $mail->SetFrom('notificaciones@bangoenergygel.com', 'Notificaciones Bango Energy Gel');
-        $mail->Subject = html_entity_decode('Forma parte de Bango Energy Gel');
-            
-        $mail->Body = $codigohtml;      
-        $mail->AddAddress($emailto);
-        $mail->Send();  
-
-        if($mail){
-            return Redirect::to('administracion/invita/bango')->with('mensaje-registro', 'Tu invitación ha sido enviada.');
-        }else{
-            return Redirect::to('administracion/invita/bango')->with('mensaje-registro', 'Problemas al enviar tu invitación.');
-        }
-
-    }
-
-
    
-
 
     public function verificacion ($email)
     {
@@ -180,5 +79,59 @@ class WelcomeController extends Controller
 
     }
 
+    public function registrar_departamento(Request $request)
+    {
+    	return view('administracion.departamento.registrar');
+    }
+
+    public function store_departamento(Request $request)
+    {
+    	$departamento = new Departamento();
+    	$departamento->nombre_departamento = $request->nombres;
+    	$departamento->descripcion_departamento = $request->descripcion;
+
+        if( $departamento->save() ){
+        	Session::flash('message', 'Los datos se han guardado satisfactoriamente.');   
+        	return redirect('administracion/departamento/registrar')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
+        }else{
+        	Session::flash('message', 'Problemas al registrar los datos.');            
+        	return redirect('administracion/departamento/registrar')->with('mensaje-registro2', 'Problemas al registrar los datos.');
+        }
+    }
+    
+    public function listado_departamento()
+    {
+    	$departamento = Departamento::all();
+
+		return view('administracion.departamento.listado', ['departamento' => $departamento]);
+    }
+
+    public function actualizar_departamento (Request $request, $id)
+    {
+    	$departamento = Departamento::findOrFail(Crypt::decrypt($id));   
+
+    	return view('administracion.departamento.actualizar', ['departamento' => $departamento]);
+    }
+    		
+    public function editar_departamento(Request $request)
+    {
+    	$departamento = Departamento::findOrFail($request->id);
+        $departamento->nombre_departamento = $request->nombres;
+        $departamento->descripcion_departamento = $request->descripcion;
+
+        if($departamento->save()){
+            return redirect('administracion/departamento/actualizar/' . Crypt::encrypt($request->id) )->with('mensaje-registro', 'Datos actualizados correctamente.');
+        }
+    }
+
+    public function eliminar_departamento(Request $request, $id)
+    {
+		$departamento = Departamento::findOrFail(Crypt::decrypt($id));  
+		$departamento->estado_departamento = "0";
+
+		if($departamento->save()){
+            return redirect('administracion/departamento/listado')->with('mensaje-registro', 'Se ha eliminado correctamente.');
+        }
+    }
 
 }

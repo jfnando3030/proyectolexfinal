@@ -52,6 +52,27 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('administracion','WelcomeController@admin');
 	Route::get('administracion/mired','WelcomeController@mired');
 	
+
+// ************************** DEPARTAMENTOS *************************************** 
+	
+	//REGISTRAR 
+	Route::get('/administracion/departamento/registrar', 'WelcomeController@registrar_departamento');
+	Route::post('/administracion/departamento/store', 'WelcomeController@store_departamento')->name('store_departamento');
+	
+	// LISTADO 
+	Route::get('/administracion/departamento/listado', 'WelcomeController@listado_departamento');
+
+	//ACTUALIZAR 
+	Route::get('/administracion/departamento/actualizar/{id}', 'WelcomeController@actualizar_departamento');
+	Route::put('/administracion/departamento/editar', 'WelcomeController@editar_departamento')->name('editar_departamento');
+
+	//ELIMINAR 
+	Route::get('/administracion/departamento/eliminar/{id}', 'WelcomeController@eliminar_departamento');
+ 
+// ************************** FIN DE  DEPARTAMENTOS ********************************* 
+
+
+
 	Route::get('administracion/invita/bango','WelcomeController@invita_bango');
 	Route::get('administracion/saber_niveles/{id}','WelcomeController@saber_niveles');
 

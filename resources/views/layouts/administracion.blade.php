@@ -137,86 +137,41 @@
                                     <a id="menu_letras"  href="{{route('usuarios.index')}}" onclick="return myFunction();">
                                         <i class="fas fa-table"></i>Listado</a>
                                 </li>
-                            
+                                
                             </ul>
                         </li>
 
                         @endif
 
-                        
-
                         <li class="has-sub">
-                                <a id="menu_letras" class="js-arrow" href="#">
-                                        <i class="fas fa-wrench"></i>Mis herramientas
-                                    <span class="arrow">
-                                        <i class="fas fa-angle-down"></i>
-                                    </span>
-                                </a>
-                                <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                        <li class="has-sub">
-                                            <a id="menu_letras" class="js-arrow" href="#">
-                                                    <i class="fa fa-file-pdf-o"></i>Mis banners
-                                                <span class="arrow">
-                                                    <i class="fas fa-angle-down"></i>
-                                                </span>
-                                            </a>
-                                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                                    @if(Auth::user()->rol == "Administrador")
-                                                    <li>
-                                                        <a id="menu_letras" href="{{route('herramientas.create')}}" onclick="return myFunction();">
-                                                            <i class="fas fa-file"></i>Subir banner</a>
-                                                    </li>
-                                                    @endif
-                                                <li>
-                                                    <a id="menu_letras" href="{{route('herramientas.index')}}" onclick="return myFunction();">
-                                                        <i class="fas fa-table"></i>Ver banners</a>
-                                                </li>
-                                            
-                                            </ul>
-                                        </li>
-                                
-                                      </ul>
+                            <a id="menu_letras" class="js-arrow" href="#">
+                                    <i class="fas fa-wrench"></i>Departamentos
+                                <span class="arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li class="has-sub">
+                                    <a href="{{url('administracion/departamento/registrar')}}" onclick="return myFunction();" id="menu_letras">
+                                    <i class="fa fa-file-pdf-o"></i>Registrar</a>
+                                </li>
+                            </ul>
 
-                                <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                    <li class="has-sub">
-                                        <a id="menu_letras" class="js-arrow" href="#">
-                                                <i class="fa fa-file-pdf-o"></i>Mis documentos
-                                            <span class="arrow">
-                                                <i class="fas fa-angle-down"></i>
-                                            </span>
-                                        </a>
-                                        <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                                @if(Auth::user()->rol == "Administrador")
-                                                <li>
-                                                    <a id="menu_letras" href="{{route('documentos.create')}}" onclick="return myFunction();">
-                                                        <i class="fas fa-file"></i>Subir documento</a>
-                                                </li>
-                                                @endif
-                                            <li>
-                                                <a id="menu_letras" href="{{route('documentos.index')}}" onclick="return myFunction();">
-                                                    <i class="fa fa-file-pdf-o"></i>Ver documentos</a>
-                                            </li>
-                                        
-                                        </ul>
-                                    </li>
-                            
-                                  </ul>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li class="has-sub">
+                                    <a href="{{url('administracion/departamento/listado')}}" onclick="return myFunction();" id="menu_letras">
+                                    <i class="fa fa-list"></i>Listado</a>
+                                </li>
+                            </ul>
 
-                               
-                            </li>
-
-                            
-                       
-
-
+                           
+                        </li>
                         <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form2').submit();" id="menu_letras"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
 
                             <form id="logout-form2" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
                             
                         </li>
-                        
-                      
                     </ul>
                 </nav>
             </div>

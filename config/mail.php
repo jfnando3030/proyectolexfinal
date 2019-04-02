@@ -12,11 +12,11 @@ return [
     | your application here. By default, Laravel is setup for SMTP mail.
     |
     | Supported: "smtp", "sendmail", "mailgun", "mandrill", "ses",
-    |            "sparkpost", "postmark", "log", "array"
+    |            "sparkpost", "log", "array"
     |
     */
 
-    'driver' => env('MANDRILL_DRIVER', 'smtp'),
+    'driver' => env('MAIL_DRIVER', 'smtp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -26,10 +26,13 @@ return [
     | Here you may provide the host address of the SMTP server used by your
     | applications. A default option is provided that is compatible with
     | the Mailgun mail service which will provide reliable deliveries.
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
     |
     */
 
-    'host' => env('MANDRILL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+
+    
 
     /*
     |--------------------------------------------------------------------------
@@ -42,7 +45,7 @@ return [
     |
     */
 
-    'port' => env('MANDRILL_PORT', 587),
+    'port' => env('MAIL_PORT', 465),
 
     /*
     |--------------------------------------------------------------------------
@@ -55,7 +58,10 @@ return [
     |
     */
 
-    'from' => ['address' => env('MANDRILL_ADDRESS'), 'name' => env('MANDRILL_NAME')],
+    'from' => [
+        'address' => env('MAIL_FROM_ADDRESS', 'gerencia@geomarvaldez.com'),
+        'name' => env('MAIL_FROM_NAME', 'GERENCIA - GEOMAR VALDEZ CONSULTORA'),
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -68,8 +74,7 @@ return [
     |
     */
 
-    'encryption' => env('MANDRILL_ENCRYPTION', 'tls'),
-
+    'encryption' => env('MAIL_ENCRYPTION', 'SSL'),
 
     /*
     |--------------------------------------------------------------------------
@@ -82,12 +87,9 @@ return [
     |
     */
 
+    'username' => 'gerencia@geomarvaldez.com',
 
-    'username' => env('MANDRILL_USERNAME'),
-
-    'password' => env('MANDRILL_PASSWORD'),
-
-
+    'password' => 'Geomar2018',
 
     /*
     |--------------------------------------------------------------------------
@@ -101,6 +103,7 @@ return [
     */
 
     'sendmail' => '/usr/sbin/sendmail -bs',
+
     /*
     |--------------------------------------------------------------------------
     | Markdown Mail Settings
@@ -119,19 +122,5 @@ return [
             resource_path('views/vendor/mail'),
         ],
     ],
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Log Channel
-    |--------------------------------------------------------------------------
-    |
-    | If you are using the "log" driver, you may specify the logging channel
-    | if you prefer to keep mail messages separate from other log entries
-    | for simpler reading. Otherwise, the default channel will be used.
-    |
-    */
-
-    'log_channel' => env('MAIL_LOG_CHANNEL'),
 
 ];
