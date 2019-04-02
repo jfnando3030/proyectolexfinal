@@ -143,7 +143,7 @@ class WelcomeController extends Controller
     public function store_solicitud(Request $request)
     {
 
-    	return $request->filename;
+    	return $request->archivo2;
     }
 
 

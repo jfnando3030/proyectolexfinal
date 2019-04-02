@@ -170,7 +170,6 @@
                         </li>
                         @endif
 
-                        @if(Auth::user()->rol == "Registrado")
                         <li class="has-sub">
                             <a id="menu_letras" class="js-arrow" href="#">
                                     <i class="fas fa-wrench"></i>Solicitudes    
@@ -193,8 +192,7 @@
                             </ul>
                         </li>
 
-                        @endif
-
+                        
                         @if(Auth::user()->rol == "Administrador")
                         <li class="has-sub">
                             <a class="js-arrow" href="#" id="menu_letras">

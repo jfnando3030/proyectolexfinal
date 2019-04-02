@@ -27,12 +27,17 @@
                                         <div class="row">
                                             <div class="col-md-6" style="padding-bottom: 15px;">
                                                 <label>Nombres del departamento:</label>
-                                                <textarea name="solicitud" id="solicitud" rows="10" placeholder="Escriba su solicitud...    " class="form-control"></textarea> 
-                                                <label>Nombres del departamento:</label>
-                                                <textarea name="solicitud" id="solicitud" rows="10" placeholder="Escriba su solicitud...    " class="form-control"></textarea> 
+                                                <textarea name="solicitud" id="solicitud" rows="11" placeholder="Escriba su solicitud...    " class="form-control"></textarea> 
                                             </div>
 
                                             <div class="col-md-6" style="padding-bottom: 15px;">
+                                                <label>Nombres del departamento:</label>
+                                                <select class="form-control" id="departamento" name="departamento">
+                                                    <option> Seleccione un departamento</option>
+                                                    @foreach($departamento as $departamento)
+                                                        <option value="{{ $departamento->id }}"> {{ $departamento->nombre_departamento }}</option>
+                                                    @endforeach
+                                                </select> 
                                                 <label>Cargar archivos:</label><br>
                                                 <div class="input-group control-group increment" >
                                                   <input  type="file" name="archivo1" id="archivo1" class="form-control" style="font-size: 13px;">
@@ -41,25 +46,25 @@
                                                   </div>
                                                 </div>
                                                 <div class="input-group control-group increment" >
-                                                  <input  type="file" name="archivo1" id="archivo1" class="form-control" style="font-size: 13px;">
+                                                  <input  type="file" name="archivo2" id="archivo2" class="form-control" style="font-size: 13px;">
                                                   <div class="input-group-btn"> 
                                                     <button class="btn btn-success" type="button" style="color: white; background-color: red; font-size: 11px;"></i>X</button>
                                                   </div>
                                                 </div>
                                                 <div class="input-group control-group increment" >
-                                                  <input  type="file" name="archivo1" id="archivo1" class="form-control" style="font-size: 13px;">
+                                                  <input  type="file" name="archivo3" id="archivo3" class="form-control" style="font-size: 13px;">
                                                   <div class="input-group-btn"> 
                                                     <button class="btn btn-success" type="button" style="color: white; background-color: red; font-size: 11px;"></i>X</button>
                                                   </div>
                                                 </div>
                                                 <div class="input-group control-group increment" >
-                                                  <input  type="file" name="archivo1" id="archivo1" class="form-control" style="font-size: 13px;">
+                                                  <input  type="file" name="archivo4" id="archivo4" class="form-control" style="font-size: 13px;">
                                                   <div class="input-group-btn"> 
                                                     <button class="btn btn-success" type="button" style="color: white; background-color: red; font-size: 11px;"></i>X</button>
                                                   </div>
                                                 </div>
                                                 <div class="input-group control-group increment" >
-                                                  <input  type="file" name="archivo1" id="archivo1" class="form-control" style="font-size: 13px;">
+                                                  <input  type="file" name="archivo5" id="archivo5" class="form-control" style="font-size: 13px;">
                                                   <div class="input-group-btn"> 
                                                     <button class="btn btn-success" type="button" style="color: white; background-color: red; font-size: 11px;"></i>X</button>
                                                   </div>
