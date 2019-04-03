@@ -29,7 +29,7 @@
                                         <div class="row">
                                             <div class="col-md-6" style="padding-bottom: 15px;">
                                                 <label>Detalle su petición:</label>
-                                                <textarea name="solicitud" id="solicitud" rows="11" placeholder="Escriba su solicitud...    " class="form-control" required=""></textarea> 
+                                                <textarea name="solicitud" id="solicitud" rows="11" placeholder="Escriba su solicitud...    " class="form-control" required="" style="background-color: currentColor;"></textarea> 
                                             </div>
 
                                             <div class="col-md-6" style="padding-bottom: 15px;">
