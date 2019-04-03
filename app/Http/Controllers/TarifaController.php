@@ -6,6 +6,7 @@ use App\Tarifa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Redirect;
 
 class TarifaController extends Controller
 {
@@ -96,7 +97,7 @@ class TarifaController extends Controller
         $tarifa->fill($request->all());
 
         if($tarifa->save()){
-            return $this->index();
+            return Redirect::to('administracion/tarifa');
         }
     }
 
@@ -111,6 +112,6 @@ class TarifaController extends Controller
         //
         $tarifa= $this->show($id);
         $tarifa->delete();
-        return $this->index();
+        return Redirect::to('administracion/tarifa');
     }
 }
