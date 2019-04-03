@@ -48,6 +48,8 @@
   
 
     <link rel="stylesheet" href="{{url('registrados/css/mensajes.css')}}">
+    <link rel="stylesheet" href="{{url('registrados/css/AdminLTE.min.css')}}">
+    <link rel="stylesheet" href="{{url('registrados/css/blue.css')}}">
 
     <!-- Main CSS-->
    
@@ -55,7 +57,9 @@
     
     <link rel="stylesheet" href="{{url('registrados/vendor/datatables/dataTables.bootstrap.css')}}">
 
-    
+
+
+
     <link rel="icon" href="{{ asset('frontend/images/icon.png') }}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
@@ -170,9 +174,10 @@
                         </li>
                         @endif
 
+                        @if(Auth::user()->rol == "Registrado")
                         <li class="has-sub">
                             <a id="menu_letras" class="js-arrow" href="#">
-                                    <i class="fas fa-wrench"></i>Solicitudes    
+                                    <i class="fa fa-file"></i>Solicitudes    
                                 <span class="arrow">
                                     <i class="fas fa-angle-down"></i>
                                 </span>
@@ -180,18 +185,11 @@
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li class="has-sub">
                                     <a href="{{url('administracion/solicitud/registrar')}}" onclick="return myFunction();" id="menu_letras">
-                                    <i class="fa fa-file-pdf-o"></i>Registrar</a>
-                                </li>
-                            </ul>
-
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li class="has-sub">
-                                    <a href="{{url('administracion/solicitud/listado')}}" onclick="return myFunction();" id="menu_letras">
-                                    <i class="fa fa-list"></i>Listado</a>
+                                    <i class="fa fa-file-pdf-o"></i>Enviar</a>
                                 </li>
                             </ul>
                         </li>
-
+                        @endif
                         
                         @if(Auth::user()->rol == "Administrador")
                         <li class="has-sub">
@@ -517,6 +515,9 @@
 
 
     <!-- Main JS-->
+    <script src="{{url('registrados/js/adminlte.min.js')}}"></script>
+    <script src="{{url('registrados/js/icheck.min.js')}}"></script>
+
  
     <script src="{{url('registrados/js/main.js')}}"></script>
     <script src="{{url('registrados/js/sweetalert.min.js')}}"></script>

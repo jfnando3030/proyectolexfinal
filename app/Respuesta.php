@@ -1,0 +1,25 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Respuesta extends Model
+{
+    protected $table ='respuestas';
+    protected $primaryKey='id';
+    public $timestamps = false;
+    protected $fillable=[
+        'id',
+        'respuesta',
+        'estado',
+        'solicitud_id',
+        'leido',
+        'fecha',
+        'hora',
+    ];
+
+    public function solicitud(){
+        return $this->belongsTo(Solicitud::class,'solicitud_id','id');
+    }
+}

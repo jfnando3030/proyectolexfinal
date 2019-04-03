@@ -24,7 +24,7 @@
 @section('contenido')
 
 <div align="center" class="col-md-12 col-12 col-xs-12 col-lg-12 col-sm-12" style="padding-top:15px; padding-bottom: 25px">
-        <h4 style="color: black; text-align:center; font-size:25px;"> Listado de departamentos </h4>
+        <h4 style="color: black; text-align:center; font-size:25px;"> Listado de solicitudes </h4>
     </div>
   <div class="container-fluid">
    @if (session('mensaje-registro'))
@@ -32,7 +32,7 @@
     @endif
     <div class="row">
         <div class="col-12  col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            @if( $departamento->count() > 0 ) 
+            @if( $solicitud->count() > 0 ) 
             <div class="row">
                 <div class="col-md-6">
 
@@ -48,33 +48,28 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Nombre del departamento</th>
-                            <th>Descripción</th>
-                            <th>Estado</th>
+                            <th>Detalle</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
                             <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($departamento as $departamento)
+                        @foreach($solicitud as $solicitud)
                             <tr>
-                                <td style="vertical-align:middle; font-size: 16px;"> {{$departamento->id}} </td>
-                                <td style="vertical-align:middle; font-size: 16px;"> {{$departamento->nombre_departamento}}</td>
-                                <td style="vertical-align:middle; font-size: 16px;"> {{$departamento->descripcion_departamento}} </td>
-                                
-                                @if( $departamento->estado_departamento == "1")
-                                    <td style="vertical-align:middle; font-size: 16px;"> <span class="label label-primary" style="color: white; padding: 5px 15px; font-size: 12px;"> Activo </span> </td>
-                                @else
-                                    <td style="vertical-align:middle; font-size: 16px;"> <span class="label label-danger" style="color: white; padding: 5px 15px; font-size: 12px;"> Inactivo </span> </td>
-                                @endif
+                                <td style="vertical-align:middle; font-size: 16px;"> {{$solicitud->id}} </td>
+                                <td style="vertical-align:middle; font-size: 16px;"> {{$solicitud->nombre_solicitud}}</td>
+                                <td style="vertical-align:middle; font-size: 16px;"> {{$solicitud->fecha_solicitud}} </td>
+                                <td style="vertical-align:middle; font-size: 16px;"> {{$solicitud->hora_solicitud}} </td>
 
                                 <td> 
-                                    <a href="{{ url('/administracion/departamento/actualizar/') }}/{{ Crypt::encrypt($departamento->id) }}" id="editar" class="btn btn-sm btn-warning"> Actualizar datos </a>
-                                    <a href="#" id="del-{{ $departamento->id }}" class="btn btn-sm btn-primary">Eliminar</a>
+                                    <a href="{{ url('/administracion/solicitud/actualizar/') }}/{{ Crypt::encrypt($solicitud->id) }}" id="editar" class="btn btn-sm btn-warning"> Actualizar datos </a>
+                                    <a href="#" id="del-{{ $solicitud->id }}" class="btn btn-sm btn-primary">Eliminar</a>
                                     <script>
-                                        $("#del-"+{{ $departamento->id }}).click(function(e){
+                                        $("#del-"+{{ $solicitud->id }}).click(function(e){
                                             swal({
                                               title: "Atención",
-                                              text: "¿Estas seguro de eliminar este departamento?",
+                                              text: "¿Estas seguro de eliminar esta solicitud?",
                                               type: "warning",
                                               showCancelButton: true,
                                               cancelButtonText: "NO",
@@ -83,7 +78,7 @@
                                               closeOnConfirm: true
                                             },
                                             function(){
-                                                window.location="{{ url('/administracion/departamento/eliminar/') }}/{{ Crypt::encrypt($departamento->id) }}";
+                                                window.location="{{ url('/administracion/solicitud/eliminar/') }}/{{ Crypt::encrypt($solicitud->id) }}";
                                                 swal("!Exitoso!", "Departamento ha sido eliminado correctamente.", "success");
                                             });
                                         });

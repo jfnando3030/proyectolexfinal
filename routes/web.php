@@ -78,7 +78,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::post('/administracion/solicitud/store', 'WelcomeController@store_solicitud')->name('store_solicitud');
 	
 	// LISTADO 
-	Route::get('/administracion/solicitud/listado', 'WelcomeController@listado_solicitud');
+	//Route::get('/administracion/solicitud/listado', 'WelcomeController@listado_solicitud');
 
 	//ACTUALIZAR 
 	Route::get('/administracion/solicitud/actualizar/{id}', 'WelcomeController@actualizar_solicitud');

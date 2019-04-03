@@ -128,10 +128,8 @@ class PerfilController extends Controller
      
         $usuario = User::find($id);
         $this->validate($request, [
-                                
-             'email'     => [ 'required', Rule::unique('users')->ignore($usuario->id), ],
-           
-       ]);
+            'email'     => [ 'required', Rule::unique('users')->ignore($usuario->id), ],
+        ]);
         
        
             
