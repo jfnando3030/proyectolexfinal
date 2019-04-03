@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-
+use App\Solicitud;
+use App\Archivos;
 use App\Departamento;
-
-use App\Comisiones;
 use Carbon\Carbon;
+use App\Comisiones;
 use Illuminate\Support\Facades\DB;
 use Mail;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Facades\Crypt;
-
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Auth\Events\Verified;
@@ -142,23 +142,82 @@ class WelcomeController extends Controller
 
     public function store_solicitud(Request $request)
     {
+
+    	$date = Carbon::now();
+		$hoy = $date->format('Y-m-d');
+		$hora = $date->format('h:i:s');
+
     	$solicitud = new Solicitud();
-    	$solicitud->nombre_solicitud = $request->nombres;
-    	$solicitud->id_user_solicitud = $request->descripcion;
-    	$solicitud->fecha_solicitud = $request->nombres;
-    	$solicitud->hora_solicitud = $request->descripcion;
-    	
-    	
-        if( $departamento->save() ){
-        	Session::flash('message', 'Los datos se han guardado satisfactoriamente.');   
-        	return redirect('administracion/departamento/registrar')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
+    	$solicitud->nombre_solicitud = $request->solicitud;
+    	$solicitud->id_user_solicitud = $request->user()->id;
+    	$solicitud->fecha_solicitud = $hoy;
+    	$solicitud->hora_solicitud = $hora;
+    	$solicitud->id_departamento = $request->departamento;
+    	 
+        if( $solicitud->save() ){
+	    	
+        	// 	PARA ARCHIVO 1 
+	    	if($request->archivo1 != ""){
+	            if($request->file('archivo1')){
+	            	$archivos1 = new Archivos();
+				    $archivos1->path = Storage::disk('local2')->put('archivos',   $request->file('archivo1')); 
+				    $archivos1->id_solicitud = $solicitud->id;
+				    $archivos1->save();
+	            }
+	        }
+
+	        // 	PARA ARCHIVO 2
+	        if($request->archivo2 != ""){
+	            if($request->file('archivo2')){
+	            	$archivos2 = new Archivos();
+				    $archivos2->path = Storage::disk('local2')->put('archivos',   $request->file('archivo2')); 
+				    $archivos2->id_solicitud = $solicitud->id;
+				    $archivos2->save();
+	            }
+	        }
+
+	        // 	PARA ARCHIVO 3
+	        if($request->archivo3 != ""){
+	            if($request->file('archivo3')){
+	            	$archivo3 = new Archivos();
+				    $archivo3->path = Storage::disk('local2')->put('archivos',   $request->file('archivo3')); 
+				    $archivo3->id_solicitud = $solicitud->id;
+				    $archivo3->save();
+	            }
+	        }
+
+	        // 	PARA ARCHIVO 4
+	        if($request->archivo4 == ""){
+	            if($request->file('archivo4')){
+	            	$archivo4 = new Archivos();
+				    $archivo4->path = Storage::disk('local2')->put('archivos',   $request->file('archivo4')); 
+				    $archivo4->id_solicitud = $solicitud->id;
+				    $archivo4->save();
+	            }
+	        }
+
+	        // 	PARA ARCHIVO 5
+	        if($request->archivo5 == ""){
+	            if($request->file('archivo5')){
+	            	$archivo5 = new Archivos();
+				    $archivo5->path = Storage::disk('local2')->put('archivos',   $request->file('archivo5')); 
+				    $archivo5->id_solicitud = $solicitud->id;
+				    $archivo5->save();
+	            }
+	        }
+
+        	return redirect('administracion/solicitud/registrar')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
         }else{
-        	Session::flash('message', 'Problemas al registrar los datos.');            
-        	return redirect('administracion/departamento/registrar')->with('mensaje-registro2', 'Problemas al registrar los datos.');
+        	return redirect('administracion/solicitud/registrarr')->with('mensaje-registro2', 'Problemas al registrar los datos.');
         }
     }
 
+    public function listado_solicitud(Request $request)
+    {
+    	$solicitud = Solicitud::where('id_user_solicitud', $request->user()->id)->where('estado_solicitud',1)->get();
 
+		return view('administracion.solicitudes.listado', ['solicitud' => $solicitud]);
+    }
 
 
 }

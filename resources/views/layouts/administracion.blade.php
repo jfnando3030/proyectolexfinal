@@ -183,13 +183,6 @@
                                     <i class="fa fa-file-pdf-o"></i>Registrar</a>
                                 </li>
                             </ul>
-
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li class="has-sub">
-                                    <a href="{{url('administracion/solicitud/listado')}}" onclick="return myFunction();" id="menu_letras">
-                                    <i class="fa fa-list"></i>Listado</a>
-                                </li>
-                            </ul>
                         </li>
 
                         
