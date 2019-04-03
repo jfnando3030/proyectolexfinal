@@ -47,7 +47,7 @@ class TarifaController extends Controller
     {
         //
         $tarifaCreada = Tarifa::create([
-            'tarifa'=>$request->nombre,
+            'tarifa'=>$request->tarifa,
             'precio'=>$request->precio,
             'descripcion'=>$request->descripcion
         ]);
@@ -92,7 +92,7 @@ class TarifaController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->show($id);
+        $tarifa = $this->show($id);
         $tarifa->fill($request->all());
 
         if($tarifa->save()){
