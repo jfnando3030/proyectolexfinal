@@ -170,9 +170,10 @@
                         </li>
                         @endif
 
+                        @if(Auth::user()->rol == "Registrado")
                         <li class="has-sub">
                             <a id="menu_letras" class="js-arrow" href="#">
-                                    <i class="fas fa-wrench"></i>Solicitudes    
+                                    <i class="fa fa-file"></i>Solicitudes    
                                 <span class="arrow">
                                     <i class="fas fa-angle-down"></i>
                                 </span>
@@ -180,11 +181,11 @@
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li class="has-sub">
                                     <a href="{{url('administracion/solicitud/registrar')}}" onclick="return myFunction();" id="menu_letras">
-                                    <i class="fa fa-file-pdf-o"></i>Registrar</a>
+                                    <i class="fa fa-file-pdf-o"></i>Enviar</a>
                                 </li>
                             </ul>
                         </li>
-
+                        @endif
                         
                         @if(Auth::user()->rol == "Administrador")
                         <li class="has-sub">
