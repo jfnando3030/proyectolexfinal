@@ -48,6 +48,8 @@
   
 
     <link rel="stylesheet" href="{{url('registrados/css/mensajes.css')}}">
+    <link rel="stylesheet" href="{{url('registrados/css/AdminLTE.min.css')}}">
+    <link rel="stylesheet" href="{{url('registrados/css/blue.css')}}">
 
     <!-- Main CSS-->
    
@@ -55,7 +57,9 @@
     
     <link rel="stylesheet" href="{{url('registrados/vendor/datatables/dataTables.bootstrap.css')}}">
 
-    
+
+
+
     <link rel="icon" href="{{ asset('frontend/images/icon.png') }}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
@@ -511,6 +515,9 @@
 
 
     <!-- Main JS-->
+    <script src="{{url('registrados/js/adminlte.min.js')}}"></script>
+    <script src="{{url('registrados/js/icheck.min.js')}}"></script>
+
  
     <script src="{{url('registrados/js/main.js')}}"></script>
     <script src="{{url('registrados/js/sweetalert.min.js')}}"></script>
