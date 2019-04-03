@@ -128,7 +128,6 @@ class WelcomeController extends Controller
         $departamento->horario_fin = $request->finDia;
         $departamento->hora_inicio = $request->inicioHora;
         $departamento->hora_fin = $request->finHora;
-
         if($departamento->save()){
             return redirect('administracion/departamento/actualizar/' . Crypt::encrypt($request->id) )->with('mensaje-registro', 'Datos actualizados correctamente.');
         }
