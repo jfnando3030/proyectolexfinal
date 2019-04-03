@@ -12,6 +12,7 @@ class Solicitud extends Model
     protected $fillable=[
         'id',
         'nombre_solicitud',
+        'id_departamento',
         'id_user_solicitud',
         'leido_solicitud',
         'id_user_abogado',

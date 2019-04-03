@@ -142,8 +142,20 @@ class WelcomeController extends Controller
 
     public function store_solicitud(Request $request)
     {
-
-    	return $request->archivo2;
+    	$solicitud = new Solicitud();
+    	$solicitud->nombre_solicitud = $request->nombres;
+    	$solicitud->id_user_solicitud = $request->descripcion;
+    	$solicitud->fecha_solicitud = $request->nombres;
+    	$solicitud->hora_solicitud = $request->descripcion;
+    	
+    	
+        if( $departamento->save() ){
+        	Session::flash('message', 'Los datos se han guardado satisfactoriamente.');   
+        	return redirect('administracion/departamento/registrar')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
+        }else{
+        	Session::flash('message', 'Problemas al registrar los datos.');            
+        	return redirect('administracion/departamento/registrar')->with('mensaje-registro2', 'Problemas al registrar los datos.');
+        }
     }
 
 
