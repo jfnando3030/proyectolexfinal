@@ -30,9 +30,50 @@
                                                 {!! Form::text('nombres',null,['placeholder'=>'Ingrese nombres del departamento','class'=>'form-control', 'required' => 'required', 'onkeypress'=>'return soloLetras(event)']) !!}
                                             </div>
                                             <div class="col-md-6" style="padding-bottom: 15px;">
-
                                                 <label>Descripción:</label>
                                                 {!! Form::text('descripcion',null,['placeholder'=>'Ingrese una breve descripción del departamento','class'=>'form-control','required' => 'required', 'onkeypress'=>'return soloLetras(event)']) !!}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                        <div class="col-md-12" style="padding-bottom: 15px;">
+                                                <label>Horario</label>
+                                        </div>
+                                            <div class="col-md-6" style="padding-bottom: 15px;">
+                                                <label>Dia Inicial</label>
+                                                {!! Form::select(
+                                                    'inicioDia',
+                                                    $dias, 
+                                                    null,
+                                                    ['class'=>'form-control', 'required' => 'required']) 
+                                                    !!}
+                                            </div>
+                                            <div class="col-md-6" style="padding-bottom: 15px;">
+                                                <label>Día Final</label>
+                                                {!! Form::select(
+                                                    'finDia',
+                                                    $dias, 
+                                                    null,
+                                                    ['class'=>'form-control', 'required' => 'required']) 
+                                                    !!}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                        <div class="col-md-6" style="padding-bottom: 15px;">
+                                                <label>Horario Inicial</label>
+                                                {!! Form::time (
+                                                    'inicioHora',
+                                                    null,
+                                                    ['class'=>'form-control', 'required' => 'required']) 
+                                                    !!}
+                                            </div>
+                                            
+                                            <div class="col-md-6" style="padding-bottom: 15px;">
+                                                <label>Hora Final</label>
+                                                {!! Form::time (
+                                                    'finHora',
+                                                    null,
+                                                    ['class'=>'form-control', 'required' => 'required']) 
+                                                    !!}
                                             </div>
                                         </div>
                                     </div>
@@ -62,5 +103,5 @@
 @endsection
 
 @section('script')
-    <script src="{{url('administration/dist/js/validaNumerosLetras.js')}}"></script>
+    <script src="{{url('registrados/js/validaNumerosLetras.js')}}"></script>
 @endsection

@@ -196,7 +196,7 @@
                         @if(Auth::user()->rol == "Administrador")
                         <li class="has-sub">
                             <a class="js-arrow" href="#" id="menu_letras">
-                                <i class="fas fa-user"></i>Tarifas
+                                <i class="fas fa-credit-card"></i>Tarifas
                                 <span class="arrow">
                                     <i class="fas fa-angle-down"></i>
                                 </span>

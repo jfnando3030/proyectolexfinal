@@ -15,9 +15,7 @@
 
         <div class="emp-profile" style="padding: 3%;">
             {!! Form::open(['route' => ['editar_departamento'],'method'=>'PUT']) !!}
-
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
-
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">
@@ -26,13 +24,56 @@
                                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                     	<input type="hidden" name="id" id="id" value="{{ $departamento->id }}">
                                         <div class="row">
-                                            <div class="col-md-6" style="padding-bottom: 15px;">
+                                        <div class="col-md-6" style="padding-bottom: 15px;">
                                                 <label>Nombres del departamento:</label>
-                                                <input type="text" name="nombres" id="nombres" class="form-control" value="{{ $departamento->nombre_departamento }} ">
+                                                {!! Form::text('nombres',$departamento->nombre_departamento,['placeholder'=>'Ingrese nombres del departamento','class'=>'form-control', 'onkeypress'=>'return soloLetras(event)']) !!}
+                                        </div>
+                                        <div class="col-md-6" style="padding-bottom: 15px;">
+                                            <label>Descripción:</label>
+                                            {!! Form::text('descripcion',$departamento->descripcion_departamento,['placeholder'=>'Ingrese una breve descripción del departamento','class'=>'form-control','required' => 'required', 'onkeypress'=>'return soloLetras(event)']) !!}
+                                        </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                        <div class="col-md-12" style="padding-bottom: 15px;">
+                                                <label>Horario</label>
+                                        </div>
+                                            <div class="col-md-6" style="padding-bottom: 15px;">
+                                                <label>Dia Inicial</label>
+                                                {!! Form::select(
+                                                    'inicioDia',
+                                                    $dias, 
+                                                    $departamento->horario_inicio,
+                                                    ['class'=>'form-control', 'required' => 'required']) 
+                                                    !!}
                                             </div>
                                             <div class="col-md-6" style="padding-bottom: 15px;">
-                                                <label>Descripción:</label>
-                                                <input type="text" name="descripcion" id="descripcion" class="form-control" value="{{ $departamento->descripcion_departamento }} ">
+                                                <label>Día Final</label>
+                                                {!! Form::select(
+                                                    'finDia',
+                                                    $dias,
+                                                    $departamento->horario_fin,
+                                                    ['class'=>'form-control', 'required' => 'required']) 
+                                                    !!}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                        <div class="col-md-6" style="padding-bottom: 15px;">
+                                                <label>Horario Inicial</label>
+                                                {!! Form::time (
+                                                    'inicioHora',
+                                                    $departamento->hora_inicio,
+                                                    ['class'=>'form-control', 'required' => 'required']) 
+                                                    !!}
+                                            </div>
+                                            
+                                            <div class="col-md-6" style="padding-bottom: 15px;">
+                                                <label>Hora Final</label>
+                                                {!! Form::time (
+                                                    'finHora',
+                                                    $departamento->hora_fin,
+                                                    ['class'=>'form-control', 'required' => 'required']) 
+                                                    !!}
                                             </div>
                                         </div>
                                     </div>
@@ -55,6 +96,15 @@
                         </div>
                     </div>              
                 </div>
+                @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
             {!! Form::close() !!}
         </div>
     </div>
@@ -62,5 +112,7 @@
 @endsection
 
 @section('script')
-    <script src="{{url('administration/dist/js/validaNumerosLetras.js')}}"></script>
+    <script src="{{url('registrados/js/validaNumerosLetras.js')}}">
+    
+    </script>
 @endsection
