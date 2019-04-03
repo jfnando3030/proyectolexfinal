@@ -24,9 +24,11 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Validation\Rule;
 use Session;
+use Validator;
 
 class WelcomeController extends Controller
 {
+    public $dias = array( 0=>"" ,1=>"Lunes", 2=>"Martes", 3=>"Miércoles", 4=>"Jueves", 5=>"Viernes", 6=>"Sábado", 7=>"Domingo");
 
 	public function __construct(){
 
@@ -81,14 +83,18 @@ class WelcomeController extends Controller
 
     public function registrar_departamento(Request $request)
     {
-    	return view('administracion.departamento.registrar');
+    	return view('administracion.departamento.registrar', ['dias' => $this->dias]);
     }
 
     public function store_departamento(Request $request)
     {
     	$departamento = new Departamento();
     	$departamento->nombre_departamento = $request->nombres;
-    	$departamento->descripcion_departamento = $request->descripcion;
+        $departamento->descripcion_departamento = $request->descripcion;
+        $departamento->horario_inicio = $request->inicioDia;
+        $departamento->horario_fin = $request->finDia;
+        $departamento->hora_inicio = $request->inicioHora;
+        $departamento->hora_fin = $request->finHora;
 
         if( $departamento->save() ){
         	Session::flash('message', 'Los datos se han guardado satisfactoriamente.');   
@@ -110,7 +116,7 @@ class WelcomeController extends Controller
     {
     	$departamento = Departamento::findOrFail(Crypt::decrypt($id));   
 
-    	return view('administracion.departamento.actualizar', ['departamento' => $departamento]);
+    	return view('administracion.departamento.actualizar', ['departamento' => $departamento, 'dias' => $this->dias]);
     }
     		
     public function editar_departamento(Request $request)
@@ -118,7 +124,10 @@ class WelcomeController extends Controller
     	$departamento = Departamento::findOrFail($request->id);
         $departamento->nombre_departamento = $request->nombres;
         $departamento->descripcion_departamento = $request->descripcion;
-
+        $departamento->horario_inicio = $request->inicioDia;
+        $departamento->horario_fin = $request->finDia;
+        $departamento->hora_inicio = $request->inicioHora;
+        $departamento->hora_fin = $request->finHora;
         if($departamento->save()){
             return redirect('administracion/departamento/actualizar/' . Crypt::encrypt($request->id) )->with('mensaje-registro', 'Datos actualizados correctamente.');
         }

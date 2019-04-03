@@ -14,6 +14,10 @@ class Departamento extends Model
         'nombre_departamento',
         'descripcion_departamento',
         'estado_departamento',
+        'horario_inicio',
+        'horario_fin',
+        'hora_inicio',
+        'hora_fin'
     ];
 
     public function usuarios(){

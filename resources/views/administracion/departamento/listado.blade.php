@@ -94,6 +94,16 @@
                         <div class="icon">
                             <i class="zmdi zmdi-mood-bad"></i>
                         </div>
+                        @if(Auth::user()->rol == "Administrador")
+                    <div class="col-md-12 col-lg-12" align="center">
+                    
+                        <a href="http://localhost/proyectolexfinal/administracion/departamento/registrar">
+                            <button title="Añadir nuevo registro" id="payment-button" type="submit" class="btn btn-lg btn-info">
+                                <i class="fas fa-plus-circle"></i>
+                            </button>
+                        </a>
+                    </div>
+                    @endif
                     </div>
                 </div>
             @endif
