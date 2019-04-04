@@ -2117,7 +2117,7 @@ a.gradient-btn:hover:after{
     width: 100%;
   margin-top: auto;
   margin-bottom: auto;
-  background: black;
+  background: #003364;
   position: relative;
   display: flex;
   justify-content: center;
@@ -2278,7 +2278,7 @@ a.gradient-btn:hover:after{
   height: 150px;
   width: 150px;
   border-radius: 50%;
-  border: 2px solid white;
+
 }
 .form_container {
   margin-top: 85px;

@@ -1506,7 +1506,7 @@ section {
 }
 
 .account-dropdown__item a:hover {
-    background: #ff131a;
+    background: #1a73e8;
     color: #fff;
 }
 
@@ -2110,7 +2110,7 @@ section {
     -moz-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    background: black;
+    background: white;
     padding: 0 15px;
 }
 
@@ -2153,12 +2153,12 @@ section {
     -moz-box-direction: normal;
     -ms-flex-direction: column;
     flex-direction: column;
-    border-bottom: 1px  solid #f2f2f2;
+    border-bottom: 1px  solid #fff;
 }
 
 .account2 .name {
     text-transform: capitalize;
-    font-weight: 500;
+    font-weight: bold;
     font-size: 15px;
     padding-top: 5px;
 
@@ -2179,7 +2179,7 @@ section {
     height: -webkit-calc(100vh - 75px);
     height: -moz-calc(100vh - 75px);
     height: calc(100vh - 75px);
-    border-right: 1px solid black;
+    border-right: 1px solid white;
     position: relative;
 }
 
@@ -2215,6 +2215,10 @@ section {
     color: white;
 }
 
+.navbar-sidebar2 .navbar__list li .arrow i:hover{
+    color:white;
+}
+
 .navbar-sidebar2 .navbar__list li:hover > a {
     color: white;
 }
@@ -2222,6 +2226,7 @@ section {
 .navbar-sidebar2 .navbar__list li a {
     font-size: 16px;
     color: white;
+    font-weight: bold;
     display: block;
     padding: 5px 10px;
 
@@ -2270,7 +2275,7 @@ section {
 
 .header-desktop2 {
     height: 75px;
-    background: black;
+    background: #1a73e8;
     position: fixed;
     z-index: 1001;
     top: 0;
@@ -2278,10 +2283,18 @@ section {
     left: 190px;
 }
 
+.header-button-item {
+    color: #fff;
+}
+
 @media (max-width: 991px) {
     .header-desktop2 {
         left: 0;
         position: relative;
+        background: white;
+    }
+    .header-button-item{
+        color: #000;
     }
 }
 
@@ -2398,7 +2411,6 @@ section {
 
 .header-button-item {
     font-size: 30px;
-    color: #fff;
     margin-right: 34px;
     position: relative;
     display: -webkit-box;
@@ -2502,8 +2514,8 @@ section {
     position: fixed;
     min-width: 300px;
     right: -300px;
-    top: 50px;
-    background: #000;
+    top: 52px;
+    background: black;
     text-align: left;
     -webkit-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1);
@@ -2534,7 +2546,7 @@ section {
 }
 
 .setting-menu .account-dropdown__item a:hover {
-    color: #fff;
+    color: white;
     font-weight: bold;
 }
 
@@ -14596,7 +14608,7 @@ section {
 
 .navbar-sidebar2 .navbar__list li a:hover{
     color: white;
-    background: #ff131a;
+    background: #06379d;
   
 }
 
@@ -15153,7 +15165,7 @@ section {
     opacity: .8;
 }
 
-.btn-primary{color:#fff;background-color:#ff131a;border-color:#ff131a;font-weight: bold;}.btn-primary:hover{color:#fff;background-color:#ff131a;border-color:#ff131a}.btn-primary.focus,.btn-primary:focus{box-shadow:0 0 0 .2rem #ff131a}.btn-primary.disabled,.btn-primary:disabled{color:#fff;background-color:#ff131a;border-color:#ff131a}.btn-primary:not(:disabled):not(.disabled).active,.btn-primary:not(:disabled):not(.disabled):active,.show>.btn-primary.dropdown-toggle{color:#fff;background-color:#ff131a;border-color:#ff131a}.btn-primary:not(:disabled):not(.disabled).active:focus,.btn-primary:not(:disabled):not(.disabled):active:focus,.show>.btn-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgba(0,123,255,.5)}
+.btn-primary{color:#fff;background-color:#06379d;border-color:#06379d;font-weight: bold;}.btn-primary:hover{color:#fff;background-color:#06379d;border-color:#06379d}.btn-primary.focus,.btn-primary:focus{box-shadow:0 0 0 .2rem #06379d}.btn-primary.disabled,.btn-primary:disabled{color:#fff;background-color:#06379d;border-color:#06379d}.btn-primary:not(:disabled):not(.disabled).active,.btn-primary:not(:disabled):not(.disabled):active,.show>.btn-primary.dropdown-toggle{color:#fff;background-color:#06379d;border-color:#06379d}.btn-primary:not(:disabled):not(.disabled).active:focus,.btn-primary:not(:disabled):not(.disabled):active:focus,.show>.btn-primary.dropdown-toggle:focus{box-shadow:0 0 0 .2rem rgba(0,123,255,.5)}
 
 .btn-download{color:#fff;background-color:#005d32;border-color:#005d32;font-weight: bold;}.btn-download:hover{color:#fff;background-color:#005d32;border-color:#005d32}
 .btn-shared{color:#fff;background-color:#006fa5;border-color:#006fa5;font-weight: bold;}.btn-shared:hover{color:#fff;background-color:#006fa5;border-color:#006fa5}

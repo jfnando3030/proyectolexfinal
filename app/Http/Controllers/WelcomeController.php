@@ -220,5 +220,37 @@ class WelcomeController extends Controller
 		return view('administracion.solicitudes.listado', ['solicitud' => $solicitud]);
     }
 
+    public function aceptar_casos(Request $request, $id)
+    {
+		$casos = Solicitud::findOrFail($id);  
+    	$casos->leido_solicitud = "1";
+    	$casos->id_user_abogado = $request->user()->id;
+    	$casos->save();
+    }
+    
+    public function gestionar_casos()
+    {
+    	$solicitud = Solicitud::where('estado_solicitud',1)->get();
+    	//return "hola";
+		return view('administracion.gestionar.listado', ['solicitud' => $solicitud]);
+    }
+
+    public function gestionar_abogado_casos($id)
+    {
+    	$solicitud = DB::select("select  * from solicitud where id = ? and estado_solicitud = 1 ", [$id] ); 
+    	$abogado = DB::select("select * from users where id = ? ", [$solicitud[0]->id_user_abogado]); 
+    	$abogados = User::where('rol', 'Abogado')->get();
+
+		return view('administracion.gestionar.actualizar', ['solicitud' => $solicitud, 'abogado' => $abogado,  'abogados' => $abogados]);
+    }
+
+    public function actualizar_abogado_caso(Request $request)
+    {
+    	$casos = Solicitud::findOrFail($request->id);  
+    	$casos->id_user_abogado = $request->abogado;
+    	if($casos->save()){
+            return redirect('administracion/gestionar/casos/listado')->with('mensaje-registro', 'Datos actualizados correctamente.');
+        }
+    }
 
 }
