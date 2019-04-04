@@ -171,6 +171,12 @@
                                     <i class="fa fa-list"></i>Listado</a>
                                 </li>
                             </ul>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li class="has-sub">
+                                    <a href="{{url('administracion/departamento/abogados')}}" onclick="return myFunction();" id="menu_letras">
+                                    <i class="fas fa-user"></i>Abogados</a>
+                                </li>
+                            </ul>
                         </li>
                         @endif
 

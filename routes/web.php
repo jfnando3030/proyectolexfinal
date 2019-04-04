@@ -62,6 +62,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	// LISTADO 
 	Route::get('/administracion/departamento/listado', 'WelcomeController@listado_departamento');
 
+	//LISTADO ABOGADOS
+	Route::get('/administracion/departamento/abogados', 'WelcomeController@listarAbogados');
+
 	//ACTUALIZAR 
 	Route::get('/administracion/departamento/actualizar/{id}', 'WelcomeController@actualizar_departamento');
 	Route::put('/administracion/departamento/editar', 'WelcomeController@editar_departamento')->name('editar_departamento');

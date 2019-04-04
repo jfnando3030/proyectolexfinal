@@ -136,6 +136,16 @@ public function admin(Request $request){
     	$departamento = Departamento::where('estado_departamento',1)->get();
 
 		return view('administracion.departamento.listado', ['departamento' => $departamento]);
+	}
+	
+	public function listarAbogados()
+    {
+		$users = DB::table('departamento_user')
+			->join('users', 'departamento_user.user_id', '=', 'users.id')
+			->join('departamento', 'departamento_user.departamento_id', '=', 'departamento.id')
+			->select('users.id' ,'users.nombres', 'users.apellidos', 'users.estado', 'departamento.nombre_departamento', 'departamento.estado_departamento')
+			->get();
+		return view('administracion.abogados.listado', ['departamento' => $users]);
     }
 
     public function actualizar_departamento (Request $request, $id)
