@@ -31,12 +31,8 @@ class WelcomeController extends Controller
     public $dias = array( 0=>"" ,1=>"Lunes", 2=>"Martes", 3=>"Miércoles", 4=>"Jueves", 5=>"Viernes", 6=>"Sábado", 7=>"Domingo");
 
 	public function __construct(){
-
-        
-  
         $this->middleware('admin',['only'=>'auth']);
         $this->middleware('guest',['only'=>'index']);
-    
     }
     
     public function index()
@@ -47,10 +43,6 @@ class WelcomeController extends Controller
 
 
     public function admin(Request $request){
-
-    	
-    	
-
         return view('administracion.index');
     }
 
