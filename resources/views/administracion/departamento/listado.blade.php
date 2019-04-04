@@ -30,6 +30,9 @@
    @if (session('mensaje-registro'))
         @include('mensajes.msj_correcto')
     @endif
+    @if (session('mensaje-error'))
+            @include('mensajes.msj_rechazado')
+        @endif
     <div class="row">
         <div class="col-12  col-sm-12 col-md-12 col-lg-12 col-xl-12">
             @if( $departamento->count() > 0 ) 
@@ -60,7 +63,7 @@
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$departamento->nombre_departamento}}</td>
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$departamento->descripcion_departamento}} </td>
                                 <td> 
-                                    <a href="{{ url('/administracion/departamento/actualizar/') }}/{{ Crypt::encrypt($departamento->id) }}" id="editar" class="btn btn-sm btn-warning"> Actualizar datos </a>
+                                    <a href="{{ url('/administracion/departamento/actualizar/') }}/{{ Crypt::encrypt($departamento->id) }}" id="editar" class="btn btn-sm btn-warning" style="font-weight: bold; color: white;"> Actualizar datos </a>
                                     <a href="#" id="del-{{ $departamento->id }}" class="btn btn-sm btn-primary">Eliminar</a>
                                     <script>
                                         $("#del-"+{{ $departamento->id }}).click(function(e){
@@ -114,7 +117,7 @@
 @endsection
 
 @section('script')
-    <script src="{{url('administration/dist/js/roles/delete.js')}}"></script>
+    <script src="{{url('js/delete.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             setTimeout(function() {

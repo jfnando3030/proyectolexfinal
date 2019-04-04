@@ -10,6 +10,9 @@
         @if (session('mensaje-registro'))
         @include('mensajes.msj_correcto')
         @endif
+        @if (session('mensaje-error'))
+            @include('mensajes.msj_rechazado')
+        @endif
         <div class="row">
             <div class="col-12	col-sm-12	col-md-12	col-lg-12	col-xl-12" id="tag_container"> 
                 @if(count($tarifas) >0)

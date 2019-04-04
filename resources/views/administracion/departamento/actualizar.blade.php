@@ -12,7 +12,9 @@
         @if (session('mensaje-registro'))
             @include('mensajes.msj_correcto')
         @endif
-
+        @if (session('mensaje-error'))
+            @include('mensajes.msj_rechazado')
+        @endif
         <div class="emp-profile" style="padding: 3%;">
             {!! Form::open(['route' => ['editar_departamento'],'method'=>'PUT']) !!}
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
@@ -96,15 +98,6 @@
                         </div>
                     </div>              
                 </div>
-                @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
             {!! Form::close() !!}
         </div>
     </div>
@@ -112,7 +105,12 @@
 @endsection
 
 @section('script')
-    <script src="{{url('registrados/js/validaNumerosLetras.js')}}">
-    
+    <script src="{{url('registrados/js/validaNumerosLetras.js')}}"></script>
+    <script>
+    $(document).ready(function() {
+            setTimeout(function() {
+                $(".rechazado").fadeOut(300);
+            },3000);
+        });
     </script>
 @endsection

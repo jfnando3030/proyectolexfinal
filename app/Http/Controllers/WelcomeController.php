@@ -28,7 +28,7 @@ use Validator;
 
 class WelcomeController extends Controller
 {
-    public $dias = array( 0=>"" ,1=>"Lunes", 2=>"Martes", 3=>"Miércoles", 4=>"Jueves", 5=>"Viernes", 6=>"Sábado", 7=>"Domingo");
+    public $dias = array( ""=>"Seleccione un día" ,1=>"Lunes", 2=>"Martes", 3=>"Miércoles", 4=>"Jueves", 5=>"Viernes", 6=>"Sábado", 7=>"Domingo");
 
 	public function __construct(){
         $this->middleware('admin',['only'=>'auth']);
@@ -80,21 +80,34 @@ class WelcomeController extends Controller
 
     public function store_departamento(Request $request)
     {
-    	$departamento = new Departamento();
-    	$departamento->nombre_departamento = $request->nombres;
-        $departamento->descripcion_departamento = $request->descripcion;
-        $departamento->horario_inicio = $request->inicioDia;
-        $departamento->horario_fin = $request->finDia;
-        $departamento->hora_inicio = $request->inicioHora;
-        $departamento->hora_fin = $request->finHora;
+		$enviarDatos = true;
+		$mensaje1= "";
+    	
+		if($request->inicioDia >= $request->finDia || $request->inicioHora >= $request->finHora){
+			$enviarDatos = false;
+			$mensaje1 = 'Revise su horario.';
+		}
 
-        if( $departamento->save() ){
-        	Session::flash('message', 'Los datos se han guardado satisfactoriamente.');   
-        	return redirect('administracion/departamento/registrar')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
-        }else{
-        	Session::flash('message', 'Problemas al registrar los datos.');            
-        	return redirect('administracion/departamento/registrar')->with('mensaje-registro2', 'Problemas al registrar los datos.');
-        }
+		if($enviarDatos){
+			$departamento = new Departamento();
+			$departamento->nombre_departamento = $request->nombres;
+			$departamento->descripcion_departamento = $request->descripcion;
+			$departamento->horario_inicio = $request->inicioDia;
+			$departamento->horario_fin = $request->finDia;
+			$departamento->hora_inicio = $request->inicioHora;
+			$departamento->hora_fin = $request->finHora;
+
+			if( $departamento->save() ){
+				$request->flush();
+				return redirect('administracion/departamento/listado/')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
+			}else{
+				$request->flush();
+				return redirect('administracion/departamento/registrar')->with('mensaje-error', 'Problemas al registrar los datos.');
+			}
+		}else{
+			$request->flash();
+			return redirect('administracion/departamento/registrar' )->with('mensaje-error', $mensaje1);
+		}
     }
     
     public function listado_departamento()
@@ -113,16 +126,29 @@ class WelcomeController extends Controller
     		
     public function editar_departamento(Request $request)
     {
-    	$departamento = Departamento::findOrFail($request->id);
-        $departamento->nombre_departamento = $request->nombres;
-        $departamento->descripcion_departamento = $request->descripcion;
-        $departamento->horario_inicio = $request->inicioDia;
-        $departamento->horario_fin = $request->finDia;
-        $departamento->hora_inicio = $request->inicioHora;
-        $departamento->hora_fin = $request->finHora;
-        if($departamento->save()){
-            return redirect('administracion/departamento/actualizar/' . Crypt::encrypt($request->id) )->with('mensaje-registro', 'Datos actualizados correctamente.');
-        }
+		$enviarDatos = true;
+		$mensaje1= "";
+    	
+		if($request->inicioDia >= $request->finDia || $request->inicioHora >= $request->finHora){
+			$enviarDatos = false;
+			$mensaje1 = 'Revise su horario.';
+		}
+
+		if($enviarDatos){
+			$departamento = Departamento::findOrFail($request->id);
+			$departamento->nombre_departamento = $request->nombres;
+			$departamento->descripcion_departamento = $request->descripcion;
+			$departamento->horario_inicio = $request->inicioDia;
+			$departamento->horario_fin = $request->finDia;
+			$departamento->hora_inicio = $request->inicioHora;
+			$departamento->hora_fin = $request->finHora;
+			if($departamento->save()){
+			return redirect('administracion/departamento/listado')->with('mensaje-registro', 'Datos actualizados correctamente.');
+			}
+		}else{
+			$request->flash();
+			return redirect('administracion/departamento/actualizar/' . Crypt::encrypt($request->id) )->with('mensaje-error', $mensaje1);
+		}
     }
 
     public function eliminar_departamento(Request $request, $id)

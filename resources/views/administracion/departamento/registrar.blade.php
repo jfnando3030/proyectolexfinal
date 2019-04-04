@@ -12,6 +12,9 @@
         @if (session('mensaje-registro'))
             @include('mensajes.msj_correcto')
         @endif
+        @if (session('mensaje-error'))
+            @include('mensajes.msj_rechazado')
+        @endif
 
         <div class="emp-profile" style="padding: 3%;">
             {!! Form::open(['route' => ['store_departamento'],'method'=>'POST']) !!}
@@ -27,7 +30,7 @@
                                         <div class="row">
                                             <div class="col-md-6" style="padding-bottom: 15px;">
                                                 <label>Nombres del departamento:</label>
-                                                {!! Form::text('nombres',null,['placeholder'=>'Ingrese nombres del departamento','class'=>'form-control', 'required' => 'required', 'onkeypress'=>'return soloLetras(event)']) !!}
+                                                {!! Form::text('nombres', null,['placeholder'=>'Ingrese nombres del departamento','class'=>'form-control', 'required' => 'required', 'onkeypress'=>'return soloLetras(event)']) !!}
                                             </div>
                                             <div class="col-md-6" style="padding-bottom: 15px;">
                                                 <label>Descripción:</label>
@@ -104,4 +107,11 @@
 
 @section('script')
     <script src="{{url('registrados/js/validaNumerosLetras.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            setTimeout(function() {
+                $(".rechazado").fadeOut(300);
+            },3000);
+        });
+    </script>
 @endsection

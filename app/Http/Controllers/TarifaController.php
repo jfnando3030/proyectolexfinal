@@ -53,7 +53,13 @@ class TarifaController extends Controller
             'descripcion'=>$request->descripcion
         ]);
 
-        if($tarifaCreada->tarifa != null){ return $this->index();}
+        if($tarifaCreada->tarifa != null){ 
+            return redirect('administracion/tarifa')->with('mensaje-registro', 'Datos registrados correctamente.');
+        }
+        else{
+            $request->flash();
+            return redirect('administracion/tarifa/create')->with('mensaje-error', 'Error al registrar los datos.');
+        }
     } 
 
     /**
@@ -96,8 +102,12 @@ class TarifaController extends Controller
         $tarifa = $this->show($id);
         $tarifa->fill($request->all());
 
-        if($tarifa->save()){
-            return Redirect::to('administracion/tarifa');
+        if($tarifa->save()){ 
+            return redirect('administracion/tarifa')->with('mensaje-registro', 'Datos actualizados correctamente.');
+        }
+        else{
+            $request->flash();
+            return redirect('administracion/tarifa/'. Crypt::encrypt($tarifa->id).'/edit')->with('mensaje-error', 'Error al actualizar datos.');
         }
     }
 
