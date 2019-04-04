@@ -85,7 +85,9 @@ class UserController extends Controller
 
                 
                 ]);
-            
+
+                
+            if($request->departamentos!=null){
                 $total_departamentos = $request->departamentos;
                 foreach($total_departamentos as $depatamento){
                     UserDepartamento::create([
@@ -93,6 +95,9 @@ class UserController extends Controller
                         'departamento_id'=>$depatamento,
                     ]);
                 }
+
+            }
+                
 
                 
 
