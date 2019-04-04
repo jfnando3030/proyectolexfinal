@@ -14618,6 +14618,8 @@ section {
       margin-bottom:0.5rem;
       margin-top:0.5rem;
     }
+
+    .box .nav-stacked>li{margin:5; width: 20%;}
     .pricing-divider {
     border-radius: 20px;
     background: #C64545;
@@ -14709,13 +14711,15 @@ section {
 
   }
 
+  .content{min-height:250px;padding:15px;margin-right:auto;margin-left:auto;padding-left:30px;padding-right:15px}
+
 /* 
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops
 */
 
 @media (min-width: 1281px) {
-  
+    .box .nav-stacked>li{margin:5; width: 20%;}
     .top{
         padding-top: 50px;
     }
@@ -14738,7 +14742,8 @@ section {
   */
   
   @media (min-width: 1025px) and (max-width: 1280px) {
-    
+    .box .nav-stacked>li{margin:5; width: 20%;}
+
     .top{
         padding-top: 80px;
     }
@@ -14768,6 +14773,8 @@ section {
         padding-top: 5px;
     }
 
+    .box .nav-stacked>li{margin:5; width: 20%;}
+
     
     .container-fluid {
 
@@ -14792,6 +14799,8 @@ section {
         padding-top: 10px;
     }
 
+    .box .nav-stacked>li{margin:5; width: 20%;}
+
     .container-fluid {
 
         padding-left: 20px;
@@ -14810,10 +14819,12 @@ section {
   */
   
   @media (min-width: 481px) and (max-width: 767px) {
+    .content{padding-left:15px}
     
     .top{
         padding-top: 5px;
     }
+    .box .nav-stacked>li{margin:5; width: 30%;}
 
     .container-fluid {
 
@@ -14833,10 +14844,13 @@ section {
   */
   
   @media (min-width: 320px) and (max-width: 480px) {
+    .content{padding-left:15px}
     
     .top{
         padding-top: 5px;
     }
+
+    .box .nav-stacked>li{margin:5; width: 100%;}
 
     .letra{
         font-size: 14px;
