@@ -88,7 +88,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::put('/administracion/solicitud/editar', 'WelcomeController@editar_solicitud')->name('editar_solicitud');
 
 	//ELIMINAR 
-	Route::get('/administracion/solicitud/eliminar/{id}', 'WelcomeController@eliminar_departamento');
+	//Route::get('/administracion/solicitud/eliminar/{id}', 'WelcomeController@eliminar_departamento');
  
 // ************************** FIN DE  SOLICITUDES ********************************* 
 
@@ -104,6 +104,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
  
 // ************************** FIN DE  SOLICITUDES ********************************* 
+
+
+// ************************** RESPUESTAS *************************************** 
+	
+	//REGISTRAR 
+	Route::get('/administracion/respuesta/registrar/{id}', 'WelcomeController@registrar_respuesta');
+	Route::post('/administracion/respuesta/store', 'WelcomeController@store_respuesta')->name('store_respuesta');
+	
+	// LISTADO 
+	//Route::get('/administracion/solicitud/listado', 'WelcomeController@listado_solicitud');
+
+	//ACTUALIZAR 
+	Route::get('/administracion/respuesta/actualizar/{id}', 'WelcomeController@actualizar_respuesta');
+	Route::put('/administracion/respuesta/editar', 'WelcomeController@editar_respuesta')->name('editar_respuesta');
+
+	//ELIMINAR 
+	Route::get('/administracion/respuesta/eliminar/{id}', 'WelcomeController@eliminar_respuesta');
+ 
+// ************************** FIN DE  RESPUESTAS ********************************* 
+
 
 
 	Route::get('administracion/invita/bango','WelcomeController@invita_bango');

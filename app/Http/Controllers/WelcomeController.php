@@ -200,78 +200,78 @@ public function admin(Request $request){
 
     
 
-public function store_solicitud(Request $request)
-{
+	public function store_solicitud(Request $request)
+	{
 
-	$date = Carbon::now();
-	$hoy = $date->format('Y-m-d');
-	$hora = $date->format('h:i:s');
+		$date = Carbon::now();
+		$hoy = $date->format('Y-m-d');
+		$hora = $date->format('h:i:s');
 
-	$solicitud = new Solicitud();
-	$solicitud->nombre_solicitud = $request->nombre;
-	$solicitud->descripcion = $request->solicitud;
-	$solicitud->id_user_solicitud = $request->user()->id;
-	$solicitud->fecha_solicitud = $hoy;
-	$solicitud->hora_solicitud = $hora;
-	$solicitud->id_departamento = $request->departamento;
-	 
-	if( $solicitud->save() ){
-		
-		//  PARA ARCHIVO 1 
-		if($request->archivo1 != ""){
-			if($request->file('archivo1')){
-				$archivos1 = new Archivos();
-				$archivos1->path = Storage::disk('local2')->put('archivos',   $request->file('archivo1')); 
-				$archivos1->id_solicitud = $solicitud->id;
-				$archivos1->save();
+		$solicitud = new Solicitud();
+		$solicitud->nombre_solicitud = $request->nombre;
+		$solicitud->descripcion = $request->solicitud;
+		$solicitud->id_user_solicitud = $request->user()->id;
+		$solicitud->fecha_solicitud = $hoy;
+		$solicitud->hora_solicitud = $hora;
+		$solicitud->id_departamento = $request->departamento;
+		 
+		if( $solicitud->save() ){
+			
+			//  PARA ARCHIVO 1 
+			if($request->archivo1 != ""){
+				if($request->file('archivo1')){
+					$archivos1 = new Archivos();
+					$archivos1->path = Storage::disk('local2')->put('archivos',   $request->file('archivo1')); 
+					$archivos1->id_solicitud = $solicitud->id;
+					$archivos1->save();
+				}
 			}
-		}
 
-		//  PARA ARCHIVO 2
-		if($request->archivo2 != ""){
-			if($request->file('archivo2')){
-				$archivos2 = new Archivos();
-				$archivos2->path = Storage::disk('local2')->put('archivos',   $request->file('archivo2')); 
-				$archivos2->id_solicitud = $solicitud->id;
-				$archivos2->save();
+			//  PARA ARCHIVO 2
+			if($request->archivo2 != ""){
+				if($request->file('archivo2')){
+					$archivos2 = new Archivos();
+					$archivos2->path = Storage::disk('local2')->put('archivos',   $request->file('archivo2')); 
+					$archivos2->id_solicitud = $solicitud->id;
+					$archivos2->save();
+				}
 			}
-		}
 
-		//  PARA ARCHIVO 3
-		if($request->archivo3 != ""){
-			if($request->file('archivo3')){
-				$archivo3 = new Archivos();
-				$archivo3->path = Storage::disk('local2')->put('archivos',   $request->file('archivo3')); 
-				$archivo3->id_solicitud = $solicitud->id;
-				$archivo3->save();
+			//  PARA ARCHIVO 3
+			if($request->archivo3 != ""){
+				if($request->file('archivo3')){
+					$archivo3 = new Archivos();
+					$archivo3->path = Storage::disk('local2')->put('archivos',   $request->file('archivo3')); 
+					$archivo3->id_solicitud = $solicitud->id;
+					$archivo3->save();
+				}
 			}
-		}
 
-		//  PARA ARCHIVO 4
-		if($request->archivo4 == ""){
-			if($request->file('archivo4')){
-				$archivo4 = new Archivos();
-				$archivo4->path = Storage::disk('local2')->put('archivos',   $request->file('archivo4')); 
-				$archivo4->id_solicitud = $solicitud->id;
-				$archivo4->save();
+			//  PARA ARCHIVO 4
+			if($request->archivo4 == ""){
+				if($request->file('archivo4')){
+					$archivo4 = new Archivos();
+					$archivo4->path = Storage::disk('local2')->put('archivos',   $request->file('archivo4')); 
+					$archivo4->id_solicitud = $solicitud->id;
+					$archivo4->save();
+				}
 			}
-		}
 
-		//  PARA ARCHIVO 5
-		if($request->archivo5 == ""){
-			if($request->file('archivo5')){
-				$archivo5 = new Archivos();
-				$archivo5->path = Storage::disk('local2')->put('archivos',   $request->file('archivo5')); 
-				$archivo5->id_solicitud = $solicitud->id;
-				$archivo5->save();
+			//  PARA ARCHIVO 5
+			if($request->archivo5 == ""){
+				if($request->file('archivo5')){
+					$archivo5 = new Archivos();
+					$archivo5->path = Storage::disk('local2')->put('archivos',   $request->file('archivo5')); 
+					$archivo5->id_solicitud = $solicitud->id;
+					$archivo5->save();
+				}
 			}
-		}
 
-		return redirect('administracion/solicitud/registrar')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
-	}else{
-		return redirect('administracion/solicitud/registrarr')->with('mensaje-registro2', 'Problemas al registrar los datos.');
+			return redirect('administracion/solicitud/registrar')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
+		}else{
+			return redirect('administracion/solicitud/registrarr')->with('mensaje-registro2', 'Problemas al registrar los datos.');
+		}
 	}
-}
 
 
     public function listado_solicitud(Request $request)
@@ -318,4 +318,12 @@ public function store_solicitud(Request $request)
         }
     }
 
+    public function registrar_respuesta(Request $request, $id)
+    {
+    	//$departamento = Departamento::all();
+    	$casos = Solicitud::findOrFail($id); 
+    	return view('administracion.respuesta.registrar', ['casos' => $casos]);
+    }
+
+    
 }
