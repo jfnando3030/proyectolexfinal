@@ -49,7 +49,7 @@ class WelcomeController extends Controller
 public function admin(Request $request){
 
 	if(Auth::user()->rol == "Administrador"){
-		$id = Auth::user()->id;
+		return view('administracion.index');
 
 	}else {
 		if(Auth::user()->rol == "Abogado"){
@@ -58,6 +58,7 @@ public function admin(Request $request){
 			return view('administracion.index', compact('total_solicitudes'));
 
 		}else{
+			return view('administracion.index');
 
 		}
 	}
