@@ -26,7 +26,7 @@
                                     	<input type="hidden" name="id" id="id" value=" {{ $solicitud[0]->id }} ">
                                         <div class="row">
                                             <div class="col-md-12" style="padding-bottom: 15px;">
-                                                <label>Nombres del caso:</label>
+                                                <label>Nombre del caso:</label>
                                                 <hr>
                                                 <p style="color: gray;"> {{ $solicitud[0]->nombre_solicitud }}" </p>
                                                 <hr>

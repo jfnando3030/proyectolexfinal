@@ -15,6 +15,7 @@ class CreateRespuestasTables extends Migration
     {
         Schema::create('respuestas', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('titulo');
             $table->text('respuesta');
             $table->integer('solicitud_id')->unsigned();
             $table->date('fecha');

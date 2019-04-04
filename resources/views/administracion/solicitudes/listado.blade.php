@@ -47,7 +47,7 @@
                 <table class="table table-borderless table-striped table-earning" id="tabla">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>Caso</th>
                             <th>Detalle</th>
                             <th>Fecha</th>
                             <th>Hora</th>
@@ -57,7 +57,7 @@
                     <tbody>
                         @foreach($solicitud as $solicitud)
                             <tr>
-                                <td style="vertical-align:middle; font-size: 16px;"> {{$solicitud->id}} </td>
+                                <td style="vertical-align:middle; font-size: 16px;"> {{$solicitud->nombre}} </td>
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$solicitud->nombre_solicitud}}</td>
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$solicitud->fecha_solicitud}} </td>
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$solicitud->hora_solicitud}} </td>

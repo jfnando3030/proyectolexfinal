@@ -5,7 +5,7 @@
 @section('contenido')
 
     <div align="center" class="col-md-12 col-12 col-xs-12 col-lg-12 col-sm-12" style="padding-top:15px; padding-bottom: 25px">
-        <h4 style="color: black; text-align:center; font-size:25px;"> Registrar solicitud </h4>
+        <h4 style="color: black; text-align:center; font-size:25px;"> Realizar solicitud </h4>
     </div>
 
   
@@ -28,8 +28,11 @@
                                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
                                             <div class="col-md-6" style="padding-bottom: 15px;">
+                                                <label>Titulo de su solicitud:</label>
+                                                {!! Form::text('nombre',null,['placeholder'=>'Ingrese el título de su solicitud','class'=>'form-control', 'required']) !!}
+
                                                 <label>Detalle su petición:</label>
-                                                <textarea name="solicitud" id="solicitud" rows="11" placeholder="Escriba su solicitud...    " class="form-control" required="" style="background-color: #f2f2f2;"></textarea> 
+                                                <textarea name="solicitud" id="solicitud" rows="9" placeholder="Escriba más información de su solicitud...    " class="form-control" required="" style="background-color: #f2f2f2;"></textarea> 
                                             </div>
 
                                             <div class="col-md-6" style="padding-bottom: 15px;">

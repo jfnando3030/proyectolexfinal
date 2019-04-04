@@ -40,8 +40,16 @@
         </div>
       </div>
 
+    @if(Auth::user()->rol == "Administrador")
 
-    <!-- Content Header (Page header) -->
+     <p style="color:black; text-align:center"> Bienvenido Súper Administrador </p>
+
+
+     @else 
+
+     @if(Auth::user()->rol == "Abogado")
+
+         <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1 style="color: black; text-align: center;">
         Solicitudes
@@ -714,6 +722,28 @@
       <!-- /.row -->
     </section>
     <!-- /.content -->
+
+
+
+
+     @else 
+
+
+     <p style="color:black; text-align:center"> Bienvenido usuario</p>
+
+
+
+
+
+
+
+
+     @endif
+
+    @endif
+
+
+
 
 
 @endsection

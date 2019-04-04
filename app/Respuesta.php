@@ -11,6 +11,7 @@ class Respuesta extends Model
     public $timestamps = false;
     protected $fillable=[
         'id',
+        'titulo',
         'respuesta',
         'estado',
         'solicitud_id',

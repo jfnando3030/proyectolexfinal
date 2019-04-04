@@ -26,6 +26,8 @@ use Illuminate\Validation\Rule;
 use Session;
 use Validator;
 
+use Illuminate\Support\Facades\Auth;
+
 class WelcomeController extends Controller
 {
     public $dias = array( ""=>"Seleccione un día" ,1=>"Lunes", 2=>"Martes", 3=>"Miércoles", 4=>"Jueves", 5=>"Viernes", 6=>"Sábado", 7=>"Domingo");
@@ -42,9 +44,27 @@ class WelcomeController extends Controller
     }
 
 
-    public function admin(Request $request){
-        return view('administracion.index');
-    }
+    
+
+public function admin(Request $request){
+
+	if(Auth::user()->rol == "Administrador"){
+		$id = Auth::user()->id;
+
+	}else {
+		if(Auth::user()->rol == "Abogado"){
+			$total_solicitudes = Solicitud::where('estado_solicitud',1)->where('leido_solicitud',0)->whereNull('id_user_abogado')->get();
+
+			return view('administracion.index', compact('total_solicitudes'));
+
+		}else{
+
+		}
+	}
+	
+}
+
+
 
     public function invita_bango()
     {
@@ -167,77 +187,81 @@ class WelcomeController extends Controller
     	return view('administracion.solicitudes.registrar', ['departamento' => $departamento]);
     }
 
-    public function store_solicitud(Request $request)
-    {
+    
 
-    	$date = Carbon::now();
-		$hoy = $date->format('Y-m-d');
-		$hora = $date->format('h:i:s');
+public function store_solicitud(Request $request)
+{
 
-    	$solicitud = new Solicitud();
-    	$solicitud->nombre_solicitud = $request->solicitud;
-    	$solicitud->id_user_solicitud = $request->user()->id;
-    	$solicitud->fecha_solicitud = $hoy;
-    	$solicitud->hora_solicitud = $hora;
-    	$solicitud->id_departamento = $request->departamento;
-    	 
-        if( $solicitud->save() ){
-	    	
-        	// 	PARA ARCHIVO 1 
-	    	if($request->archivo1 != ""){
-	            if($request->file('archivo1')){
-	            	$archivos1 = new Archivos();
-				    $archivos1->path = Storage::disk('local2')->put('archivos',   $request->file('archivo1')); 
-				    $archivos1->id_solicitud = $solicitud->id;
-				    $archivos1->save();
-	            }
-	        }
+	$date = Carbon::now();
+	$hoy = $date->format('Y-m-d');
+	$hora = $date->format('h:i:s');
 
-	        // 	PARA ARCHIVO 2
-	        if($request->archivo2 != ""){
-	            if($request->file('archivo2')){
-	            	$archivos2 = new Archivos();
-				    $archivos2->path = Storage::disk('local2')->put('archivos',   $request->file('archivo2')); 
-				    $archivos2->id_solicitud = $solicitud->id;
-				    $archivos2->save();
-	            }
-	        }
+	$solicitud = new Solicitud();
+	$solicitud->nombre_solicitud = $request->nombre;
+	$solicitud->descripcion = $request->solicitud;
+	$solicitud->id_user_solicitud = $request->user()->id;
+	$solicitud->fecha_solicitud = $hoy;
+	$solicitud->hora_solicitud = $hora;
+	$solicitud->id_departamento = $request->departamento;
+	 
+	if( $solicitud->save() ){
+		
+		//  PARA ARCHIVO 1 
+		if($request->archivo1 != ""){
+			if($request->file('archivo1')){
+				$archivos1 = new Archivos();
+				$archivos1->path = Storage::disk('local2')->put('archivos',   $request->file('archivo1')); 
+				$archivos1->id_solicitud = $solicitud->id;
+				$archivos1->save();
+			}
+		}
 
-	        // 	PARA ARCHIVO 3
-	        if($request->archivo3 != ""){
-	            if($request->file('archivo3')){
-	            	$archivo3 = new Archivos();
-				    $archivo3->path = Storage::disk('local2')->put('archivos',   $request->file('archivo3')); 
-				    $archivo3->id_solicitud = $solicitud->id;
-				    $archivo3->save();
-	            }
-	        }
+		//  PARA ARCHIVO 2
+		if($request->archivo2 != ""){
+			if($request->file('archivo2')){
+				$archivos2 = new Archivos();
+				$archivos2->path = Storage::disk('local2')->put('archivos',   $request->file('archivo2')); 
+				$archivos2->id_solicitud = $solicitud->id;
+				$archivos2->save();
+			}
+		}
 
-	        // 	PARA ARCHIVO 4
-	        if($request->archivo4 == ""){
-	            if($request->file('archivo4')){
-	            	$archivo4 = new Archivos();
-				    $archivo4->path = Storage::disk('local2')->put('archivos',   $request->file('archivo4')); 
-				    $archivo4->id_solicitud = $solicitud->id;
-				    $archivo4->save();
-	            }
-	        }
+		//  PARA ARCHIVO 3
+		if($request->archivo3 != ""){
+			if($request->file('archivo3')){
+				$archivo3 = new Archivos();
+				$archivo3->path = Storage::disk('local2')->put('archivos',   $request->file('archivo3')); 
+				$archivo3->id_solicitud = $solicitud->id;
+				$archivo3->save();
+			}
+		}
 
-	        // 	PARA ARCHIVO 5
-	        if($request->archivo5 == ""){
-	            if($request->file('archivo5')){
-	            	$archivo5 = new Archivos();
-				    $archivo5->path = Storage::disk('local2')->put('archivos',   $request->file('archivo5')); 
-				    $archivo5->id_solicitud = $solicitud->id;
-				    $archivo5->save();
-	            }
-	        }
+		//  PARA ARCHIVO 4
+		if($request->archivo4 == ""){
+			if($request->file('archivo4')){
+				$archivo4 = new Archivos();
+				$archivo4->path = Storage::disk('local2')->put('archivos',   $request->file('archivo4')); 
+				$archivo4->id_solicitud = $solicitud->id;
+				$archivo4->save();
+			}
+		}
 
-        	return redirect('administracion/solicitud/registrar')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
-        }else{
-        	return redirect('administracion/solicitud/registrarr')->with('mensaje-registro2', 'Problemas al registrar los datos.');
-        }
-    }
+		//  PARA ARCHIVO 5
+		if($request->archivo5 == ""){
+			if($request->file('archivo5')){
+				$archivo5 = new Archivos();
+				$archivo5->path = Storage::disk('local2')->put('archivos',   $request->file('archivo5')); 
+				$archivo5->id_solicitud = $solicitud->id;
+				$archivo5->save();
+			}
+		}
+
+		return redirect('administracion/solicitud/registrar')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
+	}else{
+		return redirect('administracion/solicitud/registrarr')->with('mensaje-registro2', 'Problemas al registrar los datos.');
+	}
+}
+
 
     public function listado_solicitud(Request $request)
     {
@@ -254,21 +278,25 @@ class WelcomeController extends Controller
     	$casos->save();
     }
     
-    public function gestionar_casos()
-    {
-    	$solicitud = Solicitud::where('estado_solicitud',1)->get();
-    	//return "hola";
-		return view('administracion.gestionar.listado', ['solicitud' => $solicitud]);
-    }
+    
+  public function gestionar_casos()
+  {
+	  $solicitud = Solicitud::where('estado_solicitud',1)->whereNotNull('id_user_abogado')->get();
+	  //return "hola";
+	  return view('administracion.gestionar.listado', ['solicitud' => $solicitud]);
+  }
 
-    public function gestionar_abogado_casos($id)
-    {
-    	$solicitud = DB::select("select  * from solicitud where id = ? and estado_solicitud = 1 ", [$id] ); 
-    	$abogado = DB::select("select * from users where id = ? ", [$solicitud[0]->id_user_abogado]); 
-    	$abogados = User::where('rol', 'Abogado')->get();
 
-		return view('administracion.gestionar.actualizar', ['solicitud' => $solicitud, 'abogado' => $abogado,  'abogados' => $abogados]);
-    }
+ 
+  public function gestionar_abogado_casos($id)
+  {
+	  $solicitud = DB::select("select  * from solicitud where id = ? and estado_solicitud = 1 and id_user_abogado is not null", [$id] ); 
+	  $abogado = DB::select("select * from users where id = ? ", [$solicitud[0]->id_user_abogado]); 
+	  $abogados = User::where('rol', 'Abogado')->get();
+
+	  return view('administracion.gestionar.actualizar', ['solicitud' => $solicitud, 'abogado' => $abogado,  'abogados' => $abogados]);
+  }
+
 
     public function actualizar_abogado_caso(Request $request)
     {

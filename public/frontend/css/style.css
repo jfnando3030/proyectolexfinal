@@ -2169,7 +2169,7 @@ a.gradient-btn:hover:after{
 
 /* When the checkbox is checked, add a blue background */
 .container_check input:checked ~ .checkmark {
-  background-color: #e11a20;
+  background-color: #000;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -2270,7 +2270,7 @@ a.gradient-btn:hover:after{
   width: 170px;
   top: -75px;
   border-radius: 50%;
-  background: #e11a20;
+  background: #003364;
   padding: 10px;
   text-align: center;
 }
@@ -2285,7 +2285,7 @@ a.gradient-btn:hover:after{
 }
 .login_btn {
   width: 100%;
-  background: #e11a20 !important;
+  background: #000 !important;
   color: white !important;
   cursor: pointer;
   font-weight: bold;
@@ -2296,7 +2296,7 @@ a.gradient-btn:hover:after{
 }
 
 .input-group-text {
-  background: #e11a20 !important;
+  background: #000 !important;
   color: white !important;
   border: 0 !important;
   border-radius: 0.25rem 0 0 0.25rem !important;
