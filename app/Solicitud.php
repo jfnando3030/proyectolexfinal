@@ -22,4 +22,13 @@ class Solicitud extends Model
         'fecha_solicitud',
         'hora_solicitud',
     ];
+
+    public function usuario(){
+        return $this->belongsTo(User::class,'id_user_solicitud','id');
+    }
+
+    public function departamento(){
+        return $this->belongsTo(Departamento::class,'id_departamento','id');
+    }
+
 }

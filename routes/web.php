@@ -99,7 +99,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // ************************** GESTIONAR CASOS *************************************** 
 	
 	//ACEPTAR CASOS POR ABOGADO 
-	Route::get('/administracion/gestionar/casos/aceptar/{id}', 'WelcomeController@aceptar_casos');
+	Route::get('/administracion/gestionar/casos/aceptar/{id}', 'WelcomeController@aceptar_casos')->name('aceptar');
 	
 	// CAMBIAR ABOGADO A LOS CASOS  
 	Route::get('/administracion/gestionar/casos/listado', 'WelcomeController@gestionar_casos');
@@ -113,7 +113,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // ************************** RESPUESTAS *************************************** 
 	
 	//REGISTRAR 
-	Route::get('/administracion/respuesta/registrar/{id}', 'WelcomeController@registrar_respuesta');
+	Route::get('/administracion/respuesta/registrar/{id}', 'WelcomeController@registrar_respuesta')->name('respuesta');
 	Route::post('/administracion/respuesta/store', 'WelcomeController@store_respuesta')->name('store_respuesta');
 	
 	// LISTADO 
