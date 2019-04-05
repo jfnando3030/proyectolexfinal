@@ -82,11 +82,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	
 	// LISTADO 
 	//Route::get('/administracion/solicitud/listado', 'WelcomeController@listado_solicitud');
+	
+	Route::get('/administracion/solicitud/casos', 'WelcomeController@listado_solicitud_casos');
 
 	//ACTUALIZAR 
 	Route::get('/administracion/solicitud/actualizar/{id}', 'WelcomeController@actualizar_solicitud');
 	Route::put('/administracion/solicitud/editar', 'WelcomeController@editar_solicitud')->name('editar_solicitud');
 
+	// FINALIZAR CASO
+	Route::get('/administracion/solicitud/Finalizar/{id}', 'WelcomeController@finalizar_casos');
 	//ELIMINAR 
 	//Route::get('/administracion/solicitud/eliminar/{id}', 'WelcomeController@eliminar_departamento');
  

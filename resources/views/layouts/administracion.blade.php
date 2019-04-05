@@ -126,7 +126,14 @@
                             
                         </li>
                         
-                      
+                         @if(Auth::user()->rol == "Abogado")
+                        <li>
+                            <a href="{{url('/administracion/solicitud/casos')}}" onclick="return myFunction();" id="menu_letras">
+                                    <i class="fas fa-list"></i>Casos</a>
+                            
+                        </li>
+                        @endif
+
                         @if(Auth::user()->rol == "Administrador")
                         <li class="has-sub">
                             <a class="js-arrow" href="#" id="menu_letras">
@@ -149,6 +156,8 @@
                         </li>
 
                         @endif
+
+
 
                         @if(Auth::user()->rol == "Administrador")
                         <li class="has-sub">

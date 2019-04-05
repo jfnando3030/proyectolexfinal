@@ -10,6 +10,8 @@ use App\Departamento;
 use App\UserDepartamento;
 use Carbon\Carbon;
 use App\Comisiones;
+use App\Respuesta;
+use App\ArchivosRespuesta;
 use Illuminate\Support\Facades\DB;
 use Mail;
 use PHPMailer\PHPMailer\PHPMailer;
@@ -210,8 +212,6 @@ public function admin(Request $request){
     	return view('administracion.solicitudes.registrar', ['departamento' => $departamento]);
     }
 
-    
-
 	public function store_solicitud(Request $request)
 	{
 
@@ -337,5 +337,92 @@ public function admin(Request $request){
     	return view('administracion.respuesta.registrar', ['casos' => $casos]);
     }
 
+    public function store_respuesta(Request $request)
+	{
+
+		$date = Carbon::now();
+		$hoy = $date->format('Y-m-d');
+		$hora = $date->format('h:i:s');
+
+		$respuesta = new Respuesta();
+		$respuesta->titulo = $request->nombre;
+		$respuesta->respuesta = $request->respuesta;
+		$respuesta->fecha = $hoy;
+		$respuesta->hora = $hora;
+		$respuesta->solicitud_id = $request->id_solicitud;
+		 
+		if( $respuesta->save() ){
+			
+			//  PARA ARCHIVO 1 
+			if($request->archivo1 != ""){
+				if($request->file('archivo1')){
+					$archivos1 = new ArchivosRespuesta();
+					$archivos1->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo1')); 
+					$archivos1->id_respuesta = $respuesta->id;
+					$archivos1->save();
+				}
+			}
+
+			//  PARA ARCHIVO 2
+			if($request->archivo2 != ""){
+				if($request->file('archivo2')){
+					$archivos2 = new ArchivosRespuesta();
+					$archivos2->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo2')); 
+					$archivos2->id_respuesta = $respuesta->id;
+					$archivos2->save();
+				}
+			}
+
+			//  PARA ARCHIVO 3
+			if($request->archivo3 != ""){
+				if($request->file('archivo3')){
+					$archivo3 = new ArchivosRespuesta();
+					$archivo3->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo3')); 
+					$archivo3->id_respuesta = $respuesta->id;
+					$archivo3->save();
+				}
+			}
+
+			//  PARA ARCHIVO 4
+			if($request->archivo4 == ""){
+				if($request->file('archivo4')){
+					$archivo4 = new ArchivosRespuesta();
+					$archivo4->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo4')); 
+					$archivo4->id_respuesta = $respuesta->id;
+					$archivo4->save();
+				}
+			}
+
+			//  PARA ARCHIVO 5
+			if($request->archivo5 == ""){
+				if($request->file('archivo5')){
+					$archivo5 = new ArchivosRespuesta();
+					$archivo5->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo5')); 
+					$archivo5->id_respuesta = $respuesta->id;
+					$archivo5->save();
+				}
+			}
+
+			return redirect('administracion')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
+		}else{
+			return redirect('administracion')->with('mensaje-registro2', 'Problemas al registrar los datos.');
+		}
+	}
+
+
+	public function listado_solicitud_casos(Request $request)
+    {
+    	$solicitud = Solicitud::where('id_user_abogado', $request->user()->id)->where('estado_solicitud',1)->where('finalizado_solicitud',0)->get();
+
+		return view('administracion.solicitudes.listado_casos', ['solicitud' => $solicitud]);
+    }
+
     
+    public function finalizar_casos($id)
+    {
+		$casos = Solicitud::findOrFail($id);  
+    	$casos->finalizado_solicitud = "1";
+    	$casos->save();
+    	return redirect('administracion/solicitud/casos');
+    }
 }
