@@ -7,6 +7,7 @@ use App\User;
 use App\Solicitud;
 use App\Archivos;
 use App\Departamento;
+use App\UserDepartamento;
 use Carbon\Carbon;
 use App\Comisiones;
 use Illuminate\Support\Facades\DB;
@@ -143,9 +144,20 @@ public function admin(Request $request){
 		$users = DB::table('departamento_user')
 			->join('users', 'departamento_user.user_id', '=', 'users.id')
 			->join('departamento', 'departamento_user.departamento_id', '=', 'departamento.id')
-			->select('users.id' ,'users.nombres', 'users.apellidos', 'users.estado', 'departamento.nombre_departamento', 'departamento.estado_departamento')
+			->select('users.id' ,'users.nombres', 'users.apellidos', 'departamento.nombre_departamento')
+			->where([['departamento.estado_departamento','=',1],['users.estado','=',1]])
+			->distinct()
 			->get();
-		return view('administracion.abogados.listado', ['departamento' => $users]);
+
+			$ids = Array();
+			foreach($users as $u){
+				array_push($ids, $u->id);
+			}
+
+			$ids = array_unique($ids);
+			$usuario = User::find($ids);
+			
+		return view('administracion.abogados.listado', ['usuario'=>$usuario, 'departamento' => $users]);
     }
 
     public function actualizar_departamento (Request $request, $id)
