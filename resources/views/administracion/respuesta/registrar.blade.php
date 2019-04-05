@@ -39,13 +39,13 @@
                                                 <center><h4 style="color: black; "> <strong>Formulario de respuesta </strong> </h4></center>
                                                 <hr>
                                             </div>
-                                            
+                                            <input type="hidden" name="id_solicitud" id="id_solicitud" value="{{ $casos->id }}">
                                             <div class="col-md-6" style="padding-bottom: 15px;">
                                                 <label>Titulo de respuesta:</label>
                                                 {!! Form::text('nombre',null,['placeholder'=>'Ingrese el título de su respuesta','class'=>'form-control', 'required']) !!}
 
                                                 <label>Detalle su respuesta:</label>
-                                                <textarea name="solicitud" id="solicitud" rows="9" placeholder="Escriba más información de su respuesta...    " class="form-control" required="" style="background-color: #f2f2f2;"></textarea> 
+                                                <textarea name="respuesta" id="respuesta" rows="9" placeholder="Escriba más información de su respuesta...    " class="form-control" required="" style="background-color: #f2f2f2;"></textarea> 
                                             </div>
 
                                             <div class="col-md-6" style="padding-bottom: 15px;">
