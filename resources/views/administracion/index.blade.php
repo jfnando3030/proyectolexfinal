@@ -59,14 +59,15 @@
               </div>
             </div>
             <div class="box-body no-padding">
-              <ul class="nav nav-pills nav-stacked">
+              <ul id="hola" class="nav nav-pills nav-stacked">
                 
                 <li id="todos" class="active"><a onclick="ocultar_div()" data-toggle="pill" href="#menu1"><i class="fa fa-inbox"></i> Recibidos
                   <span class="label label-primary pull-right">0</span></a></li>
                   <li id="nuevos" ><a onclick="ocultar_div()" data-toggle="pill" href="#menu2"><i class="fa fa-file-text"></i> Nuevos <span class="label label-primary pull-right">{{$total_solicitudes_nuevos}}</span></a>
                 <li id="cursos" ><a onclick="ocultar_div()" data-toggle="pill" href="#menu3"><i class="fa fa-clock-o"></i> En curso
                   <span class="label label-primary pull-right">{{$total_solicitudes_usuario}}</span></a></li>
-                <li id="finalizados" ><a onclick="ocultar_div()" data-toggle="pill" href="#menu4"><i class="fa fa-ban"></i> Finalizados</a></li>
+                  
+                <li id="finalizados" ><a onclick="ocultar_div()" data-toggle="pill" href="#menu4"><i class="fa fa-ban"></i> Finalizados <span class="label label-primary pull-right">{{$total_finalizados_usuario}}</span></a></li>
                 
                 </li>
                
@@ -475,6 +476,72 @@
             </div>
         
       </div>
+
+
+      <div id="menu4" class="box box-primary tab-pane fade">
+
+          <div  class="box box-primary">
+              <div class="box-header with-border">
+                <h3 class="box-title">Casos finalizados</h3>
+  
+             
+                <!-- /.box-tools -->
+              </div>
+              <!-- /.box-header -->
+
+              <div class="box-body no-padding">
+
+
+      @if($finalizados_usuarios->count())
+
+    
+            
+      <div class="table-responsive mailbox-messages">
+          <table class="table table-hover table-striped">
+            <tbody>
+
+                @foreach($finalizados_usuarios as $nuevo)
+                  @if($nuevo->estado_solicitud !=0)
+                  <a href="{{ route('respuesta',['id' => $nuevo->id])}}"><tr data-id="{{$nuevo->id}}">
+
+
+                
+                  
+                  <td class="mailbox-name"><b>{{$nuevo->usuario->nombres}} {{$nuevo->usuario->apellidos}}</b></td>
+                  <td class="mailbox-subject"><b>{{$nuevo->nombre_solicitud}}</b> - {{$nuevo->descripcion}}...
+                  </td>
+                  <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                  <td class="mailbox-date">{{$nuevo->departamento->nombre_departamento}}</td>
+                  <td class="mailbox-date">{{$nuevo->fecha_solicitud}} - {{$nuevo->hora_solicitud}}</td>
+                 
+                </tr>
+
+              </a>
+
+                @endif
+              @endforeach
+           
+            </tbody>
+          </table>
+          <!-- /.table -->
+        </div>
+        
+
+      @else
+
+      <p style="text-align: center;color: black;padding: 30px;font-size: 20px;">No tiene casos finalizados </p>
+
+
+
+      @endif
+
+              <!-- /.mail-box-messages -->
+            </div>
+            <!-- /.box-body -->
+            
+          </div>
+      
+    </div>
 
 
 
@@ -1203,53 +1270,16 @@ function ocultar_div(){
   
   }
 
-  function class_todos(){
  
 
-
- var element = document.getElementById("todos");
- element.classList.add("active");
- 
- 
-
- 
- }
-
- function class_cursos(){
- 
-
-
- var element = document.getElementById("cursos");
- element.classList.add("active");
- 
- 
-
- 
- }
-
- function class_finalizados(){
- 
-
-
- var element = document.getElementById("finalizados");
- element.classList.add("active");
- 
- 
-
- 
- }
-
- function class_nuevos(){
- 
-
-
- var element = document.getElementById("nuevos");
- element.classList.add("active");
- 
- 
-
- 
- }
+ $(function() {
+    $('#hola').find('a').click(function(e) {
+        e.preventDefault();
+        $(this.hash).show().siblings().hide();
+        $('#hola').find('a').parent().removeClass('active')
+        $(this).parent().addClass('active')
+    }).filter(':first').click();
+});
 
 
   </script>
