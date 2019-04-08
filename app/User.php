@@ -43,11 +43,11 @@ class User extends Authenticatable  implements MustVerifyEmailContract
         'email_verified_at' => 'datetime',
     ];
 
-    public function setPathAttribute($path){
-
-        if(!empty($path)){
-            if ($path =="eliminar"){
-                if ( ! empty($this->attributes['path'])) {
+    public function setPathAttribute($path)
+    {
+        if (!empty($path)) {
+            if ($path =="eliminar") {
+                if (!empty($this->attributes['path'])) {
                     \Storage::delete($this->attributes['path']);
                 }
                 $this->attributes['path']=null;
