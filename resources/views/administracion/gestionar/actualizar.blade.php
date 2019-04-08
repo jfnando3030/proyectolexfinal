@@ -25,13 +25,19 @@
                                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                     	<input type="hidden" name="id" id="id" value=" {{ $solicitud[0]->id }} ">
                                         <div class="row">
-                                            <div class="col-md-12" style="padding-bottom: 15px;">
+                                            <div class="col-md-6" style="padding-bottom: 15px;">
                                                 <label>Nombre del caso:</label>
                                                 <hr>
-                                                <p style="color: gray;"> {{ $solicitud[0]->nombre_solicitud }}" </p>
+                                                <p style="color: gray;"> {{ $solicitud[0]->nombre_solicitud }} </p>
                                                 <hr>
                                             </div>
-
+                                            <div class="col-md-6" style="padding-bottom: 15px;">
+                                                <label>Departamento:</label>
+                                                <hr>
+                                                <p style="color: gray;"> {{ $solicitud[0]->nombre_departamento }} </p>
+                                                <hr>
+                                            </div>
+                                            
                                            
                                         </div>
                                         <div class="row">

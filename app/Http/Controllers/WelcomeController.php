@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Solicitud;
 use App\Archivos;
+use App\Pagos;
 use App\Departamento;
 use Carbon\Carbon;
 use App\Comisiones;
@@ -322,13 +323,18 @@ public function admin(Request $request){
     //return "hola";
     return view('administracion.gestionar.listado', ['solicitud' => $solicitud]);
   }
-
  
   public function gestionar_abogado_casos($id)
   {
-    $solicitud = DB::select("select  * from solicitud where id = ? and estado_solicitud = 1 and id_user_abogado is not null", [$id] ); 
+    $solicitud = DB::select("select  solicitud.*, departamento.* from solicitud, departamento where solicitud.id_departamento = departamento.id and solicitud.id = ? and solicitud.estado_solicitud = 1 and solicitud.id_user_abogado is not null", [$id] ); 
+
+
+    $area = DB::select("select  departamento.id from solicitud, departamento where solicitud.id_departamento = departamento.id and solicitud.id = ? and solicitud.estado_solicitud = 1 and solicitud.id_user_abogado is not null", [$id] ); 
+
+    $abogados = DB::select("select * from users where id in (select user_id from departamento_user where departamento_id = ?)", [$area[0]->id] );   
+
     $abogado = DB::select("select * from users where id = ? ", [$solicitud[0]->id_user_abogado]); 
-    $abogados = User::where('rol', 'Abogado')->get();
+    
 
     return view('administracion.gestionar.actualizar', ['solicitud' => $solicitud, 'abogado' => $abogado,  'abogados' => $abogados]);
   }
@@ -350,78 +356,78 @@ public function admin(Request $request){
     }
 
     public function store_respuesta(Request $request)
-  {
+    {
 
-    $date = Carbon::now();
-    $hoy = $date->format('Y-m-d');
-    $hora = $date->format('h:i:s');
+      $date = Carbon::now();
+      $hoy = $date->format('Y-m-d');
+      $hora = $date->format('h:i:s');
 
-    $respuesta = new Respuesta();
-    $respuesta->titulo = $request->nombre;
-    $respuesta->respuesta = $request->respuesta;
-    $respuesta->fecha = $hoy;
-    $respuesta->hora = $hora;
-    $respuesta->solicitud_id = $request->id_solicitud;
-     
-    if( $respuesta->save() ){
-      
-      //  PARA ARCHIVO 1 
-      if($request->archivo1 != ""){
-        if($request->file('archivo1')){
-          $archivos1 = new ArchivosRespuesta();
-          $archivos1->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo1')); 
-          $archivos1->id_respuesta = $respuesta->id;
-          $archivos1->save();
+      $respuesta = new Respuesta();
+      $respuesta->titulo = $request->nombre;
+      $respuesta->respuesta = $request->respuesta;
+      $respuesta->fecha = $hoy;
+      $respuesta->hora = $hora;
+      $respuesta->solicitud_id = $request->id_solicitud;
+       
+      if( $respuesta->save() ){
+        
+        //  PARA ARCHIVO 1 
+        if($request->archivo1 != ""){
+          if($request->file('archivo1')){
+            $archivos1 = new ArchivosRespuesta();
+            $archivos1->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo1')); 
+            $archivos1->id_respuesta = $respuesta->id;
+            $archivos1->save();
+          }
         }
-      }
 
-      //  PARA ARCHIVO 2
-      if($request->archivo2 != ""){
-        if($request->file('archivo2')){
-          $archivos2 = new ArchivosRespuesta();
-          $archivos2->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo2')); 
-          $archivos2->id_respuesta = $respuesta->id;
-          $archivos2->save();
+        //  PARA ARCHIVO 2
+        if($request->archivo2 != ""){
+          if($request->file('archivo2')){
+            $archivos2 = new ArchivosRespuesta();
+            $archivos2->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo2')); 
+            $archivos2->id_respuesta = $respuesta->id;
+            $archivos2->save();
+          }
         }
-      }
 
-      //  PARA ARCHIVO 3
-      if($request->archivo3 != ""){
-        if($request->file('archivo3')){
-          $archivo3 = new ArchivosRespuesta();
-          $archivo3->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo3')); 
-          $archivo3->id_respuesta = $respuesta->id;
-          $archivo3->save();
+        //  PARA ARCHIVO 3
+        if($request->archivo3 != ""){
+          if($request->file('archivo3')){
+            $archivo3 = new ArchivosRespuesta();
+            $archivo3->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo3')); 
+            $archivo3->id_respuesta = $respuesta->id;
+            $archivo3->save();
+          }
         }
-      }
 
-      //  PARA ARCHIVO 4
-      if($request->archivo4 == ""){
-        if($request->file('archivo4')){
-          $archivo4 = new ArchivosRespuesta();
-          $archivo4->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo4')); 
-          $archivo4->id_respuesta = $respuesta->id;
-          $archivo4->save();
+        //  PARA ARCHIVO 4
+        if($request->archivo4 == ""){
+          if($request->file('archivo4')){
+            $archivo4 = new ArchivosRespuesta();
+            $archivo4->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo4')); 
+            $archivo4->id_respuesta = $respuesta->id;
+            $archivo4->save();
+          }
         }
-      }
 
-      //  PARA ARCHIVO 5
-      if($request->archivo5 == ""){
-        if($request->file('archivo5')){
-          $archivo5 = new ArchivosRespuesta();
-          $archivo5->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo5')); 
-          $archivo5->id_respuesta = $respuesta->id;
-          $archivo5->save();
+        //  PARA ARCHIVO 5
+        if($request->archivo5 == ""){
+          if($request->file('archivo5')){
+            $archivo5 = new ArchivosRespuesta();
+            $archivo5->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo5')); 
+            $archivo5->id_respuesta = $respuesta->id;
+            $archivo5->save();
+          }
         }
-      }
 
-      return redirect('administracion')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
-    }else{
-      return redirect('administracion')->with('mensaje-registro2', 'Problemas al registrar los datos.');
+        return redirect('administracion')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
+      }else{
+        return redirect('administracion')->with('mensaje-registro2', 'Problemas al registrar los datos.');
+      }
     }
-  }
 
-  public function listado_solicitud_casos(Request $request)
+    public function listado_solicitud_casos(Request $request)
     {
       $solicitud = Solicitud::where('id_user_abogado', $request->user()->id)->where('estado_solicitud',1)->where('finalizado_solicitud',0)->get();
 
@@ -431,9 +437,59 @@ public function admin(Request $request){
     
     public function finalizar_casos($id)
     {
-    $casos = Solicitud::findOrFail($id);  
+      $casos = Solicitud::findOrFail($id);  
       $casos->finalizado_solicitud = "1";
       $casos->save();
       return redirect('administracion/solicitud/casos');
+    }
+
+    public function registrar_pago()
+    {
+      return view('administracion.pagos.registrar');
+    }
+
+    public function store_pago(Request $request)
+    {
+      $date = Carbon::now();
+      $hoy = $date->format('Y-m-d');
+
+      $pagos = new Pagos();
+      $pagos->id_user = $request->user()->id;
+      $pagos->id_tarifa = "1";
+      $pagos->fecha_inicio = $hoy;
+      $pagos->fecha_finalizacion = $this->aumentar_dias_activacion(Carbon::parse($hoy));
+      $pagos->modo_pago = $request->pago;
+      
+      $pagos->monto_pago = "9.00";
+
+      if($request->pago == "P"){
+        $pagos->estado = 1;
+        $pagos->activo = 1; 
+      }else{
+        $pagos->estado = 0;
+        $pagos->activo = 0;
+      }
+
+     
+      if( $pagos->save())
+      {
+        return redirect('administracion/pago/registrar')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
+      }else{
+        return redirect('administracion/pago/registrar')->with('mensaje-registro2', 'Problemas al registrar los datos.');
+      }
+
+    }
+
+    public function aumentar_dias_activacion($fecha)
+    {
+      $nuevafecha = $fecha->addDay(30);
+      return $nuevafecha;
+    }
+
+    public function listado_pago(Request $request)
+    {
+      $pagos = Pagos::where('id_user', $request->user()->id)->where('estado',1)->get();
+
+      return view('administracion.pagos.listado_pagos', ['pagos' => $pagos]);
     }
 }

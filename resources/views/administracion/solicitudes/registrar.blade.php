@@ -45,33 +45,33 @@
                                                 </select> 
                                                 <label>Cargar archivos:</label><br>
                                                 <div class="input-group control-group increment" >
-                                                  <input  type="file" name="archivo1" id="archivo1" class="form-control" accept="image/*, doc,.docx, .pdf" style="font-size: 13px;">
-                                                  <div class="input-group-btn"> 
-                                                    <button class="btn btn-danger" type="button" style="color: white; background-color: red; font-size: 11px;" id="x1">X</button>
-                                                  </div>
+                                                    <input  type="file" name="archivo1" id="archivo1" class="form-control" accept="image/*, doc,.docx, .pdf" style="font-size: 13px;">
+                                                    <div class="input-group-btn"> 
+                                                        <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x1"><i class="fas fa-times"></i></button>
+                                                    </div>
                                                 </div>
                                                 <div class="input-group control-group increment" >
-                                                  <input  type="file" name="archivo2" id="archivo2" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 13px;">
-                                                  <div class="input-group-btn"> 
-                                                    <button class="btn btn-danger" type="button" style="color: white; background-color: red; font-size: 11px;" id="x2"></i>X</button>
+                                                    <input  type="file" name="archivo2" id="archivo2" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 13px;">
+                                                    <div class="input-group-btn"> 
+                                                        <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x2"><i class="fas fa-times"></i></button>
                                                   </div>
                                                 </div>
                                                 <div class="input-group control-group increment" >
                                                   <input  type="file" name="archivo3" id="archivo3" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 13px;">
                                                   <div class="input-group-btn"> 
-                                                    <button class="btn btn-danger" type="button" style="color: white; background-color: red; font-size: 11px;" id="x3"></i>X</button>
+                                                    <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x3"><i class="fas fa-times"></i></button>
                                                   </div>
                                                 </div>
                                                 <div class="input-group control-group increment" >
                                                   <input  type="file" name="archivo4" id="archivo4" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 13px;">
                                                   <div class="input-group-btn"> 
-                                                    <button class="btn btn-danger" type="button" style="color: white; background-color: red; font-size: 11px;" id="x4"></i>X</button>
+                                                    <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x4"><i class="fas fa-times"></i></button>
                                                   </div>
                                                 </div>
                                                 <div class="input-group control-group increment" >
                                                   <input  type="file" name="archivo5" id="archivo5" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 13px;">
                                                   <div class="input-group-btn"> 
-                                                    <button class="btn btn-danger" type="button" style="color: white; background-color: red; font-size: 11px;" id="x5"></i>X</button>
+                                                    <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x5"><i class="fas fa-times"></i></button>
                                                   </div>
                                                 </div>
                                             </div>                                            

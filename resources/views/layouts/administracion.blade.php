@@ -126,7 +126,7 @@
                             
                         </li>
                         
-                         @if(Auth::user()->rol == "Abogado")
+                        @if(Auth::user()->rol == "Abogado")
                         <li>
                             <a href="{{url('/administracion/solicitud/casos')}}" onclick="return myFunction();" id="menu_letras">
                                     <i class="fas fa-list"></i>Casos</a>
@@ -201,6 +201,27 @@
                                 <li class="has-sub">
                                     <a href="{{url('administracion/solicitud/registrar')}}" onclick="return myFunction();" id="menu_letras">
                                     <i class="fa fa-file-pdf-o"></i>Enviar</a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endif
+
+                        @if(Auth::user()->rol == "Registrado")
+                        <li class="has-sub">
+                            <a id="menu_letras" class="js-arrow" href="#">
+                                    <i class="fa fa-file"></i>Pago    
+                                <span class="arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li class="has-sub">
+                                    <a href="{{url('administracion/pago/registrar')}}" onclick="return myFunction();" id="menu_letras">
+                                    <i class="fa fa-file-pdf-o"></i>Registrar</a>
+                                </li>
+                                <li class="has-sub">
+                                    <a href="{{url('administracion/pago/historial')}}" onclick="return myFunction();" id="menu_letras">
+                                    <i class="fa fa-file-pdf-o"></i>Historial</a>
                                 </li>
                             </ul>
                         </li>

@@ -128,7 +128,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
  
 // ************************** FIN DE  RESPUESTAS ********************************* 
 
+// ************************** PAGOS *************************************** 
+	
+	//REGISTRAR 
+	Route::get('/administracion/pago/registrar', 'WelcomeController@registrar_pago');
+	Route::post('/administracion/pago/store', 'WelcomeController@store_pago')->name('store_pago');
+	
+	// LISTADO 
+	//Route::get('/administracion/solicitud/listado', 'WelcomeController@listado_solicitud');
+	
+	Route::get('/administracion/pago/historial', 'WelcomeController@listado_pago');
 
+	// FINALIZAR CASO
+	Route::get('/administracion/pago/eliminar/{id}', 'WelcomeController@eliminar_pago');
+	//ELIMINAR 
+	//Route::get('/administracion/solicitud/eliminar/{id}', 'WelcomeController@eliminar_departamento');
+ 
+// ************************** FIN DE  PAGOS ********************************* 
 
 	Route::get('administracion/invita/bango','WelcomeController@invita_bango');
 	Route::get('administracion/saber_niveles/{id}','WelcomeController@saber_niveles');
