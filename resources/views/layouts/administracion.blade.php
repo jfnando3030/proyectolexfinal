@@ -268,6 +268,29 @@
 
                         @endif
 
+                        @if(Auth::user()->rol == "Administrador")
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#" id="menu_letras">
+                                <i class="far fa-file-alt"></i>Oficios
+                                <span class="arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a id="menu_letras" href="{{route('oficio.create')}}" onclick="return myFunction();">
+                                        <i class="fas fa-file"></i>Agregar</a>
+                                </li>
+                                <li>
+                                    <a id="menu_letras"  href="{{route('tarifa.index')}}" onclick="return myFunction();">
+                                        <i class="fas fa-table"></i>Listado</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+
+                        @endif
+
                         <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form2').submit();" id="menu_letras"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
 

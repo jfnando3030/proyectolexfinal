@@ -35,9 +35,10 @@ class WelcomeController extends Controller
 {
     public $dias = array( ""=>"Seleccione un día" ,1=>"Lunes", 2=>"Martes", 3=>"Miércoles", 4=>"Jueves", 5=>"Viernes", 6=>"Sábado", 7=>"Domingo");
 
-  public function __construct(){
-        $this->middleware('admin',['only'=>'auth']);
-        $this->middleware('guest',['only'=>'index']);
+    public function __construct()
+    {
+        $this->middleware('admin', ['only'=>'auth']);
+        $this->middleware('guest', ['only'=>'index']);
     }
     
     public function index()

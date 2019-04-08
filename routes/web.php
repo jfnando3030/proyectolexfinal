@@ -168,6 +168,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 	Route::resource('administracion/tarifa', 'TarifaController');
 
+	Route::resource('administracion/oficio', 'OficioController');
+
 });
 
 Route::match(['get', 'post'], 'ajax-image-upload', 'ImageController@ajaxImage');
