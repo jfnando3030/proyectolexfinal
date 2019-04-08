@@ -59,7 +59,7 @@
               </div>
             </div>
             <div class="box-body no-padding">
-              <ul class="nav nav-pills nav-stacked">
+              <ul id="hola" class="nav nav-pills nav-stacked">
                 
                 <li id="todos" class="active"><a onclick="ocultar_div()" data-toggle="pill" href="#menu1"><i class="fa fa-inbox"></i> Recibidos
                   <span class="label label-primary pull-right">0</span></a></li>
@@ -1270,53 +1270,16 @@ function ocultar_div(){
   
   }
 
-  function class_todos(){
  
 
-
- var element = document.getElementById("todos");
- element.classList.add("active");
- 
- 
-
- 
- }
-
- function class_cursos(){
- 
-
-
- var element = document.getElementById("cursos");
- element.classList.add("active");
- 
- 
-
- 
- }
-
- function class_finalizados(){
- 
-
-
- var element = document.getElementById("finalizados");
- element.classList.add("active");
- 
- 
-
- 
- }
-
- function class_nuevos(){
- 
-
-
- var element = document.getElementById("nuevos");
- element.classList.add("active");
- 
- 
-
- 
- }
+ $(function() {
+    $('#hola').find('a').click(function(e) {
+        e.preventDefault();
+        $(this.hash).show().siblings().hide();
+        $('#hola').find('a').parent().removeClass('active')
+        $(this).parent().addClass('active')
+    }).filter(':first').click();
+});
 
 
   </script>
