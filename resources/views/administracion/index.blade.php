@@ -60,10 +60,42 @@
             </div>
             <div class="box-body no-padding">
               <ul id="hola" class="nav nav-pills nav-stacked">
+
+                  <?php
+
+                  $contador=0;
+
+
+                    ?>
+
+                  @foreach($solicitudes_nuevos as $nuevo)
+                      @if($nuevo->estado_solicitud !=0)
+                      
+                    @foreach($user_departamentos as $user)
+
+                    @if($user->departamento_id==$nuevo->id_departamento )
+
+                      <?php
+
+                          $contador+=1;
+
+
+                      ?>
+
+                   
+
+                    @endif
+
+
+                  @endforeach
+  
+                    @endif
+                  @endforeach
+               
                 
-                <li id="todos" class="active"><a onclick="ocultar_div()" data-toggle="pill" href="#menu1"><i class="fa fa-inbox"></i> Recibidos
+                <li id="todos" class="active"><a onclick="ocultar_div()" data-toggle="pill" href="#menu1"><i class="fa fa-inbox"></i> Respuestas
                   <span class="label label-primary pull-right">0</span></a></li>
-                  <li id="nuevos" ><a onclick="ocultar_div()" data-toggle="pill" href="#menu2"><i class="fa fa-file-text"></i> Nuevos <span class="label label-primary pull-right">{{$total_solicitudes_nuevos}}</span></a>
+                  <li id="nuevos" ><a onclick="ocultar_div()" data-toggle="pill" href="#menu2"><i class="fa fa-file-text"></i> Nuevos <span class="label label-primary pull-right">{{$total_solicitudes_nuevos  - $contador}}</span></a>
                 <li id="cursos" ><a onclick="ocultar_div()" data-toggle="pill" href="#menu3"><i class="fa fa-clock-o"></i> En curso
                   <span class="label label-primary pull-right">{{$total_solicitudes_usuario}}</span></a></li>
                   
@@ -99,20 +131,31 @@
 
                   @foreach($solicitudes_nuevos as $nuevo)
                     @if($nuevo->estado_solicitud !=0)
-                    <tr data-id="{{$nuevo->id}}">
+
+                    @foreach($user_departamentos as $user)
+
+                      @if($user->user_id==$nuevo->id_user_solicitud && $user->departamento_id==$nuevo->id_departamento )
+
+                      <tr onclick="window.location='{{ route('ver_caso',['id' => $nuevo->id])}}'" data-id="{{$nuevo->id}}">
 
 
                   
                     
-                    <td class="mailbox-name"><b>{{$nuevo->usuario->nombres}} {{$nuevo->usuario->apellidos}}</b></td>
-                    <td class="mailbox-subject"><b>{{$nuevo->nombre_solicitud}}</b> - {{$nuevo->descripcion}}...
-                    </td>
-                    <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                    <td class="mailbox-date">{{$nuevo->departamento->nombre_departamento}}</td>
-                    <td class="mailbox-date">{{$nuevo->fecha_solicitud}} - {{$nuevo->hora_solicitud}}</td>
-                    <td>  <a title="Aceptar Caso" class="btn btn-primary btn-circle btn-lg" href="{{ route('aceptar',['id' => $nuevo->id])}}" role="button"><i class="fa fa-check"></i></a> </td>
-                  </tr>
+                        <td class="mailbox-name"><b>{{$nuevo->usuario->nombres}} {{$nuevo->usuario->apellidos}}</b></td>
+                        <td class="mailbox-subject"><b>{{$nuevo->nombre_solicitud}}</b> - {{$nuevo->descripcion}}...
+                        </td>
+                        <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                        <td class="mailbox-date">{{$nuevo->departamento->nombre_departamento}}</td>
+                        <td class="mailbox-date">{{$nuevo->fecha_solicitud}} - {{$nuevo->hora_solicitud}}</td>
+                        
+                      </tr>
+    
 
+                      @endif
+
+
+                    @endforeach
+                    
                   @endif
                 @endforeach
              
@@ -142,7 +185,7 @@
         <div id="contenido" class="col-md-12 col-lg-12 col-12 tab-content" style="display:none;">
           <div id="menu1" class="box box-primary tab-pane fade in active">
             <div class="box-header with-border">
-              <h3 class="box-title">Inbox 1</h3>
+              <h3 class="box-title">Respuestas</h3>
 
               <div class="box-tools pull-right">
                 <div class="has-feedback">
@@ -349,7 +392,7 @@
 
               <div  class="box box-primary">
                   <div class="box-header with-border">
-                    <h3 class="box-title">Nuevas Solicitudes</h3>
+                    <h3 class="box-title">Nuevas Solicitudes </h3>
       
                  
                     <!-- /.box-tools -->
@@ -369,19 +412,30 @@
   
                     @foreach($solicitudes_nuevos as $nuevo)
                       @if($nuevo->estado_solicitud !=0)
-                      <tr data-id="{{$nuevo->id}}">
-  
-  
-                    
                       
+                    @foreach($user_departamentos as $user)
+
+                    @if($user->departamento_id==$nuevo->id_departamento )
+
+                    <tr onclick="window.location='{{ route('ver_caso',['id' => $nuevo->id])}}'" data-id="{{$nuevo->id}}">
+
+
+                
+                  
                       <td class="mailbox-name"><b>{{$nuevo->usuario->nombres}} {{$nuevo->usuario->apellidos}}</b></td>
                       <td class="mailbox-subject"><b>{{$nuevo->nombre_solicitud}}</b> - {{$nuevo->descripcion}}...
                       </td>
                       <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
                       <td class="mailbox-date">{{$nuevo->departamento->nombre_departamento}}</td>
                       <td class="mailbox-date">{{$nuevo->fecha_solicitud}} - {{$nuevo->hora_solicitud}}</td>
-                      <td>  <a title="Aceptar Caso" class="btn btn-primary btn-circle btn-lg" href="{{ route('aceptar',['id' => $nuevo->id])}}" role="button"><i class="fa fa-check"></i></a> </td>
+                      
                     </tr>
+  
+
+                    @endif
+
+
+                  @endforeach
   
                     @endif
                   @endforeach
@@ -436,7 +490,7 @@
 
                   @foreach($solicitudes_usuario as $nuevo)
                     @if($nuevo->estado_solicitud !=0)
-                    <a href="{{ route('respuesta',['id' => $nuevo->id])}}"><tr data-id="{{$nuevo->id}}">
+                   <tr onclick="window.location='{{ route('respuesta',['id' => $nuevo->id])}}'" data-id="{{$nuevo->id}}">
 
 
                   
@@ -450,7 +504,7 @@
                    
                   </tr>
 
-                </a>
+               
 
                   @endif
                 @endforeach
@@ -1280,6 +1334,12 @@ function ocultar_div(){
         $(this).parent().addClass('active')
     }).filter(':first').click();
 });
+
+function myFunction2() {
+                $(".loader").show();
+                
+           
+            }
 
 
   </script>

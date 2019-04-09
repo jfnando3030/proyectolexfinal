@@ -14,6 +14,7 @@ use App\Respuesta;
 use App\ArchivosRespuesta;
 use Illuminate\Support\Facades\DB;
 use Mail;
+use App\UserDepartamento;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use Illuminate\Support\Facades\Redirect;
@@ -68,8 +69,8 @@ public function admin(Request $request){
       $solicitudes_usuario = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->paginate(15);
 			$solicitudes_nuevos = Solicitud::where('estado_solicitud',1)->where('leido_solicitud',0)->orderBy('fecha_solicitud', 'asc')->paginate(15);
 			$finalizados_usuarios = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->where('finalizado_solicitud', 1)->paginate(15);
-      
-      return view('administracion.index', compact('finalizados_usuarios','total_solicitudes', 'total_solicitudes_usuario', 'total_finalizados_usuario','total_solicitudes_nuevos', 'solicitudes_nuevos', 'solicitudes_usuario'));
+      $user_departamentos = UserDepartamento::where('user_id',Auth::user()->id)->get();
+      return view('administracion.index', compact('user_departamentos','finalizados_usuarios','total_solicitudes', 'total_solicitudes_usuario', 'total_finalizados_usuario','total_solicitudes_nuevos', 'solicitudes_nuevos', 'solicitudes_usuario'));
 
     }else{
       return view('administracion.index');
@@ -315,6 +316,20 @@ public function admin(Request $request){
       }
     
     }
+
+
+    public function ver_caso(Request $request, $id)
+    {
+      $caso = Solicitud::findOrFail($id);  
+      $archivos = Archivos::where('id_solicitud',$id)->get();
+     
+  
+     
+      return view('administracion.aceptar_caso.index',compact('caso', 'archivos'));
+     
+    
+    }
+
 
     
     
