@@ -21,5 +21,7 @@ class Pagos extends Model
         'monto_pago',
         'activo',
         'estado',
+        'comprobante_pago',
+        'path',
     ];
 }

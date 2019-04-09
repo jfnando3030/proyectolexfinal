@@ -464,10 +464,26 @@ public function admin(Request $request){
       return view('administracion.pagos.registrar');
     }
 
+    public function saber_comprobante_repetido($comprobante_pago)
+    {
+      $pagos = Pagos::where('comprobante_pago', $comprobante_pago)->get();
+
+      if (count($pagos) == 0 ){
+        return "no_existe";
+      }else{
+        return "existe";
+      }
+    }
+
     public function store_pago(Request $request)
     {
       $date = Carbon::now();
       $hoy = $date->format('Y-m-d');
+
+      if($request->pago == "TD"){
+
+      }
+
 
       $pagos = new Pagos();
       $pagos->id_user = $request->user()->id;
@@ -481,9 +497,19 @@ public function admin(Request $request){
       if($request->pago == "P"){
         $pagos->estado = 1;
         $pagos->activo = 1; 
+        $pagos->path = "Ninguno";
+        $pagos->comprobante_pago = "Ninguno";
       }else{
         $pagos->estado = 0;
         $pagos->activo = 0;
+        if ($this->saber_comprobante_repetido($request->numero_comprobante) == "existe"){
+          return redirect('administracion/pago/registrar')->with('mensaje-registro', 'El comprobante de pago no es válido.');
+        }else{
+          $pagos->comprobante_pago = $request->numero_comprobante;
+        }
+
+        
+
       }
 
      

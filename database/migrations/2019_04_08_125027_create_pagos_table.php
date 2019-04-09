@@ -23,6 +23,8 @@ class CreatePagosTable extends Migration
             $table->decimal('monto_pago', 8, 2);    
             $table->char('activo',1)->default(0);
             $table->char('estado',1);
+            $table->string('comprobante_pago');
+            $table->string('path')->nullable(); //nullable significa que permite valores nulos
         });
     }
 
