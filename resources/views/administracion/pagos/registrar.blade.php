@@ -18,18 +18,49 @@
     });
 </script>
 
-<style type="text/css">
-    
+<script type="text/javascript">
+  $(document).ready(function(){
+    var aux = 1;
+    $('input[type=radio][name=rb]').on('change', function() {
+      $('#rb-' + aux).css("border-style", "solid");
+      $('#rb-' + aux).css("border-color", "black");
+      
+      var x = $(this).attr("value");
 
+      var y = $('#precio-' + x).text();
+
+      if(y == "$ 0.00/Mes"){
+        $('#div_pago_td3').hide();
+        $('#div_pago_td').hide();
+        $('#div_pago_td2').hide();
+        $('#pago').removeAttr('required');
+      }else{
+        $('#div_pago_td3').show();
+        $('#pago').attr("required", "true");
+      }
+
+      $('#rb-' + x).css("border-style", "solid");
+      $('#rb-' + x).css("border-color", "#0075f6");
+      aux = x;
+    }); 
+  });
+</script>
+
+
+<style type="text/css">
 
     section.pricing {
 
     }
 
     #body_free, #body_premiun, #body_basic{
-        height: 90%;
+      
     }
 
+    .pt-5, .py-5 {
+      padding-top: 0rem!important;
+      padding-bottom: 1rem!important;
+    }
     .pricing .card {
       border: none;
       border-radius: 1rem;
@@ -49,7 +80,7 @@
     }
 
     .pricing .card-price {
-      font-size: 3rem;
+      font-size: 2rem;
       margin: 0;
       color: black;
     }
@@ -59,7 +90,8 @@
     }
 
     .pricing ul li {
-      margin-bottom: 1rem;
+      margin-bottom: 0.2rem;
+      font-size: 14px;
     }
 
     .pricing .text-muted {
@@ -74,6 +106,14 @@
       padding: 1rem;
       opacity: 0.7;
       transition: all 0.2s;
+    }
+
+
+    textarea{
+      padding: 2px 0px 0px 25px;
+      height: 90px;
+      resize: none;
+      font-size: 10px;
     }
 
     /* Hover Effects on Card */
@@ -91,6 +131,7 @@
 
 </style>
 
+
 @section('contenido')
 
     <div align="center" class="col-md-12 col-12 col-xs-12 col-lg-12 col-sm-12" style="padding-top:15px; padding-bottom: 25px">
@@ -101,7 +142,9 @@
     <div class="container-fluid">
 
         @if (session('mensaje-registro'))
-            @include('mensajes.msj_correcto')
+          @include('mensajes.msj_correcto')
+        @else
+          @include('mensajes.msj_rechazado')
         @endif
 
         <div class="emp-profile" style="padding: 3%;">
@@ -116,108 +159,63 @@
                                 <div class="tab-content profile-tab" id="myTabContent">
                                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                         <div class="row">
-                                            <div class="col-md-12" style="padding-bottom: 15px;">
+                                            
+
+                                            <div class="col-md-12">
+                                              <label>PLAN DE PAGO</label>
+                                              <section class="pricing py-5">
+                                                <div class="container">
+                                                  <div class="row">
+                                                    <!-- Free Tier -->
+                                                    <?php $x = 1; ?>
+                                                    @foreach( $tarifa as $tarifa)
+                                                    <div class="col-lg-4" >
+                                                      <div class="card-body" >
+                                                        @if($x == 1 )
+                                                          <div class="card mb-5 mb-lg-0" id="rb-{{$tarifa->id}}" style="border-style: solid; border-color: #0075f6;">
+                                                        @else
+                                                          <div class="card mb-5 mb-lg-0" id="rb-{{$tarifa->id}}" style="border-style: solid; border-color: solid;">
+                                                        @endif
+                                                          <h5 class="card-title text-muted text-uppercase text-center">{{ $tarifa->tarifa }} </h5>
+                                                          <h4 class="card-price text-center" id="precio-{{$tarifa->id}}">$ {{ $tarifa->precio }}<span class="period">/Mes</span></h4>
+                                                          <hr>
+                                                            <textarea readonly="" row="7" style="resize: none;">{{ $tarifa->descripcion }}</textarea>
+                                                          <br>
+                                                          @if($x == 1 )
+                                                          <center><input type="radio" name="rb" id="rb_plan" value="{{$tarifa->id}}" checked="" > <strong>Seleccionar</strong></center>
+                                                          @else
+                                                            <center><input type="radio" name="rb" id="rb_plan" value="{{$tarifa->id}}" > <strong>Seleccionar</strong></center>
+                                                          @endif
+                                                          <br>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <?php $x = $x + 1; ?>
+                                                    @endforeach                                               
+                                                  </div>
+                                                </div>
+                                              </section>
+                                            </div>   
+
+                                            <div class="col-md-12" style="padding-bottom: 15px; display: none; " id="div_pago_td3">
                                                 <label>Seleccione el método de pago:</label>
-                                                <select class="form-control" id="pago" name="pago" required="">
-                                                    <option value=""> Seleccione un departamento</option>
+                                                <select class="form-control" id="pago" name="pago" >
+                                                    <option value=""> Seleccione un modo de pago</option>
                                                     <option value="TD"> Transferencia o deposito bancario</option>
                                                     <option value="P"> Paypal</option>
                                                 </select> 
                                             </div>
-                                            <div class="col-md-6" style="padding-bottom: 15px;" id="div_pago_td">
+                                            <div class="col-md-6" style="padding-bottom: 15px; display: none;" id="div_pago_td">
                                                 <label>Número de comprobante:</label>
                                                 {!! Form::text('numero_comprobante',null,['placeholder'=>'Ingrese el número de comprobante','class'=>'form-control']) !!}
                                             </div>
 
-                                            <div class="col-md-6" style="padding-bottom: 15px;" id="div_pago_td2">
+                                            <div class="col-md-6" style="padding-bottom: 15px; display: none;" id="div_pago_td2">
                                                 <label>Cargar comprobante:</label><br>
                                                 <div class="input-group control-group increment" >
                                                     <input  type="file" name="archivo1" id="archivo1"accept="image/*, doc,.docx, .pdf" style="font-size: 13px;">
                                                 </div>
                                             </div>
-
-                                            <div class="col-md-12">
-                                                
-                                                <!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
-
-                                                <section class="pricing py-5">
-                                                  <div class="container">
-                                                    <div class="row">
-                                                      <!-- Free Tier -->
-                                                      <div class="col-lg-4">
-                                                        <div class="card mb-5 mb-lg-0">
-                                                          <div class="card-body" id="body_free">
-                                                            <h5 class="card-title text-muted text-uppercase text-center">Free</h5>
-                                                            <h1 class="card-price text-center">$0<span class="period">/month</span></h1>
-                                                            <hr>
-                                                            <ul class="fa-ul">
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span>Single User</li>
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span>5GB Storage</li>
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited Public Projects</li>
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span>Community Access</li>
-                                                              <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Unlimited Private Projects</li>
-                                                              <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Dedicated Phone Support</li>
-                                                              <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Free Subdomain</li>
-                                                              <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Monthly Status Reports</li>
-                                                            </ul>
-                                                           
-                                                            <hr>
-                                                            <center><input type="radio" name="gender" value="F" checked=""> <strong>Seleccionar</strong></center>
-                                                            
-                                                          </div>
-                                                        </div>
-                                                      </div>
-                                                      <!-- Plus Tier -->
-                                                      <div class="col-lg-4">
-                                                        <div class="card mb-5 mb-lg-0">
-                                                          <div class="card-body" id="body_basic">
-                                                            <h5 class="card-title text-muted text-uppercase text-center">Plus</h5>
-                                                            <h1 class="card-price text-center">$9<span class="period">/month</span></h1>
-                                                            <hr>
-                                                            <ul class="fa-ul">
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span><strong>5 Users</strong></li>
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span>50GB Storage</li>
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited Public Projects</li>
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span>Community Access</li>
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited Private Projects</li>
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span>Dedicated Phone Support</li>
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span>Free Subdomain</li>
-                                                              <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Monthly Status Reports</li>
-                                                            </ul>
-                                                            <hr>
-                                                            <center><input type="radio" name="gender" value="B"> <strong>Seleccionar</strong></center>
-                                                          </div>
-                                                        </div>
-                                                      </div>
-                                                      <!-- Pro Tier -->
-                                                      <div class="col-lg-4">
-                                                        <div class="card">
-                                                          <div class="card-body" id="body_premiun">
-                                                            <h5 class="card-title text-muted text-uppercase text-center">Pro</h5>
-                                                            <h1 class="card-price text-center">$49<span class="period">/month</span></h1>
-                                                            <hr>
-                                                            <ul class="fa-ul">
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span><strong>Unlimited Users</strong></li>
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span>150GB Storage</li>
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited Public Projects</li>
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span>Community Access</li>
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span>Unlimited Private Projects</li>
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span>Dedicated Phone Support</li>
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span><strong>Unlimited</strong> Free Subdomains</li>
-                                                              <li><span class="fa-li"><i class="fas fa-check"></i></span>Monthly Status Reports</li>
-                                                            </ul>
-                                                            <hr>
-                                                            <center><input type="radio" name="gender" value="P"> <strong>Seleccionar</strong></center>
-                                                          </div>
-                                                        </div>
-                                                      </div>
-                                                    </div>
-                                                  </div>
-                                                </section>
-                                            </div>   
-
-                                            
-
                                         </div>
                                     </div>
                                 </div>

@@ -51,6 +51,7 @@
                             <th>Monto</th>
                             <th>Inicio</th>
                             <th>Finaliza</th>
+                            <th>Estado</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -58,12 +59,22 @@
                             <tr>
                                 @if ($pagos->modo_pago == "P")
                                     <td style="vertical-align:middle; font-size: 16px;"> Paypal </td>
-                                @else
+                                @endif
+                                @if ($pagos->modo_pago == "TD")
                                     <td style="vertical-align:middle; font-size: 16px;"> Transferencia o deposito </td>
+                                @endif
+                                @if ($pagos->modo_pago == "Free")
+                                    <td style="vertical-align:middle; font-size: 16px;"> Gratuito </td>
                                 @endif
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$pagos->monto_pago}}</td>
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$pagos->fecha_inicio}} </td>
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$pagos->fecha_finalizacion}} </td>
+                                 @if ($pagos->estado == 1)
+                                    <td style="vertical-align:middle; font-size: 16px;"> Activo </td>
+                                @else
+                                    <td style="vertical-align:middle; font-size: 16px;"> Inactivo</td>
+                                @endif
+                                
                            </tr>
                         @endforeach
                     </tbody>

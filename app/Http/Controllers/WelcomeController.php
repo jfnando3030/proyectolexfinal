@@ -7,6 +7,7 @@ use App\User;
 use App\Solicitud;
 use App\Archivos;
 use App\Pagos;
+use App\Tarifa;
 use App\Departamento;
 use Carbon\Carbon;
 use App\Comisiones;
@@ -461,7 +462,8 @@ public function admin(Request $request){
 
     public function registrar_pago()
     {
-      return view('administracion.pagos.registrar');
+      $tarifa = Tarifa::where('estado', 1)->get();
+      return view('administracion.pagos.registrar', ['tarifa' => $tarifa]);
     }
 
     public function saber_comprobante_repetido($comprobante_pago)
@@ -477,24 +479,30 @@ public function admin(Request $request){
 
     public function store_pago(Request $request)
     {
+
+      $tarifa = Tarifa::findOrFail($request->rb); 
+
       $date = Carbon::now();
       $hoy = $date->format('Y-m-d');
-
-      if($request->pago == "TD"){
-
-      }
-
 
       $pagos = new Pagos();
       $pagos->id_user = $request->user()->id;
       $pagos->id_tarifa = "1";
       $pagos->fecha_inicio = $hoy;
       $pagos->fecha_finalizacion = $this->aumentar_dias_activacion(Carbon::parse($hoy));
-      $pagos->modo_pago = $request->pago;
       
-      $pagos->monto_pago = "9.00";
+      if( $tarifa->id == 1){
+        $pagos->modo_pago = "Free";
+        $pagos->comprobante_pago = "Ninguno";
+      }else{
+        $pagos->modo_pago = $request->pago;
+      }
+      
+      
+      $pagos->monto_pago = $tarifa->precio;
 
-      if($request->pago == "P"){
+
+      if($request->pago == "P" or  $tarifa->id == 1){
         $pagos->estado = 1;
         $pagos->activo = 1; 
         $pagos->path = "Ninguno";
@@ -503,13 +511,17 @@ public function admin(Request $request){
         $pagos->estado = 0;
         $pagos->activo = 0;
         if ($this->saber_comprobante_repetido($request->numero_comprobante) == "existe"){
-          return redirect('administracion/pago/registrar')->with('mensaje-registro', 'El comprobante de pago no es válido.');
+          return redirect('administracion/pago/registrar')->with('mensaje-error', 'El comprobante de pago no es válido.');
         }else{
           $pagos->comprobante_pago = $request->numero_comprobante;
+          if($request->archivo1 != ""){
+            if($request->file('archivo1')){
+              $pagos->path = Storage::disk('local2')->put('comprobante_pagos',   $request->file('archivo1')); 
+            }
+          }else{
+            $pagos->path = "Ninguno";
+          }
         }
-
-        
-
       }
 
      
@@ -517,7 +529,7 @@ public function admin(Request $request){
       {
         return redirect('administracion/pago/registrar')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
       }else{
-        return redirect('administracion/pago/registrar')->with('mensaje-registro2', 'Problemas al registrar los datos.');
+        return redirect('administracion/pago/registrar')->with('mensaje-error', 'Problemas al registrar los datos.');
       }
 
     }
@@ -530,7 +542,7 @@ public function admin(Request $request){
 
     public function listado_pago(Request $request)
     {
-      $pagos = Pagos::where('id_user', $request->user()->id)->where('estado',1)->get();
+      $pagos = Pagos::where('id_user', $request->user()->id)->get();
 
       return view('administracion.pagos.listado_pagos', ['pagos' => $pagos]);
     }
