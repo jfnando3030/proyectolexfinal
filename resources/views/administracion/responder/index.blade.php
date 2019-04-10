@@ -16,7 +16,7 @@
           <div class="col-md-12">
             <div class="box box-primary">
               <div class="box-header with-border">
-                <h3 class="box-title">{{$caso->nombre_solicitud}}</h3>
+                <h3 class="box-title">{{$respuesta->titulo}}</h3>
   
          
               </div>
@@ -24,22 +24,21 @@
               <div class="box-body no-padding">
                 <div class="mailbox-read-info">
               
-                  <h5 style="color:black"> <b> De: </b> {{$caso->usuario->nombres}} {{$caso->usuario->apellidos}}
-                    <br> <b> Para: </b> {{$caso->departamento->nombre_departamento}}
-                    <span class="mailbox-read-time pull-right">{{$caso->fecha_solicitud}} - {{$caso->hora_solicitud}}</span></h5>
+                  <h5 style="color:black"> <b>De: </b> {{$respuesta->solicitud->abogado->nombres}} {{$respuesta->solicitud->abogado->apellidos}}
+                    <br> <b> Para: </b> Mi
+                    <span class="mailbox-read-time pull-right">{{$respuesta->fecha}} - {{$respuesta->hora}}</span></h5>
                 </div>
-                <!-- /.mailbox-read-info -->
-                @if(Auth::user()->rol == "Abogado")
+               
 
                    <div class="mailbox-controls with-border text-center">
-                        <a href="{{ route('aceptar',['id' => $caso->id])}}"  class="btn btn-sm btn-primary">Aceptar caso</a>
+                        <a href="#"  class="btn btn-sm btn-primary">Responder</a>
                     </div>
 
-                @endif
+                
               
                 <!-- /.mailbox-controls -->
                 <div class="mailbox-read-message">
-                  <p>{{$caso->descripcion}}</p>
+                  <p>{{$respuesta->respuesta}}</p>
   
                  
                 </div>
@@ -180,4 +179,3 @@
 
     
 @endsection
-

@@ -22,6 +22,8 @@ class CreateRespuestasTables extends Migration
             $table->time('hora');
             $table->char('leido',1)->default(0);
             $table->char('estado',1)->default(1);
+            $table->integer('id_autorespuesta')->nullable();
+           
 
 
 

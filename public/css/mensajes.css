@@ -10,10 +10,13 @@
 
 .rechazado{
 
-    background-color: #FFEDED;
-    border: 1px dashed #FA206A;
+    background-color: #FA206A;
     padding: 8px;
     margin-bottom: 10px;
+    color: white;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
 }
 
 .disabled {

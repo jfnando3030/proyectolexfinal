@@ -51,36 +51,48 @@ class WelcomeController extends Controller
 
     
 
-public function admin(Request $request){
+    public function admin(Request $request){
 
-  if(Auth::user()->rol == "Administrador"){
-    return view('administracion.index');
-
-  }else {
-    if(Auth::user()->rol == "Abogado"){
-      $total_solicitudes_finalizados = Solicitud::where('estado_solicitud',1)->where('leido_solicitud',0)->whereNull('id_user_abogado')->count();
-      
-      
-			$total_solicitudes_usuario = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->count();
-			$total_finalizados_usuario = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->where('finalizado_solicitud', 1)->count();
-      $total_solicitudes_nuevos = Solicitud::where('estado_solicitud',1)->where('leido_solicitud',0)->count();
-     
+      if(Auth::user()->rol == "Administrador"){
+        return view('administracion.index');
     
-
-      $solicitudes_usuario = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->paginate(15);
-			$solicitudes_nuevos = Solicitud::where('estado_solicitud',1)->where('leido_solicitud',0)->orderBy('fecha_solicitud', 'asc')->paginate(15);
-			$finalizados_usuarios = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->where('finalizado_solicitud', 1)->paginate(15);
-      $user_departamentos = UserDepartamento::where('user_id',Auth::user()->id)->get();
-      return view('administracion.index', compact('user_departamentos','finalizados_usuarios','total_solicitudes', 'total_solicitudes_usuario', 'total_finalizados_usuario','total_solicitudes_nuevos', 'solicitudes_nuevos', 'solicitudes_usuario'));
-
-    }else{
-      return view('administracion.index');
-
+      }else {
+        if(Auth::user()->rol == "Abogado"){
+          $total_solicitudes_finalizados = Solicitud::where('estado_solicitud',1)->where('leido_solicitud',0)->whereNull('id_user_abogado')->count();
+          
+          
+          $total_solicitudes_usuario = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->count();
+          $total_finalizados_usuario = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->where('finalizado_solicitud', 1)->count();
+          $total_solicitudes_nuevos = Solicitud::where('estado_solicitud',1)->where('leido_solicitud',0)->count();
+         
+        
+    
+          $solicitudes_usuario = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->paginate(15);
+          $solicitudes_nuevos = Solicitud::where('estado_solicitud',1)->where('leido_solicitud',0)->orderBy('fecha_solicitud', 'asc')->paginate(15);
+          $finalizados_usuarios = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->where('finalizado_solicitud', 1)->paginate(15);
+          $user_departamentos = UserDepartamento::where('user_id',Auth::user()->id)->get();
+          
+          
+          return view('administracion.index', compact('user_departamentos','finalizados_usuarios','total_solicitudes', 'total_solicitudes_usuario', 'total_finalizados_usuario','total_solicitudes_nuevos', 'solicitudes_nuevos', 'solicitudes_usuario'));
+    
+        }else{
+    
+          $total_solicitudes_registrados = Solicitud::where('estado_solicitud',1)->where('id_user_solicitud', Auth::user()->id )->count();
+          $solicitudes_registrados = Solicitud::where('estado_solicitud',1)->where('id_user_solicitud', Auth::user()->id )->orderBy('fecha_solicitud', 'asc')->paginate(15);
+    
+         
+          $respuestas = Respuesta::where('estado',1)->orderBy('fecha', 'asc')->get();
+         
+          
+    
+          return view('administracion.index', compact('respuestas','total_solicitudes_registrados','solicitudes_registrados'));
+    
+        }
+    
+      }
+      
     }
-
-  }
-  
-}
+    
 
 
     public function invita_bango()
@@ -330,6 +342,20 @@ public function admin(Request $request){
      
     
     }
+
+
+    public function ver_respuesta(Request $request, $id)
+    {
+      $respuesta = Respuesta::findOrFail($id);  
+      $archivos = ArchivosRespuesta::where('id_respuesta',$id)->get();
+     
+  
+     
+      return view('administracion.responder.index',compact('respuesta', 'archivos'));
+     
+    
+    }
+
 
 
     

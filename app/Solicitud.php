@@ -27,6 +27,11 @@ class Solicitud extends Model
         return $this->belongsTo(User::class,'id_user_solicitud','id');
     }
 
+    public function abogado(){
+        return $this->belongsTo(User::class,'id_user_abogado','id');
+    }
+
+
     public function departamento(){
         return $this->belongsTo(Departamento::class,'id_departamento','id');
     }

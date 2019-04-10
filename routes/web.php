@@ -101,6 +101,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	//ACEPTAR CASOS POR ABOGADO 
 	Route::get('/administracion/gestionar/casos/aceptar/{id}', 'WelcomeController@aceptar_casos')->name('aceptar');
 	Route::get('/administracion/gestionar/casos/{id}', 'WelcomeController@ver_caso')->name('ver_caso');
+	
 	// CAMBIAR ABOGADO A LOS CASOS  
 	Route::get('/administracion/gestionar/casos/listado', 'WelcomeController@gestionar_casos');
 	Route::get('/administracion/gestionar/casos/cambiar/{id}', 'WelcomeController@gestionar_abogado_casos');
@@ -111,6 +112,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 // ************************** RESPUESTAS *************************************** 
+    Route::get('/administracion/casos/respuesta/{id}', 'WelcomeController@ver_respuesta')->name('ver_respuesta');
 	
 	//REGISTRAR 
 	Route::get('/administracion/respuesta/registrar/{id}', 'WelcomeController@registrar_respuesta')->name('respuesta');
