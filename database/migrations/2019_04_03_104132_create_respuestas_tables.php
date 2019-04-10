@@ -23,6 +23,7 @@ class CreateRespuestasTables extends Migration
             $table->char('leido',1)->default(0);
             $table->char('estado',1)->default(1);
             $table->integer('id_autorespuesta')->nullable();
+            $table->integer('id_user_receptor');
            
 
 

@@ -305,9 +305,9 @@ class WelcomeController extends Controller
         }
       }
 
-      return redirect('administracion/solicitud/registrar')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
+      return redirect('administracion/solicitud/registrar')->with('mensaje-registro', 'La solicitud ha sido enviado correctamente.');
     }else{
-      return redirect('administracion/solicitud/registrarr')->with('mensaje-registro2', 'Problemas al registrar los datos.');
+      return redirect('administracion/solicitud/registrarr')->with('mensaje-registro2', 'Problemas al enviar los datos.');
     }
   }
 
@@ -464,9 +464,82 @@ class WelcomeController extends Controller
           }
         }
 
-        return redirect('administracion')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
+        return redirect('administracion')->with('mensaje-registro', 'Respuesta enviada correctamente.');
       }else{
-        return redirect('administracion')->with('mensaje-registro2', 'Problemas al registrar los datos.');
+        return redirect('administracion')->with('mensaje-registro2', 'Problemas al enviar la respuesta.');
+      }
+    }
+
+    public function store_respuesta2(Request $request)
+    {
+
+      $date = Carbon::now();
+      $hoy = $date->format('Y-m-d');
+      $hora = $date->format('h:i:s');
+
+      $respuesta = new Respuesta();
+      $respuesta->titulo = $request->nombre;
+      $respuesta->respuesta = $request->respuesta;
+      $respuesta->fecha = $hoy;
+      $respuesta->hora = $hora;
+      $respuesta->solicitud_id = $request->id_solicitud;
+      $respuesta->id_autorespuesta = $request->id_solicitud;
+       
+      if( $respuesta->save() ){
+        
+        //  PARA ARCHIVO 1 
+        if($request->archivo1 != ""){
+          if($request->file('archivo1')){
+            $archivos1 = new ArchivosRespuesta();
+            $archivos1->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo1')); 
+            $archivos1->id_respuesta = $respuesta->id;
+            $archivos1->save();
+          }
+        }
+
+        //  PARA ARCHIVO 2
+        if($request->archivo2 != ""){
+          if($request->file('archivo2')){
+            $archivos2 = new ArchivosRespuesta();
+            $archivos2->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo2')); 
+            $archivos2->id_respuesta = $respuesta->id;
+            $archivos2->save();
+          }
+        }
+
+        //  PARA ARCHIVO 3
+        if($request->archivo3 != ""){
+          if($request->file('archivo3')){
+            $archivo3 = new ArchivosRespuesta();
+            $archivo3->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo3')); 
+            $archivo3->id_respuesta = $respuesta->id;
+            $archivo3->save();
+          }
+        }
+
+        //  PARA ARCHIVO 4
+        if($request->archivo4 == ""){
+          if($request->file('archivo4')){
+            $archivo4 = new ArchivosRespuesta();
+            $archivo4->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo4')); 
+            $archivo4->id_respuesta = $respuesta->id;
+            $archivo4->save();
+          }
+        }
+
+        //  PARA ARCHIVO 5
+        if($request->archivo5 == ""){
+          if($request->file('archivo5')){
+            $archivo5 = new ArchivosRespuesta();
+            $archivo5->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo5')); 
+            $archivo5->id_respuesta = $respuesta->id;
+            $archivo5->save();
+          }
+        }
+
+        return redirect('administracion')->with('mensaje-registro', 'Respuesta enviada correctamente.');
+      }else{
+        return redirect('administracion')->with('mensaje-registro2', 'Problemas al enviar la respuesta.');
       }
     }
 

@@ -15,9 +15,11 @@ class Respuesta extends Model
         'respuesta',
         'estado',
         'solicitud_id',
+        'id_user_receptor',
         'leido',
         'fecha',
         'hora',
+        'id_autorespuesta',
     ];
 
     public function solicitud(){
