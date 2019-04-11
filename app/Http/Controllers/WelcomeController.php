@@ -30,6 +30,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Validation\Rule;
 use Session;
 use Validator;
+use Illuminate\Notifications\NotifyLawyers;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -307,6 +308,24 @@ class WelcomeController extends Controller
           $archivo5->id_solicitud = $solicitud->id;
           $archivo5->save();
         }
+      }
+      
+      $id_departamento = $request->departamento;
+      $usuarios = DB::table('departamento_user')
+      ->join('users', function($join) use($id_departamento){
+        $join->on('departamento_user.user_id', '=', 'users.id')
+        ->where([
+          ['departamento_user.departamento_id', $id_departamento],
+          [ 'users.estado', '1' ]
+        ]);
+      })
+      ->select('users.id', 'departamento_user.departamento_id')
+      ->get();
+
+      foreach($usuarios as $u){
+        $usuario = User::find($u->id);
+        $departamento = Departamento::find($u->departamento_id);
+        $usuario->sendLawyersNotifications($departamento->nombre_departamento, $solicitud->id);
       }
 
       return redirect('administracion/solicitud/registrar')->with('mensaje-registro', 'La solicitud ha sido enviado correctamente.');
