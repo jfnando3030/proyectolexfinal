@@ -720,27 +720,209 @@
 $(function () {
 $("#example1").DataTable();
 $('#example2').DataTable({
-"paging": false,
-"lengthChange": false,
+"paging": true,
+"lengthChange": true,
 "searching": true,
 "ordering": false,
-"info": true,
+"info": false,
 "autoWidth": false,
+"aLengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
+
 "language": {
 "search": "Buscar:",
-"LengthMenu": "Display _MENU_ records",
+"sLengthMenu":     "Mostrar _MENU_ registros",
+"oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+    },
+
 },
 });
 
 $('#example3').DataTable({
-"paging": false,
-"lengthChange": false,
+"paging": true,
+"lengthChange": true,
 "searching": true,
 "ordering": false,
-"info": true,
-"autoWidth": false
+"info": false,
+"autoWidth": false,
+
 });
 });
+
+$('#example4').DataTable({
+"paging": true,
+"lengthChange": true,
+"searching": true,
+"ordering": false,
+"info": false,
+"autoWidth": false,
+"aLengthMenu": [[1, 25, 50, -1], [1, 25, 50, "All"]],
+"language": {
+"search": "Buscar:",
+"sLengthMenu":     "Mostrar _MENU_ registros",
+"oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+    },
+
+},
+});
+
+$('#example5').DataTable({
+"paging": true,
+"lengthChange": true,
+"searching": true,
+"ordering": false,
+"info": false,
+"autoWidth": false,
+"aLengthMenu": [[1, 25, 50, -1], [1, 25, 50, "All"]],
+"language": {
+"search": "Buscar:",
+"sLengthMenu":     "Mostrar _MENU_ registros",
+"oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+    },
+
+},
+});
+
+$('#example6').DataTable({
+"paging": true,
+"lengthChange": true,
+"searching": true,
+"ordering": false,
+"info": false,
+"autoWidth": false,
+"aLengthMenu": [[1, 25, 50, -1], [1, 25, 50, "All"]],
+"language": {
+"search": "Buscar:",
+"sLengthMenu":     "Mostrar _MENU_ registros",
+"oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+    },
+
+},
+});
+
+$('#example7').DataTable({
+"paging": true,
+"lengthChange": true,
+"searching": true,
+"ordering": false,
+"info": false,
+"autoWidth": false,
+"aLengthMenu": [[1, 25, 50, -1], [1, 25, 50, "All"]],
+"language": {
+"search": "Buscar:",
+"sLengthMenu":     "Mostrar _MENU_ registros",
+"oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+    },
+
+},
+});
+
+$('#example8').DataTable({
+"paging": true,
+"lengthChange": true,
+"searching": true,
+"ordering": false,
+"info": false,
+"autoWidth": false,
+"aLengthMenu": [[1, 25, 50, -1], [1, 25, 50, "All"]],
+"language": {
+"search": "Buscar:",
+"sLengthMenu":     "Mostrar _MENU_ registros",
+"oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+    },
+
+},
+});
+
+$('#example9').DataTable({
+"paging": true,
+"lengthChange": true,
+"searching": true,
+"ordering": false,
+"info": false,
+"autoWidth": false,
+"aLengthMenu": [[1, 25, 50, -1], [1, 25, 50, "All"]],
+"language": {
+"search": "Buscar:",
+"sLengthMenu":     "Mostrar _MENU_ registros",
+"oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+    },
+
+},
+});
+
+
+$('#example10').DataTable({
+"paging": true,
+"lengthChange": true,
+"searching": true,
+"ordering": false,
+"info": false,
+"autoWidth": false,
+"aLengthMenu": [[1, 25, 50, -1], [1, 25, 50, "All"]],
+"language": {
+"search": "Buscar:",
+"sLengthMenu":     "Mostrar _MENU_ registros",
+"oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+    },
+
+},
+});
+
+
+$('#example11').DataTable({
+"paging": false,
+"lengthChange": true,
+"searching": true,
+"ordering": false,
+"info": false,
+"autoWidth": false,
+"aLengthMenu": [[1, 25, 50, -1], [1, 25, 50, "All"]],
+"language": {
+"search": "Buscar:",
+"sLengthMenu":     "Mostrar _MENU_ registros",
+"oPaginate": {
+        "sFirst":    "Primero",
+        "sLast":     "Último",
+        "sNext":     "Siguiente",
+        "sPrevious": "Anterior"
+    },
+
+},
+});
+
+
 </script>
 
 

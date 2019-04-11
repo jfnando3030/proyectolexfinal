@@ -169,6 +169,7 @@
               <form action="{{ route('store_respuesta2') }}" method="post" enctype="multipart/form-data">
 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+                <input type="hidden" name="id_user_receptor" id="id_user_receptor" value="{{ $respuesta->solicitud->id_user_abogado }}">
 
                 <div class="row">
                     <div class="col-md-12">
@@ -251,7 +252,11 @@
               </div>
 
             </div>
-            <!-- /. box -->
+
+
+
+         
+
           </div>
           <!-- /.col -->
         </div>

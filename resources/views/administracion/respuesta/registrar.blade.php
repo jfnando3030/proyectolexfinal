@@ -31,8 +31,9 @@
                                                 <hr>
                                                 <center><h4 style="color: black; "> <strong>Información de la solicitud </strong> </h4></center>
                                                 <hr>
-                                                <p align=justify  style="line-height: 0.5em; color: black; font-size: 13px;"> <strong>  Petición:  </strong> <br> <Blockquote  style="color: black; font-size: 13px; line-height: 3em;"> {{ $casos->nombre_solicitud}} </Blockquote></p>
-                                                <p style=" line-height: 2em; color: black; font-size: 13px;"> <strong>  Descripción:  </strong> <br> <Blockquote  style="color: black; font-size: 13px; line-height: 1.5em;">{{ $casos->descripcion}} </Block; uote></p>
+                                                <p align=justify  style="line-height: 2em; color: black; font-size: 13px;"> <strong>  De:  </strong> <span  style="color: black; font-size: 13px; line-height: 2em;"> {{ $casos->usuario->nombres}} {{ $casos->usuario->apellidos}} </span></p>
+                                                <p align=justify  style="line-height: 2em; color: black; font-size: 13px;"> <strong>  Petición:  </strong> <span  style="color: black; font-size: 13px; line-height: 2em;"> {{ $casos->nombre_solicitud}} </span></p>
+                                                <p style=" line-height: 2em; color: black; font-size: 13px;"> <strong>  Descripción:  </strong> <span  style="color: black; font-size: 13px; line-height: 2em;">{{ $casos->descripcion}} </span></p>
                                             </div>
                                              <div class="col-md-12" style="padding-bottom: 15px;">
                                                 <hr>
@@ -40,6 +41,7 @@
                                                 <hr>
                                             </div>
                                             <input type="hidden" name="id_solicitud" id="id_solicitud" value="{{ $casos->id }}">
+                                            <input type="hidden" name="id_user_receptor" id="id_user_receptor" value="{{ $casos->id_user_solicitud }}">
                                             <div class="col-md-6" style="padding-bottom: 15px;">
                                                 <label>Titulo de respuesta:</label>
                                                 {!! Form::text('nombre',null,['placeholder'=>'Ingrese el título de su respuesta','class'=>'form-control', 'required']) !!}
