@@ -137,7 +137,7 @@
                                               <tr class="fila">
                                                   
                                                   
-                                                  <th>Emisor</th>
+                                                  <th>Emisore</th>
                       
                                                   <th>Mensaje</th>
                                                   <th>Adjuntos</th>
@@ -249,7 +249,7 @@
           
                                                         
                                                       @if($response->estado !=0)
-                                                        <tr onclick="window.location='{{ route('ver_respuesta',['id' => $response->id])}}'" data-id="{{$response->id}}">
+                                                        <tr onclick="window.location='{{ route('ver_respuesta',['id' => Crypt::encrypt($response->id) ])}}'" data-id="{{$response->id}}">
                                         
                                         
                                                         
