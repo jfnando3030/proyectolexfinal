@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "76f7ad0ef20ac30c7c1aa4b2e2841672",
-=======
-    "content-hash": "cd265918525a92293b88811af9251f3c",
->>>>>>> 3dc32111b790e25537e2aafea9f27d0562960a68
+    "content-hash": "fa03aa2dd09b94298da371e51ff2e05f",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1397,7 +1393,6 @@
             "time": "2018-07-02T15:55:56+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "paypal/rest-api-sdk-php",
             "version": "1.14.0",
             "source": {
@@ -1419,7 +1414,34 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8.35"
-=======
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PayPal": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "PayPal",
+                    "homepage": "https://github.com/paypal/rest-api-sdk-php/contributors"
+                }
+            ],
+            "description": "PayPal's PHP SDK for REST APIs",
+            "homepage": "http://paypal.github.io/PayPal-PHP-SDK/",
+            "keywords": [
+                "payments",
+                "paypal",
+                "rest",
+                "sdk"
+            ],
+            "time": "2019-01-04T20:04:25+00:00"
+        },
+        {
             "name": "phenx/php-font-lib",
             "version": "0.5.1",
             "source": {
@@ -1475,39 +1497,15 @@
             },
             "require-dev": {
                 "phpunit/phpunit": "~5.0"
->>>>>>> 3dc32111b790e25537e2aafea9f27d0562960a68
             },
             "type": "library",
             "autoload": {
                 "psr-0": {
-<<<<<<< HEAD
-                    "PayPal": "lib/"
-=======
                     "Svg\\": "src/"
->>>>>>> 3dc32111b790e25537e2aafea9f27d0562960a68
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-<<<<<<< HEAD
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "PayPal",
-                    "homepage": "https://github.com/paypal/rest-api-sdk-php/contributors"
-                }
-            ],
-            "description": "PayPal's PHP SDK for REST APIs",
-            "homepage": "http://paypal.github.io/PayPal-PHP-SDK/",
-            "keywords": [
-                "payments",
-                "paypal",
-                "rest",
-                "sdk"
-            ],
-            "time": "2019-01-04T20:04:25+00:00"
-=======
                 "LGPL-3.0"
             ],
             "authors": [
@@ -1519,7 +1517,6 @@
             "description": "A library to read, parse and export to PDF SVG files.",
             "homepage": "https://github.com/PhenX/php-svg-lib",
             "time": "2018-06-03T10:10:03+00:00"
->>>>>>> 3dc32111b790e25537e2aafea9f27d0562960a68
         },
         {
             "name": "phpmailer/phpmailer",
@@ -1938,7 +1935,6 @@
             "time": "2018-07-19T23:38:55+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "react/promise",
             "version": "v2.7.1",
             "source": {
@@ -1966,7 +1962,25 @@
                 "files": [
                     "src/functions_include.php"
                 ]
-=======
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jan Sorgalla",
+                    "email": "jsorgalla@gmail.com"
+                }
+            ],
+            "description": "A lightweight implementation of CommonJS Promises/A for PHP",
+            "keywords": [
+                "promise",
+                "promises"
+            ],
+            "time": "2019-01-07T21:25:54+00:00"
+        },
+        {
             "name": "sabberworm/php-css-parser",
             "version": "8.1.0",
             "source": {
@@ -1991,7 +2005,6 @@
                 "psr-0": {
                     "Sabberworm\\CSS": "lib/"
                 }
->>>>>>> 3dc32111b790e25537e2aafea9f27d0562960a68
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1999,18 +2012,6 @@
             ],
             "authors": [
                 {
-<<<<<<< HEAD
-                    "name": "Jan Sorgalla",
-                    "email": "jsorgalla@gmail.com"
-                }
-            ],
-            "description": "A lightweight implementation of CommonJS Promises/A for PHP",
-            "keywords": [
-                "promise",
-                "promises"
-            ],
-            "time": "2019-01-07T21:25:54+00:00"
-=======
                     "name": "Raphael Schweikert"
                 }
             ],
@@ -2022,7 +2023,6 @@
                 "stylesheet"
             ],
             "time": "2016-07-19T19:14:21+00:00"
->>>>>>> 3dc32111b790e25537e2aafea9f27d0562960a68
         },
         {
             "name": "swiftmailer/swiftmailer",
