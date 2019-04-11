@@ -172,6 +172,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 	Route::resource('administracion/oficio', 'OficioController');
 
+
+// ************************** PAYPAL *************************************** 
+	
+	// route for view/blade file
+	Route::get('paywithpaypal', array('as' => 'paywithpaypal','uses' => 'AddMoneyController@payWithPaypal',));
+	// route for post request
+	Route::post('paypal', array('as' => 'paypal','uses' => 'AddMoneyController@postPaymentWithpaypal',));
+	// route for check status responce
+	Route::get('paypal', array('as' => 'status','uses' => 'AddMoneyController@getPaymentStatus',));
+
+// ************************** FIN DE PAYPAL ********************************* 
+
+
 });
 
 Route::match(['get', 'post'], 'ajax-image-upload', 'ImageController@ajaxImage');

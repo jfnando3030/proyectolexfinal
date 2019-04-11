@@ -489,7 +489,8 @@ class WelcomeController extends Controller
     public function registrar_pago()
     {
       $tarifa = Tarifa::where('estado', 1)->get();
-      return view('administracion.pagos.registrar', ['tarifa' => $tarifa]);
+      $tarifa2 = Tarifa::where('estado', 1)->get();
+      return view('administracion.pagos.registrar', ['tarifa' => $tarifa, 'tarifa2' => $tarifa2]);
     }
 
     public function saber_comprobante_repetido($comprobante_pago)
@@ -521,14 +522,14 @@ class WelcomeController extends Controller
         $pagos->modo_pago = "Free";
         $pagos->comprobante_pago = "Ninguno";
       }else{
-        $pagos->modo_pago = $request->pago;
+        $pagos->modo_pago = "DT";
       }
       
       
       $pagos->monto_pago = $tarifa->precio;
 
 
-      if($request->pago == "P" or  $tarifa->id == 1){
+      if($tarifa->id == 1){
         $pagos->estado = 1;
         $pagos->activo = 1; 
         $pagos->path = "Ninguno";

@@ -30,18 +30,32 @@
       var y = $('#precio-' + x).text();
 
       if(y == "$ 0.00/Mes"){
-        $('#div_pago_td3').hide();
-        $('#div_pago_td').hide();
+        $('#div_pago_td1').hide();
         $('#div_pago_td2').hide();
-        $('#pago').removeAttr('required');
       }else{
-        $('#div_pago_td3').show();
-        $('#pago').attr("required", "true");
+        $('#div_pago_td1').show();
+        $('#div_pago_td2').show();
       }
 
       $('#rb-' + x).css("border-style", "solid");
       $('#rb-' + x).css("border-color", "#0075f6");
       aux = x;
+    }); 
+  });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var aux1 = 2;
+    $('input[type=radio][name=rbp]').on('change', function() {
+      $('#rbp-' + aux1).css("border-style", "solid");
+      $('#rbp-' + aux1).css("border-color", "black");
+      
+      var y = $(this).attr("value");
+
+      $('#rbp-' + y).css("border-style", "solid");
+      $('#rbp-' + y).css("border-color", "#0075f6");
+      aux1 = y;
     }); 
   });
 </script>
@@ -148,95 +162,171 @@
         @endif
 
         <div class="emp-profile" style="padding: 3%;">
-            <form action="{{ route('store_pago') }}" method="post" enctype="multipart/form-data">
 
-                <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+          <div class="card-body">
+            <div class="custom-tab">
+              <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist" style="background-color: white;">
+                  <a class="nav-item nav-link active" id="custom-nav-home-tab" data-toggle="tab" href="#custom-nav-home" role="tab" aria-controls="custom-nav-home"
+                   aria-selected="true">Deposito </a>
+                  <a class="nav-item nav-link" id="custom-nav-profile-tab" data-toggle="tab" href="#custom-nav-profile" role="tab" aria-controls="custom-nav-profile"
+                   aria-selected="false"> Paypal </a>
+                </div>
+              </nav>
+              <div class="tab-content pl-3 pt-2" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="custom-nav-home" role="tabpanel" aria-labelledby="custom-nav-home-tab">
+                  
+                  <form action="{{ route('store_pago') }}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+                    <div class="row">
+                        <div class="col-md-12 col-12 col-lg-12 col-sm-12 col-xs-12">
+                            <div class="tab-content profile-tab" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="row">
+                                        
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-12 col-12 col-lg-12 col-sm-12 col-xs-12">
-                                <div class="tab-content profile-tab" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
-                                            
-
-                                            <div class="col-md-12">
-                                              <label>PLAN DE PAGO</label>
-                                              <section class="pricing py-5">
-                                                <div class="container">
-                                                  <div class="row">
-                                                    <!-- Free Tier -->
-                                                    <?php $x = 1; ?>
-                                                    @foreach( $tarifa as $tarifa)
-                                                    <div class="col-lg-4" >
-                                                      <div class="card-body" >
-                                                        @if($x == 1 )
-                                                          <div class="card mb-5 mb-lg-0" id="rb-{{$tarifa->id}}" style="border-style: solid; border-color: #0075f6;">
-                                                        @else
-                                                          <div class="card mb-5 mb-lg-0" id="rb-{{$tarifa->id}}" style="border-style: solid; border-color: solid;">
-                                                        @endif
-                                                          <h5 class="card-title text-muted text-uppercase text-center">{{ $tarifa->tarifa }} </h5>
-                                                          <h4 class="card-price text-center" id="precio-{{$tarifa->id}}">$ {{ $tarifa->precio }}<span class="period">/Mes</span></h4>
-                                                          <hr>
-                                                            <textarea readonly="" row="7" style="resize: none;">{{ $tarifa->descripcion }}</textarea>
-                                                          <br>
-                                                          @if($x == 1 )
-                                                          <center><input type="radio" name="rb" id="rb_plan" value="{{$tarifa->id}}" checked="" > <strong>Seleccionar</strong></center>
-                                                          @else
-                                                            <center><input type="radio" name="rb" id="rb_plan" value="{{$tarifa->id}}" > <strong>Seleccionar</strong></center>
-                                                          @endif
-                                                          <br>
-                                                        </div>
-                                                      </div>
+                                        <div class="col-md-12">
+                                          <label>PLAN DE PAGO</label>
+                                          <section class="pricing py-5">
+                                            <div class="container">
+                                              <div class="row">
+                                                <!-- Free Tier -->
+                                                <?php $x = 1; ?>
+                                                @foreach( $tarifa as $tarifa)
+                                                <div class="col-lg-4" >
+                                                  <div class="card-body" >
+                                                    @if($x == 1 )
+                                                      <div class="card mb-5 mb-lg-0" id="rb-{{$tarifa->id}}" style="border-style: solid; border-color: #0075f6;">
+                                                    @else
+                                                      <div class="card mb-5 mb-lg-0" id="rb-{{$tarifa->id}}" style="border-style: solid; border-color: solid;">
+                                                    @endif
+                                                      <h5 class="card-title text-muted text-uppercase text-center">{{ $tarifa->tarifa }} </h5>
+                                                      <h4 class="card-price text-center" id="precio-{{$tarifa->id}}">$ {{ $tarifa->precio }}<span class="period">/Mes</span></h4>
+                                                      <hr>
+                                                        <textarea readonly="" row="7" style="resize: none;">{{ $tarifa->descripcion }}</textarea>
+                                                      <br>
+                                                      @if($x == 1 )
+                                                      <center><input type="radio" name="rb" id="rb_plan" value="{{$tarifa->id}}" checked="" > <strong>Seleccionar</strong></center>
+                                                      @else
+                                                        <center><input type="radio" name="rb" id="rb_plan" value="{{$tarifa->id}}" > <strong>Seleccionar</strong></center>
+                                                      @endif
+                                                      <br>
                                                     </div>
-                                                    <?php $x = $x + 1; ?>
-                                                    @endforeach                                               
                                                   </div>
                                                 </div>
-                                              </section>
-                                            </div>   
-
-                                            <div class="col-md-12" style="padding-bottom: 15px; display: none; " id="div_pago_td3">
-                                                <label>Seleccione el método de pago:</label>
-                                                <select class="form-control" id="pago" name="pago" >
-                                                    <option value=""> Seleccione un modo de pago</option>
-                                                    <option value="TD"> Transferencia o deposito bancario</option>
-                                                    <option value="P"> Paypal</option>
-                                                </select> 
+                                                <?php $x = $x + 1; ?>
+                                                @endforeach                                               
+                                              </div>
                                             </div>
-                                            <div class="col-md-6" style="padding-bottom: 15px; display: none;" id="div_pago_td">
-                                                <label>Número de comprobante:</label>
-                                                {!! Form::text('numero_comprobante',null,['placeholder'=>'Ingrese el número de comprobante','class'=>'form-control']) !!}
-                                            </div>
+                                          </section>
+                                        </div>   
 
-                                            <div class="col-md-6" style="padding-bottom: 15px; display: none;" id="div_pago_td2">
-                                                <label>Cargar comprobante:</label><br>
-                                                <div class="input-group control-group increment" >
-                                                    <input  type="file" name="archivo1" id="archivo1"accept="image/*, doc,.docx, .pdf" style="font-size: 13px;">
-                                                </div>
+                                        
+                                        <div class="col-md-6" style="padding-bottom: 15px; display: none;" id="div_pago_td1">
+                                            <label>Número de comprobante:</label>
+                                            {!! Form::text('numero_comprobante',null,['placeholder'=>'Ingrese el número de comprobante','class'=>'form-control', 'required']) !!}
+                                        </div>
+
+                                        <div class="col-md-6" style="padding-bottom: 15px; display: none;" id="div_pago_td2">
+                                            <label>Cargar comprobante:</label><br>
+                                            <div class="input-group control-group increment" >
+                                                <input  type="file" name="archivo1" id="archivo1"accept="image/*, doc,.docx, .pdf" style="font-size: 13px;">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="col-md-4">
+                                            
+                            </div>
+
+                            <div class="col-md-4" style="padding-bottom: 15px;" id="btn_guardar">
+                                {!! Form::submit('Guardar información',['class'=>'btn btn-primary btn-block']) !!}
+                            </div>
 
                             <div class="col-md-4">
-                                                
-                                </div>
+                                
+                            </div>
+                    
+                    </div>  
+                  {!! Form::close() !!}
 
-                                <div class="col-md-4" style="padding-bottom: 15px;" id="btn_guardar">
-                                    {!! Form::submit('Guardar información',['class'=>'btn btn-primary btn-block']) !!}
-                                </div>
-
-                                <div class="col-md-4">
-                                    
-                                </div>
-                        
-                        </div>  
-                    </div>              
                 </div>
-            {!! Form::close() !!}
+                <div class="tab-pane fade" id="custom-nav-profile" role="tabpanel" aria-labelledby="custom-nav-profile-tab">
+                  
+                  <form action="{{ route('paypal') }}" method="post" enctype="multipart/form-data">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+                    <div class="row">
+                        <div class="col-md-12 col-12 col-lg-12 col-sm-12 col-xs-12">
+                            <div class="tab-content profile-tab" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="row">
+                                      
+                                        <div class="col-md-12">
+                                          <label>PLAN DE PAGO</label>
+                                          <section class="pricing py-5">
+                                            <div class="container">
+                                              <div class="row">
+                                                <!-- Free Tier -->
+                                                <?php $y = 1; ?>
+                                                @foreach( $tarifa2 as $tarifa2)
+                                                @if( $tarifa2->id >= 2 )
+                                                <div class="col-lg-6" >
+                                                  <div class="card-body" >
+                                                    @if($y == 1 )
+                                                      <div class="card mb-5 mb-lg-0" id="rbp-{{$tarifa2->id}}" style="border-style: solid; border-color: #0075f6;">
+                                                    @else
+                                                      <div class="card mb-5 mb-lg-0" id="rbp-{{$tarifa2->id}}" style="border-style: solid; border-color: solid;">
+                                                    @endif
+                                                      <h5 class="card-title text-muted text-uppercase text-center">{{ $tarifa2->tarifa }} </h5>
+                                                      <h4 class="card-price text-center" id="precio-{{$tarifa2->id}}">$ {{ $tarifa2->precio }}<span class="period">/Mes</span></h4>
+                                                      <hr>
+                                                        <textarea readonly="" row="7" style="resize: none;">{{ $tarifa2->descripcion }}</textarea>
+                                                        <input type="hidden" name="amount" id="amount" value="{{ $tarifa2->precio  }}">
+                                                      <br>
+                                                      @if($y == 1 )
+                                                      <center><input type="radio" name="rbp" id="rb_plan" value="{{$tarifa2->id}}" checked="" > <strong>Seleccionar</strong></center>
+                                                      @else
+                                                        <center><input type="radio" name="rbp" id="rb_plan" value="{{$tarifa2->id}}" > <strong>Seleccionar</strong></center>
+                                                      @endif
+                                                      <br>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <?php $y = $y + 1; ?>
+                                                @endif
+                                                @endforeach                                               
+                                              </div>
+                                            </div>
+                                          </section>
+                                        </div>   
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                                            
+                            </div>
+
+                            <div class="col-md-4" style="padding-bottom: 15px;" id="btn_guardar">
+                                {!! Form::submit('Guardar información',['class'=>'btn btn-primary btn-block']) !!}
+                            </div>
+
+                            <div class="col-md-4">
+                                
+                            </div>
+                    
+                    </div>  
+                  {!! Form::close() !!}
+
+                </div>
+              </div>
+
+            </div>
+          </div>
         </div>
     </div>
 
