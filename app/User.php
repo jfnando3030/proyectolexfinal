@@ -6,7 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Carbon\Carbon;
 use App\Notifications\ResetPassword as ResetPasswordNotification;
-
+use App\Notifications\NotifyLawyers as sendLawyerNotification;
 use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Auth\MustVerifyEmail;
 
@@ -69,6 +69,11 @@ class User extends Authenticatable  implements MustVerifyEmailContract
     {
         // Your your own implementation.
         $this->notify(new ResetPasswordNotification($token));
+    }
+
+    public function sendLawyersNotifications($nombreDepartamento, $idSolicitud)
+    {
+        $this->notify(new sendLawyerNotification($nombreDepartamento, $idSolicitud));
     }
 
     public function departamentos(){
