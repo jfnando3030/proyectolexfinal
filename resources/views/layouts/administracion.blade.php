@@ -291,6 +291,14 @@
 
                         @endif
 
+                        @if(Auth::user()->rol == "Administrador")
+                        <li>
+                            <a href="{{url('administracion/pago/aprobacion')}}" onclick="return myFunction();" id="menu_letras">
+                            <i class="fas fa-list"></i>Aprobación Pagos</a>
+                        </li>
+                        @endif
+
+
                         <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form2').submit();" id="menu_letras"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
 

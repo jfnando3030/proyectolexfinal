@@ -147,6 +147,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('/administracion/pago/eliminar/{id}', 'WelcomeController@eliminar_pago');
 	//ELIMINAR 
 	//Route::get('/administracion/solicitud/eliminar/{id}', 'WelcomeController@eliminar_departamento');
+
+
+	Route::get('administracion/pago/aprobacion', 'WelcomeController@aprobacion_pagos');
+	Route::get('administracion/pagos/aprobar/{id}', 'WelcomeController@aprobacion_pagos_id');
+	Route::get('administracion/pagos/cancelar/{id}', 'WelcomeController@cancelar_pagos_id');
+	Route::get('administracion/pagos/cancelar2/{id}', 'WelcomeController@cancelar_pagos_id2');
  
 // ************************** FIN DE  PAGOS ********************************* 
 
@@ -164,13 +170,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::resource('administracion/usuarios', 'UserController');
 
 
-
-
-
-
 	Route::get('administracion/ganancia/historial','WelcomeController@historial_ganancia_vista');
 
 	Route::resource('administracion/tarifa', 'TarifaController');
+
+	Route::resource('administracion/oficio', 'OficioController');
+
+
+// ************************** PAYPAL *************************************** 
+	
+	// route for view/blade file
+	Route::get('paywithpaypal', array('as' => 'paywithpaypal','uses' => 'AddMoneyController@payWithPaypal',));
+	// route for post request
+	Route::post('paypal', array('as' => 'paypal','uses' => 'AddMoneyController@postPaymentWithpaypal',));
+	// route for check status responce
+	Route::get('paypal', array('as' => 'status','uses' => 'AddMoneyController@getPaymentStatus',));
+
+// ************************** FIN DE PAYPAL ********************************* 
 
 	Route::resource('administracion/oficio', 'OficioController');
 	Route::get('/administracion/notificaciones/{id}', 'NotificacionUserController@notificacion')->name('notificacion');

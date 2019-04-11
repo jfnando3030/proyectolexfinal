@@ -10,15 +10,19 @@ use Illuminate\Notifications\Messages\MailMessage;
 class NotifyLawyers extends Notification
 {
     use Queueable;
+    public $nombreDepartamento;
+    public $idSolicitud;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($nd, $ids)
     {
         //
+        $this->nombreDepartamento = $nd;
+        $this->idSolicitud = $ids;
     }
 
     /**
@@ -41,9 +45,10 @@ class NotifyLawyers extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        ->subject('Nueva solicitud de atención al cliente')
+        ->line("Una nueva solicitud de atención al cliente ha sido enviada al departamento de {$this->nombreDepartamento}, por favor revise su bandeja para obtener más información")
+        ->action('Ver Caso', url("/administracion/gestionar/casos/{$this->idSolicitud }"))
+        ->line('');
     }
 
     /**

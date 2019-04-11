@@ -49,7 +49,7 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-Saludos!,<br>El Equipo de Merino y Asociados
+Saludos!,<br>El Equipo de Merino & Asociados
 @endif
 
 {{-- Subcopy --}}

@@ -30,6 +30,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Validation\Rule;
 use Session;
 use Validator;
+use Illuminate\Notifications\NotifyLawyers;
 
 
 use Illuminate\Support\Facades\Auth;
@@ -310,6 +311,24 @@ class WelcomeController extends Controller
           $archivo5->save();
         }
       }
+      
+      $id_departamento = $request->departamento;
+      $usuarios = DB::table('departamento_user')
+      ->join('users', function($join) use($id_departamento){
+        $join->on('departamento_user.user_id', '=', 'users.id')
+        ->where([
+          ['departamento_user.departamento_id', $id_departamento],
+          [ 'users.estado', '1' ]
+        ]);
+      })
+      ->select('users.id', 'departamento_user.departamento_id')
+      ->get();
+
+      foreach($usuarios as $u){
+        $usuario = User::find($u->id);
+        $departamento = Departamento::find($u->departamento_id);
+        $usuario->sendLawyersNotifications($departamento->nombre_departamento, $solicitud->id);
+      }
 
       return redirect('administracion/solicitud/registrar')->with('mensaje-registro', 'La solicitud ha sido enviado correctamente.');
     }else{
@@ -581,7 +600,8 @@ class WelcomeController extends Controller
     public function registrar_pago()
     {
       $tarifa = Tarifa::where('estado', 1)->get();
-      return view('administracion.pagos.registrar', ['tarifa' => $tarifa]);
+      $tarifa2 = Tarifa::where('estado', 1)->get();
+      return view('administracion.pagos.registrar', ['tarifa' => $tarifa, 'tarifa2' => $tarifa2]);
     }
 
     public function saber_comprobante_repetido($comprobante_pago)
@@ -598,6 +618,15 @@ class WelcomeController extends Controller
     public function store_pago(Request $request)
     {
 
+      $pago_consulta = Pagos::where('id_user', $request->user()->id)->where('activo', 1)->orWhere('activo', 0)->get();
+
+      if (count($pago_consulta) > 0){
+        $pago_consulta[0]->activo = 2;
+        $pago_consulta[0]->estado = 0;
+
+        $pago_consulta[0]->save();
+      }
+
       $tarifa = Tarifa::findOrFail($request->rb); 
 
       $date = Carbon::now();
@@ -605,7 +634,7 @@ class WelcomeController extends Controller
 
       $pagos = new Pagos();
       $pagos->id_user = $request->user()->id;
-      $pagos->id_tarifa = "1";
+      $pagos->id_tarifa = $tarifa->id;
       $pagos->fecha_inicio = $hoy;
       $pagos->fecha_finalizacion = $this->aumentar_dias_activacion(Carbon::parse($hoy));
       
@@ -613,14 +642,14 @@ class WelcomeController extends Controller
         $pagos->modo_pago = "Free";
         $pagos->comprobante_pago = "Ninguno";
       }else{
-        $pagos->modo_pago = $request->pago;
+        $pagos->modo_pago = "DT";
       }
       
       
       $pagos->monto_pago = $tarifa->precio;
 
 
-      if($request->pago == "P" or  $tarifa->id == 1){
+      if($tarifa->id == 1){
         $pagos->estado = 1;
         $pagos->activo = 1; 
         $pagos->path = "Ninguno";
@@ -664,4 +693,46 @@ class WelcomeController extends Controller
 
       return view('administracion.pagos.listado_pagos', ['pagos' => $pagos]);
     }
+
+     public function aprobacion_pagos(Request $request)
+    {
+      $pagos = DB::select('select pagos.*, users.nombres, users.apellidos FROM users, pagos WHERE users.id = pagos.id_user ');
+
+      return view('administracion.pagos.aprobacion', ['pagos' => $pagos]);
+
+    }
+
+    public function aprobacion_pagos_id($id)
+    {
+    $pagos =Pagos::find($id);
+    
+    $pagos->activo = 1;
+    $pagos->estado = 1;
+    $pagos->save();      
+
+    return redirect('administracion/pago/aprobacion')->with('mensaje-registro', 'Pago aprobado exitosamente');
+    }
+
+    public function cancelar_pagos_id($id)
+    {
+    $pagos =Pagos::find($id);
+    
+    $pagos->activo = 2;
+    $pagos->estado = 0;
+    $pagos->save();      
+
+    return redirect('administracion/pago/aprobacion')->with('mensaje-registro', 'Pago cancelado exitosamente');;
+    }
+
+    public function cancelar_pagos_id2($id)
+    {
+    $pagos =Pagos::find($id);
+    
+    $pagos->activo = 2;
+    $pagos->estado = 0;
+    $pagos->save();      
+
+    return redirect('administracion/pago/historial')->with('mensaje-registro', 'Pago cancelado exitosamente');;
+    }
+
 }
