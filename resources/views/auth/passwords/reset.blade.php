@@ -88,7 +88,7 @@
                                 <div class="input-group mb-3{{ $errors->has('email') ? ' has-error' : '' }}">
                                    
                                     <span  class="input-group-text"><i class="fas fa-envelope" style="    padding-right: 3px;"></i></span>   
-                                    <input placeholder="Ingrese su email" oninvalid="this.setCustomValidity('Se requiere que ingrese su email')" oninput="this.setCustomValidity('')"  id="email" type="email" class="form-control" name="email"  value="{{ $email or old('email') }}" required autofocus>
+                                    <input placeholder="Ingrese su email"  id="email" type="text" class="form-control" name="email"  value="{{ $email or old('email') }}" required autofocus>
                                 </div>
 
                                 @if ($errors->has('email'))

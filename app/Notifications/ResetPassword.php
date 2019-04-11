@@ -38,13 +38,13 @@ class ResetPassword extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->subject('Solicitud para recuperar contraseña de Bango Energy Gel')
+        ->subject('Solicitud para recuperar contraseña de Merino & Asociados')
         ->greeting('Hola!,')
-        ->line('Tú estas recibiendo este email porque nosotros recibimos una solicitud de cambio de contraseña desde tu cuenta de Bango Energy Gel.')
+        ->line('Tú estas recibiendo este email porque nosotros recibimos una solicitud de cambio de contraseña desde tu cuenta de Merino & Asociados.')
         ->action('Cambiar Contraseña', url('password/reset', $this->token))
         ->line('Si tú no realizaste esta petición, por favor ignora este mensaje.')
-        ->line('Si tienes alguna pregunta o inquietud escríbenos a: info@bangonerergygel.com')
-        ->salutation('¡Saludos!, '. 'El equipo de Bango Energy Gel')
+        ->line('Si tienes alguna pregunta o inquietud escríbenos a: info@merinoabogados.com')
+        ->salutation('¡Saludos!, '. 'El equipo de Merino & Asociados')
         ->line('ESTA ES UNA COMUNICACIÓN AUTOMÁTICA, POR FAVOR NO RESPONDER.');
     }
 
