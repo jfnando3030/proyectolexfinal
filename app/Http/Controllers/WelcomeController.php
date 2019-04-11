@@ -68,24 +68,28 @@ class WelcomeController extends Controller
         
     
           $solicitudes_usuario = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->paginate(15);
-          $solicitudes_nuevos = Solicitud::where('estado_solicitud',1)->where('leido_solicitud',0)->orderBy('fecha_solicitud', 'asc')->paginate(15);
+          $solicitudes_nuevos = Solicitud::where('estado_solicitud',1)->where('leido_solicitud',0)->orderBy('fecha_solicitud', 'asc')->orderBy('hora_solicitud', 'desc')->paginate(15);
           $finalizados_usuarios = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->where('finalizado_solicitud', 1)->paginate(15);
           $user_departamentos = UserDepartamento::where('user_id',Auth::user()->id)->get();
+
+          $respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'asc')->orderBy('hora', 'desc')->get();
+          $total_respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
           
           
-          return view('administracion.index', compact('user_departamentos','finalizados_usuarios','total_solicitudes', 'total_solicitudes_usuario', 'total_finalizados_usuario','total_solicitudes_nuevos', 'solicitudes_nuevos', 'solicitudes_usuario'));
+          return view('administracion.index', compact('total_respuestas','respuestas','user_departamentos','finalizados_usuarios','total_solicitudes', 'total_solicitudes_usuario', 'total_finalizados_usuario','total_solicitudes_nuevos', 'solicitudes_nuevos', 'solicitudes_usuario'));
     
         }else{
     
           $total_solicitudes_registrados = Solicitud::where('estado_solicitud',1)->where('id_user_solicitud', Auth::user()->id )->count();
-          $solicitudes_registrados = Solicitud::where('estado_solicitud',1)->where('id_user_solicitud', Auth::user()->id )->orderBy('fecha_solicitud', 'asc')->paginate(15);
+          $solicitudes_registrados = Solicitud::where('estado_solicitud',1)->where('id_user_solicitud', Auth::user()->id )->orderBy('fecha_solicitud', 'asc')->orderBy('hora_solicitud', 'desc')->paginate(15);
     
          
-          $respuestas = Respuesta::where('estado',1)->orderBy('fecha', 'asc')->get();
+          $respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'asc')->orderBy('hora', 'desc')->get();
+          $total_respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
          
           
     
-          return view('administracion.index', compact('respuestas','total_solicitudes_registrados','solicitudes_registrados'));
+          return view('administracion.index', compact('total_respuestas','respuestas','total_solicitudes_registrados','solicitudes_registrados'));
     
         }
     
@@ -305,9 +309,9 @@ class WelcomeController extends Controller
         }
       }
 
-      return redirect('administracion/solicitud/registrar')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
+      return redirect('administracion/solicitud/registrar')->with('mensaje-registro', 'La solicitud ha sido enviado correctamente.');
     }else{
-      return redirect('administracion/solicitud/registrarr')->with('mensaje-registro2', 'Problemas al registrar los datos.');
+      return redirect('administracion/solicitud/registrarr')->with('mensaje-registro2', 'Problemas al enviar los datos.');
     }
   }
 
@@ -411,6 +415,7 @@ class WelcomeController extends Controller
       $respuesta->fecha = $hoy;
       $respuesta->hora = $hora;
       $respuesta->solicitud_id = $request->id_solicitud;
+      $respuesta->id_user_receptor = $request->id_user_receptor;
        
       if( $respuesta->save() ){
         
@@ -464,9 +469,83 @@ class WelcomeController extends Controller
           }
         }
 
-        return redirect('administracion')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
+        return redirect('administracion')->with('mensaje-registro', 'Respuesta enviada correctamente.');
       }else{
-        return redirect('administracion')->with('mensaje-registro2', 'Problemas al registrar los datos.');
+        return redirect('administracion')->with('mensaje-registro2', 'Problemas al enviar la respuesta.');
+      }
+    }
+
+    public function store_respuesta2(Request $request)
+    {
+
+      $date = Carbon::now();
+      $hoy = $date->format('Y-m-d');
+      $hora = $date->format('h:i:s');
+
+      $respuesta = new Respuesta();
+      $respuesta->titulo = $request->nombre;
+      $respuesta->respuesta = $request->respuesta;
+      $respuesta->fecha = $hoy;
+      $respuesta->hora = $hora;
+      $respuesta->solicitud_id = $request->id_solicitud;
+      $respuesta->id_autorespuesta = $request->id_solicitud;
+      $respuesta->id_user_receptor = $request->id_user_receptor;
+       
+      if( $respuesta->save() ){
+        
+        //  PARA ARCHIVO 1 
+        if($request->archivo1 != ""){
+          if($request->file('archivo1')){
+            $archivos1 = new ArchivosRespuesta();
+            $archivos1->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo1')); 
+            $archivos1->id_respuesta = $respuesta->id;
+            $archivos1->save();
+          }
+        }
+
+        //  PARA ARCHIVO 2
+        if($request->archivo2 != ""){
+          if($request->file('archivo2')){
+            $archivos2 = new ArchivosRespuesta();
+            $archivos2->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo2')); 
+            $archivos2->id_respuesta = $respuesta->id;
+            $archivos2->save();
+          }
+        }
+
+        //  PARA ARCHIVO 3
+        if($request->archivo3 != ""){
+          if($request->file('archivo3')){
+            $archivo3 = new ArchivosRespuesta();
+            $archivo3->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo3')); 
+            $archivo3->id_respuesta = $respuesta->id;
+            $archivo3->save();
+          }
+        }
+
+        //  PARA ARCHIVO 4
+        if($request->archivo4 == ""){
+          if($request->file('archivo4')){
+            $archivo4 = new ArchivosRespuesta();
+            $archivo4->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo4')); 
+            $archivo4->id_respuesta = $respuesta->id;
+            $archivo4->save();
+          }
+        }
+
+        //  PARA ARCHIVO 5
+        if($request->archivo5 == ""){
+          if($request->file('archivo5')){
+            $archivo5 = new ArchivosRespuesta();
+            $archivo5->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo5')); 
+            $archivo5->id_respuesta = $respuesta->id;
+            $archivo5->save();
+          }
+        }
+
+        return redirect('administracion')->with('mensaje-registro', 'Respuesta enviada correctamente.');
+      }else{
+        return redirect('administracion')->with('mensaje-registro2', 'Problemas al enviar la respuesta.');
       }
     }
 

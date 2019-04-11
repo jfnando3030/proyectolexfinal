@@ -87,7 +87,7 @@
                             </div>
 
                             <div class="col-md-4" style="padding-bottom: 15px;">
-                                {!! Form::submit('Guardar información',['class'=>'btn btn-primary btn-block']) !!}
+                                {!! Form::submit('Enviar solicitud',['class'=>'btn btn-primary btn-block']) !!}
                             </div>
 
                             <div class="col-md-4">

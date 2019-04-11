@@ -417,13 +417,24 @@
 })(jQuery);
 
 $("#main").click(function() {
-  document.getElementById("mini-fab").style.display = "block";
-  $("#mini-fab").toggleClass('d-none');
+  var existe= document.getElementById("mini-fab");
+  if(existe){
+    existe.style.display = "block";
+    $("#mini-fab").toggleClass('d-none');
+ }
+
+ 
+  
 });
 
 $("#main2").click(function() {
-  document.getElementById("mini-fab").style.display = "none";
-  $("#mini-fab").toggleClass('d-none');
+  var existe= document.getElementById("mini-fab");
+  if(existe){
+   existe.style.display = "none";
+   $("#mini-fab").toggleClass('d-none');
+}
+  
+ 
 
 });
 

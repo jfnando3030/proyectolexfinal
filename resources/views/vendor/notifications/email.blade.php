@@ -1,7 +1,7 @@
 @component('mail::message')
 {{-- Greeting --}}
 <div align="center">
-        <img src="https://afiliados.bangoenergygel.com/frontend/images/redondo.png" width="150px" height="150px"/>
+        <img src="http://35.237.74.133/images/merino.png" width="150px" height="150px"/>
         </div>
 @if (! empty($greeting))
 # {{ $greeting }}
@@ -25,16 +25,16 @@
 <?php
     switch ($level) {
         case 'success':
-            $color = '#e11a20';
+            $color = '#000';
             break;
         case 'error':
-            $color = '#e11a20';
+            $color = '#000';
             break;
         default:
-            $color = '#e11a20';
+            $color = '#000';
     }
 ?>
-@component('mail::button', ['url' => $actionUrl, 'color' => '#e11a20'])
+@component('mail::button', ['url' => $actionUrl, 'color' => '#000'])
 {{ $actionText }}
 @endcomponent
 @endisset
@@ -49,7 +49,7 @@
 @if (! empty($salutation))
 {{ $salutation }}
 @else
-Saludos!,<br>El Equipo de Bango Energy Gel
+Saludos!,<br>El Equipo de Merino y Asociados
 @endif
 
 {{-- Subcopy --}}

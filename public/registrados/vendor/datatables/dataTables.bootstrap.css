@@ -2,6 +2,8 @@ div.dataTables_length label {
 	font-weight: normal;
 	text-align: left;
 	white-space: nowrap;
+	color:black;
+	padding-top: 12px;
 }
 
 div.dataTables_length select {

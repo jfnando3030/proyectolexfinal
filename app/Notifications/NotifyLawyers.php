@@ -7,15 +7,18 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class ResetPassword extends Notification
+class NotifyLawyers extends Notification
 {
     use Queueable;
 
-    public $token;
-
-    public function __construct($token)
+    /**
+     * Create a new notification instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        $this->token = $token;
+        //
     }
 
     /**
@@ -38,14 +41,9 @@ class ResetPassword extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->subject('Solicitud para recuperar contraseña de Merino & Asociados')
-        ->greeting('Hola!,')
-        ->line('Tú estas recibiendo este email porque nosotros recibimos una solicitud de cambio de contraseña desde tu cuenta de Merino & Asociados.')
-        ->action('Cambiar Contraseña', url('password/reset', $this->token))
-        ->line('Si tú no realizaste esta petición, por favor ignora este mensaje.')
-        ->line('Si tienes alguna pregunta o inquietud escríbenos a: info@merinoabogados.com')
-        ->salutation('¡Saludos!, '. 'El equipo de Merino & Asociados')
-        ->line('ESTA ES UNA COMUNICACIÓN AUTOMÁTICA, POR FAVOR NO RESPONDER.');
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**

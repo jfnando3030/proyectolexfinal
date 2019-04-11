@@ -117,6 +117,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	//REGISTRAR 
 	Route::get('/administracion/respuesta/registrar/{id}', 'WelcomeController@registrar_respuesta')->name('respuesta');
 	Route::post('/administracion/respuesta/store', 'WelcomeController@store_respuesta')->name('store_respuesta');
+	Route::post('/administracion/respuesta/store2', 'WelcomeController@store_respuesta2')->name('store_respuesta2');
 	
 	// LISTADO 
 	//Route::get('/administracion/solicitud/listado', 'WelcomeController@listado_solicitud');
