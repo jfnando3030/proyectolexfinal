@@ -112,7 +112,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 // ************************** RESPUESTAS *************************************** 
-    Route::get('/administracion/casos/respuesta/{id}', 'WelcomeController@ver_respuesta')->name('ver_respuesta');
+	Route::get('/administracion/casos/respuesta/{id}', 'WelcomeController@ver_respuesta')->name('ver_respuesta');
+	Route::get('/administracion/notificaciones', 'NotificacionUserController@all_notificaciones')->name('all_notificaciones');
 	
 	//REGISTRAR 
 	Route::get('/administracion/respuesta/registrar/{id}', 'WelcomeController@registrar_respuesta')->name('respuesta');
@@ -172,6 +173,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::resource('administracion/tarifa', 'TarifaController');
 
 	Route::resource('administracion/oficio', 'OficioController');
+	Route::get('/administracion/notificaciones/{id}', 'NotificacionUserController@notificacion')->name('notificacion');
 
 });
 

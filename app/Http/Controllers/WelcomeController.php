@@ -31,6 +31,7 @@ use Illuminate\Validation\Rule;
 use Session;
 use Validator;
 
+
 use Illuminate\Support\Facades\Auth;
 
 class WelcomeController extends Controller
@@ -67,12 +68,12 @@ class WelcomeController extends Controller
          
         
     
-          $solicitudes_usuario = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->paginate(15);
-          $solicitudes_nuevos = Solicitud::where('estado_solicitud',1)->where('leido_solicitud',0)->orderBy('fecha_solicitud', 'asc')->orderBy('hora_solicitud', 'desc')->paginate(15);
-          $finalizados_usuarios = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->where('finalizado_solicitud', 1)->paginate(15);
+          $solicitudes_usuario = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->get();
+          $solicitudes_nuevos = Solicitud::where('estado_solicitud',1)->where('leido_solicitud',0)->orderBy('fecha_solicitud', 'desc')->orderBy('hora_solicitud', 'asc')->get();
+          $finalizados_usuarios = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->where('finalizado_solicitud', 1)->get();
           $user_departamentos = UserDepartamento::where('user_id',Auth::user()->id)->get();
 
-          $respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'asc')->orderBy('hora', 'desc')->get();
+          $respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'desc')->orderBy('hora', 'asc')->get();
           $total_respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
           
           
@@ -81,15 +82,18 @@ class WelcomeController extends Controller
         }else{
     
           $total_solicitudes_registrados = Solicitud::where('estado_solicitud',1)->where('id_user_solicitud', Auth::user()->id )->count();
-          $solicitudes_registrados = Solicitud::where('estado_solicitud',1)->where('id_user_solicitud', Auth::user()->id )->orderBy('fecha_solicitud', 'asc')->orderBy('hora_solicitud', 'desc')->paginate(15);
+          $solicitudes_registrados = Solicitud::where('estado_solicitud',1)->where('id_user_solicitud', Auth::user()->id )->orderBy('fecha_solicitud', 'desc')->orderBy('hora_solicitud', 'asc')->get();
     
          
-          $respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'asc')->orderBy('hora', 'desc')->get();
+          $respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'desc')->orderBy('hora', 'asc')->get();
           $total_respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
+
+          $total_respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
          
-          
+          $respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'desc')->orderBy('hora', 'asc')->take(3)->get();
+
     
-          return view('administracion.index', compact('total_respuestas','respuestas','total_solicitudes_registrados','solicitudes_registrados'));
+          return view('administracion.index', compact('respuestas_notificacion','total_respuestas_notificacion','total_respuestas','respuestas','total_solicitudes_registrados','solicitudes_registrados'));
     
         }
     
@@ -98,12 +102,7 @@ class WelcomeController extends Controller
     }
     
 
-
-    public function invita_bango()
-    {
-      return view('administracion.invita_bango');
-    }
-   
+  
 
     public function verificacion ($email)
     {
@@ -239,7 +238,10 @@ class WelcomeController extends Controller
     public function registrar_solicitud(Request $request)
     {
       $departamento = Departamento::all();
-      return view('administracion.solicitudes.registrar', ['departamento' => $departamento]);
+      $respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->take(3)->get();
+
+      $total_respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->count();
+      return view('administracion.solicitudes.registrar', ['departamento' => $departamento, 'total_respuestas_notificacion' => $total_respuestas_notificacion, 'respuestas_notificacion'=>$respuestas_notificacion]);
     }
 
   public function store_solicitud(Request $request)
@@ -247,7 +249,7 @@ class WelcomeController extends Controller
 
     $date = Carbon::now();
     $hoy = $date->format('Y-m-d');
-    $hora = $date->format('h:i:s');
+    $hora = $date->format('H:i:s');
 
     $solicitud = new Solicitud();
     $solicitud->nombre_solicitud = $request->nombre;
@@ -311,7 +313,7 @@ class WelcomeController extends Controller
 
       return redirect('administracion/solicitud/registrar')->with('mensaje-registro', 'La solicitud ha sido enviado correctamente.');
     }else{
-      return redirect('administracion/solicitud/registrarr')->with('mensaje-registro2', 'Problemas al enviar los datos.');
+      return redirect('administracion/solicitud/registrar')->with('mensaje-registro2', 'Problemas al enviar los datos.');
     }
   }
 
@@ -339,10 +341,12 @@ class WelcomeController extends Controller
     {
       $caso = Solicitud::findOrFail($id);  
       $archivos = Archivos::where('id_solicitud',$id)->get();
+      $total_respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->count();
+      $respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->take(3)->get();
      
   
      
-      return view('administracion.aceptar_caso.index',compact('caso', 'archivos'));
+      return view('administracion.aceptar_caso.index',compact('respuestas_notificacion','total_respuestas_notificacion','caso', 'archivos'));
      
     
     }
@@ -350,12 +354,21 @@ class WelcomeController extends Controller
 
     public function ver_respuesta(Request $request, $id)
     {
-      $respuesta = Respuesta::findOrFail($id);  
-      $archivos = ArchivosRespuesta::where('id_respuesta',$id)->get();
-     
+      $nuevo_id= Crypt::decrypt($id);
+
+  
+        
+      $notificacion = Respuesta::find($nuevo_id);
+      $notificacion->leido = 1;
+      $notificacion->save();
+
+      $respuesta = Respuesta::findOrFail($nuevo_id);  
+      $archivos = ArchivosRespuesta::where('id_respuesta',$nuevo_id)->get();
+      $total_respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->count();
+      $respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->take(3)->get();
   
      
-      return view('administracion.responder.index',compact('respuesta', 'archivos'));
+      return view('administracion.responder.index',compact('respuestas_notificacion','total_respuestas_notificacion','respuesta', 'archivos'));
      
     
     }
@@ -367,7 +380,7 @@ class WelcomeController extends Controller
   public function gestionar_casos()
   {
     $solicitud = Solicitud::where('estado_solicitud',1)->whereNotNull('id_user_abogado')->get();
-    //return "hola";
+   
     return view('administracion.gestionar.listado', ['solicitud' => $solicitud]);
   }
  
@@ -407,7 +420,7 @@ class WelcomeController extends Controller
 
       $date = Carbon::now();
       $hoy = $date->format('Y-m-d');
-      $hora = $date->format('h:i:s');
+      $hora = $date->format('H:i:s');
 
       $respuesta = new Respuesta();
       $respuesta->titulo = $request->nombre;
@@ -480,7 +493,7 @@ class WelcomeController extends Controller
 
       $date = Carbon::now();
       $hoy = $date->format('Y-m-d');
-      $hora = $date->format('h:i:s');
+      $hora = $date->format('H:i:s');
 
       $respuesta = new Respuesta();
       $respuesta->titulo = $request->nombre;

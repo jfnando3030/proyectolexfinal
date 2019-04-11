@@ -44,7 +44,7 @@
   
 
     <!-- Main content -->
-    <section class="content">
+    <section class="content2">
       <div class="row">
         <div class="col-md-12 col-lg-12 col-12">
           
@@ -134,14 +134,14 @@
                                       <table id="example4" class="table table-hover table-striped">
 
                                           <thead>
-                                              <tr>
+                                              <tr class="fila">
                                                   
                                                   
                                                   <th>Emisor</th>
                       
                                                   <th>Mensaje</th>
                                                   <th>Adjuntos</th>
-                                                  <th>Fecha - Hora</th>
+                                                  <th>Fecha</th>
                       
                                                  
 
@@ -159,7 +159,7 @@
                                                       
                                                         
                                                         <td class="mailbox-name"><b>De: </b> {{$response->solicitud->usuario->nombres}} {{$response->solicitud->usuario->apellidos}}</td>
-                                                        <td class="mailbox-subject"><b>{{$response->titulo}}</b> - {{$response->respuesta}}...
+                                                        <td class="mailbox-subject"><b>{{$response->titulo}}</b> - {{substr($response->respuesta, 0, 30)}}...
                                                         </td>
                                                         <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
                                                         <td class="mailbox-date">{{$response->fecha}} - {{$response->hora}}</td>
@@ -232,13 +232,13 @@
                                     <div class="table-responsive mailbox-messages">
                                         <table id="example5" class="table table-hover table-striped">
                                             <thead>
-                                                <tr>
+                                                <tr class="fila">
                                                     
                                                     
                                                     <th>Emisor</th>
                                                     <th>Mensaje</th>
                                                     <th>Adjuntos</th>
-                                                    <th>Fecha - Hora</th>
+                                                    <th>Fecha</th>
                         
                                                    
           
@@ -255,7 +255,7 @@
                                                         
                                                           
                                                           <td class="mailbox-name"><b>De: </b> {{$response->solicitud->usuario->nombres}} {{$response->solicitud->usuario->apellidos}}</td>
-                                                          <td class="mailbox-subject"><b>{{$response->titulo}}</b> - {{$response->respuesta}}...
+                                                          <td class="mailbox-subject"><b>{{$response->titulo}}</b> - {{substr($response->respuesta, 0, 30)}}...
                                                           </td>
                                                           <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
                                                           <td class="mailbox-date">{{$response->fecha}} - {{$response->hora}}</td>
@@ -323,14 +323,14 @@
           <div class="table-responsive mailbox-messages">
               <table id="example6" class="table table-hover table-striped">
                   <thead>
-                      <tr>
+                      <tr class="fila">
                           
                           
                           <th>Emisor</th>
                           <th>Mensaje</th>
                           <th>Adjuntos</th>
                           <th>Departamento</th>
-                          <th>Fecha - Hora</th>
+                          <th>Fecha</th>
 
                          
 
@@ -352,7 +352,7 @@
                 
                   
                       <td class="mailbox-name"><b>{{$nuevo->usuario->nombres}} {{$nuevo->usuario->apellidos}}</b></td>
-                      <td class="mailbox-subject"><b>{{$nuevo->nombre_solicitud}}</b> - {{$nuevo->descripcion}}...
+                      <td class="mailbox-subject"><b>{{$nuevo->nombre_solicitud}}</b> - {{substr($nuevo->descripcion, 0, 30)}}...
                       </td>
                       <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
                       <td class="mailbox-date">{{$nuevo->departamento->nombre_departamento}}</td>
@@ -416,14 +416,14 @@
         <div class="table-responsive mailbox-messages">
             <table  id="example7" class="table table-hover table-striped">
                 <thead>
-                    <tr>
+                    <tr class="fila">
                         
                         
                         <th>Emisor</th>
                         <th>Mensaje</th>
                         <th>Adjuntos</th>
                         <th>Departamento</th>
-                        <th>Fecha - Hora</th>
+                        <th>Fecha</th>
 
                        
 
@@ -440,7 +440,7 @@
                   
                     
                     <td class="mailbox-name"><b>{{$nuevo->usuario->nombres}} {{$nuevo->usuario->apellidos}}</b></td>
-                    <td class="mailbox-subject"><b>{{$nuevo->nombre_solicitud}}</b> - {{$nuevo->descripcion}}...
+                    <td class="mailbox-subject"><b>{{$nuevo->nombre_solicitud}}</b> - {{substr($nuevo->descripcion, 0, 30)}}...
                     </td>
                     <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
                     <td class="mailbox-date">{{$nuevo->departamento->nombre_departamento}}</td>
@@ -498,14 +498,14 @@
           <table id="example8" class="table table-hover table-striped">
             <tbody>
                 <thead>
-                    <tr>
+                    <tr class="fila">
                         
                         
                         <th>Emisor</th>
                         <th>Mensaje</th>
                         <th>Adjuntos</th>
                         <th>Departamento</th>
-                        <th>Fecha - Hora</th>
+                        <th>Fecha</th>
 
                        
 
@@ -520,7 +520,7 @@
                 
                   
                   <td class="mailbox-name"><b>{{$nuevo->usuario->nombres}} {{$nuevo->usuario->apellidos}}</b></td>
-                  <td class="mailbox-subject"><b>{{$nuevo->nombre_solicitud}}</b> - {{$nuevo->descripcion}}...
+                  <td class="mailbox-subject"><b>{{$nuevo->nombre_solicitud}}</b> - {{substr($nuevo->descripcion, 0, 30)}}...
                   </td>
                   <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
                   <td class="mailbox-date">{{$nuevo->departamento->nombre_departamento}}</td>
@@ -582,7 +582,7 @@
 
 
        <!-- Main content -->
-    <section class="content">
+    <section class="content2">
       <div class="row">
         <div class="col-md-3 col-lg-2 col-12">
 
@@ -647,14 +647,14 @@
                                 
 
                                   <thead>
-                                      <tr>
+                                      <tr class="fila">
                                           
-                                          
+                                         
                                           <th>Emisor</th>
               
                                           <th>Mensaje</th>
                                           <th>Adjuntos</th>
-                                          <th>Fecha - Hora</th>
+                                          <th>Fecha</th>
               
                                          
 
@@ -673,9 +673,9 @@
                               
                               
                                               
-                                                
+                                              
                                                 <td class="mailbox-name"><b>De: </b> {{$response->solicitud->usuario->nombres}} {{$response->solicitud->usuario->apellidos}}</td>
-                                                <td class="mailbox-subject"><b>{{$response->titulo}}</b> - {{$response->respuesta}}...
+                                                <td class="mailbox-subject"><b>{{$response->titulo}}</b> - {{substr($response->respuesta, 0, 30)}} ...
                                                 </td>
                                                 <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
                                                 <td class="mailbox-date">{{$response->fecha}} - {{$response->hora}}</td>
@@ -752,14 +752,14 @@
                    <div class="table-responsive mailbox-messages">
                     <table id="example10" class="table table-hover table-striped">
                         <thead>
-                            <tr>
+                            <tr class="fila">
                                 
-                                
+                              <th></th>
                                 <th>Emisor</th>
                                 <th>Mensaje</th>
                                 <th>Adjuntos</th>
                                
-                                <th>Fecha - Hora</th>
+                                <th>Fecha</th>
       
                                
       
@@ -773,18 +773,44 @@
         
 
                                     @if($response->estado !=0)
-                                      <tr onclick="window.location='{{ route('ver_respuesta',['id' => $response->id])}}'" data-id="{{$response->id}}">
+                                    @if($response->leido==0)
+                                      <tr style="background-color: #e4e4e4" onclick="window.location='{{ route('ver_respuesta',['id' => Crypt::encrypt($response->id) ])}}'" data-id="{{$response->id}}">
                     
-                    
-                                    
+                                         
+
+                                         <td class="mailbox-star"><i class="fa fa-star text-yellow"></i></td>
+
+                                         
+                                        
                                       
                                         <td class="mailbox-name"><b>De: </b> {{$response->solicitud->abogado->nombres}} {{$response->solicitud->abogado->apellidos}}</td>
-                                        <td class="mailbox-subject"><b>{{$response->titulo}}</b> - {{$response->respuesta}}...
+                                        <td class="mailbox-subject"><b>{{$response->titulo}}</b> - {{substr($response->respuesta, 0, 30)}}...
                                         </td>
                                         <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
                                         <td class="mailbox-date">{{$response->fecha}} - {{$response->hora}}</td>
                                     
                                       </tr>
+
+                                      @else 
+                                      <tr onclick="window.location='{{ route('ver_respuesta',['id' => Crypt::encrypt($response->id) ])}}'" data-id="{{$response->id}}">
+                    
+                                      
+
+                                        <td class="mailbox-star">  <i class="far fa-star text-yellow"></i></td>
+
+                                        
+                                       
+                                     
+                                       <td class="mailbox-name"><b>De: </b> {{$response->solicitud->abogado->nombres}} {{$response->solicitud->abogado->apellidos}}</td>
+                                       <td class="mailbox-subject"><b>{{$response->titulo}}</b> - {{$response->respuesta}}...
+                                       </td>
+                                       <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                                       <td class="mailbox-date">{{$response->fecha}} - {{$response->hora}}</td>
+                                   
+                                     </tr>
+                                         
+                                       
+                                         @endif
                 
                             
                 
@@ -849,14 +875,14 @@
                     <table id="example11" class="table table-hover table-striped">
 
                         <thead>
-                            <tr>
+                            <tr class="fila">
                                 
                                 
                                 <th>Emisor</th>
                                 <th>Mensaje</th>
                                 <th>Adjuntos</th>
                                
-                                <th>Fecha - Hora</th>
+                                <th>Fecha</th>
       
                                
       
@@ -873,7 +899,7 @@
                           
                             
                             <td class="mailbox-name"><b>Para: {{$nuevo->departamento->nombre_departamento}}</b></td>
-                            <td class="mailbox-subject"><b>{{$nuevo->nombre_solicitud}}</b> - {{$nuevo->descripcion}}...
+                            <td class="mailbox-subject"><b>{{$nuevo->nombre_solicitud}}</b> - {{substr($nuevo->descripcion, 0, 30)}} ...
                             </td>
                             <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
                             <td class="mailbox-date">{{$nuevo->fecha_solicitud}} - {{$nuevo->hora_solicitud}}</td>

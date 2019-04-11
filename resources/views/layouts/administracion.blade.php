@@ -317,8 +317,10 @@
                             </div>
                             <div class="header-button2">
                              
+                                @if(Auth::user()->rol == "Administrador")
                                 <div class="header-button-item has-noti js-item-menu">
-                                    <i class="zmdi zmdi-notifications"></i>
+                                    <i class="zmdi zmdi-email"></i>
+                                        <span class="quantity">1</span>
                                     <div class="notifi-dropdown js-dropdown">
                                         <div class="notifi__title">
                                         <p>Usted Tiene 0 notificaciones sin leer</p>
@@ -329,6 +331,63 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
+
+                                @if(Auth::user()->rol == "Abogado")
+                                <div class="header-button-item has-noti js-item-menu">
+                                    <i class="zmdi zmdi-email"></i>
+                                        <span class="quantity">1</span>
+                                    <div class="notifi-dropdown js-dropdown">
+                                        <div class="notifi__title">
+                                        <p>Usted Tiene 0 notificaciones sin leer</p>
+                                        </div>
+
+                                        <div class="notifi__footer">
+                                            <a href="#" onclick="return myFunction();">Ver Todas Notificaciones</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+
+                                @if(Auth::user()->rol == "Registrado")
+                                <div class="header-button-item has-noti js-item-menu">
+                                    <i class="zmdi zmdi-email"></i>
+                                <span class="quantity">{{$total_respuestas_notificacion}}</span>
+                                    <div class="notifi-dropdown js-dropdown">
+                                        <div class="notifi__title">
+                                        <p>Usted Tiene {{$total_respuestas_notificacion}} notificaciones sin leer</p>
+                                        </div>
+
+                                        @if($total_respuestas_notificacion>0)
+                                            @foreach($respuestas_notificacion as $notificacion)
+
+                                            <a href="{{ route('notificacion', ['id' => Crypt::encrypt($notificacion->id)]) }}" onclick="return myFunction();">
+
+                                            <div class="notifi__item">
+                                                <div class="image img-cir img-40">
+                                                    <img src="{{url('images/no-avatar.png')}}" alt="{{$notificacion->solicitud->abogado->nombres}} {{$notificacion->solicitud->abogado->apellidos}}" />
+                                                </div>
+                                                <div class="content">
+                                                    <p>{{$notificacion->titulo}}</p>
+                                                    <span class="date">{{$notificacion->solicitud->abogado->nombres}} {{$notificacion->solicitud->abogado->apellidos}} , {{$notificacion->fecha}} , {{$notificacion->hora}}</span>
+                                                </div>
+                                            </div>
+
+                                            </a>
+
+
+                                            @endforeach
+
+                                        @endif
+
+                                        
+
+                                        <div class="notifi__footer">
+                                            <a href="{{ route('all_notificaciones') }}" onclick="return myFunction();">Ver Todas Notificaciones</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
                                 <div class="header-button-item mr-0 js-sidebar-btn">
                                     <i class="zmdi zmdi-menu"></i>
                                 </div>
@@ -759,7 +818,7 @@ $('#example4').DataTable({
 "ordering": false,
 "info": false,
 "autoWidth": false,
-"aLengthMenu": [[1, 25, 50, -1], [1, 25, 50, "All"]],
+"aLengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
 "language": {
 "search": "Buscar:",
 "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -780,7 +839,7 @@ $('#example5').DataTable({
 "ordering": false,
 "info": false,
 "autoWidth": false,
-"aLengthMenu": [[1, 25, 50, -1], [1, 25, 50, "All"]],
+"aLengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
 "language": {
 "search": "Buscar:",
 "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -801,7 +860,7 @@ $('#example6').DataTable({
 "ordering": false,
 "info": false,
 "autoWidth": false,
-"aLengthMenu": [[1, 25, 50, -1], [1, 25, 50, "All"]],
+"aLengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
 "language": {
 "search": "Buscar:",
 "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -822,7 +881,7 @@ $('#example7').DataTable({
 "ordering": false,
 "info": false,
 "autoWidth": false,
-"aLengthMenu": [[1, 25, 50, -1], [1, 25, 50, "All"]],
+"aLengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
 "language": {
 "search": "Buscar:",
 "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -843,7 +902,7 @@ $('#example8').DataTable({
 "ordering": false,
 "info": false,
 "autoWidth": false,
-"aLengthMenu": [[1, 25, 50, -1], [1, 25, 50, "All"]],
+"aLengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
 "language": {
 "search": "Buscar:",
 "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -864,7 +923,7 @@ $('#example9').DataTable({
 "ordering": false,
 "info": false,
 "autoWidth": false,
-"aLengthMenu": [[1, 25, 50, -1], [1, 25, 50, "All"]],
+"aLengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
 "language": {
 "search": "Buscar:",
 "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -886,7 +945,7 @@ $('#example10').DataTable({
 "ordering": false,
 "info": false,
 "autoWidth": false,
-"aLengthMenu": [[1, 25, 50, -1], [1, 25, 50, "All"]],
+"aLengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
 "language": {
 "search": "Buscar:",
 "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -902,13 +961,13 @@ $('#example10').DataTable({
 
 
 $('#example11').DataTable({
-"paging": false,
+"paging": true,
 "lengthChange": true,
 "searching": true,
 "ordering": false,
 "info": false,
 "autoWidth": false,
-"aLengthMenu": [[1, 25, 50, -1], [1, 25, 50, "All"]],
+"aLengthMenu": [[15, 25, 50, -1], [15, 25, 50, "All"]],
 "language": {
 "search": "Buscar:",
 "sLengthMenu":     "Mostrar _MENU_ registros",

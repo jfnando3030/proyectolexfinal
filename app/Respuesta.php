@@ -25,4 +25,6 @@ class Respuesta extends Model
     public function solicitud(){
         return $this->belongsTo(Solicitud::class,'solicitud_id','id');
     }
+
+ 
 }

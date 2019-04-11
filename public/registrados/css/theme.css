@@ -2031,7 +2031,7 @@ section {
 
 .notifi__item .img-cir {
     position: relative;
-    margin-right: 15px;
+
 }
 
 .notifi__item .img-cir i {
@@ -2436,18 +2436,7 @@ section {
     position: relative;
 }
 
-.has-noti > i:after {
-    content: '';
-    height: 8px;
-    width: 8px;
-    background: #ff4b5a;
-    position: absolute;
-    -webkit-border-radius: 100%;
-    -moz-border-radius: 100%;
-    border-radius: 100%;
-    top: 0;
-    right: -6px;
-}
+
 
 .search-dropdown {
     -webkit-box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1);
@@ -14710,7 +14699,8 @@ tr:hover {
 
   }
 
-  .content{min-height:250px;padding:15px;margin-right:auto;margin-left:auto;padding-left:30px;padding-right:15px}
+  .content2{min-height:250px;padding:15px;margin-right:auto;margin-left:auto;padding-left:30px;padding-right:15px}
+  .content{margin-right:auto;margin-left:auto;padding-left:5px;padding-right:5px}
 
 /* 
   ##Device = Desktops
@@ -14818,7 +14808,8 @@ tr:hover {
   */
   
   @media (min-width: 481px) and (max-width: 767px) {
-    .content{padding-left:15px}
+    .content2{padding-left:15px}
+    .row{margin-right: -15px;margin-left: -15px; }
     
     .top{
         padding-top: 5px;
@@ -14843,7 +14834,8 @@ tr:hover {
   */
   
   @media (min-width: 320px) and (max-width: 480px) {
-    .content{padding-left:15px}
+    .content2{padding-left:15px}
+    .row{margin-right: -15px;margin-left: -15px; }
     
     .top{
         padding-top: 5px;
@@ -14956,6 +14948,39 @@ tr:hover {
   }
   .select-options li[rel="hide"] {
     display: none;
+  }
+
+  .quantity{
+    position: absolute;
+    display: inline-block;
+    top: -3px;
+    right: -10px;
+    height: 18px;
+    width: 18px;
+    line-height: 17px;
+    text-align: center;
+    background: #ff4b5a;
+    color: #fff;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    font-size: 14px;
+  }
+
+  .fila{
+
+    background-color: #3c8dbc;
+    color: white;
+    text-align: center;
+
+  }
+
+  .fila:hover{
+
+    background-color: #3c8dbc;
+    color: white;
+    text-align: center;
+
   }
 
   .emp-profile{
