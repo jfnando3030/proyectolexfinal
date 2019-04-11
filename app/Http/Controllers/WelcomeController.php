@@ -78,7 +78,7 @@ class WelcomeController extends Controller
           $total_respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
           
           
-          return view('administracion.index', compact('total_respuestas','respuestas','user_departamentos','finalizados_usuarios','total_solicitudes', 'total_solicitudes_usuario', 'total_finalizados_usuario','total_solicitudes_nuevos', 'solicitudes_nuevos', 'solicitudes_usuario'));
+          return view('administracion.index', compact('total_respuestas','respuestas','user_departamentos','finalizados_usuarios', 'total_solicitudes_usuario', 'total_finalizados_usuario','total_solicitudes_nuevos', 'solicitudes_nuevos', 'solicitudes_usuario'));
     
         }else{
     
