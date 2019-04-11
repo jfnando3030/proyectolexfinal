@@ -146,6 +146,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('/administracion/pago/eliminar/{id}', 'WelcomeController@eliminar_pago');
 	//ELIMINAR 
 	//Route::get('/administracion/solicitud/eliminar/{id}', 'WelcomeController@eliminar_departamento');
+
+
+	Route::get('administracion/pago/aprobacion', 'WelcomeController@aprobacion_pagos');
+	Route::get('administracion/pagos/aprobar/{id}', 'WelcomeController@aprobacion_pagos_id');
+	Route::get('administracion/pagos/cancelar/{id}', 'WelcomeController@cancelar_pagos_id');
+	Route::get('administracion/pagos/cancelar2/{id}', 'WelcomeController@cancelar_pagos_id2');
  
 // ************************** FIN DE  PAGOS ********************************* 
 
@@ -161,10 +167,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::resource('administracion/herramientas', 'HerramientasController');
 	Route::resource('administracion/documentos', 'DocumentoController');
 	Route::resource('administracion/usuarios', 'UserController');
-
-
-
-
 
 
 	Route::get('administracion/ganancia/historial','WelcomeController@historial_ganancia_vista');

@@ -32,7 +32,7 @@
     @endif
     <div class="row">
         <div class="col-12  col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            @if( $pagos->count() > 0 ) 
+            @if( count($pagos) > 0 ) 
             <div class="row">
                 <div class="col-md-6">
 
@@ -47,17 +47,18 @@
                 <table class="table table-borderless table-striped table-earning" id="tabla">
                     <thead>
                         <tr>
+                            <th>Usuario</th>
                             <th>Tarifa</th>
                             <th>Monto</th>
                             <th>Inicio</th>
                             <th>Finaliza</th>
-                            <th>Estado</th>
-                            <th>Acción</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($pagos as $pagos)
                             <tr>
+                                <td style="vertical-align:middle; font-size: 16px;"> {{$pagos->nombres}} {{$pagos->apellidos}} </td>
                                 @if ($pagos->modo_pago == "P")
                                     <td style="vertical-align:middle; font-size: 16px;"> Paypal </td>
                                 @endif
@@ -70,16 +71,28 @@
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$pagos->monto_pago}}</td>
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$pagos->fecha_inicio}} </td>
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$pagos->fecha_finalizacion}} </td>
-                                 @if ($pagos->estado == 1)
-                                    <td style="vertical-align:middle; font-size: 16px;"> Activo </td>
-                                @else
-                                    <td style="vertical-align:middle; font-size: 16px;"> Inactivo</td>
-                                @endif
                                 <td width="10%">
                                   <center>
 
                                     @if ($pagos->estado == "0" and $pagos->activo == "0")
-                                        PENDIENTE
+                                    <a href="#" id="del-{{ $pagos->id }}" class="btn btn-sm btn-primary"> Aprobar </a>
+                                    <script>
+                                      $("#del-"+{{ $pagos->id }}).click(function(e){
+                                          swal({
+                                            title: "Atención",
+                                            text: "¿Estas seguro de aprobar el pago?",
+                                            type: "warning",
+                                            showCancelButton: true,
+                                            confirmButtonClass: "btn-primary",
+                                            confirmButtonText: "Sí, aprobar!",
+                                            closeOnConfirm: false
+                                          },
+                                          function(){
+                                              window.location="{{ url('administracion/pagos/aprobar/') }}/{{ $pagos->id }}";
+                                              swal("!Eliminado!", "El pago ha sido aprobado correctamente.", "success");
+                                          });
+                                      });
+                                      </script>
                                       @endif
 
                                       @if ($pagos->estado == "1" and $pagos->activo == "1")
@@ -96,7 +109,7 @@
                                             closeOnConfirm: false
                                           },
                                           function(){
-                                              window.location="{{ url('administracion/pagos/cancelar2/') }}/{{ $pagos->id }}";
+                                              window.location="{{ url('administracion/pagos/cancelar/') }}/{{ $pagos->id }}";
                                               swal("!Eliminado!", "El pago ha sido cancelado correctamente.", "success");
                                           });
                                       });

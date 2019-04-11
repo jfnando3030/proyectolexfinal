@@ -34,7 +34,7 @@ class AddMoneyController extends Controller
 {
     private $_api_context;
 
-    public $monto;
+    public $_id_tarifa;
     /**
      * Create a new controller instance.
      *
@@ -80,8 +80,6 @@ class AddMoneyController extends Controller
             ->setQuantity(1)
             ->setPrice($tarifa->precio); /** unit price **/
 
-        $this->monto = $tarifa->precio;
-
         $item_list = new ItemList();
         $item_list->setItems(array($item_1));
 
@@ -92,7 +90,7 @@ class AddMoneyController extends Controller
         $transaction = new Transaction();
         $transaction->setAmount($amount)
             ->setItemList($item_list)
-            ->setDescription('Your transaction description');
+            ->setDescription($tarifa->id);
 
         $redirect_urls = new RedirectUrls();
         $redirect_urls->setReturnUrl(URL::route('status')) /** Specify return URL **/
@@ -177,11 +175,19 @@ class AddMoneyController extends Controller
 
             //$tarifa1 = Tarifa::findOrFail($request->rbp); 
 
-            //DB::insert('insert into pagos (id_user, id_tarifa, fecha_inicio, fecha_finalizacion, modo_pago, monto_pago, activo, estado, comprobante_pago, path) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$request->user()->id, $request->rbp, $hoy, $finalizacion, 'P', $tarifa1->precio , '1', '1', 'Ninguno', 'Ninguno']);
+             $pago_consulta = Pagos::where('id_user', $request->user()->id)->where('activo', 1)->orWhere('activo', 0)->get();
 
-            //return redirect('administracion/pago/registrar');
-            return $this->monto;
-         
+              if (count($pago_consulta) > 0){
+                $pago_consulta[0]->activo = 2;
+                $pago_consulta[0]->estado = 0;
+
+                $pago_consulta[0]->save();
+              }
+
+            DB::insert('insert into pagos (id_user, id_tarifa, fecha_inicio, fecha_finalizacion, modo_pago, monto_pago, activo, estado, comprobante_pago, path) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$request->user()->id, $payment->transactions[0]->description, $hoy, $finalizacion, 'P', $payment->transactions[0]->amount->total , '1', '1', 'Ninguno', 'Ninguno']);
+
+            return redirect('administracion/pago/registrar')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
+
             //Session::flash('flash_message', 'Tu pago ha sido exitoso.' );
             //return Redirect::route('/pago/registrar/nuevo2');
         }

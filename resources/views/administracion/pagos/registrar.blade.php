@@ -224,7 +224,7 @@
                                         
                                         <div class="col-md-6" style="padding-bottom: 15px; display: none;" id="div_pago_td1">
                                             <label>Número de comprobante:</label>
-                                            {!! Form::text('numero_comprobante',null,['placeholder'=>'Ingrese el número de comprobante','class'=>'form-control', 'required']) !!}
+                                            {!! Form::text('numero_comprobante',null,['placeholder'=>'Ingrese el número de comprobante','class'=>'form-control']) !!}
                                         </div>
 
                                         <div class="col-md-6" style="padding-bottom: 15px; display: none;" id="div_pago_td2">

@@ -586,6 +586,15 @@ class WelcomeController extends Controller
     public function store_pago(Request $request)
     {
 
+      $pago_consulta = Pagos::where('id_user', $request->user()->id)->where('activo', 1)->orWhere('activo', 0)->get();
+
+      if (count($pago_consulta) > 0){
+        $pago_consulta[0]->activo = 2;
+        $pago_consulta[0]->estado = 0;
+
+        $pago_consulta[0]->save();
+      }
+
       $tarifa = Tarifa::findOrFail($request->rb); 
 
       $date = Carbon::now();
@@ -593,7 +602,7 @@ class WelcomeController extends Controller
 
       $pagos = new Pagos();
       $pagos->id_user = $request->user()->id;
-      $pagos->id_tarifa = "1";
+      $pagos->id_tarifa = $tarifa->id;
       $pagos->fecha_inicio = $hoy;
       $pagos->fecha_finalizacion = $this->aumentar_dias_activacion(Carbon::parse($hoy));
       
@@ -652,4 +661,46 @@ class WelcomeController extends Controller
 
       return view('administracion.pagos.listado_pagos', ['pagos' => $pagos]);
     }
+
+     public function aprobacion_pagos(Request $request)
+    {
+      $pagos = DB::select('select pagos.*, users.nombres, users.apellidos FROM users, pagos WHERE users.id = pagos.id_user ');
+
+      return view('administracion.pagos.aprobacion', ['pagos' => $pagos]);
+
+    }
+
+    public function aprobacion_pagos_id($id)
+    {
+    $pagos =Pagos::find($id);
+    
+    $pagos->activo = 1;
+    $pagos->estado = 1;
+    $pagos->save();      
+
+    return redirect('administracion/pago/aprobacion')->with('mensaje-registro', 'Pago aprobado exitosamente');
+    }
+
+    public function cancelar_pagos_id($id)
+    {
+    $pagos =Pagos::find($id);
+    
+    $pagos->activo = 2;
+    $pagos->estado = 0;
+    $pagos->save();      
+
+    return redirect('administracion/pago/aprobacion')->with('mensaje-registro', 'Pago cancelado exitosamente');;
+    }
+
+    public function cancelar_pagos_id2($id)
+    {
+    $pagos =Pagos::find($id);
+    
+    $pagos->activo = 2;
+    $pagos->estado = 0;
+    $pagos->save();      
+
+    return redirect('administracion/pago/historial')->with('mensaje-registro', 'Pago cancelado exitosamente');;
+    }
+
 }
