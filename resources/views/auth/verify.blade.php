@@ -65,11 +65,11 @@
                                                     {{ __('Gracias por haberte registrado en BanGo Energy Gel. Antes de proceder a gestionar tu panel de administración, por favor haz click en el enlace para verificar tu correo electrónico: ') }} 
                                                     <br>
                                                 </div>
-                                                <center><a style="color: red;" href="{{ route('verification.resend') }}"> <strong>{{ __('haga clic aquí para enviar el correo de verificación.') }}</strong></a></center>
+                                                <center><a style="color: white;" href="{{ route('verification.resend') }}"> <strong>{{ __('haga clic aquí para enviar el correo de verificación.') }}</strong></a></center>
                                                 <br>
                                                 <br>
                                                 <center>
-                                                    <a class="btn btn-default btn-flat" style="background-color: red; color: white; border-color: red;" href="{{ route('logout') }}"
+                                                    <a class="btn btn-default btn-flat" style="background-color: black; color: white; border-color: black;" href="{{ route('logout') }}"
                                                       onclick="event.preventDefault();
                                                                      document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i>
                                                         {{ __('Cerrar sesión') }}
