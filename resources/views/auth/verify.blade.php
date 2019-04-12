@@ -62,7 +62,7 @@
                                                         </div>
                                                     @endif
 
-                                                    {{ __('Gracias por haberte registrado en BanGo Energy Gel. Antes de proceder a gestionar tu panel de administración, por favor haz click en el enlace para verificar tu correo electrónico: ') }} 
+                                                    {{ __('Gracias por haberte registrado en Merino & Asociados. Antes de proceder a gestionar tu panel de administración, por favor haz click en el enlace para verificar tu correo electrónico: ') }} 
                                                     <br>
                                                 </div>
                                                 <center><a style="color: white;" href="{{ route('verification.resend') }}"> <strong>{{ __('haga clic aquí para enviar el correo de verificación.') }}</strong></a></center>
