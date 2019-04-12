@@ -34,40 +34,25 @@
     
                                 @if($response->estado !=0)
                                   @if($response->leido==0)
-                                    <tr style="background-color: #e4e4e4" onclick="window.location='{{ route('ver_respuesta',['id' => Crypt::encrypt($response->id) ])}}'" data-id="{{$response->id}}">
-                  
-                                       
-    
-                                       <td class="mailbox-star"><i class="fa fa-star text-yellow"></i></td>
-    
-                                       
-                                      
+                                  <a style="width: 100%;padding: 15px;background-color: #e4e4e4;" href="{{ route('ver_respuesta',['id' => Crypt::encrypt($response->id) ])}}" >
                                     
-                                      <td class="mailbox-name"><b>De: </b> {{$response->solicitud->abogado->nombres}} {{$response->solicitud->abogado->apellidos}}</td>
-                                      <td class="mailbox-subject"><b>{{$response->titulo}}</b> - {{substr($response->respuesta, 0, 30)}}...
-                                      </td>
-                                      <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                      <td class="mailbox-date">{{$response->fecha}} - {{$response->hora}}</td>
-                                  
-                                    </tr>
+                                    <div style="background-color: #e4e4e4" class="row">
+                                            <b>De: </b> {{$response->solicitud->abogado->nombres}} {{$response->solicitud->abogado->apellidos}}
+                                            <b>{{$response->titulo}}</b> - {{substr($response->respuesta, 0, 30)}}...
+                                            <i class="fa fa-paperclip"></i>
+                                            {{$response->fecha}} - {{$response->hora}}
+                                  </div> </a>
+                            
     
                                     @else 
-                                    <tr onclick="window.location='{{ route('ver_respuesta',['id' => Crypt::encrypt($response->id) ])}}'" data-id="{{$response->id}}">
-                  
+                                    <a style="width: 100%;padding: 15px;background-color: white;" href="{{ route('ver_respuesta',['id' => Crypt::encrypt($response->id) ])}}" >
                                     
-    
-                                      <td class="mailbox-star">  <i class="far fa-star text-yellow"></i></td>
-    
-                                      
-                                     
-                                   
-                                     <td class="mailbox-name"><b>De: </b> {{$response->solicitud->abogado->nombres}} {{$response->solicitud->abogado->apellidos}}</td>
-                                     <td class="mailbox-subject"><b>{{$response->titulo}}</b> - {{$response->respuesta}}...
-                                     </td>
-                                     <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
-                                     <td class="mailbox-date">{{$response->fecha}} - {{$response->hora}}</td>
-                                 
-                                   </tr>
+                                            <div style="background-color: white" class="row">
+                                                    <b>De: </b> {{$response->solicitud->abogado->nombres}} {{$response->solicitud->abogado->apellidos}}
+                                                    <b>{{$response->titulo}}</b> - {{substr($response->respuesta, 0, 30)}}...
+                                                    <i class="fa fa-paperclip"></i>
+                                                    {{$response->fecha}} - {{$response->hora}}
+                                          </div> </a>
                                        
                                      
                                        @endif
