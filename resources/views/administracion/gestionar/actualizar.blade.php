@@ -14,7 +14,7 @@
         @endif
 
         <div class="emp-profile" style="padding: 3%;">
-            <form action="{{ route('actualizar_abogado_caso') }}" method="put">
+            <form action="{{ route('actualizar_abogado_caso') }}" method="get">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
 
                 <div class="row">

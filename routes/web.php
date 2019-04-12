@@ -103,9 +103,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('/administracion/gestionar/casos/{id}', 'WelcomeController@ver_caso')->name('ver_caso');
 	
 	// CAMBIAR ABOGADO A LOS CASOS  
-	Route::get('/administracion/gestionar/casos/listado', 'WelcomeController@gestionar_casos');
+	Route::get('/administracion/gestionar/', 'WelcomeController@gestionar_casos');
 	Route::get('/administracion/gestionar/casos/cambiar/{id}', 'WelcomeController@gestionar_abogado_casos');
-	Route::get('/administracion/gestionar/casos/cambiar', 'WelcomeController@actualizar_abogado_caso')->name('actualizar_abogado_caso');
+	Route::get('/administracion/gestionar/casos/', 'WelcomeController@actualizar_abogado_caso')->name('actualizar_abogado_caso');
 
  
 // ************************** FIN DE  SOLICITUDES ********************************* 
