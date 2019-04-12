@@ -304,7 +304,7 @@
 
         <div id="menu2" class="box box-primary tab-pane fade">
 
-              <div  class="box box-primary">
+             
                   <div class="box-header with-border">
                     <h3 class="box-title">Nuevas Solicitudes </h3>
       
@@ -387,7 +387,7 @@
                 </div>
                 <!-- /.box-body -->
                 
-              </div>
+            
           
         </div>
 
@@ -397,7 +397,7 @@
         
         <div id="menu3" class="box box-primary tab-pane fade">
 
-            <div  class="box box-primary">
+            
                 <div class="box-header with-border">
                   <h3 class="box-title">Casos asignados</h3>
     
@@ -471,14 +471,14 @@
               </div>
               <!-- /.box-body -->
               
-            </div>
+           
         
       </div>
 
 
       <div id="menu4" class="box box-primary tab-pane fade">
 
-          <div  class="box box-primary">
+        
               <div class="box-header with-border">
                 <h3 class="box-title">Casos finalizados</h3>
   
@@ -551,7 +551,7 @@
             </div>
             <!-- /.box-body -->
             
-          </div>
+         
       
     </div>
 
@@ -739,7 +739,6 @@
                 
               <div id="menu5" class="box box-primary tab-pane fade in active">
 
-              <div  class="box box-primary">
                   <div class="box-header with-border">
                       <h3 class="box-title">Respuestas</h3>
                   </div>
@@ -835,7 +834,7 @@
                         
                           @endif
                       </div>
-                    </div>
+                   
                   </div>                        
                         
         
@@ -855,7 +854,7 @@
 
                 <div id="menu6" class="box box-primary tab-pane fade">
 
-                    <div  class="box box-primary">
+                   
                         <div class="box-header with-border">
                           <h3 class="box-title">Solicitudes Enviadas</h3>
             
@@ -929,7 +928,7 @@
                       </div>
                       <!-- /.box-body -->
                       
-                    </div>
+                  
                 
               </div>
 

@@ -70,11 +70,11 @@ class WelcomeController extends Controller
         
     
           $solicitudes_usuario = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->get();
-          $solicitudes_nuevos = Solicitud::where('estado_solicitud',1)->where('leido_solicitud',0)->orderBy('fecha_solicitud', 'desc')->orderBy('hora_solicitud', 'asc')->get();
+          $solicitudes_nuevos = Solicitud::where('estado_solicitud',1)->where('leido_solicitud',0)->orderBy('fecha_solicitud', 'desc')->orderBy('hora_solicitud', 'desc')->get();
           $finalizados_usuarios = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->where('finalizado_solicitud', 1)->get();
           $user_departamentos = UserDepartamento::where('user_id',Auth::user()->id)->get();
 
-          $respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'desc')->orderBy('hora', 'asc')->get();
+          $respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'desc')->orderBy('hora', 'desc')->get();
           $total_respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
           
           
@@ -83,15 +83,15 @@ class WelcomeController extends Controller
         }else{
     
           $total_solicitudes_registrados = Solicitud::where('estado_solicitud',1)->where('id_user_solicitud', Auth::user()->id )->count();
-          $solicitudes_registrados = Solicitud::where('estado_solicitud',1)->where('id_user_solicitud', Auth::user()->id )->orderBy('fecha_solicitud', 'desc')->orderBy('hora_solicitud', 'asc')->get();
+          $solicitudes_registrados = Solicitud::where('estado_solicitud',1)->where('id_user_solicitud', Auth::user()->id )->orderBy('fecha_solicitud', 'desc')->orderBy('hora_solicitud', 'desc')->get();
     
          
-          $respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'desc')->orderBy('hora', 'asc')->get();
+          $respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'desc')->orderBy('hora', 'desc')->get();
           $total_respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
 
           $total_respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
          
-          $respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'desc')->orderBy('hora', 'asc')->take(3)->get();
+          $respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'desc')->orderBy('hora', 'desc')->take(3)->get();
 
     
           return view('administracion.index', compact('respuestas_notificacion','total_respuestas_notificacion','total_respuestas','respuestas','total_solicitudes_registrados','solicitudes_registrados'));
@@ -681,7 +681,11 @@ class WelcomeController extends Controller
     {
       $tarifa = Tarifa::where('estado', 1)->get();
       $tarifa2 = Tarifa::where('estado', 1)->get();
-      return view('administracion.pagos.registrar', ['tarifa' => $tarifa, 'tarifa2' => $tarifa2]);
+      $total_respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
+         
+      $respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'desc')->orderBy('hora', 'desc')->take(3)->get();
+
+      return view('administracion.pagos.registrar', ['tarifa' => $tarifa, 'tarifa2' => $tarifa2, 'total_respuestas_notificacion' => $total_respuestas_notificacion, 'respuestas_notificacion' => $respuestas_notificacion]);
     }
 
     public function saber_comprobante_repetido($comprobante_pago)
@@ -770,8 +774,11 @@ class WelcomeController extends Controller
     public function listado_pago(Request $request)
     {
       $pagos = Pagos::where('id_user', $request->user()->id)->get();
+      $total_respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
+         
+      $respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'desc')->orderBy('hora', 'desc')->take(3)->get();
 
-      return view('administracion.pagos.listado_pagos', ['pagos' => $pagos]);
+      return view('administracion.pagos.listado_pagos', ['pagos' => $pagos, 'total_respuestas_notificacion' => $total_respuestas_notificacion, 'respuestas_notificacion' => $respuestas_notificacion]);
     }
 
      public function aprobacion_pagos(Request $request)

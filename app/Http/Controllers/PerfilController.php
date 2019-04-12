@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Redirect;
 
-
+use App\Respuesta;
 use App\User;
 use App\Http\Requests\PerfilRequest;
 use Illuminate\Validation\Rule;
@@ -37,10 +37,12 @@ class PerfilController extends Controller
     {
          
     
-
+        $total_respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
+         
+        $respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'desc')->orderBy('hora', 'desc')->take(3)->get();
 
       
-          return view('administracion.perfil.index');
+          return view('administracion.perfil.index', compact('total_respuestas_notificacion', 'respuestas_notificacion'));
     }
 
 
@@ -88,13 +90,16 @@ class PerfilController extends Controller
         $nuevo_id= Crypt::decrypt($id);
         $usuario = User::find($nuevo_id);
 
-       
+        $total_respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
+         
+        $respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'desc')->orderBy('hora', 'desc')->take(3)->get();
+
       
     
      
 
 
-        return view('administracion.perfil.edit',compact('usuario'));
+        return view('administracion.perfil.edit',compact('usuario', 'total_respuestas_notificacion', 'respuestas_notificacion'));
 
     }
 
