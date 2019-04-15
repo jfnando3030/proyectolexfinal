@@ -34,6 +34,10 @@ class OficioController extends Controller
         22=>"Sucumbíos",
         23=>"Tungurahua",
         24=>"Zamora Chinchipe");
+
+    public $ciudades = array(
+        
+    );
     /**
      * Display a listing of the resource.
      *
