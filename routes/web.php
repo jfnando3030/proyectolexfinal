@@ -175,8 +175,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 	Route::resource('administracion/tarifa', 'TarifaController');
 
-	// OFICIOS
-	Route::get('administracion/oficio', 'OficioController@create');
+	Route::resource('administracion/oficio', 'OficioController');
 
 
 // ************************** PAYPAL *************************************** 

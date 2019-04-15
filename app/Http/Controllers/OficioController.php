@@ -60,7 +60,7 @@ class OficioController extends Controller
     public function create()
     {
         //
-        return view('oficios.create', ['provincia' => $this->provincias]);
+        return view('oficios.create');
     }
 
     /**
