@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Support\Facades\Crypt;
 
 class NotifyLawyers extends Notification
 {
@@ -47,7 +48,7 @@ class NotifyLawyers extends Notification
         return (new MailMessage)
         ->subject('Nueva solicitud de atención al cliente')
         ->line("Una nueva solicitud de atención al cliente ha sido enviada al departamento de {$this->nombreDepartamento}, por favor revise su bandeja para obtener más información")
-        ->action('Ver Caso', url("/administracion/gestionar/casos/{$this->idSolicitud }"))
+        ->action('Ver Caso', url("/administracion/gestionar/casos/".Crypt::encrypt($this->idSolicitud)))
         ->line('');
     }
 
