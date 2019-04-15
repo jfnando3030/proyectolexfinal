@@ -763,7 +763,7 @@
 $(function () {
 $("#example1").DataTable();
 $('#example2').DataTable({
-"paging": true,
+"paging": false,
 "lengthChange": true,
 "searching": true,
 "ordering": false,

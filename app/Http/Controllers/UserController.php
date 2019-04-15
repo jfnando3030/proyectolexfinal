@@ -35,7 +35,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
 
-        $usuarios = User::where('estado',1)->orderBy('id')->paginate(5);
+        $usuarios = User::where('estado',1)->orderBy('id')->paginate(10);
   
         if ($request->ajax()) {
             return view('usuarios-ajax', compact('usuarios'));
