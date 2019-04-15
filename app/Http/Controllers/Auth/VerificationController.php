@@ -83,7 +83,7 @@ class VerificationController extends Controller
                 <br>    
                     <div style="width:550px;margin:50px auto; background-color:white;">
                         <div style="width:100%; padding-top:35px; padding-bottom:15px;">
-                            <img width="213" border="0" style="width: 213px;" src="http://35.237.74.133/frontend/images/xredondo.png.pagespeed.ic.GZLIh_PkSl.webp" alt="" />
+                            <img width="213" border="0" style="width: 213px;" src="http://35.237.74.133/frontend/images/redondo.png" alt="" />
                         </div>
                         <div style="width:100%; color: #343434; font-size: 24px; font-family: Quicksand, Calibri, sans-serif; font-weight:700;letter-spacing: 3px; line-height: 35px;">
                             <p style="color:#999; line-height:0px;margin-top:-15px;">_</p>
@@ -123,7 +123,7 @@ class VerificationController extends Controller
                                 <td align="left" valign="top">
                                     <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify">' . $nombres .', nuevamente bienvenido y muchas gracias por tu confianza.</p>
                                     <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify">&iexcl;Un abrazo!,<br/>
-                             El equipo de LEX 4.0<br/>
+                             El equipo de Merino&Asociados<br/>
                              <p style="font-family: Verdana, Geneva, sans-serif; font-size: 11px;"><span><strong>ESTA ES UNA COMUNICACI&Oacute;N AUTOM&Aacute;TICA, POR FAVOR NO RESPONDER.</strong></span></p>
                             </td></tr></table>
 
@@ -164,8 +164,8 @@ class VerificationController extends Controller
         //confirmaciones
         $mail->Username = 'gerencia@geomarvaldez.com';
         $mail->Password = 'Geomar2018';
-        $mail->SetFrom('gerencia@geomarvaldez.com', 'Notificaciones LEX 4.0');
-        $mail->Subject = html_entity_decode('Bienvenido a LEX 4.0');
+        $mail->SetFrom('gerencia@geomarvaldez.com', 'Notificaciones Merino & Asociados ');
+        $mail->Subject = html_entity_decode('Bienvenido a Merino&Asociados');
             
         $mail->Body = $codigohtml;      
         $mail->AddAddress($emailto);

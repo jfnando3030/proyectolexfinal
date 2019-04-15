@@ -53,8 +53,8 @@ class WelcomeController extends Controller
 
     
 
-    public function admin(Request $request){
-
+    public function admin(Request $request)
+    {
       if(Auth::user()->rol == "Administrador"){
         return view('administracion.index');
     
