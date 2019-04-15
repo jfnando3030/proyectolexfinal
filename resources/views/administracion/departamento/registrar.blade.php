@@ -41,7 +41,7 @@
                                         <div class="col-md-12" style="padding-bottom: 15px;">
                                         </div>
                                             <div class="col-md-6" style="padding-bottom: 15px;">
-                                                <label>Provincia</label>
+                                                <label>Dia Inicial</label>
                                                 {!! Form::select(
                                                     'inicioDia',
                                                     $dias, 

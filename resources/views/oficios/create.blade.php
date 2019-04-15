@@ -24,17 +24,6 @@
                                             <input class="form-control" required="required" name="fecha" type="date">
                                         </div>
                                         <div class="col-md-6" style="padding-bottom: 15px;">
-                                        </div>
-                                        <div class="col-md-6" style="padding-bottom: 15px;">
-                                            <label>Provincias</label>
-                                            {!! Form::select(
-                                                'inicioDia',
-                                                $provincia, 
-                                                null,
-                                                ['class'=>'form-control', 'required' => 'required']) 
-                                            !!}
-                                        </div>
-                                        <div class="col-md-6" style="padding-bottom: 15px;">
                                             <label>Ciudad:</label>
                                             <input placeholder="Ingrese el nombre de la ciudad" class="form-control" required="required" onkeypress="return soloLetras(event)" name="ciudad" type="text">
                                         </div>

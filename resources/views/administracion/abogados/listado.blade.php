@@ -106,7 +106,7 @@
                         @if(Auth::user()->rol == "Administrador")
                     <div class="col-md-12 col-lg-12" align="center">
                     
-                        <a href="{{route('usuarios.create')}}">
+                        <a href="http://localhost/proyectolexfinal/administracion/departamento/registrar">
                             <button title="Añadir nuevo registro" id="payment-button" type="submit" class="btn btn-lg btn-info">
                                 <i class="fas fa-plus-circle"></i>
                             </button>
