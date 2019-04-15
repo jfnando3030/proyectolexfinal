@@ -745,7 +745,7 @@ class WelcomeController extends Controller
 
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify"> Para ver la respuesta da clic en el siguiente enlace.</p>
 
-                          <a href="http://localhost/proyectolexfinal/administracion/casos/respuesta/' . Crypt::encrypt($respuesta->id ) . '" style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:center"> Da clic en este enlace </a>
+                          <a href="http://35.237.74.133/administracion/casos/respuesta/' . Crypt::encrypt($respuesta->id ) . '" style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:center"> Da clic en este enlace </a>
 
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify">&iexcl;Un abrazo!,<br/>
                              El equipo de LEX 4.0<br/>
