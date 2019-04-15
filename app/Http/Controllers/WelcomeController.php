@@ -443,10 +443,10 @@ class WelcomeController extends Controller
  
   public function gestionar_abogado_casos($id)
   {
-    $solicitud = DB::select("select  solicitud.*, departamento.* from solicitud, departamento where solicitud.id_departamento = departamento.id and solicitud.id = ? and solicitud.estado_solicitud = 1 and solicitud.id_user_abogado is not null", [$id] ); 
+    $solicitud = DB::select("select  solicitud.*, departamento.* from solicitud, departamento where solicitud.id_departamento = departamento.id and solicitud.id = ? and solicitud.estado_solicitud = 1 and solicitud.id_user_abogado is not null", [Crypt::decrypt($id)] ); 
 
 
-    $area = DB::select("select  departamento.id from solicitud, departamento where solicitud.id_departamento = departamento.id and solicitud.id = ? and solicitud.estado_solicitud = 1 and solicitud.id_user_abogado is not null", [$id] ); 
+    $area = DB::select("select  departamento.id from solicitud, departamento where solicitud.id_departamento = departamento.id and solicitud.id = ? and solicitud.estado_solicitud = 1 and solicitud.id_user_abogado is not null", [Crypt::decrypt($id)] ); 
 
     $abogados = DB::select("select * from users where id in (select user_id from departamento_user where departamento_id = ?)", [$area[0]->id] );   
 

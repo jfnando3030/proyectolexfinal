@@ -63,7 +63,7 @@
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$solicitud->hora_solicitud}} </td>
 
                                 <td> 
-                                    <a href="{{ url('/administracion/gestionar/casos/cambiar/') }}/{{ $solicitud->id }}" id="editar" class="btn btn-sm btn-warning"> Actualizar  abogado </a>
+                                    <a href="{{ url('/administracion/gestionar/casos/cambiar/') }}/{{ Crypt::encrypt($solicitud->id) }}" id="editar" class="btn btn-sm btn-warning"> Actualizar  abogado </a>
                                 </td>
                            </tr>
                         @endforeach
