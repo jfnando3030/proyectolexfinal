@@ -497,7 +497,7 @@ class WelcomeController extends Controller
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify"> Hola ' . $nombres_abogado  . ', te escribimos para notificarte que se te ha asignado el caso: ' . $casos->nombre_solicitud . ', el cual pertenece a ' . $nombres_cliente  . '.</p>
 
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify">&iexcl;Un abrazo!,<br/>
-                             El equipo de LEX 4.0<br/>
+                             El equipo de Merino&Asociados<br/>
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 11px;"><span><strong>ESTA ES UNA COMUNICACI&Oacute;N AUTOM&Aacute;TICA, POR FAVOR NO RESPONDER.</strong></span></p>
                         </div>
                             
@@ -536,7 +536,7 @@ class WelcomeController extends Controller
         //confirmaciones
         $mail->Username = 'gerencia@geomarvaldez.com';
         $mail->Password = 'Geomar2018';
-        $mail->SetFrom('gerencia@geomarvaldez.com', 'Notificaciones LEX 4.0');
+        $mail->SetFrom('gerencia@geomarvaldez.com', 'Notificaciones Merino & Asociados');
         $mail->Subject = html_entity_decode('Cambio de abogado');
             
         $mail->Body = $codigohtml;      
@@ -568,10 +568,10 @@ class WelcomeController extends Controller
                         </div>
                         <div style="color: #888888; font-size: 16px; font-family: Work Sans, Calibri, sans-serif; line-height: 24px; width:400px; margin:30px auto; text-align:center;">
 
-                          <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify"> Hola ' . $nombres_cliente  . ', te escribimos para notificarte que tu caso: ' . $casos->nombre_solicitud . ' ha sido asignado al Abogado ' . $nombres_abogado  . '.</p>
+                          <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify"> Hola ' . $nombres_cliente  . ', te escribimos para notificarte que tu caso: ' . $casos->nombre_solicitud . ' ha sido cambiado al Abogado ' . $nombres_abogado  . '.</p>
 
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify">&iexcl;Un abrazo!,<br/>
-                             El equipo de LEX 4.0<br/>
+                             El equipo de Merino&Asociados<br/>
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 11px;"><span><strong>ESTA ES UNA COMUNICACI&Oacute;N AUTOM&Aacute;TICA, POR FAVOR NO RESPONDER.</strong></span></p>
                         </div>
                             
@@ -610,7 +610,7 @@ class WelcomeController extends Controller
         //confirmaciones
         $mail->Username = 'gerencia@geomarvaldez.com';
         $mail->Password = 'Geomar2018';
-        $mail->SetFrom('gerencia@geomarvaldez.com', 'Notificaciones LEX 4.0');
+        $mail->SetFrom('gerencia@geomarvaldez.com', 'Notificaciones Merino & Asociados');
         $mail->Subject = html_entity_decode('Cambio de abogado');
             
         $mail->Body = $codigohtml;      
@@ -748,7 +748,7 @@ class WelcomeController extends Controller
                           <a href="http://35.237.74.133/administracion/casos/respuesta/' . Crypt::encrypt($respuesta->id ) . '" style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:center"> Da clic en este enlace </a>
 
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify">&iexcl;Un abrazo!,<br/>
-                             El equipo de LEX 4.0<br/>
+                             El equipo de Merino&Asociados<br/>
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 11px;"><span><strong>ESTA ES UNA COMUNICACI&Oacute;N AUTOM&Aacute;TICA, POR FAVOR NO RESPONDER.</strong></span></p>
                         </div>
                             
@@ -787,7 +787,7 @@ class WelcomeController extends Controller
         //confirmaciones
         $mail->Username = 'gerencia@geomarvaldez.com';
         $mail->Password = 'Geomar2018';
-        $mail->SetFrom('gerencia@geomarvaldez.com', 'Notificaciones LEX 4.0');
+        $mail->SetFrom('gerencia@geomarvaldez.com', 'Notificaciones Merino & Asociados');
         $mail->Subject = html_entity_decode('Respuesta del abogado');
             
         $mail->Body = $codigohtml;      
@@ -914,7 +914,7 @@ class WelcomeController extends Controller
                           <a href="http://35.237.74.133/administracion/casos/respuesta-abogado/' . Crypt::encrypt($respuesta->id ) . '" style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:center"> Da clic en este enlace </a>
 
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify">&iexcl;Un abrazo!,<br/>
-                             El equipo de LEX 4.0<br/>
+                             El equipo de Merino&Asociados<br/>
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 11px;"><span><strong>ESTA ES UNA COMUNICACI&Oacute;N AUTOM&Aacute;TICA, POR FAVOR NO RESPONDER.</strong></span></p>
                         </div>
                             
@@ -953,7 +953,7 @@ class WelcomeController extends Controller
         //confirmaciones
         $mail->Username = 'gerencia@geomarvaldez.com';
         $mail->Password = 'Geomar2018';
-        $mail->SetFrom('gerencia@geomarvaldez.com', 'Notificaciones LEX 4.0');
+        $mail->SetFrom('gerencia@geomarvaldez.com', 'Notificaciones Merino & Asociados');
         $mail->Subject = html_entity_decode('Respuesta del abogado');
             
         $mail->Body = $codigohtml;      
