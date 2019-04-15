@@ -19,6 +19,7 @@ class CreateSolicitudTabla extends Migration
             $table->text('descripcion');
             $table->integer('id_user_solicitud')->unsigned();
             $table->integer('id_departamento');
+            $table->integer('tiene_archivo_adjunto')->default(0);;
             $table->char('leido_solicitud',1)->default(0);
             $table->char('finalizado_solicitud',1)->default(0);
             $table->integer('id_user_abogado')->nullable();

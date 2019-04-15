@@ -52,24 +52,27 @@
                             <div class="col-md-12 col-12 col-xs-12- col-lg-12">
 
                                     <div class="row">
-                                            <div class="col-md-6 col-12">
-                                                <label style="text-align:center; color: black;font-weight: bold;">Cód. Patrocinador:</label>
-                                                <span style="color: black;">{{Auth::user()->codpatrocinador}}</span>
-                                            </div>
+                                           
                                             <div class="col-md-6  col-12">
                                                     <label style="text-align:center; color: black;font-weight: bold;">Nombres:</label>
                                                      <span style="color: black;">{{Auth::user()->nombres}}</span>
                                               
                                                 
                                             </div>
+                                            <div class="col-md-6 col-12">
+                                                <label style="text-align:center; color: black;font-weight: bold;">Apellidos:</label>
+                                                <span style="color: black;">{{Auth::user()->apellidos}}</span>
+                                            </div>
                                         </div>
                                
                                                
                                            <div class="row">
+
                                                 <div class="col-md-6 col-12">
-                                                    <label style="text-align:center; color: black;font-weight: bold;">Apellidos:</label>
-                                                    <span style="color: black;">{{Auth::user()->apellidos}}</span>
-                                                </div>
+                                                        <label style="text-align:center; color: black;font-weight: bold;">Cédula:</label>
+                                                        <span style="color: black;">{{Auth::user()->cedula}}</span>
+                                                    </div>
+                                               
                                                 <div class="col-md-6  col-12">
                                                         <label style="text-align:center; color: black;font-weight: bold;">Email:</label>
                                                          <span style="color: black;">{{Auth::user()->email}}</span>
@@ -79,11 +82,8 @@
                                             </div>
 
                                             <div class="row">
-                                                    <div class="col-md-6 col-12">
-                                                        <label style="text-align:center; color: black;font-weight: bold;">Cédula:</label>
-                                                        <span style="color: black;">{{Auth::user()->cedula}}</span>
-                                                    </div>
-                                                    <div class="col-md-6  col-12">
+                                                  
+                                                    <div class="col-md-12  col-12">
                                                             <label style="text-align:center; color: black;font-weight: bold;">Direccion:</label>
                                                             @if(Auth::user()->direccion!="")
 
@@ -123,123 +123,32 @@
                                                             
                                                         </div>
                                                         <div class="col-md-6  col-12">
-                                                                <label style="text-align:center; color: black;font-weight: bold;">Género:</label>
-                                                                @if(Auth::user()->sexo!="")
-                                                                    @if(Auth::user()->sexo=="M")
+                                                                <label style="text-align:center; color: black;font-weight: bold;">Celular:</label>
 
-                                                                        <span style="color: black;">Masculino</span>
+                                                                @if(Auth::user()->celular!="")
 
-                                                                    @else
-                                                                        <span style="color: black;">Femenino</span>
+                                                                <span style="color: black;">{{Auth::user()->celular}}</span>
+                                                           
 
-                                                                    @endif
+                                                              @else
 
-                                                                @else
-
-                                                                <span style="color: black;">No ha ingresado su género</span>
+                                                              <span style="color: black;">No ha ingresado su # celular</span>
 
 
-                                                                @endif
-                                                               
+                                                              @endif
+
+                                                              
                                                           
                                                             
                                                         </div>
                                                     </div>
 
-                                                    <div class="row">
-                                                            <div class="col-md-6 col-12">
-                                                                <label style="text-align:center; color: black;font-weight: bold;">Fecha Nacimiento:</label>
-                                                                @if(Auth::user()->fechanacim!="")
-
-                                                                <span style="color: black;">{{Auth::user()->fechanacim}}</span>
-                                                           
-
-                                                              @else
-
-                                                              <span style="color: black;">No ha ingresado su fecha de nacimiento</span>
+                                                   
 
 
-                                                              @endif
-                                                                
-                                                            </div>
-                                                            <div class="col-md-6  col-12">
-                                                                    <label style="text-align:center; color: black;font-weight: bold;">Celular:</label>
+                                                       
 
-                                                                    @if(Auth::user()->celular!="")
-
-                                                                    <span style="color: black;">{{Auth::user()->celular}}</span>
-                                                               
-    
-                                                                  @else
-    
-                                                                  <span style="color: black;">No ha ingresado su # celular</span>
-    
-    
-                                                                  @endif
-
-                                                                  
-                                                              
-                                                                
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="row">
-                                                            <div class="col-md-6 col-12">
-                                                                <label style="text-align:center; color: black;font-weight: bold;">Tipo de Pago:</label>
-                                                                @if(Auth::user()->tipopagos!="")
-
-                                                                <span style="color: black;">{{Auth::user()->tipopagos}}</span>
-                                                           
-
-                                                              @else
-
-                                                              <span style="color: black;">No ha ingresado su tipo de pago</span>
-
-
-                                                              @endif
-                                                                
-                                                            </div>
-                                                            <div class="col-md-6  col-12">
-                                                                    <label style="text-align:center; color: black;font-weight: bold;">Entidad Bancaria:</label>
-
-                                                                    @if(Auth::user()->titular!="")
-
-                                                                    <span style="color: black;">{{Auth::user()->titular}}</span>
-                                                               
-    
-                                                                  @else
-    
-                                                                  <span style="color: black;">No ha ingresado su entidad bancaria</span>
-    
-    
-                                                                  @endif
-
-                                                                  
-                                                              
-                                                                
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-md-6 col-12">
-                                                                <label style="text-align:center; color: black;font-weight: bold;"># Tarjeta Crédito:</label>
-                                                                @if(Auth::user()->numctatarjeta!="")
-
-                                                                <span style="color: black;">{{Auth::user()->numctatarjeta}}</span>
-                                                           
-
-                                                              @else
-
-                                                              <span style="color: black;">No ha ingresado su tarjeta de crédito</span>
-
-
-                                                              @endif
-                                                                
-                                                            </div>
-                                                            
-                                                 
-                                                        </div>
+                                                   
 
                                                         
 
@@ -247,7 +156,7 @@
 
                                                             <div class="col-md-4">
                             
-                                                    </div>
+                                                         </div>
                             
                                                     <div class="col-md-4" style="padding-bottom: 15px; padding-left: 0; padding-right: 0;">
                                                         <a title="Editar Perfil" onclick="return myFunction();" class="btn btn-primary btn-block" href="{{ route('perfil.edit',['parameters' => Crypt::encrypt(Auth::user()->id)])}}" role="button">Editar perfil</a>

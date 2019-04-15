@@ -92,6 +92,7 @@ class WelcomeController extends Controller
           $total_respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
          
           $respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'desc')->orderBy('hora', 'desc')->take(3)->get();
+          
 
     
           return view('administracion.index', compact('respuestas_notificacion','total_respuestas_notificacion','total_respuestas','respuestas','total_solicitudes_registrados','solicitudes_registrados'));
@@ -259,8 +260,11 @@ class WelcomeController extends Controller
     $solicitud->fecha_solicitud = $hoy;
     $solicitud->hora_solicitud = $hora;
     $solicitud->id_departamento = $request->departamento;
+
+    $bandera=false;
      
     if( $solicitud->save() ){
+
       
       //  PARA ARCHIVO 1 
       if($request->archivo1 != ""){
@@ -268,6 +272,7 @@ class WelcomeController extends Controller
           $archivos1 = new Archivos();
           $archivos1->path = Storage::disk('local2')->put('archivos',   $request->file('archivo1')); 
           $archivos1->id_solicitud = $solicitud->id;
+          $bandera=true;
           $archivos1->save();
         }
       }
@@ -278,6 +283,7 @@ class WelcomeController extends Controller
           $archivos2 = new Archivos();
           $archivos2->path = Storage::disk('local2')->put('archivos',   $request->file('archivo2')); 
           $archivos2->id_solicitud = $solicitud->id;
+          $bandera=true;
           $archivos2->save();
         }
       }
@@ -288,6 +294,7 @@ class WelcomeController extends Controller
           $archivo3 = new Archivos();
           $archivo3->path = Storage::disk('local2')->put('archivos',   $request->file('archivo3')); 
           $archivo3->id_solicitud = $solicitud->id;
+          $bandera=true;
           $archivo3->save();
         }
       }
@@ -298,6 +305,7 @@ class WelcomeController extends Controller
           $archivo4 = new Archivos();
           $archivo4->path = Storage::disk('local2')->put('archivos',   $request->file('archivo4')); 
           $archivo4->id_solicitud = $solicitud->id;
+          $bandera=true;
           $archivo4->save();
         }
       }
@@ -308,9 +316,18 @@ class WelcomeController extends Controller
           $archivo5 = new Archivos();
           $archivo5->path = Storage::disk('local2')->put('archivos',   $request->file('archivo5')); 
           $archivo5->id_solicitud = $solicitud->id;
+          $bandera=true;
           $archivo5->save();
         }
       }
+
+      if($bandera){
+        $solicitud_busqueda = Solicitud::find($solicitud->id);
+        $solicitud_busqueda->tiene_archivo_adjunto = 1;
+        $solicitud_busqueda->save();
+
+      }
+
       
       $id_departamento = $request->departamento;
       $usuarios = DB::table('departamento_user')
@@ -358,7 +375,7 @@ class WelcomeController extends Controller
 
     public function ver_caso(Request $request, $id)
     {
-      $caso = Solicitud::findOrFail($id);  
+      $caso = Solicitud::findOrFail(Crypt::decrypt($id));  
       $archivos = Archivos::where('id_solicitud',$id)->get();
       $total_respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->count();
       $respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->take(3)->get();
@@ -388,6 +405,27 @@ class WelcomeController extends Controller
   
      
       return view('administracion.responder.index',compact('respuestas_notificacion','total_respuestas_notificacion','respuesta', 'archivos'));
+     
+    
+    }
+
+    public function ver_respuesta2(Request $request, $id)
+    {
+      $nuevo_id= Crypt::decrypt($id);
+
+  
+        
+      $notificacion = Respuesta::find($nuevo_id);
+      $notificacion->leido = 1;
+      $notificacion->save();
+
+      $respuesta = Respuesta::findOrFail($nuevo_id);  
+      $archivos = ArchivosRespuesta::where('id_respuesta',$nuevo_id)->get();
+      $total_respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->count();
+      $respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->take(3)->get();
+  
+     
+      return view('administracion.responder.index-abogado',compact('respuestas_notificacion','total_respuestas_notificacion','respuesta', 'archivos'));
      
     
     }
@@ -590,7 +628,7 @@ class WelcomeController extends Controller
     public function registrar_respuesta(Request $request, $id)
     {
       //$departamento = Departamento::all();
-      $casos = Solicitud::findOrFail($id); 
+      $casos = Solicitud::findOrFail(Crypt::decrypt($id)); 
       return view('administracion.respuesta.registrar', ['casos' => $casos]);
     }
 
@@ -608,6 +646,8 @@ class WelcomeController extends Controller
       $respuesta->hora = $hora;
       $respuesta->solicitud_id = $request->id_solicitud;
       $respuesta->id_user_receptor = $request->id_user_receptor;
+
+      $bandera=false;
        
       if( $respuesta->save() ){
         
@@ -617,6 +657,7 @@ class WelcomeController extends Controller
             $archivos1 = new ArchivosRespuesta();
             $archivos1->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo1')); 
             $archivos1->id_respuesta = $respuesta->id;
+            $bandera=true;
             $archivos1->save();
           }
         }
@@ -627,6 +668,7 @@ class WelcomeController extends Controller
             $archivos2 = new ArchivosRespuesta();
             $archivos2->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo2')); 
             $archivos2->id_respuesta = $respuesta->id;
+            $bandera=true;
             $archivos2->save();
           }
         }
@@ -637,6 +679,7 @@ class WelcomeController extends Controller
             $archivo3 = new ArchivosRespuesta();
             $archivo3->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo3')); 
             $archivo3->id_respuesta = $respuesta->id;
+            $bandera=true;
             $archivo3->save();
           }
         }
@@ -647,6 +690,7 @@ class WelcomeController extends Controller
             $archivo4 = new ArchivosRespuesta();
             $archivo4->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo4')); 
             $archivo4->id_respuesta = $respuesta->id;
+            $bandera=true;
             $archivo4->save();
           }
         }
@@ -657,8 +701,17 @@ class WelcomeController extends Controller
             $archivo5 = new ArchivosRespuesta();
             $archivo5->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo5')); 
             $archivo5->id_respuesta = $respuesta->id;
+            $bandera=true;
             $archivo5->save();
           }
+        }
+
+     
+        if($bandera){
+          $respuesta_busqueda = Respuesta::find($respuesta->id);
+          $respuesta_busqueda->tiene_archivo_adjunto = 1;
+          $respuesta_busqueda->save();
+  
         }
 
 
@@ -760,8 +813,9 @@ class WelcomeController extends Controller
       $respuesta->fecha = $hoy;
       $respuesta->hora = $hora;
       $respuesta->solicitud_id = $request->id_solicitud;
-      $respuesta->id_autorespuesta = $request->id_solicitud;
+      $respuesta->id_autorespuesta = $request->id_auto_respuesta;
       $respuesta->id_user_receptor = $request->id_user_receptor;
+      $bandera=false;
        
       if( $respuesta->save() ){
         
@@ -771,6 +825,7 @@ class WelcomeController extends Controller
             $archivos1 = new ArchivosRespuesta();
             $archivos1->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo1')); 
             $archivos1->id_respuesta = $respuesta->id;
+            $bandera=true;
             $archivos1->save();
           }
         }
@@ -781,6 +836,7 @@ class WelcomeController extends Controller
             $archivos2 = new ArchivosRespuesta();
             $archivos2->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo2')); 
             $archivos2->id_respuesta = $respuesta->id;
+            $bandera=true;
             $archivos2->save();
           }
         }
@@ -791,6 +847,7 @@ class WelcomeController extends Controller
             $archivo3 = new ArchivosRespuesta();
             $archivo3->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo3')); 
             $archivo3->id_respuesta = $respuesta->id;
+            $bandera=true;
             $archivo3->save();
           }
         }
@@ -801,6 +858,7 @@ class WelcomeController extends Controller
             $archivo4 = new ArchivosRespuesta();
             $archivo4->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo4')); 
             $archivo4->id_respuesta = $respuesta->id;
+            $bandera=true;
             $archivo4->save();
           }
         }
@@ -811,8 +869,16 @@ class WelcomeController extends Controller
             $archivo5 = new ArchivosRespuesta();
             $archivo5->path = Storage::disk('local2')->put('respuesta',   $request->file('archivo5')); 
             $archivo5->id_respuesta = $respuesta->id;
+            $bandera=true;
             $archivo5->save();
           }
+        }
+
+        if($bandera){
+          $respuesta_busqueda = Respuesta::find($respuesta->id);
+          $respuesta_busqueda->tiene_archivo_adjunto = 1;
+          $respuesta_busqueda->save();
+  
         }
 
         return redirect('administracion')->with('mensaje-registro', 'Respuesta enviada correctamente.');

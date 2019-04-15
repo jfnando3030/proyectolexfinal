@@ -54,68 +54,8 @@
                         @endif
                     </div>
 
-                    <h5 style="color: red; text-align:center;">
-                       Información Bancaria
-                    </h5>
+   
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label style="padding-top: 15px;color: black;font-weight: bold;">Tipo de Cuenta:</label>
-
-                            <select class="form-control" name="tipopagos" id="tipopagos" style="width: 100%;" >
-
-                                @if(Auth::user()->tipopagos=="")
-
-                                  <option disabled value="" selected>Seleccione un método de pago</option>
-                                  <option value="ahorro" class="hover">  Cta. Ahorro </option>
-                                  <option value="corriente" class="hover">  Cta. Corriente </option>
-                                  <option value="tarjeta" class="hover">  Tarjeta de Crédito </option>
-
-                                @else                                                                        
-                
-                                        
-                                                @if('ahorro' == Auth::user()->tipopagos)
-                                                    <option value="ahorro" selected class="hover">  Cta. Ahorro </option>
-                                                    <option value="corriente" class="hover" >  Cta. Corriente </option>
-                                                    <option value="tarjeta" class="hover">  Tarjeta de Crédito </option>
-                                                @else
-                                                   @if('corriente' == Auth::user()->tipopagos)
-                                                    <option value="ahorro" class="hover">  Cta. Ahorro </option>
-                                                    <option value="corriente" selected class="hover">  Cta. Corriente </option>
-                                                    <option value="tarjeta" class="hover">  Tarjeta de Crédito </option>
-                                                @else
-
-                                                    <option value="ahorro" class="hover">  Cta. Ahorro </option>
-                                                    <option value="corriente" class="hover">  Cta. Corriente </option>
-                                                    <option value="tarjeta" selected class="hover">  Tarjeta de Crédito </option>
-
-                                                @endif
-                                                @endif
-                                @endif
-                                            
-                                </select>
-                               
-                        </div>
-                        <div class="col-md-12">
-
-                            <label style="padding-top: 15px;color: black;font-weight: bold;">Entidad Bancaria:</label>
-                            {!! Form::text('titular',null,['placeholder'=>'Ingrese la entidad bancaria','class'=>'form-control']) !!}
-                           
-                       
-                               
-                        </div>
-
-                        <div class="col-md-12">
-
-                            <label style="padding-top: 15px;color: black;font-weight: bold;"># Cuenta Bancaria / Tarjeta Crédito:</label>
-                            {!! Form::text('numctatarjeta',null,['placeholder'=>'Ingrese el nro de cuenta','class'=>'form-control', 'onkeypress'=>'return soloNumeros(event)']) !!}
-                           
-                       
-                               
-                        </div>
-
-
-                    </div>
 
                 </div>
                 <div class="col-md-8">
@@ -176,40 +116,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <label>Sexo:</label>
-                                    
-                                                                    <select class="form-control" name="sexo" id="sexo" style="width: 100%;" >
-                                                                        @if(Auth::user()->sexo=="")
-
-                                                                          <option disabled value="" selected>Seleccione el género</option>
-                                                                          <option value="M">  Masculino </option>
-                                                                          <option value="F">  Femenino </option>
-
-                                                                        @else                                                                        
-                                                        
-                                                                                
-                                                                                        @if('M' == Auth::user()->sexo)
-                                                                                            <option value="M" selected>  Masculino </option>
-                                                                                            <option value="F">  Femenino </option>
-                                                                                        @else
-                                                                                            <option value="F" selected>  Femenino </option>
-                                                                                            <option value="M">  Masculino </option>
-                                                                                        @endif
-                                                                        @endif
-                                                                                    
-                                                                        </select>
-                                                                       
-                                                                </div>
-                                                                <div class="col-md-6">
-                        
-                                                                    <label>Fecha Nacimiento:</label>
-                                                                    {!! Form::date('fechanacim',null,['placeholder'=>'Ingrese su fecha de nacimiento','class'=>'form-control']) !!}
-                                                               
-                                                                       
-                                                                </div>
-                                                            </div>
+                                                 
 
                                                 <div class="row">
                                                     <div class="col-md-6" >

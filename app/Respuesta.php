@@ -20,6 +20,7 @@ class Respuesta extends Model
         'fecha',
         'hora',
         'id_autorespuesta',
+        'tiene_archivo_adjunto',
     ];
 
     public function solicitud(){

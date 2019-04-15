@@ -24,6 +24,7 @@ class CreateRespuestasTables extends Migration
             $table->char('estado',1)->default(1);
             $table->integer('id_autorespuesta')->nullable();
             $table->integer('id_user_receptor');
+            $table->integer('tiene_archivo_adjunto')->default(0);;
            
 
 

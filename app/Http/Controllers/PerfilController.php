@@ -148,11 +148,6 @@ class PerfilController extends Controller
                     'direccion' => $request['direccion'],
                     'telefono' => $request['telefono'],
                     'celular' => $request['celular'],
-                    'sexo' => $request['sexo'],
-                    'fechanacim' => $request['fechanacim'],
-                    'tipopagos' => $request['tipopagos'],
-                    'titular' => $request['titular'],
-                    'numctatarjeta' => $request['numctatarjeta'],
                     
                     'path'=> $request['path'],
                 
@@ -171,14 +166,9 @@ class PerfilController extends Controller
                     'direccion' => $request['direccion'],
                     'telefono' => $request['telefono'],
                     'celular' => $request['celular'],
-                    'sexo' => $request['sexo'],
-                    'fechanacim' => $request['fechanacim'],
                     'password' => bcrypt($request['password']),
                     'path'=> $request['path'],
-                    'tipopagos' => $request['tipopagos'],
-                    'titular' => $request['titular'],
-                    'numctatarjeta' => $request['numctatarjeta'],
-                
+
 
 
                    

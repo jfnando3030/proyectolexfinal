@@ -113,6 +113,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 // ************************** RESPUESTAS *************************************** 
 	Route::get('/administracion/casos/respuesta/{id}', 'WelcomeController@ver_respuesta')->name('ver_respuesta');
+	Route::get('/administracion/casos/respuesta-abogado/{id}', 'WelcomeController@ver_respuesta2')->name('ver_respuesta2');
 	Route::get('/administracion/notificaciones', 'NotificacionUserController@all_notificaciones')->name('all_notificaciones');
 	
 	//REGISTRAR 

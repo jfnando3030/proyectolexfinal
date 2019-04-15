@@ -137,7 +137,7 @@
                                               <tr class="fila">
                                                   
                                                   
-                                                  <th>Emisore</th>
+                                                  <th>Emisor</th>
                       
                                                   <th>Mensaje</th>
                                                   <th>Adjuntos</th>
@@ -161,7 +161,12 @@
                                                         <td class="mailbox-name"><b>De: </b> {{$response->solicitud->usuario->nombres}} {{$response->solicitud->usuario->apellidos}}</td>
                                                         <td class="mailbox-subject"><b>{{$response->titulo}}</b> - {{substr($response->respuesta, 0, 30)}}...
                                                         </td>
+                                                        @if($response->tiene_archivo_adjunto ==1)
                                                         <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                                                        @else 
+                                                        <td> </td>
+
+                                                        @endif
                                                         <td class="mailbox-date">{{$response->fecha}} - {{$response->hora}}</td>
                                                        
                                                       </tr>
@@ -214,7 +219,7 @@
         <div id="contenido" class="col-md-12 col-lg-12 col-12 tab-content" style="display:none;">
           <div id="menu1" class="box box-primary tab-pane fade in active">
               <div class="box-header with-border">
-                  <h3 class="box-title">Bandeja de entrada</h3>
+                  <h3 class="box-title">Bandeja de entrada 2</h3>
     
                
                   <!-- /.box-tools -->
@@ -249,7 +254,8 @@
           
                                                         
                                                       @if($response->estado !=0)
-                                                        <tr onclick="window.location='{{ route('ver_respuesta',['id' => Crypt::encrypt($response->id) ])}}'" data-id="{{$response->id}}">
+                                                         @if($response->leido==0) 
+                                                        <tr style="background-color: #e4e4e4" onclick="window.location='{{ route('ver_respuesta2',['id' => Crypt::encrypt($response->id) ])}}'" data-id="{{$response->id}}">
                                         
                                         
                                                         
@@ -257,10 +263,40 @@
                                                           <td class="mailbox-name"><b>De: </b> {{$response->solicitud->usuario->nombres}} {{$response->solicitud->usuario->apellidos}}</td>
                                                           <td class="mailbox-subject"><b>{{$response->titulo}}</b> - {{substr($response->respuesta, 0, 30)}}...
                                                           </td>
+                                                          @if($response->tiene_archivo_adjunto ==1)
                                                           <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                                                          @else 
+                                                          <td> </td>
+  
+                                                          @endif
                                                           <td class="mailbox-date">{{$response->fecha}} - {{$response->hora}}</td>
                                                          
                                                         </tr>
+
+                                                        @else 
+
+                                                        <tr onclick="window.location='{{ route('ver_respuesta2',['id' => Crypt::encrypt($response->id) ])}}'" data-id="{{$response->id}}">
+                                        
+                                        
+                                                        
+                                                          
+                                                          <td class="mailbox-name"><b>De: </b> {{$response->solicitud->usuario->nombres}} {{$response->solicitud->usuario->apellidos}}</td>
+                                                          <td class="mailbox-subject"><b>{{$response->titulo}}</b> - {{substr($response->respuesta, 0, 30)}}...
+                                                          </td>
+                                                          @if($response->tiene_archivo_adjunto ==1)
+                                                          <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                                                          @else 
+                                                          <td> </td>
+  
+                                                          @endif
+                                                          <td class="mailbox-date">{{$response->fecha}} - {{$response->hora}}</td>
+                                                         
+                                                        </tr>
+
+
+
+
+                                                        @endif
                                         
                                                       
                                         
@@ -346,7 +382,7 @@
 
                     @if($user->departamento_id==$nuevo->id_departamento )
 
-                    <tr onclick="window.location='{{ route('ver_caso',['id' => $nuevo->id])}}'" data-id="{{$nuevo->id}}">
+                    <tr onclick="window.location='{{ route('ver_caso',['id' => Crypt::encrypt($nuevo->id)])}}'" data-id="{{$nuevo->id}}">
 
 
                 
@@ -354,7 +390,12 @@
                       <td class="mailbox-name"><b>{{$nuevo->usuario->nombres}} {{$nuevo->usuario->apellidos}}</b></td>
                       <td class="mailbox-subject"><b>{{$nuevo->nombre_solicitud}}</b> - {{substr($nuevo->descripcion, 0, 30)}}...
                       </td>
+                      @if($nuevo->tiene_archivo_adjunto ==1)
                       <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                      @else 
+                      <td> </td>
+
+                      @endif
                       <td class="mailbox-date">{{$nuevo->departamento->nombre_departamento}}</td>
                       <td class="mailbox-date">{{$nuevo->fecha_solicitud}} - {{$nuevo->hora_solicitud}}</td>
                       
@@ -434,7 +475,7 @@
 
                   @foreach($solicitudes_usuario as $nuevo)
                     @if($nuevo->estado_solicitud !=0)
-                   <tr onclick="window.location='{{ route('respuesta',['id' => $nuevo->id])}}'" data-id="{{$nuevo->id}}">
+                   <tr onclick="window.location='{{ route('respuesta',['id' => Crypt::encrypt($response->id)])}}'" data-id="{{$nuevo->id}}">
 
 
                   
@@ -442,7 +483,12 @@
                     <td class="mailbox-name"><b>{{$nuevo->usuario->nombres}} {{$nuevo->usuario->apellidos}}</b></td>
                     <td class="mailbox-subject"><b>{{$nuevo->nombre_solicitud}}</b> - {{substr($nuevo->descripcion, 0, 30)}}...
                     </td>
+                    @if($nuevo->tiene_archivo_adjunto ==1)
                     <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                    @else 
+                    <td> </td>
+
+                    @endif
                     <td class="mailbox-date">{{$nuevo->departamento->nombre_departamento}}</td>
                     <td class="mailbox-date">{{$nuevo->fecha_solicitud}} - {{$nuevo->hora_solicitud}}</td>
                    
@@ -522,7 +568,12 @@
                   <td class="mailbox-name"><b>{{$nuevo->usuario->nombres}} {{$nuevo->usuario->apellidos}}</b></td>
                   <td class="mailbox-subject"><b>{{$nuevo->nombre_solicitud}}</b> - {{substr($nuevo->descripcion, 0, 30)}}...
                   </td>
+                  @if($nuevo->tiene_archivo_adjunto ==1)
                   <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                  @else 
+                  <td> </td>
+
+                  @endif
                   <td class="mailbox-date">{{$nuevo->departamento->nombre_departamento}}</td>
                   <td class="mailbox-date">{{$nuevo->fecha_solicitud}} - {{$nuevo->hora_solicitud}}</td>
                  
@@ -677,7 +728,12 @@
                                                 <td class="mailbox-name"><b>De: </b> {{$response->solicitud->usuario->nombres}} {{$response->solicitud->usuario->apellidos}}</td>
                                                 <td class="mailbox-subject"><b>{{$response->titulo}}</b> - {{substr($response->respuesta, 0, 30)}} ...
                                                 </td>
+                                                @if($response->tiene_archivo_adjunto ==1)
                                                 <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                                                @else 
+                                                <td> </td>
+
+                                                @endif
                                                 <td class="mailbox-date">{{$response->fecha}} - {{$response->hora}}</td>
                                                
                                               </tr>
@@ -740,7 +796,7 @@
               <div id="menu5" class="box box-primary tab-pane fade in active">
 
                   <div class="box-header with-border">
-                      <h3 class="box-title">Respuestas</h3>
+                      <h3 class="box-title">Respuestas 2</h3>
                   </div>
                       
           
@@ -785,7 +841,12 @@
                                         <td class="mailbox-name"><b>De: </b> {{$response->solicitud->abogado->nombres}} {{$response->solicitud->abogado->apellidos}}</td>
                                         <td class="mailbox-subject"><b>{{$response->titulo}}</b> - {{substr($response->respuesta, 0, 30)}}...
                                         </td>
+                                        @if($response->tiene_archivo_adjunto ==1)
                                         <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                                        @else 
+                                        <td> </td>
+
+                                        @endif
                                         <td class="mailbox-date">{{$response->fecha}} - {{$response->hora}}</td>
                                     
                                       </tr>
@@ -892,7 +953,7 @@
           
                           @foreach($solicitudes_registrados as $nuevo)
                             @if($nuevo->estado_solicitud !=0)
-                           <tr onclick="window.location='{{ route('ver_caso',['id' => $nuevo->id])}}'" data-id="{{$nuevo->id}}">
+                           <tr onclick="window.location='{{ route('ver_caso',['id' => Crypt::encrypt($nuevo->id)])}}'" data-id="{{$nuevo->id}}">
           
           
                           
@@ -900,7 +961,12 @@
                             <td class="mailbox-name"><b>Para: {{$nuevo->departamento->nombre_departamento}}</b></td>
                             <td class="mailbox-subject"><b>{{$nuevo->nombre_solicitud}}</b> - {{substr($nuevo->descripcion, 0, 30)}} ...
                             </td>
+                            @if($nuevo->tiene_archivo_adjunto ==1)
                             <td class="mailbox-attachment"><i class="fa fa-paperclip"></i></td>
+                            @else 
+                            <td> </td>
+
+                            @endif
                             <td class="mailbox-date">{{$nuevo->fecha_solicitud}} - {{$nuevo->hora_solicitud}}</td>
                            
                           </tr>

@@ -21,6 +21,7 @@ class Solicitud extends Model
         'estado_solicitud',
         'fecha_solicitud',
         'hora_solicitud',
+        'tiene_archivo_adjunto',
     ];
 
     public function usuario(){

@@ -24,7 +24,7 @@
               <div class="box-body no-padding">
                 <div class="mailbox-read-info">
               
-                  <h5 style="color:black"> <b>De: </b> {{$respuesta->solicitud->abogado->nombres}} {{$respuesta->solicitud->abogado->apellidos}}
+                  <h5 style="color:black"> <b>De: </b> {{$respuesta->solicitud->usuario->nombres}} {{$respuesta->solicitud->usuario->apellidos}}
                     <br> <b> Para: </b> Mi
                     <span class="mailbox-read-time pull-right">{{$respuesta->fecha}} - {{$respuesta->hora}}</span></h5>
                 </div>
@@ -169,7 +169,7 @@
               <form action="{{ route('store_respuesta2') }}" method="post" enctype="multipart/form-data">
 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
-                <input type="hidden" name="id_user_receptor" id="id_user_receptor" value="{{ $respuesta->solicitud->id_user_abogado }}">
+                <input type="hidden" name="id_user_receptor" id="id_user_receptor" value="{{ $respuesta->solicitud->id_user_solicitud }}">
 
                 <div class="row">
                     <div class="col-md-12">
@@ -185,7 +185,6 @@
                                                 <hr>
                                             </div>
                                             <input type="hidden" name="id_solicitud" id="id_solicitud" value="{{ $respuesta->solicitud->id }}">
-                                            <input type="hidden" name="id_auto_respuesta" id="id_auto_respuesta" value="{{ $respuesta->id }}">
                                             <div class="col-md-6" style="padding-bottom: 15px;">
                                                 <label>Titulo de respuesta:</label>
                                                 {!! Form::text('nombre',null,['placeholder'=>'Ingrese el título de su respuesta','class'=>'form-control', 'required']) !!}
