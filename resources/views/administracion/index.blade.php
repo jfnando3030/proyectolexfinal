@@ -219,7 +219,7 @@
         <div id="contenido" class="col-md-12 col-lg-12 col-12 tab-content" style="display:none;">
           <div id="menu1" class="box box-primary tab-pane fade in active">
               <div class="box-header with-border">
-                  <h3 class="box-title">Bandeja de entrada 2</h3>
+                  <h3 class="box-title">Bandeja de entrada</h3>
     
                
                   <!-- /.box-tools -->
@@ -475,7 +475,7 @@
 
                   @foreach($solicitudes_usuario as $nuevo)
                     @if($nuevo->estado_solicitud !=0)
-                   <tr onclick="window.location='{{ route('respuesta',['id' => Crypt::encrypt($response->id)])}}'" data-id="{{$nuevo->id}}">
+                   <tr onclick="window.location='{{ route('respuesta',['id' => Crypt::encrypt($nuevo->id)])}}'" data-id="{{$nuevo->id}}">
 
 
                   
@@ -796,7 +796,7 @@
               <div id="menu5" class="box box-primary tab-pane fade in active">
 
                   <div class="box-header with-border">
-                      <h3 class="box-title">Respuestas 2</h3>
+                      <h3 class="box-title">Respuestas</h3>
                   </div>
                       
           
