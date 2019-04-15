@@ -326,35 +326,11 @@
                             <div class="header-button2">
                              
                                 @if(Auth::user()->rol == "Administrador")
-                                <div class="header-button-item has-noti js-item-menu">
-                                    <i class="zmdi zmdi-email"></i>
-                                        <span class="quantity">1</span>
-                                    <div class="notifi-dropdown js-dropdown">
-                                        <div class="notifi__title">
-                                        <p>Usted Tiene 0 notificaciones sin leer</p>
-                                        </div>
-
-                                        <div class="notifi__footer">
-                                            <a href="#" onclick="return myFunction();">Ver Todas Notificaciones</a>
-                                        </div>
-                                    </div>
-                                </div>
+                           
                                 @endif
 
                                 @if(Auth::user()->rol == "Abogado")
-                                <div class="header-button-item has-noti js-item-menu">
-                                    <i class="zmdi zmdi-email"></i>
-                                        <span class="quantity">1</span>
-                                    <div class="notifi-dropdown js-dropdown">
-                                        <div class="notifi__title">
-                                        <p>Usted Tiene 0 notificaciones sin leer</p>
-                                        </div>
-
-                                        <div class="notifi__footer">
-                                            <a href="#" onclick="return myFunction();">Ver Todas Notificaciones</a>
-                                        </div>
-                                    </div>
-                                </div>
+                             
                                 @endif
 
                                 @if(Auth::user()->rol == "Registrado")
