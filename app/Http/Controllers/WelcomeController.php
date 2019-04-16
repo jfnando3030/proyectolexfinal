@@ -1098,10 +1098,10 @@ class WelcomeController extends Controller
 
       $pagos = new Pagos();
       $pagos->id_user = $request->user()->id;
-      $pagos->id_tarifa = "DT";
+      $pagos->id_tarifa = $tarifa->id;
       $pagos->fecha_inicio = $hoy;
       $pagos->fecha_finalizacion = $this->aumentar_dias_activacion(Carbon::parse($hoy));
-      $pagos->modo_pago = $tarifa->tarifa;
+      $pagos->modo_pago =  "DT";
       $pagos->monto_pago = $tarifa->precio;
 
       $pagos->estado = 0;

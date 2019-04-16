@@ -201,7 +201,28 @@
                                                       <h5 class="card-title text-muted text-uppercase text-center">{{ $tarifa->tarifa }} </h5>
                                                       <h4 class="card-price text-center" id="precio-{{$tarifa->id}}">$ {{ $tarifa->precio }}<span class="period">/Mes</span></h4>
                                                       <hr>
-                                                        <textarea readonly="" row="7" style="resize: none; font-size: 15.5px;">{{ $tarifa->descripcion }}</textarea>
+                                                        @if($x == 1 )
+                                                          <ul class="fa-ul">
+                                                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Consultoría <small>(2/mes)</small></li>
+                                                            <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Elaboración de documentos </li>
+                                                            <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Asesoría</li>
+
+                                                          </ul>
+                                                        @endif
+                                                        @if($x == 2 )
+                                                          <ul class="fa-ul">
+                                                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Consultoría <small> (2/mes)</small> </li>
+                                                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Elaboración de documentos <small> (2/mes)</small></li>
+                                                            <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Asesoría</li>
+                                                          </ul>
+                                                        @endif
+                                                        @if($x == 3 )
+                                                          <ul class="fa-ul">
+                                                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Consultoría</li>
+                                                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Elaboración de documentos</li>
+                                                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Asesoría legal</li>
+                                                          </ul>
+                                                        @endif
                                                       <br>
                                                       @if($x == 1 )
                                                       <center><input type="radio" name="rb" id="rb_plan" value="{{$tarifa->id}}" checked="" > <strong>Seleccionar</strong></center>
@@ -270,8 +291,7 @@
                                                 <!-- Free Tier -->
                                                 <?php $y = 1; ?>
                                                 @foreach( $tarifa2 as $tarifa2)
-                                                @if( $tarifa2->id >= 2 )
-                                                <div class="col-lg-6" >
+                                                <div class="col-lg-4" >
                                                   <div class="card-body" >
                                                     @if($y == 1 )
                                                       <div class="card mb-5 mb-lg-0" id="rbp-{{$tarifa2->id}}" style="border-style: solid; border-color: #0075f6;">
@@ -281,8 +301,28 @@
                                                       <h5 class="card-title text-muted text-uppercase text-center">{{ $tarifa2->tarifa }} </h5>
                                                       <h4 class="card-price text-center" id="precio-{{$tarifa2->id}}">$ {{ $tarifa2->precio }}<span class="period">/Mes</span></h4>
                                                       <hr>
-                                                        <textarea readonly="" row="7" style="resize: none;">{{ $tarifa2->descripcion }}</textarea>
-                                                        <input type="hidden" name="amount" id="amount" value="{{ $tarifa2->precio  }}">
+                                                      @if($y == 1 )
+                                                          <ul class="fa-ul">
+                                                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Consultoría <small>(2/mes)</small></li>
+                                                            <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Elaboración de documentos </li>
+                                                            <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Asesoría</li>
+
+                                                          </ul>
+                                                        @endif
+                                                        @if($y == 2 )
+                                                          <ul class="fa-ul">
+                                                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Consultoría <small> (2/mes)</small> </li>
+                                                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Elaboración de documentos <small> (2/mes)</small></li>
+                                                            <li class="text-muted"><span class="fa-li"><i class="fas fa-times"></i></span>Asesoría</li>
+                                                          </ul>
+                                                        @endif
+                                                        @if($y == 3 )
+                                                          <ul class="fa-ul">
+                                                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Consultoría</li>
+                                                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Elaboración de documentos</li>
+                                                            <li><span class="fa-li"><i class="fas fa-check"></i></span>Asesoría legal</li>
+                                                          </ul>
+                                                        @endif
                                                       <br>
                                                       @if($y == 1 )
                                                       <center><input type="radio" name="rbp" id="rb_plan" value="{{$tarifa2->id}}" checked="" > <strong>Seleccionar</strong></center>
@@ -294,7 +334,6 @@
                                                   </div>
                                                 </div>
                                                 <?php $y = $y + 1; ?>
-                                                @endif
                                                 @endforeach                                               
                                               </div>
                                             </div>
