@@ -278,7 +278,7 @@
                             </a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a id="menu_letras" href="{{route('oficio.create')}}" onclick="return myFunction();">
+                                    <a id="menu_letras" href="{{url('administracion/oficio')}}" onclick="return myFunction();">
                                         <i class="fas fa-file"></i>Agregar</a>
                                 </li>
                                 <li>

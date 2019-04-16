@@ -175,8 +175,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 	Route::resource('administracion/tarifa', 'TarifaController');
 
-	Route::resource('administracion/oficio', 'OficioController');
-
 
 // ************************** PAYPAL *************************************** 
 	
@@ -189,7 +187,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 // ************************** FIN DE PAYPAL ********************************* 
 
-	Route::resource('administracion/oficio', 'OficioController');
+//*******************************OFICIO********************************
+	Route::get('administracion/oficio', 'OficioController@create');
+	Route::post('administracion/oficio/procuracion_judicial', 'OficioController@store');
+	
 	Route::get('/administracion/notificaciones/{id}', 'NotificacionUserController@notificacion')->name('notificacion');
 
 });
