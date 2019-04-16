@@ -67,10 +67,6 @@
 
     }
 
-    #body_free, #body_premiun, #body_basic{
-      
-    }
-
     .pt-5, .py-5 {
       padding-top: 0rem!important;
       padding-bottom: 1rem!important;
@@ -122,12 +118,14 @@
       transition: all 0.2s;
     }
 
+    .col-lg-4{
+      padding-left: 0px;
+    }
 
     textarea{
       padding: 2px 0px 0px 25px;
-      height: 90px;
+      height: 120px;
       resize: none;
-      font-size: 10px;
     }
 
     /* Hover Effects on Card */
@@ -186,15 +184,15 @@
                                         
 
                                         <div class="col-md-12">
-                                          <label>PLAN DE PAGO</label>
+                                          <label>Plan de pagos</label>
                                           <section class="pricing py-5">
                                             <div class="container">
                                               <div class="row">
                                                 <!-- Free Tier -->
                                                 <?php $x = 1; ?>
                                                 @foreach( $tarifa as $tarifa)
-                                                <div class="col-lg-4" >
-                                                  <div class="card-body" >
+                                                <div class="col-md-4" style="padding-left: 2px;">
+                                                  <div class="card-body" style="padding-left: 2px; width: 100%;" >
                                                     @if($x == 1 )
                                                       <div class="card mb-5 mb-lg-0" id="rb-{{$tarifa->id}}" style="border-style: solid; border-color: #0075f6;">
                                                     @else
@@ -203,7 +201,7 @@
                                                       <h5 class="card-title text-muted text-uppercase text-center">{{ $tarifa->tarifa }} </h5>
                                                       <h4 class="card-price text-center" id="precio-{{$tarifa->id}}">$ {{ $tarifa->precio }}<span class="period">/Mes</span></h4>
                                                       <hr>
-                                                        <textarea readonly="" row="7" style="resize: none;">{{ $tarifa->descripcion }}</textarea>
+                                                        <textarea readonly="" row="7" style="resize: none; font-size: 15.5px;">{{ $tarifa->descripcion }}</textarea>
                                                       <br>
                                                       @if($x == 1 )
                                                       <center><input type="radio" name="rb" id="rb_plan" value="{{$tarifa->id}}" checked="" > <strong>Seleccionar</strong></center>
@@ -222,12 +220,12 @@
                                         </div>   
 
                                         
-                                        <div class="col-md-6" style="padding-bottom: 15px; display: none;" id="div_pago_td1">
+                                        <div class="col-md-6" style="padding-bottom: 15px;" id="div_pago_td1">
                                             <label>Número de comprobante:</label>
-                                            {!! Form::text('numero_comprobante',null,['placeholder'=>'Ingrese el número de comprobante','class'=>'form-control']) !!}
+                                            {!! Form::text('numero_comprobante',null,['placeholder'=>'Ingrese el número de comprobante','class'=>'form-control', 'required' ]) !!}
                                         </div>
 
-                                        <div class="col-md-6" style="padding-bottom: 15px; display: none;" id="div_pago_td2">
+                                        <div class="col-md-6" style="padding-bottom: 15px;" id="div_pago_td2">
                                             <label>Cargar comprobante:</label><br>
                                             <div class="input-group control-group increment" >
                                                 <input  type="file" name="archivo1" id="archivo1"accept="image/*, doc,.docx, .pdf" style="font-size: 13px;">

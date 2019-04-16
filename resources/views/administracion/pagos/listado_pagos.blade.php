@@ -64,9 +64,6 @@
                                 @if ($pagos->modo_pago == "DT")
                                     <td style="vertical-align:middle; font-size: 16px;"> Transferencia o deposito </td>
                                 @endif
-                                @if ($pagos->modo_pago == "Free")
-                                    <td style="vertical-align:middle; font-size: 16px;"> Gratuito </td>
-                                @endif
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$pagos->monto_pago}}</td>
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$pagos->fecha_inicio}} </td>
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$pagos->fecha_finalizacion}} </td>
