@@ -19,7 +19,7 @@
                                 <div class="row">
                                     <div class="col-md-12" style="padding-bottom: 15px;">
                                         <label>Tipo de oficio</label>
-                                        {!! Form::select('inicioDia', $contratos, null, ['class'=>'form-control', 'required' => 'required']) !!}
+                                        {!! Form::select('tipo_oficio', $contratos, null, ['class'=>'form-control', 'required' => 'required']) !!}
                                     </div>
                                 </div>
 
@@ -154,6 +154,7 @@
 
                                 <div class="row" id="oficio_psppacj">
                                     <form method="POST" action="{{ url('administracion/oficio/contrato_prestacion_servicios_profesionales_perito_acreditado_consejo_judicatura') }}" accept-charset="UTF-8">
+                                        @csrf
                                         <div class="row ">
                                             <div class="col-md-6" style="padding-bottom: 15px;">
                                                 <label>Fecha:</label>
@@ -228,7 +229,7 @@
                                                             </div>
                                                             <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
                                                                 <label>Nombre:</label>
-                                                                <input placeholder="Ingrese el nombre completo del abogado" class="form-control" required="required" onkeypress="return soloLetras(event)" name="psppacjabogado_nombre" type="text">
+                                                                <input placeholder="Ingrese el nombre completo del abogado" class="form-control" required="required" name="psppacjabogado_nombre" type="text">
                                                             </div>
                                                             <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
                                                                 <label>Calidad:</label>
@@ -249,7 +250,7 @@
                                                             </div>
                                                             <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
                                                                 <label>Nombre:</label>
-                                                                <input placeholder="Ingrese el nombre completo del perito" class="form-control" required="required" onkeypress="return soloLetras(event)" name="psppacjperito_nombre" type="text">
+                                                                <input placeholder="Ingrese el nombre completo del perito" class="form-control" required="required" name="psppacjperito_nombre" type="text">
                                                             </div>
                                                             <div class="col-md-6" style="padding-bottom: 15px;">
                                                                 <label>Área:</label>
@@ -273,7 +274,7 @@
                                                             </div>
                                                             <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
                                                                 <label>Cuota de Entrada:</label>
-                                                                <input placeholder="Ingrese el valor de la cuota de entrada" class="form-control" required="required" onkeypress="return soloLetras(event)" name="psppacjvfpago_cuota" type="number">
+                                                                <input placeholder="Ingrese el valor de la cuota de entrada" class="form-control" required="required" name="psppacjvfpago_cuota" type="number">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -282,7 +283,7 @@
         
                                             <div class="col-md-12" style="padding-bottom: 15px;">
                                                 <label>Domicilio</label>
-                                                <input placeholder="Ingrese el domicilio" class="form-control" required="required" onkeypress="return soloLetras(event)" name="psppacj_domicilio" type="text">
+                                                <input placeholder="Ingrese el domicilio" class="form-control" required="required" name="psppacj_domicilio" type="text">
                                             </div>
                                             <div class="col-md-4" style="padding-bottom: 15px;"></div>
                                             <div class="col-md-4" style="padding-bottom: 15px;">

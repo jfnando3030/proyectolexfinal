@@ -335,7 +335,6 @@ class OficioController extends Controller
      */
     public function store(Request $request)
     {
-
         /* $datos = [
             "cedula" => $request->opj_cedula,
             "nombre" => $request->opj_nombre,
@@ -358,7 +357,7 @@ class OficioController extends Controller
         $pdf->setPaper('A4', 'portrait');
         return $pdf->stream(); */
 
-        // dd($request);
+        /* dd($request); */
 
         /* $datos = [            
             "fecha" => $request->oca_fecha,
@@ -390,36 +389,36 @@ class OficioController extends Controller
         $pdf->setPaper('A4', 'portrait');
         return $pdf->stream(); */
 
-        dd($request);
+        
 
 
         $datos = [            
-            "fecha" => $request->oca_fecha,
-            "provincia" => $this->provincias[$request->oca_pronvicia],
-            "ciudad" => $this->ciudades[$request->oca_ciudad],
-            "duracion" => $request->oca_duracion,
-            "arrendador_cedula" => $request->ocaarrendador_cedula,
-            "arrendador_nombre" => $request->ocaarrendador_nombre,
-            "arrendador_direccion" => $request->ocaarrendador_direccion,
-            "arrendatario_cedula" => $request->ocaarrendatario_cedula,
-            "arrendatario_nombre" => $request->ocaarrendatario_nombre,
-            "arrendatario_direccion" => $request->ocaarrendatario_direccion,
-            "local_antecedentes" => $request->ocalocal_antecedentes,
-            "local_destino" => $request->ocalocal_destino,
-            "local_precio_n" => $request->ocalocal_precio_n,
-            "local_precio_l" => $request->ocalocal_precio_l,
-            "local_periodo" => $request->ocalocal_periodo,
-            "local_intervalo" => $request->ocalocal_intervalo,
-            "local_garantia_n" => $request->ocalocal_garantia_n,
-            "local_garantia_l" => $request->ocalocal_garantia_l,
-            "local_provincia" => $this->provincias[$request->ocalocal_provincia],
-            "local_ciudad" => $this->ciudades[$request->ocalocal_ciudad],
-            "local_direccion" => $request->ocalocal_direccion,
+        "fecha" => $request->psppacj_fecha,
+        "provincia" => $this->provincias[$request->psppacj_provincia],
+        "ciudad" => $this->ciudades[$request->psppacj_ciudad],
+        "canton" => $request->psppacj_canton,
+        "cliente_cedula" => $request->psppacjcliente_cedula,
+        "cliente_nombre" => $request->psppacjcliente_nombre,
+        "cliente_estado_civil" => $request->psppacjcliente_estado_civil,
+        "cliente_provincia" => $this->provincias[$request->psppacjcliente_provincia],
+        "cliente_canton" => $request->psppacjcliente_canton,
+        "cliente_correo" => $request->psppacjcliente_correo,
+        "cliente_motivo" => $request->psppacjcliente_motivo,
+        "abogado_cedula" => $request->psppacjabogado_cedula,
+        "abogado_nombre" => $request->psppacjabogado_nombre,
+        "abogado_calidad" => $request->psppacjabogado_calidad,
+        "abogado_mat_foro_abogados" => $request->psppacjabogado_mat_foro_abogados,
+        "perito_cedula" => $request->psppacjperito_cedula,
+        "perito_nombre" => $request->psppacjperito_nombre,
+        "perito_area" => $request->psppacjperito_area,
+        "perito_calificacion" => $request->psppacjperito_calificacion,
+        "vfpago_honorario_l" => $request->psppacjvfpago_honorario_l,
+        "vfpago_honorario_n" => $request->psppacjvfpago_honorario_n,
+        "vfpago_cuota" => $request->psppacjvfpago_cuota,
+        "domicilio" => $request->psppacj_domicilio,
         ];
 
-
-
-        $pdf = PDF::loadView('oficios.contrato_arrendamiento', $datos);
+        $pdf = PDF::loadView('oficios.contrato_prestacion_servicios_profesionales_perito_acreditado_consejo_judicatura', $datos);
         $pdf->setPaper('A4', 'portrait');
         return $pdf->stream();
     }
