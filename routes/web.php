@@ -190,6 +190,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 //*******************************OFICIO********************************
 	Route::get('administracion/oficio', 'OficioController@create');
 	Route::post('administracion/oficio/procuracion_judicial', 'OficioController@store');
+	Route::post('administracion/oficio/contrato_arrendamiento', 'OficioController@store');
+	Route::post('administracion/oficio/contrato_prestacion_servicios_profesionales_perito_acreditado_consejo_judicatura', 'OficioController@store');
 	
 	Route::get('/administracion/notificaciones/{id}', 'NotificacionUserController@notificacion')->name('notificacion');
 
