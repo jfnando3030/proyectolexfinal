@@ -30,8 +30,11 @@
     @include('mensajes.msj_rechazado')
   @endif
 
+  
   @if(Auth::user()->rol == "Administrador")
+  <br>
     <p style="color:black; text-align:center"> Bienvenido Súper Administrador </p>
+  
   @else 
     @if(Auth::user()->rol == "Abogado")
     <!-- Main content -->
@@ -330,9 +333,16 @@
     </section>
   @else 
     <section class="content2">
+      @if($saber_consultoria != 0 ) 
+        <div class="alert alert-warning">
+          <strong>Advertencia!</strong> Lo sentimos, Usted ha superado el limite de envios de solicitudes para consultoría. Por favor renueva a un nuevo plan
+        </div>
+      @endif
+      
+ 
       <div class="row">
         <div class="col-md-3 col-lg-2 col-12">
-          @if( $saber_tarifa->count() )
+          @if( $saber_tarifa->count() == 0 or $saber_consultoria != 0 )
             <a  class="btn btn-primary btn-block margin-bottom" title="Redactar nueva solicitud" href="{{url('administracion/solicitud/registrar')}}"><i class="fa fa-plus" style="margin-right: 2px;"></i> Redactar</a>
           @else
             <a class="btn btn-default btn-block margin-bottom" title="Redactar nueva solicitud" disabled href="#"><i class="fa fa-plus" ></i> Redactar</a>

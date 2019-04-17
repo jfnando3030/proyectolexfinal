@@ -29,12 +29,6 @@
                                             <input placeholder="Ingrese el precio de la tarifa" class="form-control" required="required" onkeypress="return soloLetras(event)" name="precio" type="number" step="0.01" value="{{$tarifa->precio}}">
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-12" style="padding-bottom: 15px;">
-                                            <label>Descripción de la tarifa:</label>
-                                            <textarea placeholder="Ingrese la descripción breve de la tarifa" class="form-control" required="required" onkeypress="return soloLetras(event)" name="descripcion" rows="7" >{{$tarifa->descripcion}}</textarea>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>

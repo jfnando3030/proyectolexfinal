@@ -6,15 +6,7 @@
 
 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="padding: 25px;">
 
-    <article class="bg-secondary">  
-        <div class="card-body text-center" style="padding-top: 15px;">
-            <h4 class="text-white">PLAN</h4>
-      
-        </div>
-      
-      </article>
-
-    @if($saber_tarifa->count())
+    @if($saber_tarifa->count() ==0  or $saber_consultoria != 0 )
 
     <div align="center" class="col-md-12 col-12 col-xs-12 col-lg-12 col-sm-12" style="padding-top:15px; padding-bottom: 25px">
         <h4 style="color: black; text-align:center; font-size:25px;"> Realizar solicitud </h4>
@@ -57,31 +49,31 @@
                                                 </select> 
                                                 <label>Cargar archivos:</label><br>
                                                 <div class="input-group control-group increment" >
-                                                    <input  type="file" name="archivo1" id="archivo1" class="form-control" accept="image/*, doc,.docx, .pdf" style="font-size: 13px;">
+                                                    <input  type="file" name="archivo1" id="archivo1" class="form-control" accept="image/*, doc,.docx, .pdf" style="font-size: 11px;">
                                                     <div class="input-group-btn"> 
                                                         <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x1"><i class="fas fa-times"></i></button>
                                                     </div>
                                                 </div>
                                                 <div class="input-group control-group increment" >
-                                                    <input  type="file" name="archivo2" id="archivo2" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 13px;">
+                                                    <input  type="file" name="archivo2" id="archivo2" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 11px;">
                                                     <div class="input-group-btn"> 
                                                         <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x2"><i class="fas fa-times"></i></button>
                                                   </div>
                                                 </div>
                                                 <div class="input-group control-group increment" >
-                                                  <input  type="file" name="archivo3" id="archivo3" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 13px;">
+                                                  <input  type="file" name="archivo3" id="archivo3" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 11px;">
                                                   <div class="input-group-btn"> 
                                                     <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x3"><i class="fas fa-times"></i></button>
                                                   </div>
                                                 </div>
                                                 <div class="input-group control-group increment" >
-                                                  <input  type="file" name="archivo4" id="archivo4" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 13px;">
+                                                  <input  type="file" name="archivo4" id="archivo4" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 11px;">
                                                   <div class="input-group-btn"> 
                                                     <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x4"><i class="fas fa-times"></i></button>
                                                   </div>
                                                 </div>
                                                 <div class="input-group control-group increment" >
-                                                  <input  type="file" name="archivo5" id="archivo5" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 13px;">
+                                                  <input  type="file" name="archivo5" id="archivo5" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 11px;">
                                                   <div class="input-group-btn"> 
                                                     <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x5"><i class="fas fa-times"></i></button>
                                                   </div>
@@ -114,19 +106,32 @@
 
 
       @else
-
-      <article style="background:white">  
-        <div class="card-body text-center" style="padding-top: 15px;">
-            <h4 style="color:red">No tiene un plan de pago activo seleccionado </h4>
+        @if($saber_consultoria == 0 ) 
+            
+            <article style="background:white">  
+            <div class="card-body text-center" style="padding-top: 15px;">
+                <h4 style="color:red">Lo sentimos, Usted ha superado el limite de envios de solicitudes para consultoría.  </h4>
+                <br>
+            <p style="color:black; font-size:15px"> Por favor renueva a un nuevo plan</p>  
             <br>
-        <p style="color:black; font-size:15px"> Por favor seleccione un plan</p>  
-        <br>
-        <p><a class="btn btn-warning letra" target="_self" onclick="return myFunction();" href="{{route('registrar_pago')}}"> Seleccionar Plan  
-        <i class="far fa-money-bill-alt"></i></a></p>
-        </div>
+            <p><a class="btn btn-warning letra" target="_self" onclick="return myFunction();" href="{{route('registrar_pago')}}"> Seleccionar Plan  
+            <i class="far fa-money-bill-alt"></i></a></p>
+            </div>
 
-      </article>
+          </article>
+        @else 
+          <article style="background:white">  
+            <div class="card-body text-center" style="padding-top: 15px;">
+                <h4 style="color:red">No tiene un plan de pago activo seleccionado </h4>
+                <br>
+            <p style="color:black; font-size:15px"> Por favor seleccione un plan</p>  
+            <br>
+            <p><a class="btn btn-warning letra" target="_self" onclick="return myFunction();" href="{{route('registrar_pago')}}"> Seleccionar Plan  
+            <i class="far fa-money-bill-alt"></i></a></p>
+            </div>
 
+          </article>
+        @endif 
       @endif
 
 

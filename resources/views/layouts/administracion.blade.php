@@ -239,10 +239,6 @@
                             </a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a id="menu_letras" href="{{route('tarifa.create')}}" onclick="return myFunction();">
-                                        <i class="fas fa-file"></i>Agregar</a>
-                                </li>
-                                <li>
                                     <a id="menu_letras"  href="{{route('tarifa.index')}}" onclick="return myFunction();">
                                         <i class="fas fa-table"></i>Listado</a>
                                 </li>
