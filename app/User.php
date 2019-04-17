@@ -22,7 +22,7 @@ class User extends Authenticatable  implements MustVerifyEmailContract
      * @var array
      */
     protected $fillable = [
-        'nombres', 'apellidos', 'email', 'password', 'cedula', 'estado', 'rol', 'path', 'telefono', 'celular', 'direccion', 'created_at',
+        'nombres', 'apellidos', 'email', 'password', 'cedula', 'estado', 'ciudad', 'rol', 'path', 'telefono', 'celular', 'direccion', 'created_at',
     ];
 
     /**

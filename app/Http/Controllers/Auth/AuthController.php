@@ -32,6 +32,8 @@ class AuthController extends Controller
             'nombres' => $request['nombres'],
             'apellidos' => $request['apellidos'],
             'cedula' => $request['cedula'],
+            'ciudad' => $request['ciudad'],
+            'direccion' => $request['direccion'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
             'rol' => "Registrado",

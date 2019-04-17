@@ -29,6 +29,8 @@ class UserFrontendRequest extends FormRequest
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|between:6,50',
             'cedula' => 'required',
+            'ciudad' => 'required',
+            'direccion' => 'direccion',
 
              
         ];
