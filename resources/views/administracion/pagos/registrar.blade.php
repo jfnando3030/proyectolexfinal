@@ -262,7 +262,7 @@
                             </div>
 
                             <div class="col-md-4" style="padding-bottom: 15px;" id="btn_guardar">
-                                {!! Form::submit('Guardar información',['class'=>'btn btn-primary btn-block']) !!}
+                                {!! Form::submit('Confirmar transacción',['class'=>'btn btn-primary btn-block']) !!}
                             </div>
 
                             <div class="col-md-4">
@@ -349,7 +349,7 @@
                             </div>
 
                             <div class="col-md-4" style="padding-bottom: 15px;" id="btn_guardar">
-                                {!! Form::submit('Guardar información',['class'=>'btn btn-primary btn-block']) !!}
+                                {!! Form::submit('Confirmar transacción',['class'=>'btn btn-primary btn-block']) !!}
                             </div>
 
                             <div class="col-md-4">
