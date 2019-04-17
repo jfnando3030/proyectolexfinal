@@ -136,7 +136,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // ************************** PAGOS *************************************** 
 	
 	//REGISTRAR 
-	Route::get('/administracion/pago/registrar', 'WelcomeController@registrar_pago');
+	Route::get('/administracion/pago/registrar', 'WelcomeController@registrar_pago')->name('registrar_pago');;
 	Route::post('/administracion/pago/store', 'WelcomeController@store_pago')->name('store_pago');
 	
 	// LISTADO 

@@ -190,7 +190,7 @@
                         @endif
 
                         @if(Auth::user()->rol == "Registrado")
-                            @if( $saber_tarifa == 1 )
+                            @if( $saber_tarifa->count() )
                                 <li class="has-sub">
                                     <a id="menu_letras" class="js-arrow" href="#">
                                             <i class="fa fa-file"></i>Solicitudes    

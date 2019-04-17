@@ -332,7 +332,7 @@
     <section class="content2">
       <div class="row">
         <div class="col-md-3 col-lg-2 col-12">
-          @if( $saber_tarifa == 1 )
+          @if( $saber_tarifa->count() )
             <a  class="btn btn-primary btn-block margin-bottom" title="Redactar nueva solicitud" href="{{url('administracion/solicitud/registrar')}}"><i class="fa fa-plus" style="margin-right: 2px;"></i> Redactar</a>
           @else
             <a class="btn btn-default btn-block margin-bottom" title="Redactar nueva solicitud" disabled href="#"><i class="fa fa-plus" ></i> Redactar</a>

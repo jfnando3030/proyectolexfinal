@@ -56,14 +56,7 @@ class WelcomeController extends Controller
     public function admin(Request $request)
     {
 
-      $saber_tarifa_a = DB::select('select id_user FROM pagos WHERE id_user = ? and activo = 1 and estado = 1',  [ $request->user()->id ]);
-
-      if(count($saber_tarifa_a) == 0){
-        $saber_tarifa = 0;
-      }else{
-        $saber_tarifa = 1;
-      } 
-
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
       if(Auth::user()->rol == "Administrador"){
         return view('administracion.index', compact('saber_tarifa'));
     
@@ -138,13 +131,7 @@ class WelcomeController extends Controller
 
     public function registrar_departamento(Request $request)
     {
-      $saber_tarifa_a = DB::select('select id_user FROM pagos WHERE id_user = ? and activo = 1 and estado = 1',  [ $request->user()->id ]);
-
-      if(count($saber_tarifa_a) == 0){
-        $saber_tarifa = 0;
-      }else{
-        $saber_tarifa = 1;
-      } 
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
 
       return view('administracion.departamento.registrar', ['dias' => $this->dias,'saber_tarifa' => $saber_tarifa]);
     }
@@ -185,14 +172,7 @@ class WelcomeController extends Controller
     {
       $departamento = Departamento::where('estado_departamento',1)->get();
 
-      $saber_tarifa_a = DB::select('select id_user FROM pagos WHERE id_user = ? and activo = 1 and estado = 1',  [ $request->user()->id ]);
-
-      if(count($saber_tarifa_a) == 0){
-        $saber_tarifa = 0;
-      }else{
-        $saber_tarifa = 1;
-      } 
-
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
       return view('administracion.departamento.listado', ['departamento' => $departamento, 'saber_tarifa' => $saber_tarifa]);
     }
   
@@ -214,13 +194,7 @@ class WelcomeController extends Controller
   		$ids = array_unique($ids);
   		$usuario = User::find($ids);
 
-    $saber_tarifa_a = DB::select('select id_user FROM pagos WHERE id_user = ? and activo = 1 and estado = 1',  [ $request->user()->id ]);
-
-    if(count($saber_tarifa_a) == 0){
-      $saber_tarifa = 0;
-    }else{
-      $saber_tarifa = 1;
-    } 
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
   		
   	return view('administracion.abogados.listado', ['usuario'=>$usuario, 'departamento' => $users, 'saber_tarifa' => $saber_tarifa]);
 	}
@@ -278,13 +252,7 @@ class WelcomeController extends Controller
 
       $total_respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->count();
 
-      $saber_tarifa_a = DB::select('select id_user FROM pagos WHERE id_user = ? and activo = 1 and estado = 1',  [ $request->user()->id ]);
-
-      if(count($saber_tarifa_a) == 0){
-        $saber_tarifa = 0;
-      }else{
-        $saber_tarifa = 1;
-      } 
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
 
       return view('administracion.solicitudes.registrar', ['departamento' => $departamento, 'total_respuestas_notificacion' => $total_respuestas_notificacion, 'respuestas_notificacion'=>$respuestas_notificacion, 'saber_tarifa'=>$saber_tarifa]);
     }
@@ -472,13 +440,7 @@ class WelcomeController extends Controller
   {
     $solicitud = Solicitud::where('estado_solicitud',1)->whereNotNull('id_user_abogado')->get();
     
-    $saber_tarifa_a = DB::select('select id_user FROM pagos WHERE id_user = ? and activo = 1 and estado = 1',  [ $request->user()->id ]);
-
-    if(count($saber_tarifa_a) == 0){
-      $saber_tarifa = 0;
-    }else{
-      $saber_tarifa = 1;
-    } 
+    $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
 
     return view('administracion.gestionar.listado', ['solicitud' => $solicitud, 'saber_tarifa' => $saber_tarifa]);
   }
@@ -494,13 +456,7 @@ class WelcomeController extends Controller
 
     $abogado = DB::select("select * from users where id = ? ", [$solicitud[0]->id_user_abogado]); 
     
-    $saber_tarifa_a = DB::select('select id_user FROM pagos WHERE id_user = ? and activo = 1 and estado = 1',  [ $request->user()->id ]);
-
-    if(count($saber_tarifa_a) == 0){
-      $saber_tarifa = 0;
-    }else{
-      $saber_tarifa = 1;
-    } 
+    $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
 
     return view('administracion.gestionar.actualizar', ['solicitud' => $solicitud, 'abogado' => $abogado,  'abogados' => $abogados,'saber_tarifa' => $saber_tarifa]);
   }
@@ -675,13 +631,7 @@ class WelcomeController extends Controller
       //$departamento = Departamento::all();
       $casos = Solicitud::findOrFail(Crypt::decrypt($id)); 
 
-      $saber_tarifa_a = DB::select('select id_user FROM pagos WHERE id_user = ? and activo = 1 and estado = 1',  [ $request->user()->id ]);
-
-      if(count($saber_tarifa_a) == 0){
-        $saber_tarifa = 0;
-      }else{
-        $saber_tarifa = 1;
-      } 
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
 
       return view('administracion.respuesta.registrar', ['casos' => $casos, 'saber_tarifa' => $saber_tarifa]);
     }
@@ -1025,13 +975,7 @@ class WelcomeController extends Controller
     {
       $solicitud = Solicitud::where('id_user_abogado', $request->user()->id)->where('estado_solicitud',1)->where('finalizado_solicitud',0)->get();
 
-      $saber_tarifa_a = DB::select('select id_user FROM pagos WHERE id_user = ? and activo = 1 and estado = 1',  [ $request->user()->id ]);
-
-      if(count($saber_tarifa_a) == 0){
-        $saber_tarifa = 0;
-      }else{
-        $saber_tarifa = 1;
-      }
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
 
       return view('administracion.solicitudes.listado_casos', ['solicitud' => $solicitud, 'saber_tarifa' => $saber_tarifa]);
     }
@@ -1052,13 +996,7 @@ class WelcomeController extends Controller
       $tarifa2 = Tarifa::where('estado', 1)->get();
 
 
-      $saber_tarifa_a = DB::select('select id_user FROM pagos WHERE id_user = ? and activo = 1 and estado = 1',  [ $request->user()->id ]);
-
-      if(count($saber_tarifa_a) == 0){
-        $saber_tarifa = 0;
-      }else{
-        $saber_tarifa = 1;
-      }
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
 
 
       $total_respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
@@ -1141,13 +1079,7 @@ class WelcomeController extends Controller
       $pagos = Pagos::where('id_user', $request->user()->id)->get();
       $total_respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
       
-      $saber_tarifa_a = DB::select('select id_user FROM pagos WHERE id_user = ? and activo = 1 and estado = 1',  [ $request->user()->id ]);
-
-      if(count($saber_tarifa_a) == 0){
-        $saber_tarifa = 0;
-      }else{
-        $saber_tarifa = 1;
-      }
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
 
       $respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'desc')->orderBy('hora', 'desc')->take(3)->get();
 
@@ -1158,13 +1090,7 @@ class WelcomeController extends Controller
     {
       $pagos = DB::select('select pagos.*, users.nombres, users.apellidos FROM users, pagos WHERE users.id = pagos.id_user ');
       
-      $saber_tarifa_a = DB::select('select id_user FROM pagos WHERE id_user = ? and activo = 1 and estado = 1',  [ $request->user()->id ]);
-
-      if(count($saber_tarifa_a) == 0){
-        $saber_tarifa = 0;
-      }else{
-        $saber_tarifa = 1;
-      }
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
 
       return view('administracion.pagos.aprobacion', ['pagos' => $pagos, 'saber_tarifa' => $saber_tarifa]);
 
