@@ -17,7 +17,9 @@ class CrearTablaTarifas extends Migration
             $table->increments('id');
             $table->string('tarifa');
             $table->decimal('precio', 6,2);
-            $table->string('descripcion');
+            $table->integer('cantidad_consultorias');
+            $table->integer('asesoria');
+            $table->integer('cantidad_documentos');
             $table->char('estado', 1)->default(1);
         });
     }

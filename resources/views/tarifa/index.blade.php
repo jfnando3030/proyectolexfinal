@@ -23,7 +23,6 @@
       <th scope="col">Id</th>
       <th scope="col">Nombre</th>
       <th scope="col">Precio</th>
-      <th scope="col">Descripción</th>
       <!-- <th scope="col">Estado</th> -->
       <th scope="col">Opciones</th>
     </tr>
@@ -34,7 +33,6 @@
       <th scope="row">{{ $taf->id }}</th>
       <td>{{ $taf->tarifa }}</td>
       <td>{{ $taf->precio }}</td>
-      <td>{{ $taf->descripcion }}</td>
       <!-- <td>
           @if($taf->estado == 1)
           <i class="fas fa-toggle-on"></i>
@@ -42,7 +40,7 @@
             <i class="fal fa-toggle-off"></i>
           @endif
       </td>  -->
-      <td>
+      <td style="text-align: center;">
       @if(Auth::user()->rol == "Administrador")
         <form action="{{route('tarifa.destroy', Crypt::encrypt($taf->id))}}" method="POST">
         @csrf

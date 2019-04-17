@@ -19,6 +19,7 @@ class CreatePagosTable extends Migration
             $table->integer('id_tarifa');
             $table->date('fecha_inicio');
             $table->date('fecha_finalizacion');
+            $table->char('cantidad_consultorias',1)->default(0);
             $table->string('modo_pago');
             $table->decimal('monto_pago', 8, 2);    
             $table->char('activo',1)->default(0);

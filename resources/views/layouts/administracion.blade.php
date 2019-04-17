@@ -190,20 +190,22 @@
                         @endif
 
                         @if(Auth::user()->rol == "Registrado")
-                        <li class="has-sub">
-                            <a id="menu_letras" class="js-arrow" href="#">
-                                    <i class="fa fa-file"></i>Solicitudes    
-                                <span class="arrow">
-                                    <i class="fas fa-angle-down"></i>
-                                </span>
-                            </a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            @if( $saber_tarifa->count() )
                                 <li class="has-sub">
-                                    <a href="{{url('administracion/solicitud/registrar')}}" onclick="return myFunction();" id="menu_letras">
-                                    <i class="fa fa-file-pdf-o"></i>Enviar</a>
+                                    <a id="menu_letras" class="js-arrow" href="#">
+                                            <i class="fa fa-file"></i>Solicitudes    
+                                        <span class="arrow">
+                                            <i class="fas fa-angle-down"></i>
+                                        </span>
+                                    </a>
+                                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                        <li class="has-sub">
+                                            <a href="{{url('administracion/solicitud/registrar')}}" onclick="return myFunction();" id="menu_letras">
+                                            <i class="fa fa-file-pdf-o"></i>Enviar</a>
+                                        </li>
+                                    </ul>
                                 </li>
-                            </ul>
-                        </li>
+                            @endif
                         @endif
 
                         @if(Auth::user()->rol == "Registrado")
@@ -763,7 +765,7 @@
 $(function () {
 $("#example1").DataTable();
 $('#example2').DataTable({
-"paging": true,
+"paging": false,
 "lengthChange": true,
 "searching": true,
 "ordering": false,

@@ -22,7 +22,7 @@ class TarifaController extends Controller
     public function index()
     {
         //
-        $tarifas = Tarifa::where('estado',1)->orderBy('id')->paginate(2);
+        $tarifas = Tarifa::where('estado',1)->orderBy('id')->paginate(5);
         // dd($tarifas[0]->tarifa);
         return view('tarifa.index')->with( 'tarifas' , $tarifas);
     }

@@ -55,8 +55,10 @@ class WelcomeController extends Controller
 
     public function admin(Request $request)
     {
+
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
       if(Auth::user()->rol == "Administrador"){
-        return view('administracion.index');
+        return view('administracion.index', compact('saber_tarifa'));
     
       }else {
         if(Auth::user()->rol == "Abogado"){
@@ -78,7 +80,7 @@ class WelcomeController extends Controller
           $total_respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
           
           
-          return view('administracion.index', compact('total_respuestas','respuestas','user_departamentos','finalizados_usuarios', 'total_solicitudes_usuario', 'total_finalizados_usuario','total_solicitudes_nuevos', 'solicitudes_nuevos', 'solicitudes_usuario'));
+          return view('administracion.index', compact('total_respuestas','respuestas','user_departamentos','finalizados_usuarios', 'total_solicitudes_usuario', 'total_finalizados_usuario','total_solicitudes_nuevos', 'solicitudes_nuevos', 'solicitudes_usuario', 'saber_tarifa'));
     
         }else{
     
@@ -95,7 +97,7 @@ class WelcomeController extends Controller
           
 
     
-          return view('administracion.index', compact('respuestas_notificacion','total_respuestas_notificacion','total_respuestas','respuestas','total_solicitudes_registrados','solicitudes_registrados'));
+          return view('administracion.index', compact('respuestas_notificacion','total_respuestas_notificacion','total_respuestas','respuestas','total_solicitudes_registrados','solicitudes_registrados', 'saber_tarifa'));
     
         }
     
@@ -129,67 +131,72 @@ class WelcomeController extends Controller
 
     public function registrar_departamento(Request $request)
     {
-      return view('administracion.departamento.registrar', ['dias' => $this->dias]);
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
+
+      return view('administracion.departamento.registrar', ['dias' => $this->dias,'saber_tarifa' => $saber_tarifa]);
     }
 
     public function store_departamento(Request $request)
     {
-    $enviarDatos = true;
-    $mensaje1= "";
-      
-    if($request->inicioDia >= $request->finDia || $request->inicioHora >= $request->finHora){
-      $enviarDatos = false;
-      $mensaje1 = 'Revise su horario.';
-    }
-
-    if($enviarDatos){
-      $departamento = new Departamento();
-      $departamento->nombre_departamento = $request->nombres;
-      $departamento->descripcion_departamento = $request->descripcion;
-      $departamento->horario_inicio = $request->inicioDia;
-      $departamento->horario_fin = $request->finDia;
-      $departamento->hora_inicio = $request->inicioHora;
-      $departamento->hora_fin = $request->finHora;
-
-      if( $departamento->save() ){
-        $request->flush();
-        return redirect('administracion/departamento/listado/')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
-      }else{
-        $request->flush();
-        return redirect('administracion/departamento/registrar')->with('mensaje-error', 'Problemas al registrar los datos.');
+      $enviarDatos = true;
+      $mensaje1= "";
+        
+      if($request->inicioDia >= $request->finDia || $request->inicioHora >= $request->finHora){
+        $enviarDatos = false;
+        $mensaje1 = 'Revise su horario.';
       }
-    }else{
-      $request->flash();
-      return redirect('administracion/departamento/registrar' )->with('mensaje-error', $mensaje1);
-    }
+
+      if($enviarDatos){
+        $departamento = new Departamento();
+        $departamento->nombre_departamento = $request->nombres;
+        $departamento->descripcion_departamento = $request->descripcion;
+        $departamento->horario_inicio = $request->inicioDia;
+        $departamento->horario_fin = $request->finDia;
+        $departamento->hora_inicio = $request->inicioHora;
+        $departamento->hora_fin = $request->finHora;
+
+        if( $departamento->save() ){
+          $request->flush();
+          return redirect('administracion/departamento/listado/')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
+        }else{
+          $request->flush();
+          return redirect('administracion/departamento/registrar')->with('mensaje-error', 'Problemas al registrar los datos.');
+        }
+      }else{
+        $request->flash();
+        return redirect('administracion/departamento/registrar' )->with('mensaje-error', $mensaje1);
+      }
     }
     
-    public function listado_departamento()
+    public function listado_departamento( Request $request)
     {
       $departamento = Departamento::where('estado_departamento',1)->get();
 
-    return view('administracion.departamento.listado', ['departamento' => $departamento]);
-  }
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
+      return view('administracion.departamento.listado', ['departamento' => $departamento, 'saber_tarifa' => $saber_tarifa]);
+    }
   
-	public function listarAbogados()
+	public function listarAbogados(Request $request)
 	{
-	$users = DB::table('departamento_user')
-		->join('users', 'departamento_user.user_id', '=', 'users.id')
-		->join('departamento', 'departamento_user.departamento_id', '=', 'departamento.id')
-		->select('users.id' ,'users.nombres', 'users.apellidos', 'departamento.nombre_departamento')
-		->where([['departamento.estado_departamento','=',1],['users.estado','=',1]])
-		->distinct()
-		->get();
+  	$users = DB::table('departamento_user')
+  		->join('users', 'departamento_user.user_id', '=', 'users.id')
+  		->join('departamento', 'departamento_user.departamento_id', '=', 'departamento.id')
+  		->select('users.id' ,'users.nombres', 'users.apellidos', 'departamento.nombre_departamento')
+  		->where([['departamento.estado_departamento','=',1],['users.estado','=',1]])
+  		->distinct()
+  		->get();
 
-		$ids = Array();
-		foreach($users as $u){
-			array_push($ids, $u->id);
-		}
+  		$ids = Array();
+  		foreach($users as $u){
+  			array_push($ids, $u->id);
+  		}
 
-		$ids = array_unique($ids);
-		$usuario = User::find($ids);
-		
-	return view('administracion.abogados.listado', ['usuario'=>$usuario, 'departamento' => $users]);
+  		$ids = array_unique($ids);
+  		$usuario = User::find($ids);
+
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
+  		
+  	return view('administracion.abogados.listado', ['usuario'=>$usuario, 'departamento' => $users, 'saber_tarifa' => $saber_tarifa]);
 	}
 
 
@@ -202,29 +209,30 @@ class WelcomeController extends Controller
         
     public function editar_departamento(Request $request)
     {
-    $enviarDatos = true;
-    $mensaje1= "";
+      $enviarDatos = true;
+      $mensaje1= "";
       
-    if($request->inicioDia >= $request->finDia || $request->inicioHora >= $request->finHora){
-      $enviarDatos = false;
-      $mensaje1 = 'Revise su horario.';
-    }
-
-    if($enviarDatos){
-      $departamento = Departamento::findOrFail($request->id);
-      $departamento->nombre_departamento = $request->nombres;
-      $departamento->descripcion_departamento = $request->descripcion;
-      $departamento->horario_inicio = $request->inicioDia;
-      $departamento->horario_fin = $request->finDia;
-      $departamento->hora_inicio = $request->inicioHora;
-      $departamento->hora_fin = $request->finHora;
-      if($departamento->save()){
-      return redirect('administracion/departamento/listado')->with('mensaje-registro', 'Datos actualizados correctamente.');
+      if($request->inicioDia >= $request->finDia || $request->inicioHora >= $request->finHora){
+        $enviarDatos = false;
+        $mensaje1 = 'Revise su horario.';
       }
-    }else{
-      $request->flash();
-      return redirect('administracion/departamento/actualizar/' . Crypt::encrypt($request->id) )->with('mensaje-error', $mensaje1);
-    }
+
+      if($enviarDatos){
+        $departamento = Departamento::findOrFail($request->id);
+        $departamento->nombre_departamento = $request->nombres;
+        $departamento->descripcion_departamento = $request->descripcion;
+        $departamento->horario_inicio = $request->inicioDia;
+        $departamento->horario_fin = $request->finDia;
+        $departamento->hora_inicio = $request->inicioHora;
+        $departamento->hora_fin = $request->finHora;
+        if($departamento->save()){
+        return redirect('administracion/departamento/listado')->with('mensaje-registro', 'Datos actualizados correctamente.');
+        }
+      }else{
+        $request->flash();
+        return redirect('administracion/departamento/actualizar/' . Crypt::encrypt($request->id) )->with('mensaje-error', $mensaje1);
+      }
+
     }
 
     public function eliminar_departamento(Request $request, $id)
@@ -243,7 +251,10 @@ class WelcomeController extends Controller
       $respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->take(3)->get();
 
       $total_respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->count();
-      return view('administracion.solicitudes.registrar', ['departamento' => $departamento, 'total_respuestas_notificacion' => $total_respuestas_notificacion, 'respuestas_notificacion'=>$respuestas_notificacion]);
+
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
+
+      return view('administracion.solicitudes.registrar', ['departamento' => $departamento, 'total_respuestas_notificacion' => $total_respuestas_notificacion, 'respuestas_notificacion'=>$respuestas_notificacion, 'saber_tarifa'=>$saber_tarifa]);
     }
 
   public function store_solicitud(Request $request)
@@ -412,8 +423,6 @@ class WelcomeController extends Controller
     public function ver_respuesta2(Request $request, $id)
     {
       $nuevo_id= Crypt::decrypt($id);
-
-  
         
       $notificacion = Respuesta::find($nuevo_id);
       $notificacion->leido = 1;
@@ -424,21 +433,16 @@ class WelcomeController extends Controller
       $total_respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->count();
       $respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->take(3)->get();
   
-     
       return view('administracion.responder.index-abogado',compact('respuestas_notificacion','total_respuestas_notificacion','respuesta', 'archivos'));
-     
-    
-    }
+  }
 
-
-
-    
-    
-  public function gestionar_casos()
+  public function gestionar_casos(Request $request)
   {
     $solicitud = Solicitud::where('estado_solicitud',1)->whereNotNull('id_user_abogado')->get();
-   
-    return view('administracion.gestionar.listado', ['solicitud' => $solicitud]);
+    
+    $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
+
+    return view('administracion.gestionar.listado', ['solicitud' => $solicitud, 'saber_tarifa' => $saber_tarifa]);
   }
  
   public function gestionar_abogado_casos($id)
@@ -452,8 +456,9 @@ class WelcomeController extends Controller
 
     $abogado = DB::select("select * from users where id = ? ", [$solicitud[0]->id_user_abogado]); 
     
+    $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
 
-    return view('administracion.gestionar.actualizar', ['solicitud' => $solicitud, 'abogado' => $abogado,  'abogados' => $abogados]);
+    return view('administracion.gestionar.actualizar', ['solicitud' => $solicitud, 'abogado' => $abogado,  'abogados' => $abogados,'saber_tarifa' => $saber_tarifa]);
   }
 
     public function actualizar_abogado_caso(Request $request)
@@ -497,7 +502,7 @@ class WelcomeController extends Controller
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify"> Hola ' . $nombres_abogado  . ', te escribimos para notificarte que se te ha asignado el caso: ' . $casos->nombre_solicitud . ', el cual pertenece a ' . $nombres_cliente  . '.</p>
 
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify">&iexcl;Un abrazo!,<br/>
-                             El equipo de LEX 4.0<br/>
+                             El equipo de Merino&Asociados<br/>
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 11px;"><span><strong>ESTA ES UNA COMUNICACI&Oacute;N AUTOM&Aacute;TICA, POR FAVOR NO RESPONDER.</strong></span></p>
                         </div>
                             
@@ -536,7 +541,7 @@ class WelcomeController extends Controller
         //confirmaciones
         $mail->Username = 'gerencia@geomarvaldez.com';
         $mail->Password = 'Geomar2018';
-        $mail->SetFrom('gerencia@geomarvaldez.com', 'Notificaciones LEX 4.0');
+        $mail->SetFrom('gerencia@geomarvaldez.com', 'Notificaciones Merino & Asociados');
         $mail->Subject = html_entity_decode('Cambio de abogado');
             
         $mail->Body = $codigohtml;      
@@ -568,10 +573,10 @@ class WelcomeController extends Controller
                         </div>
                         <div style="color: #888888; font-size: 16px; font-family: Work Sans, Calibri, sans-serif; line-height: 24px; width:400px; margin:30px auto; text-align:center;">
 
-                          <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify"> Hola ' . $nombres_cliente  . ', te escribimos para notificarte que tu caso: ' . $casos->nombre_solicitud . ' ha sido asignado al Abogado ' . $nombres_abogado  . '.</p>
+                          <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify"> Hola ' . $nombres_cliente  . ', te escribimos para notificarte que tu caso: ' . $casos->nombre_solicitud . ' ha sido cambiado al Abogado ' . $nombres_abogado  . '.</p>
 
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify">&iexcl;Un abrazo!,<br/>
-                             El equipo de LEX 4.0<br/>
+                             El equipo de Merino&Asociados<br/>
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 11px;"><span><strong>ESTA ES UNA COMUNICACI&Oacute;N AUTOM&Aacute;TICA, POR FAVOR NO RESPONDER.</strong></span></p>
                         </div>
                             
@@ -610,16 +615,12 @@ class WelcomeController extends Controller
         //confirmaciones
         $mail->Username = 'gerencia@geomarvaldez.com';
         $mail->Password = 'Geomar2018';
-        $mail->SetFrom('gerencia@geomarvaldez.com', 'Notificaciones LEX 4.0');
+        $mail->SetFrom('gerencia@geomarvaldez.com', 'Notificaciones Merino & Asociados');
         $mail->Subject = html_entity_decode('Cambio de abogado');
             
         $mail->Body = $codigohtml;      
         $mail->AddAddress($emaiL_cliente);
         $mail->Send();
-
-
-
-
 
         return redirect('administracion/gestionar')->with('mensaje-registro', 'Datos actualizados correctamente.');
         }
@@ -629,7 +630,10 @@ class WelcomeController extends Controller
     {
       //$departamento = Departamento::all();
       $casos = Solicitud::findOrFail(Crypt::decrypt($id)); 
-      return view('administracion.respuesta.registrar', ['casos' => $casos]);
+
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
+
+      return view('administracion.respuesta.registrar', ['casos' => $casos, 'saber_tarifa' => $saber_tarifa]);
     }
 
     public function store_respuesta(Request $request)
@@ -745,10 +749,10 @@ class WelcomeController extends Controller
 
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify"> Para ver la respuesta da clic en el siguiente enlace.</p>
 
-                          <a href="http://localhost/proyectolexfinal/administracion/casos/respuesta/' . Crypt::encrypt($respuesta->id ) . '" style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:center"> Da clic en este enlace </a>
+                          <a href="http://35.237.74.133/administracion/casos/respuesta/' . Crypt::encrypt($respuesta->id ) . '" style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:center"> Da clic en este enlace </a>
 
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify">&iexcl;Un abrazo!,<br/>
-                             El equipo de LEX 4.0<br/>
+                             El equipo de Merino&Asociados<br/>
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 11px;"><span><strong>ESTA ES UNA COMUNICACI&Oacute;N AUTOM&Aacute;TICA, POR FAVOR NO RESPONDER.</strong></span></p>
                         </div>
                             
@@ -787,7 +791,7 @@ class WelcomeController extends Controller
         //confirmaciones
         $mail->Username = 'gerencia@geomarvaldez.com';
         $mail->Password = 'Geomar2018';
-        $mail->SetFrom('gerencia@geomarvaldez.com', 'Notificaciones LEX 4.0');
+        $mail->SetFrom('gerencia@geomarvaldez.com', 'Notificaciones Merino & Asociados');
         $mail->Subject = html_entity_decode('Respuesta del abogado');
             
         $mail->Body = $codigohtml;      
@@ -914,7 +918,7 @@ class WelcomeController extends Controller
                           <a href="http://35.237.74.133/administracion/casos/respuesta-abogado/' . Crypt::encrypt($respuesta->id ) . '" style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:center"> Da clic en este enlace </a>
 
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 12px; text-align:justify">&iexcl;Un abrazo!,<br/>
-                             El equipo de LEX 4.0<br/>
+                             El equipo de Merino&Asociados<br/>
                           <p style="font-family: Verdana, Geneva, sans-serif; font-size: 11px;"><span><strong>ESTA ES UNA COMUNICACI&Oacute;N AUTOM&Aacute;TICA, POR FAVOR NO RESPONDER.</strong></span></p>
                         </div>
                             
@@ -953,7 +957,7 @@ class WelcomeController extends Controller
         //confirmaciones
         $mail->Username = 'gerencia@geomarvaldez.com';
         $mail->Password = 'Geomar2018';
-        $mail->SetFrom('gerencia@geomarvaldez.com', 'Notificaciones LEX 4.0');
+        $mail->SetFrom('gerencia@geomarvaldez.com', 'Notificaciones Merino & Asociados');
         $mail->Subject = html_entity_decode('Respuesta del abogado');
             
         $mail->Body = $codigohtml;      
@@ -971,7 +975,9 @@ class WelcomeController extends Controller
     {
       $solicitud = Solicitud::where('id_user_abogado', $request->user()->id)->where('estado_solicitud',1)->where('finalizado_solicitud',0)->get();
 
-    return view('administracion.solicitudes.listado_casos', ['solicitud' => $solicitud]);
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
+
+      return view('administracion.solicitudes.listado_casos', ['solicitud' => $solicitud, 'saber_tarifa' => $saber_tarifa]);
     }
 
     
@@ -983,15 +989,21 @@ class WelcomeController extends Controller
       return redirect('administracion/solicitud/casos');
     }
 
-    public function registrar_pago()
+    public function registrar_pago(Request $request)
     {
+
       $tarifa = Tarifa::where('estado', 1)->get();
       $tarifa2 = Tarifa::where('estado', 1)->get();
+
+
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
+
+
       $total_respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
          
       $respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'desc')->orderBy('hora', 'desc')->take(3)->get();
 
-      return view('administracion.pagos.registrar', ['tarifa' => $tarifa, 'tarifa2' => $tarifa2, 'total_respuestas_notificacion' => $total_respuestas_notificacion, 'respuestas_notificacion' => $respuestas_notificacion]);
+      return view('administracion.pagos.registrar', ['tarifa' => $tarifa, 'tarifa2' => $tarifa2, 'total_respuestas_notificacion' => $total_respuestas_notificacion, 'respuestas_notificacion' => $respuestas_notificacion, 'saber_tarifa' => $saber_tarifa]);
     }
 
     public function saber_comprobante_repetido($comprobante_pago)
@@ -1027,39 +1039,24 @@ class WelcomeController extends Controller
       $pagos->id_tarifa = $tarifa->id;
       $pagos->fecha_inicio = $hoy;
       $pagos->fecha_finalizacion = $this->aumentar_dias_activacion(Carbon::parse($hoy));
-      
-      if( $tarifa->id == 1){
-        $pagos->modo_pago = "Free";
-        $pagos->comprobante_pago = "Ninguno";
-      }else{
-        $pagos->modo_pago = "DT";
-      }
-      
-      
+      $pagos->modo_pago =  "DT";
       $pagos->monto_pago = $tarifa->precio;
 
-
-      if($tarifa->id == 1){
-        $pagos->estado = 1;
-        $pagos->activo = 1; 
-        $pagos->path = "Ninguno";
-        $pagos->comprobante_pago = "Ninguno";
+      $pagos->estado = 0;
+      $pagos->activo = 0;
+      if ($this->saber_comprobante_repetido($request->numero_comprobante) == "existe"){
+        return redirect('administracion/pago/registrar')->with('mensaje-error', 'El comprobante de pago no es válido.');
       }else{
-        $pagos->estado = 0;
-        $pagos->activo = 0;
-        if ($this->saber_comprobante_repetido($request->numero_comprobante) == "existe"){
-          return redirect('administracion/pago/registrar')->with('mensaje-error', 'El comprobante de pago no es válido.');
-        }else{
-          $pagos->comprobante_pago = $request->numero_comprobante;
-          if($request->archivo1 != ""){
-            if($request->file('archivo1')){
-              $pagos->path = Storage::disk('local2')->put('comprobante_pagos',   $request->file('archivo1')); 
-            }
-          }else{
-            $pagos->path = "Ninguno";
+        $pagos->comprobante_pago = $request->numero_comprobante;
+        if($request->archivo1 != ""){
+          if($request->file('archivo1')){
+            $pagos->path = Storage::disk('local2')->put('comprobante_pagos',   $request->file('archivo1')); 
           }
+        }else{
+          $pagos->path = "Ninguno";
         }
       }
+
 
      
       if( $pagos->save())
@@ -1081,17 +1078,21 @@ class WelcomeController extends Controller
     {
       $pagos = Pagos::where('id_user', $request->user()->id)->get();
       $total_respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
-         
+      
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
+
       $respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->orderBy('fecha', 'desc')->orderBy('hora', 'desc')->take(3)->get();
 
-      return view('administracion.pagos.listado_pagos', ['pagos' => $pagos, 'total_respuestas_notificacion' => $total_respuestas_notificacion, 'respuestas_notificacion' => $respuestas_notificacion]);
+      return view('administracion.pagos.listado_pagos', ['pagos' => $pagos, 'total_respuestas_notificacion' => $total_respuestas_notificacion, 'respuestas_notificacion' => $respuestas_notificacion, 'saber_tarifa' => $saber_tarifa]);
     }
 
      public function aprobacion_pagos(Request $request)
     {
       $pagos = DB::select('select pagos.*, users.nombres, users.apellidos FROM users, pagos WHERE users.id = pagos.id_user ');
+      
+      $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
 
-      return view('administracion.pagos.aprobacion', ['pagos' => $pagos]);
+      return view('administracion.pagos.aprobacion', ['pagos' => $pagos, 'saber_tarifa' => $saber_tarifa]);
 
     }
 

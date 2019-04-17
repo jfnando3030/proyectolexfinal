@@ -15,7 +15,9 @@ class Tarifa extends Model
         'id', 
         'tarifa',
         'precio',
-        'descripcion',
+        'cantidad_consultorias',
+        'cantidad_documentos',
+        'asesoria',
         'estado'
     ];
 }

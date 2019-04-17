@@ -4,6 +4,18 @@
 
 @section('contenido')
 
+<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="padding: 25px;">
+
+    <article class="bg-secondary">  
+        <div class="card-body text-center" style="padding-top: 15px;">
+            <h4 class="text-white">PLAN</h4>
+      
+        </div>
+      
+      </article>
+
+    @if($saber_tarifa->count())
+
     <div align="center" class="col-md-12 col-12 col-xs-12 col-lg-12 col-sm-12" style="padding-top:15px; padding-bottom: 25px">
         <h4 style="color: black; text-align:center; font-size:25px;"> Realizar solicitud </h4>
     </div>
@@ -99,6 +111,30 @@
             {!! Form::close() !!}
         </div>
     </div>
+
+
+      @else
+
+      <article style="background:white">  
+        <div class="card-body text-center" style="padding-top: 15px;">
+            <h4 style="color:red">No tiene un plan de pago activo seleccionado </h4>
+            <br>
+        <p style="color:black; font-size:15px"> Por favor seleccione un plan</p>  
+        <br>
+        <p><a class="btn btn-warning letra" target="_self" onclick="return myFunction();" href="{{route('registrar_pago')}}"> Seleccionar Plan  
+        <i class="far fa-money-bill-alt"></i></a></p>
+        </div>
+
+      </article>
+
+      @endif
+
+
+
+
+</div>
+
+   
 
 
 @endsection

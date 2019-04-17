@@ -247,7 +247,7 @@ class VerificationController extends Controller
         //confirmaciones
         $mail->Username = 'Guayas Emprende por Internet';
         $mail->Password = '5luKaRwGdN_5wKEUWTfc6w';
-        $mail->SetFrom('confirmaciones@bangoenergygel.com', 'Notificaciones Bango Energy Gel');
+        $mail->SetFrom('confirmaciones@bangoenergygel.com', 'Notificaciones Merino & Asociados');
         $mail->Subject = html_entity_decode('Forma parte de Bango Energy Gel');
             
         $mail->Body = $codigohtml;      
