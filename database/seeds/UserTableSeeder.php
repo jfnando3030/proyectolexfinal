@@ -25,7 +25,8 @@ class UserTableSeeder extends Seeder
             'password'=> bcrypt('12345678'),
             'direccion' => "",
             'telefono' => "",
-            'celular' => "",
+            'celular' => "0991851033",
+            'ciudad' => "Machala",
             'email_verified_at'=>"2019-04-01 12:31:15",
            
  
@@ -45,6 +46,7 @@ class UserTableSeeder extends Seeder
             'direccion' => "",
             'telefono' => "",
             'celular' => "",
+            'ciudad' => "Machala",
             'email_verified_at'=>"2019-04-01 12:31:15",
            
  
@@ -64,6 +66,7 @@ class UserTableSeeder extends Seeder
             'direccion' => "",
             'telefono' => "",
             'celular' => "",
+            'ciudad' => "Machala",
             'email_verified_at'=>"2019-04-01 12:31:15",
            
  
