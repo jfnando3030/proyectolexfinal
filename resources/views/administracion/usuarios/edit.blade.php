@@ -142,31 +142,44 @@
                           
                                         </div>
                                 </div>
-        
-        
-                                <div class="col-xs-12 col-md-8 col-12">
 
-                                        <div class="form-group">
-                                                {!! Form::label('Departamentos:', '', ['class' => 'negrita']) !!}
-                                                <select class="form-control select2" multiple="multiple" data-placeholder="Selecione los departamentos" name ="departamentos[]" style="width: 100%;">
-                                                        <?php $array = array(); ?>
-                                                        @foreach($usuario->departamentos as $departamento)
-                                                            <?php $array[] = $departamento->id;?>
-                                                        @endforeach
-                                                        @foreach($departamentos as $departamento)
-                                                            @if(in_array($departamento->id,$array) )
-                                                                <option value="{{$departamento->id}}" selected> {{ $departamento->nombre_departamento }} </option>
-                                                            @else
-                                                                <option value="{{$departamento->id}}" > {{ $departamento->nombre_departamento }} </option>
-                                                            @endif
-                                                        @endforeach
-                                
-                                                </select>
-                                            </div>
+                                <div class="col-md-4 col-xs-12 col-12" >
+                                        {!! Form::label('*Ciudad:', '', ['class' => 'negrita']) !!}
+                                        {!! Form::text('ciudad',null,['placeholder'=>'Ingrese su ciudad','class'=>'form-control',  'required']) !!}
+                                        
+                                    </div>
         
-                                      
         
-                               </div>
+                               
+
+                     </div>
+
+                     <div class="row">
+
+                            <div class="col-xs-12 col-md-12 col-12">
+
+                                    <div class="form-group">
+                                            {!! Form::label('Departamentos:', '', ['class' => 'negrita']) !!}
+                                            <select class="form-control select2" multiple="multiple" data-placeholder="Selecione los departamentos" name ="departamentos[]" style="width: 100%;">
+                                                    <?php $array = array(); ?>
+                                                    @foreach($usuario->departamentos as $departamento)
+                                                        <?php $array[] = $departamento->id;?>
+                                                    @endforeach
+                                                    @foreach($departamentos as $departamento)
+                                                        @if(in_array($departamento->id,$array) )
+                                                            <option value="{{$departamento->id}}" selected> {{ $departamento->nombre_departamento }} </option>
+                                                        @else
+                                                            <option value="{{$departamento->id}}" > {{ $departamento->nombre_departamento }} </option>
+                                                        @endif
+                                                    @endforeach
+                            
+                                            </select>
+                                        </div>
+    
+                                  
+    
+                           </div>
+
 
                      </div>
 
