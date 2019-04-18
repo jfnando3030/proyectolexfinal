@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{-- <meta http-equiv="X-UA-Compatible" content="ie=edge"> --}}
     <link rel="icon" href="{{ asset('frontend/images/icon.png') }}">
-    <title>Procuración Judicial</title>
+    <title>Contrato de Arrendamiento</title>
     <style>
         @page {
                 margin: 0cm 0cm;

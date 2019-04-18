@@ -23,7 +23,7 @@
                                     </div>
                                 </div>
 
-                                {{-- <div class="row" id="oficio_ca">
+                                <div class="row" id="oficio_ca" style="display:none">
                                     <form method="POST" action="{{ url('administracion/oficio/contrato_arrendamiento') }}" accept-charset="UTF-8">
                                         @csrf
                                         <div class="row">
@@ -150,10 +150,10 @@
                                             <div class="col-md-4" style="padding-bottom: 15px;"></div>
                                         </div>
                                     </form>
-                                </div> --}}
+                                </div>
 
-                                <div class="row" id="oficio_psppacj">
-                                    <form method="POST" action="{{ url('administracion/oficio/contrato_prestacion_servicios_profesionales_perito_acreditado_consejo_judicatura') }}" accept-charset="UTF-8">
+                                <div class="row" id="oficio_psppacj" style="display:none">
+                                    <form method="POST" action="{{ url('administracion/oficio/contrato_psppacj') }}" accept-charset="UTF-8">
                                         @csrf
                                         <div class="row ">
                                             <div class="col-md-6" style="padding-bottom: 15px;">
@@ -194,7 +194,7 @@
         
                                                             <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
                                                                 <label>Nombre:</label>
-                                                                <input placeholder="Ingrese el nombre completo del cliente" class="form-control" required="required" onkeypress="return soloLetras(event)" name="psppacjcliente_nombre" type="text">
+                                                                <input placeholder="Ingrese el nombre completo del cliente" class="form-control" required="required" name="psppacjcliente_nombre" type="text">
                                                             </div>
                                                             <div class="col-md-6" style="padding-bottom: 15px;">
                                                                 <label>Estado Civil</label>
@@ -235,7 +235,7 @@
                                                                 <label>Calidad:</label>
                                                                 <input placeholder="Ingrese la cualidad del abogado" class="form-control" required="required"  name="psppacjabogado_calidad" type="text">
                                                             </div>
-                                                            <div class="col-md-6" style="padding-bottom: 15px;">
+                                                            <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
                                                                 <label>Mat. Foro de Abogados:</label>
                                                                 <input placeholder="Ingrese Mat. foro de abogados" class="form-control" required="required"  name="psppacjabogado_mat_foro_abogados" type="text">
                                                             </div>
@@ -274,7 +274,7 @@
                                                             </div>
                                                             <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
                                                                 <label>Cuota de Entrada:</label>
-                                                                <input placeholder="Ingrese el valor de la cuota de entrada" class="form-control" required="required" name="psppacjvfpago_cuota" type="number">
+                                                                <input placeholder="Ingrese el valor de la cuota de entrada en letras" class="form-control" required="required" name="psppacjvfpago_cuota" type="text">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -294,123 +294,139 @@
                                     </form>
                                 </div>
 
-                                {{-- <div class="row" id="oficio_psp" style="display:none">
-                                    <div class="col-md-6" style="padding-bottom: 15px;">
-                                        <label>Fecha:</label>
-                                        <input class="form-control" required="required" name="fecha" type="date">
-                                    </div>
-
-                                    <div class="col-md-6" style="padding-bottom: 15px;"></div>
-
-                                    <div class="col-md-6" style="padding-bottom: 15px;">
-                                        <label>Provincia</label>
-                                        {!! Form::select('inicioDia', $provincias, null, ['class'=>'form-control', 'required' => 'required']) !!}
-                                    </div>
-
-                                    <div class="col-md-6" style="padding-bottom: 15px;">
-                                        <label>Ciudad</label>
-                                        {!! Form::select('inicioDia', $ciudades, null, ['class'=>'form-control', 'required' => 'required']) !!}
-                                    </div>
-
-                                    <div class="col-md-12" style="padding-bottom: 15px;">
-                                        <nav>
-                                            <div class="nav nav-tabs" id="nav-tab" role="tablist" style="background-color: white;">
-                                                <a class="nav-item nav-link active" id="nav-cliente-tab" data-toggle="tab" href="#nav-cliente" role="tab" aria-controls="nav-cliente" aria-selected="true">Cliente</a>
-                                                <a class="nav-item nav-link" id="nav-abogado-tab" data-toggle="tab" href="#nav-abogado" role="tab" aria-controls="nav-abogado" aria-selected="false">Abogado</a>
-                                                <a class="nav-item nav-link" id="nav-vfpago-tab" data-toggle="tab" href="#nav-vfpago" role="tab" aria-controls="nav-vfpago" aria-selected="false">Valor y Forma de Pago</a>
+                                <div class="row" id="oficio_psp" style="display:none">
+                                    <form method="POST" action="{{ url('administracion/oficio/contrato_psp') }}" accept-charset="UTF-8">
+                                        @csrf
+                                        <div class="row ">
+                                            <div class="col-md-6" style="padding-bottom: 15px;">
+                                                <label>Fecha:</label>
+                                                <input class="form-control" required="required" name="psp_fecha" type="date">
                                             </div>
-                                        </nav>
-                                        <div class="tab-content" id="nav-tabContent">
-                                            <div class="tab-pane fade show active" id="nav-cliente" role="tabpanel" aria-labelledby="nav-cliente-tab">
-                                                <div class="row">
-                                                    <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
-                                                        <label>Número de Cédula:</label>
-                                                        <input placeholder="Ingrese el número de cédula del cliente" class="form-control" required="required" name="cedula" type="tel">
-                                                    </div>
-
-                                                    <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
-                                                        <label>Nombre:</label>
-                                                        <input placeholder="Ingrese el nombre completo del cliente" class="form-control" required="required" onkeypress="return soloLetras(event)" name="nombre" type="text">
-                                                    </div>
-
-                                                    <div class="col-md-6" style="padding-bottom: 15px;">
-                                                        <label>Provincia</label>
-                                                        {!! Form::select('inicioDia', $provincias, null, ['class'=>'form-control', 'required' => 'required']) !!}
-                                                    </div>
-
-                                                    <div class="col-md-6" style="padding-bottom: 15px;">
-                                                        <label>Cantón:</label>
-                                                        <input placeholder="Ingrese el nombre del cantón" class="form-control" required="required"  name="direccion" type="text">
-                                                    </div>
-                                                    <div class="col-md-6" style="padding-bottom: 15px;">
-                                                        <label>Correo Electrónico:</label>
-                                                        <input placeholder="Ingrese el correo electrónico del cliente" class="form-control" required="required"  name="correo" type="email">
-                                                    </div>
-                                                    <div class="col-md-12" style="padding-bottom: 15px;">
-                                                        <label>Calidad:</label>
-                                                        <input placeholder="Ingrese la cualidad del cliente" class="form-control" required="required"  name="calidad" type="text">
-                                                    </div>
-                                                    <div class="col-md-12" style="padding-bottom: 15px;">
-                                                        <label>Dirección:</label>
-                                                        <input placeholder="Ingrese la dirección del cliente" class="form-control" required="required"  name="direccion" type="text">
-                                                    </div>
-                                                    <div class="col-md-12" style="padding-bottom: 15px;">
-                                                        <label>Motivo:</label>
-                                                        <input placeholder="Ingrese el motivo por el cuál el abogado es contratado, especificando la experticia a realizar" class="form-control" required="required"  name="direccion" type="text">
-                                                    </div>
-                                                    <div class="col-md-12" style="padding-bottom: 15px;">
-                                                        <label>Causa:</label>
-                                                        <input placeholder="Ingrese la causa por el cuál el abogado es contratado, especificando la experticia a realizar" class="form-control" required="required"  name="direccion" type="text">
-                                                    </div>
-                                                </div>
+        
+                                            <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
+                                                <label>Provincia</label>
+                                                {!! Form::select('psp_provincia', $provincias, null, ['class'=>'form-control', 'required' => 'required']) !!}
                                             </div>
-
-                                            <div class="tab-pane fade" id="nav-abogado" role="tabpanel" aria-labelledby="nav-abogado-tab">
-                                                <div class="row">
-                                                    <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
-                                                        <label>Número de Cédula:</label>
-                                                        <input placeholder="Ingrese el número de cédula del cliente" class="form-control" required="required" name="cedula" type="tel">
-                                                    </div>
-                                                    <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
-                                                        <label>Nombre:</label>
-                                                        <input placeholder="Ingrese el nombre completo del abogado" class="form-control" required="required" onkeypress="return soloLetras(event)" name="nombre" type="text">
-                                                    </div>
-                                                    <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
-                                                        <label>Calidad:</label>
-                                                        <input placeholder="Ingrese la cualidad del abogado" class="form-control" required="required"  name="calidad" type="text">
-                                                    </div>
-                                                    <div class="col-md-6" style="padding-bottom: 15px;">
-                                                        <label>Mat. Foro de Abogados:</label>
-                                                        <input placeholder="Ingrese Mat. foro de abogados" class="form-control" required="required"  name="mat_foro_abogados" type="text">
-                                                    </div>
-                                                </div>
+        
+                                            <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
+                                                <label>Ciudad</label>
+                                                {!! Form::select('psp_ciudad', $ciudades, null, ['class'=>'form-control', 'required' => 'required']) !!}
                                             </div>
-
-                                            <div class="tab-pane fade" id="nav-vfpago" role="tabpanel" aria-labelledby="nav-vfpago-tab">
-                                                <div class="row">
-                                                    <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
-                                                        <label>Honorarios:</label>
-                                                        <input placeholder="Ingrese el valor de los honorarios en letras" class="form-control" required="required" name="honorario_l" type="text">
-                                                    </div><div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
-                                                        <label>Honorarios:</label>
-                                                        <input placeholder="Ingrese el valor de los honorarios en números" class="form-control" required="required" name="honorario_N" type="number">
-                                                    </div>
-                                                    <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
-                                                        <label>Cuota de Entrada:</label>
-                                                        <input placeholder="Ingrese el valor de la cuota de entrada" class="form-control" required="required" onkeypress="return soloLetras(event)" name="nombre" type="number">
-                                                    </div>
-                                                </div>
+                                            <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
+                                                <label>Cantón:</label>
+                                                <input class="form-control" required="required" name="psp_canton" type="text">
                                             </div>
-                                        </div>                                    
-                                    </div>
+        
+                                            <div class="col-md-12" style="padding-bottom: 15px;">
+                                                <nav>
+                                                    <div class="nav nav-tabs" id="nav-tab" role="tablist" style="background-color: white;">
+                                                        <a class="nav-item nav-link active" id="nav-pspcliente-tab" data-toggle="tab" href="#nav-pspcliente" role="tab" aria-controls="nav-pspcliente" aria-selected="true">Cliente</a>
+                                                        <a class="nav-item nav-link" id="nav-pspabogado-tab" data-toggle="tab" href="#nav-pspabogado" role="tab" aria-controls="nav-pspabogado" aria-selected="false">Abogado</a>
+                                                        <a class="nav-item nav-link" id="nav-pspvfpago-tab" data-toggle="tab" href="#nav-pspvfpago" role="tab" aria-controls="nav-pspvfpago" aria-selected="false">Valor y Forma de Pago</a>
+                                                    </div>
+                                                </nav>
+                                                <div class="tab-content" id="nav-tabContent">
+                                                    <div class="tab-pane fade show active" id="nav-pspcliente" role="tabpanel" aria-labelledby="nav-pspcliente-tab">
+                                                        <div class="row">
+                                                            <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
+                                                                <label>Número de Cédula:</label>
+                                                                <input placeholder="Ingrese el número de cédula del cliente" class="form-control" required="required" name="pspcliente_cedula" type="tel">
+                                                            </div>
+        
+                                                            <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
+                                                                <label>Nombre:</label>
+                                                                <input placeholder="Ingrese el nombre completo del cliente" class="form-control" required="required" name="pspcliente_nombre" type="text">
+                                                            </div>
+        
+                                                            <div class="col-md-6" style="padding-bottom: 15px;">
+                                                                <label>Provincia</label>
+                                                                {!! Form::select('pspcliente_provincia', $provincias, null, ['class'=>'form-control', 'required' => 'required']) !!}
+                                                            </div>
+        
+                                                            <div class="col-md-6" style="padding-bottom: 15px;">
+                                                                <label>Cantón:</label>
+                                                                <input placeholder="Ingrese el nombre del cantón" class="form-control" required="required"  name="pspcliente_canton" type="text">
+                                                            </div>
+                                                            <div class="col-md-6" style="padding-bottom: 15px;">
+                                                                <label>Correo Electrónico:</label>
+                                                                <input placeholder="Ingrese el correo electrónico del cliente" class="form-control" required="required"  name="pspcliente_correo" type="email">
+                                                            </div>
+                                                            <div class="col-md-6" style="padding-bottom: 15px;">
+                                                                <label>Causa:</label>
+                                                                <input placeholder="Ingrese la causa" class="form-control" required="required" name="pspcliente__causa" type="text">
+                                                            </div>
+                                                            <div class="col-md-6" style="padding-bottom: 15px;">
+                                                                <label>Teléfono:</label>
+                                                                <input placeholder="Ingrese el número de teléfono del cliente" class="form-control" required="required" name="pspcliente__telefono" type="tel">
+                                                            </div>
+                                                            <div class="col-md-6" style="padding-bottom: 15px;">
+                                                                <label>Dirección:</label>
+                                                                <input placeholder="Ingrese la dirección domiciliaria del cliente" class="form-control" required="required" name="pspcliente__direccion" type="text">
+                                                            </div>
+                                                            <div class="col-md-12" style="padding-bottom: 15px;">
+                                                                <label>Calidad:</label>
+                                                                <input placeholder="Ingrese la dirección domiciliaria del cliente" class="form-control" required="required" name="pspcliente__calidad" type="text">
+                                                            </div>
+                                                            <div class="col-md-12" style="padding-bottom: 15px;">
+                                                                <label>Motivo:</label>
+                                                                <input placeholder="Ingrese el motivo por el cuál el perito es contratado, especificando la experticia a realizar" class="form-control" required="required"  name="pspcliente_motivo" type="text">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+        
+                                                    <div class="tab-pane fade" id="nav-pspabogado" role="tabpanel" aria-labelledby="nav-pspabogado-tab">
+                                                        <div class="row">
+                                                            <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
+                                                                <label>Número de Cédula:</label>
+                                                                <input placeholder="Ingrese el número de cédula del cliente" class="form-control" required="required" name="pspabogado_cedula" type="tel">
+                                                            </div>
+                                                            <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
+                                                                <label>Nombre:</label>
+                                                                <input placeholder="Ingrese el nombre completo del abogado" class="form-control" required="required" name="pspabogado_nombre" type="text">
+                                                            </div>
+                                                            <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
+                                                                <label>Calidad:</label>
+                                                                <input placeholder="Ingrese la cualidad del abogado" class="form-control" required="required"  name="pspabogado_calidad" type="text">
+                                                            </div>
+                                                            <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
+                                                                <label>Mat. Foro de Abogados:</label>
+                                                                <input placeholder="Ingrese Mat. foro de abogados" class="form-control" required="required"  name="pspabogado_mat_foro_abogados" type="text">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+        
+                                                    <div class="tab-pane fade" id="nav-pspvfpago" role="tabpanel" aria-labelledby="nav-pspvfpago-tab">
+                                                        <div class="row">
+                                                            <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
+                                                                <label>Honorarios:</label>
+                                                                <input placeholder="Ingrese el valor de los honorarios en letras" class="form-control" required="required" name="pspvfpago_honorario_l" type="text">
+                                                            </div><div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
+                                                                <label>Honorarios:</label>
+                                                                <input placeholder="Ingrese el valor de los honorarios en números" class="form-control" required="required" name="pspvfpago_honorario_n" type="number">
+                                                            </div>
+                                                            {{-- <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
+                                                                <label>Cuota de Entrada:</label>
+                                                                <input placeholder="Ingrese el valor de la cuota de entrada en letras" class="form-control" required="required" name="pspvfpago_cuota" type="text">
+                                                            </div> --}}
+                                                        </div>
+                                                    </div>
+                                                </div>                                    
+                                            </div>
+        
+                                            <div class="col-md-12" style="padding-bottom: 15px;">
+                                                <label>Domicilio</label>
+                                                <input placeholder="Ingrese el domicilio" class="form-control" required="required" name="psp_domicilio" type="text">
+                                            </div>
+                                            <div class="col-md-4" style="padding-bottom: 15px;"></div>
+                                            <div class="col-md-4" style="padding-bottom: 15px;">
+                                                <input class="btn btn-primary btn-block" type="submit" value="Generar Oficio">
+                                            </div>
+                                            <div class="col-md-4" style="padding-bottom: 15px;"></div>
+                                        </div>
+                                    </form>
+                                </div>
 
-                                    <div class="col-md-6" style="padding-bottom: 15px;">
-                                        <label>Domicilio</label>
-                                        <input placeholder="Ingrese el domicilio" class="form-control" required="required" onkeypress="return soloLetras(event)" name="domicilio" type="number">
-                                    </div>
-                                </div> --}}
-
-                                {{-- <div class="row" id="oficio_pj">
+                                <div class="row" id="oficio_pj" style="display:none">
                                     <form method="POST" action="{{ url('administracion/oficio/procuracion_judicial') }}" accept-charset="UTF-8">
                                         @csrf
                                         <div class="row">
@@ -503,7 +519,7 @@
                                             <div class="col-md-4" style="padding-bottom: 15px;"></div>
                                         </div>
                                     </form>
-                                </div> --}}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -515,9 +531,43 @@
 @endsection
 @section('script')
     <script>
-        /* $( "[name='opj_provincia']" ).change(function() {
-        alert( "Handler for .change() called." + this.value.text);
-        }); */
+        $( "[name='tipo_oficio']" ).change(function() {
+            if(this.value == ""){
+                $("#oficio_ca").css("display", "none"); 
+                $("#oficio_pj").css("display", "none"); 
+                $("#oficio_psp").css("display", "none");
+                $("#oficio_psppacj").css("display", "none");
+                $("#metodo_oficio").val(this.value);
+            }
+            if(this.value == "1"){ 
+                $("#oficio_ca").css("display", "block"); 
+                $("#oficio_pj").css("display", "none"); 
+                $("#oficio_psp").css("display", "none");
+                $("#oficio_psppacj").css("display", "none");
+                $("#metodo_oficio").val(this.value);
+            }
+            if(this.value == "2"){ 
+                $("#oficio_pj").css("display", "block");
+                $("#oficio_ca").css("display", "none"); 
+                $("#oficio_psp").css("display", "none");
+                $("#oficio_psppacj").css("display", "none");
+                $("#metodo_oficio").val(this.value);
+            }
+            if(this.value == "3"){ 
+                $("#oficio_psp").css("display", "block");
+                $("#oficio_ca").css("display", "none"); 
+                $("#oficio_pj").css("display", "none"); 
+                $("#oficio_psppacj").css("display", "none");
+                $("#metodo_oficio").val(this.value);
+            }
+            if(this.value == "4"){ 
+                $("#oficio_psppacj").css("display", "block");
+                $("#oficio_ca").css("display", "none"); 
+                $("#oficio_pj").css("display", "none"); 
+                $("#oficio_psp").css("display", "none");
+                $("#metodo_oficio").val(this.value);
+            }
+        });
     </script>
 
 @endsection

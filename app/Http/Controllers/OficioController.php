@@ -333,33 +333,9 @@ class OficioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function ca(Request $request)
     {
-        /* $datos = [
-            "cedula" => $request->opj_cedula,
-            "nombre" => $request->opj_nombre,
-            "edad" => $request->opj_edad,
-            "ocupacion" => $request->opj_ocupacion,
-            "direccion" => $request->opj_direccion,
-            "estadocivil" => $request->opj_estadocivil,
-            "provincia" => $this->provincias[$request->opj_provincia],
-            "canton" => $request->opj_canton,
-            "telefono" => $request->opj_telefono,
-            "procedimiento" => $request->opj_procedimiento,
-            "causa_letra" => $request->opj_causa_l,
-            "causa_numero" => $request->opj_causa_n,
-            "nombre_uji" => $request->opj_uji,
-            "canton_uji" => $request->opj_cantonuji,
-            "provincia_uji" => $this->provincias[$request->opj_provinciauji],
-            "juez_funcionario" => $request->opj_juez_funcionario   
-        ];
-        $pdf = PDF::loadView('oficios.procuracion_judicial', $datos);
-        $pdf->setPaper('A4', 'portrait');
-        return $pdf->stream(); */
-
-        /* dd($request); */
-
-        /* $datos = [            
+        $datos = [            
             "fecha" => $request->oca_fecha,
             "provincia" => $this->provincias[$request->oca_pronvicia],
             "ciudad" => $this->ciudades[$request->oca_ciudad],
@@ -387,39 +363,96 @@ class OficioController extends Controller
 
         $pdf = PDF::loadView('oficios.contrato_arrendamiento', $datos);
         $pdf->setPaper('A4', 'portrait');
-        return $pdf->stream(); */
+        return $pdf->stream();
+    }
 
-        
-
-
-        $datos = [            
-        "fecha" => $request->psppacj_fecha,
-        "provincia" => $this->provincias[$request->psppacj_provincia],
-        "ciudad" => $this->ciudades[$request->psppacj_ciudad],
-        "canton" => $request->psppacj_canton,
-        "cliente_cedula" => $request->psppacjcliente_cedula,
-        "cliente_nombre" => $request->psppacjcliente_nombre,
-        "cliente_estado_civil" => $request->psppacjcliente_estado_civil,
-        "cliente_provincia" => $this->provincias[$request->psppacjcliente_provincia],
-        "cliente_canton" => $request->psppacjcliente_canton,
-        "cliente_correo" => $request->psppacjcliente_correo,
-        "cliente_motivo" => $request->psppacjcliente_motivo,
-        "abogado_cedula" => $request->psppacjabogado_cedula,
-        "abogado_nombre" => $request->psppacjabogado_nombre,
-        "abogado_calidad" => $request->psppacjabogado_calidad,
-        "abogado_mat_foro_abogados" => $request->psppacjabogado_mat_foro_abogados,
-        "perito_cedula" => $request->psppacjperito_cedula,
-        "perito_nombre" => $request->psppacjperito_nombre,
-        "perito_area" => $request->psppacjperito_area,
-        "perito_calificacion" => $request->psppacjperito_calificacion,
-        "vfpago_honorario_l" => $request->psppacjvfpago_honorario_l,
-        "vfpago_honorario_n" => $request->psppacjvfpago_honorario_n,
-        "vfpago_cuota" => $request->psppacjvfpago_cuota,
-        "domicilio" => $request->psppacj_domicilio,
+    public function pj(Request $request)
+    {
+        $datos = [
+            "cedula" => $request->opj_cedula,
+            "nombre" => $request->opj_nombre,
+            "edad" => $request->opj_edad,
+            "ocupacion" => $request->opj_ocupacion,
+            "direccion" => $request->opj_direccion,
+            "estadocivil" => $request->opj_estadocivil,
+            "provincia" => $this->provincias[$request->opj_provincia],
+            "canton" => $request->opj_canton,
+            "telefono" => $request->opj_telefono,
+            "procedimiento" => $request->opj_procedimiento,
+            "causa_letra" => $request->opj_causa_l,
+            "causa_numero" => $request->opj_causa_n,
+            "nombre_uji" => $request->opj_uji,
+            "canton_uji" => $request->opj_cantonuji,
+            "provincia_uji" => $this->provincias[$request->opj_provinciauji],
+            "juez_funcionario" => $request->opj_juez_funcionario   
         ];
-
-        $pdf = PDF::loadView('oficios.contrato_prestacion_servicios_profesionales_perito_acreditado_consejo_judicatura', $datos);
+        $pdf = PDF::loadView('oficios.procuracion_judicial', $datos);
         $pdf->setPaper('A4', 'portrait');
         return $pdf->stream();
+    }
+
+    public function psppacj(Request $request)
+    {
+        $datos = [            
+            "fecha" => explode('-', date('Y-F-d', strtotime($request->psppacj_fecha))),
+            "provincia" => $this->provincias[$request->psppacj_provincia],
+            "ciudad" => $this->ciudades[$request->psppacj_ciudad],
+            "canton" => $request->psppacj_canton,
+            "cliente_cedula" => $request->psppacjcliente_cedula,
+            "cliente_nombre" => $request->psppacjcliente_nombre,
+            "cliente_estado_civil" => $request->psppacjcliente_estado_civil,
+            "cliente_provincia" => $this->provincias[$request->psppacjcliente_provincia],
+            "cliente_canton" => $request->psppacjcliente_canton,
+            "cliente_correo" => $request->psppacjcliente_correo,
+            "cliente_motivo" => $request->psppacjcliente_motivo,
+            "abogado_cedula" => $request->psppacjabogado_cedula,
+            "abogado_nombre" => $request->psppacjabogado_nombre,
+            "abogado_calidad" => $request->psppacjabogado_calidad,
+            "abogado_mat_foro_abogados" => $request->psppacjabogado_mat_foro_abogados,
+            "perito_cedula" => $request->psppacjperito_cedula,
+            "perito_nombre" => $request->psppacjperito_nombre,
+            "perito_area" => $request->psppacjperito_area,
+            "perito_calificacion" => $request->psppacjperito_calificacion,
+            "vfpago_honorario_l" => $request->psppacjvfpago_honorario_l,
+            "vfpago_honorario_n" => $request->psppacjvfpago_honorario_n,
+            "vfpago_cuota" => $request->psppacjvfpago_cuota,
+            "domicilio" => $request->psppacj_domicilio,
+            ];
+    
+            $pdf = PDF::loadView('oficios.contrato_psppacj', $datos);
+            $pdf->setPaper('A4', 'portrait');
+            return $pdf->stream();
+    }
+
+    public function psp(Request $request)
+    {
+        $datos = [            
+            "fecha" => explode('-', date('Y-F-d', strtotime($request->psp_fecha))),
+            "provincia" => $this->provincias[$request->psp_provincia],
+            "ciudad" => $this->ciudades[$request->psp_ciudad],
+            "canton" => $request->psp_canton,
+            "cliente_cedula" => $request->pspcliente_cedula,
+            "cliente_nombre" => $request->pspcliente_nombre,
+            "cliente_provincia" => $this->provincias[$request->pspcliente_provincia],
+            "cliente_canton" => $request->pspcliente_canton,
+            "cliente_correo" => $request->pspcliente_correo,
+            "cliente_causa" => $request->pspcliente_causa,
+            "cliente_telefono" => $request->pspcliente_telefono,
+            "cliente_calidad" => $request->pspcliente_calidad,
+            "cliente_direccion" => $request->pspcliente_direccion,
+            "cliente_motivo" => $request->pspcliente_motivo,
+            "abogado_cedula" => $request->pspabogado_cedula,
+            "abogado_nombre" => $request->pspabogado_nombre,
+            "abogado_calidad" => $request->pspabogado_calidad,
+            "abogado_mat_foro_abogados" => $request->pspabogado_mat_foro_abogados,
+            "vfpago_honorario_l" => $request->pspvfpago_honorario_l,
+            "vfpago_honorario_n" => $request->pspvfpago_honorario_n,
+            "vfpago_cuota" => $request->pspvfpago_cuota,
+            "domicilio" => $request->psp_domicilio,
+            ];
+    
+            $pdf = PDF::loadView('oficios.contrato_psp', $datos);
+            $pdf->setPaper('A4', 'portrait');
+            return $pdf->stream();
     }
 }

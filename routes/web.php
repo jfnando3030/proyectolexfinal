@@ -189,9 +189,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 //*******************************OFICIO********************************
 	Route::get('administracion/oficio', 'OficioController@create');
-	Route::post('administracion/oficio/procuracion_judicial', 'OficioController@store');
-	Route::post('administracion/oficio/contrato_arrendamiento', 'OficioController@store');
-	Route::post('administracion/oficio/contrato_prestacion_servicios_profesionales_perito_acreditado_consejo_judicatura', 'OficioController@store');
+	Route::post('administracion/oficio/procuracion_judicial', 'OficioController@pj');
+	Route::post('administracion/oficio/contrato_arrendamiento', 'OficioController@ca');
+	Route::post('administracion/oficio/contrato_psppacj', 'OficioController@psppacj');
+	Route::post('administracion/oficio/contrato_psp', 'OficioController@psp');
 	
 	Route::get('/administracion/notificaciones/{id}', 'NotificacionUserController@notificacion')->name('notificacion');
 
