@@ -23,7 +23,8 @@
       <th scope="col">Id</th>
       <th scope="col">Nombre</th>
       <th scope="col">Precio</th>
-      <!-- <th scope="col">Estado</th> -->
+      <th scope="col">Cantidad Consultas</th> 
+      <th scope="col">Cantidad Documentos</th> 
       <th scope="col">Opciones</th>
     </tr>
   </thead>
@@ -33,6 +34,8 @@
       <th scope="row">{{ $taf->id }}</th>
       <td>{{ $taf->tarifa }}</td>
       <td>{{ $taf->precio }}</td>
+      <td>{{ $taf->cantidad_consultorias }}</td>
+      <td>{{ $taf->cantidad_documentos }}</td>
       <!-- <td>
           @if($taf->estado == 1)
           <i class="fas fa-toggle-on"></i>

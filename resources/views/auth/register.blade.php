@@ -87,7 +87,7 @@
 
                                         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="input-group mb-3{{ $errors->has('cedula') ? ' has-error' : '' }}">
-                                                <span  class="input-group-text" style="font-size:22px"><i class="fas fa-address-card" style="    padding-right: 3px;"></i></span>   
+                                                <span  class="input-group-text" style="font-size:22px"><i class="fas fa-address-card" style=" padding-right: 4px; padding-left: 4px;"></i></span>   
                                                 <input id="cedula" type="text" class="form-control" name="cedula" placeholder="Ingrese su cédula"  value="{{ old('cedula') }}" required >
                                             </div>
 
@@ -100,7 +100,7 @@
 
                                         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="input-group mb-3{{ $errors->has('nombres') ? ' has-error' : '' }}">
-                                                <span  class="input-group-text"><i class="fas fa-user" style="    padding-right: 3px;"></i></span>   
+                                                <span  class="input-group-text"><i class="fas fa-user" style="padding-right: 4px; padding-left: 4px;"></i></span>   
                                                 <input id="nombres" type="text" class="form-control" name="nombres" placeholder="Ingrese sus nombres"  value="{{ old('nombres') }}" required >
                                             </div>
 
@@ -113,7 +113,7 @@
 
                                         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="input-group mb-3{{ $errors->has('apellidos') ? ' has-error' : '' }}">
-                                                <span  class="input-group-text"><i class="fas fa-user" style="    padding-right: 3px;"></i></span>   
+                                                <span  class="input-group-text"><i class="fas fa-user" style="   padding-right: 4px; padding-left: 4px;"></i></span>   
                                                 <input id="apellidos" type="text" class="form-control" name="apellidos" placeholder="Ingrese sus apellidos"  value="{{ old('apellidos') }}" required >
                                             </div>
 
@@ -128,7 +128,7 @@
                                         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="input-group mb-3{{ $errors->has('email') ? ' has-error' : '' }}">
                                                
-                                                <span  class="input-group-text"><i class="fas fa-envelope" style="    padding-right: 3px;"></i></span>   
+                                                <span  class="input-group-text"><i class="fas fa-envelope" style="   padding-right: 3px; padding-left: 3px;"></i></span>   
                                                 <input id="email" type="email" class="form-control" name="email" placeholder="Ingrese su email"  value="{{ old('email') }}" required>
                                             </div>
 
@@ -142,7 +142,7 @@
 
                                         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="input-group mb-3{{ $errors->has('telefono') ? ' has-error' : '' }}">
-                                                <span  class="input-group-text"><i class="fas fa-phone" style="    padding-right: 3px;"></i></span>   
+                                                <span  class="input-group-text"><i class="fas fa-phone" style="    padding-right: 3px; padding-left: 3px;"></i></span>   
                                                 <input id="telefono" type="text" class="form-control" name="telefono" placeholder="Ingrese número de teléfono"  value="{{ old('telefono') }}" required >
                                             </div>
 
@@ -155,7 +155,7 @@
 
                                         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="input-group mb-3{{ $errors->has('celular') ? ' has-error' : '' }}">
-                                                <span  class="input-group-text"><i class="fas fa-phone" style="    padding-right: 3px;"></i></span>   
+                                                <span  class="input-group-text"><i class="fas fa-mobile-alt" style="padding-right: 7px; padding-left: 7px;"></i></span>   
                                                 <input id="celular" type="text" class="form-control" name="celular" placeholder="Ingrese su número de celular"  value="{{ old('celular') }}" required >
                                             </div>
 
@@ -170,7 +170,7 @@
                                             <div class="input-group mb-3{{ $errors->has('password') ? ' has-error' : '' }}">
                                               
                                                
-                                                <span  class="input-group-text"><i class="fas fa-key"></i></span>
+                                                <span  class="input-group-text"><i class="fas fa-key" style="padding-right: 3px; padding-left: 3px;"></i></span>
                                                 <input id="password" type="password" class="form-control" placeholder="Ingrese su contraseña" name="password" required>  
                                             </div>
 
@@ -183,8 +183,8 @@
 
                                         <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
                                             <div class="input-group mb-3{{ $errors->has('password') ? ' has-error' : '' }}">
-                                                <span  class="input-group-text"><i class="fas fa-key"></i></span>
-                                                <input id="password-confirm" type="password" class="form-control" placeholder="Validar contraseña" name="password_confirmation" required>  
+                                                <span  class="input-group-text"><i class="fas fa-key" style="padding-right: 3px; padding-left: 3px;"></i></span>
+                                                <input id="password-confirm" type="password" class="form-control" placeholder="Repita su contraseña" name="password_confirmation" required>  
                                             </div>
                                             @if ($errors->has('password'))
                                                 <span >
@@ -192,7 +192,37 @@
                                                 </span>
                                             @endif
                                         </div>
+
+                                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div class="input-group mb-3{{ $errors->has('ciudad') ? ' has-error' : '' }}">
+                                                <span  class="input-group-text"><i class="fas fa-building" style="padding-right: 5px; padding-left: 5px;"></i></span>   
+                                                <input id="ciudad" type="text" class="form-control" name="ciudad" placeholder="Ingrese su ciudad"  value="{{ old('ciudad') }}" required >
+                                            </div>
+    
+                                            @if ($errors->has('ciudad'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('ciudad') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div> 
+
+                                        <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div class="input-group mb-3{{ $errors->has('direccion') ? ' has-error' : '' }}">
+                                                <span  class="input-group-text"><i class="fas fa-street-view" style="padding-right: 3px; padding-left: 3px;"></i></span>   
+                                                <input id="direccion" type="text" class="form-control" name="direccion" placeholder="Ingrese su dirección"  value="{{ old('direccion') }}" required >
+                                            </div>
+                                           
+                                            @if ($errors->has('direccion'))
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $errors->first('direccion') }}</strong>
+                                                </span>
+                                            @endif
+                                        </div> 
+
+
                                     </div>
+
+
 
                                     <div align="center" class="form-group">
                                         <div class="custom-control custom-checkbox">

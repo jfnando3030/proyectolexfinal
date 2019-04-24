@@ -29,6 +29,17 @@
                                             <input placeholder="Ingrese el precio de la tarifa" class="form-control" required="required" onkeypress="return soloLetras(event)" name="precio" type="number" step="0.01" value="{{$tarifa->precio}}">
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-6" style="padding-bottom: 15px;">
+                                            <label>Cantidad de consultas:</label>
+                                            <input placeholder="Ingrese la cantidad de consultas" class="form-control" required="required" onkeypress="return soloNumeros(event)" name="cantidad_consultorias" type="number" value="{{$tarifa->cantidad_consultorias}}">
+                                        </div>
+                                        <div class="col-md-6" style="padding-bottom: 15px;">
+                                            <label>Cantidad de documentos:</label>
+                                            <input placeholder="Ingrese la cantidad de documentos" class="form-control" required="required" onkeypress="return soloNumeros(event)" name="cantidad_documentos" type="number"  value="{{$tarifa->cantidad_documentos}}">
+                                        </div>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

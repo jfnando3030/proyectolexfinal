@@ -145,17 +145,28 @@
             
                                    </div>
 
-                                   <div class="col-xs-12 col-md-4">
-
-                                    <div class="form-group">
-                                        {!! Form::label('Departamentos:', '', ['class' => 'negrita']) !!}
-                                            <select class="form-control select2" multiple="multiple" data-placeholder="Selecione los departamentos" name ="departamentos[]" style="width: 100%;">
-                                                @foreach($departamentos as $departamento)
-                                                    <option value="{{$departamento->id}}" >  {{ $departamento->nombre_departamento }} </option>
-                                                @endforeach
-                                            </select>
+                                   <div class="col-xs-12 col-md-4" >
+                                        {!! Form::label('*Ciudad:', '', ['class' => 'negrita']) !!}
+                                        {!! Form::text('ciudad',null,['placeholder'=>'Ingrese su ciudad','class'=>'form-control',  'required']) !!}
+                                        
                                     </div>
-                                     </div>
+
+                         </div>
+
+                         <div class="row">
+
+                                <div class="col-xs-12 col-md-12">
+
+                                        <div class="form-group">
+                                            {!! Form::label('Departamentos:', '', ['class' => 'negrita']) !!}
+                                                <select class="form-control select2" multiple="multiple" data-placeholder="Selecione los departamentos" name ="departamentos[]" style="width: 100%;">
+                                                    @foreach($departamentos as $departamento)
+                                                        <option value="{{$departamento->id}}" >  {{ $departamento->nombre_departamento }} </option>
+                                                    @endforeach
+                                                </select>
+                                        </div>
+                                         </div>
+
 
                          </div>
 

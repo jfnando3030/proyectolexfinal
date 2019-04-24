@@ -76,6 +76,7 @@ class UserController extends Controller
                     'cedula' => $request['cedula'],
                     'email' => $request['email'],
                     'celular' => $request['celular'],
+                    'ciudad' => $request['ciudad'],
                     'telefono' => $request['telefono'],
                     'direccion' => $request['direccion'],
                     'path'=> $request['path'],
@@ -181,6 +182,8 @@ class UserController extends Controller
             'cedula' => $request['cedula'],
             'email' => $request['email'],
             'celular' => $request['celular'],
+            'ciudad' => $request['ciudad'],
+            
             'telefono' => $request['telefono'],
             'direccion' => $request['direccion'],
             'path'=> $request['path'],
@@ -203,6 +206,7 @@ class UserController extends Controller
             'telefono' => $request['telefono'],
             'password' => $request['password'],
             'direccion' => $request['direccion'],
+            'ciudad' => $request['ciudad'],
             'path'=> $request['path'],
             'rol'=>$request['id_roles'],
         

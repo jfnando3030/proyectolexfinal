@@ -256,6 +256,8 @@ class WelcomeController extends Controller
       }else{
         $saber_consultoria = 1;
       }
+    }else{
+      $saber_consultoria = 0;
     }
 
     return view('administracion.solicitudes.registrar', ['departamento' => $departamento, 'total_respuestas_notificacion' => $total_respuestas_notificacion, 'respuestas_notificacion'=>$respuestas_notificacion, 'saber_tarifa'=>$saber_tarifa, 'saber_consultoria'=>$saber_consultoria ]);

@@ -29,6 +29,7 @@ class UsuarioEditRequest extends FormRequest
             'celular' => 'required',
             'id_roles'=>'required',
             'cedula' => 'required|max:10',
+            'ciudad' => 'required',
              
         ];
     }
