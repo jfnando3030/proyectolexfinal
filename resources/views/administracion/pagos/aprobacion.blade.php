@@ -89,7 +89,7 @@
                                           },
                                           function(){
                                               window.location="{{ url('administracion/pagos/aprobar/') }}/{{ $pagos->id }}";
-                                              swal("!Eliminado!", "El pago ha sido aprobado correctamente.", "success");
+                                              swal("!Aprobado!", "El pago ha sido aprobado correctamente.", "success");
                                           });
                                       });
                                       </script>
@@ -110,7 +110,7 @@
                                           },
                                           function(){
                                               window.location="{{ url('administracion/pagos/cancelar/') }}/{{ $pagos->id }}";
-                                              swal("!Eliminado!", "El pago ha sido cancelado correctamente.", "success");
+                                              swal("!Cancelado!", "El pago ha sido cancelado correctamente.", "success");
                                           });
                                       });
                                       </script>

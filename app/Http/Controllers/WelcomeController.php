@@ -66,7 +66,7 @@ class WelcomeController extends Controller
     }else{
        $saber_consultoria = 0;
     }
-    
+      
     if(Auth::user()->rol == "Administrador"){
       return view('administracion.index', compact('saber_tarifa', 'saber_consultoria'));
   
