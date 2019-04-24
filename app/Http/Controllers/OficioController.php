@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use PDF;
+use App\OficioLog;
 
 class OficioController extends Controller
 {
@@ -142,178 +143,178 @@ class OficioController extends Controller
         89=>"Santa Cruz",
         // GUAYAS
         90=>"Alf. Baquer. Moreno",
-        100=>"Ancon",
-        101=>"Balao",
-        102=>"Balzar",
-        102=>"Colimes",
-        104=>"Daule",
-        105=>"Duran",
-        106=>"El Empalme",
-        107=>"El Triunfo",
-        108=>"Guayaquil",
-        109=>"Milagro",
-        110=>"Naranjal",
-        111=>"Naranjito",
-        112=>"Palestina",
-        113=>"Pedro Carbo",
-        114=>"Playas",
-        115=>"Samborondon",
-        116=>"Santa Lucia",
-        117=>"Taura",
-        118=>"Urbina Jado",
-        119=>"Yaguachi",
+        91=>"Ancon",
+        92=>"Balao",
+        93=>"Balzar",
+        94=>"Colimes",
+        95=>"Daule",
+        96=>"Duran",
+        97=>"El Empalme",
+        98=>"El Triunfo",
+        99=>"Guayaquil",
+        100=>"Milagro",
+        101=>"Naranjal",
+        102=>"Naranjito",
+        103=>"Palestina",
+        104=>"Pedro Carbo",
+        105=>"Playas",
+        106=>"Samborondon",
+        107=>"Santa Lucia",
+        108=>"Taura",
+        109=>"Urbina Jado",
+        110=>"Yaguachi",
         // IMBABURA
-        120=>"Ambuqui",
-        121=>"Atuntaqui",
-        122=>"Cotacachi",
-        123=>"Ibarra",
-        124=>"Otavalo",
-        125=>"Pimampiro",
-        126=>"San Antonio De Ibarra",
-        127=>"San Miguel De Urcuqui",
-        128=>"San Pablo",
-        129=>"Tumbabiro",
+        111=>"Ambuqui",
+        112=>"Atuntaqui",
+        113=>"Cotacachi",
+        114=>"Ibarra",
+        115=>"Otavalo",
+        116=>"Pimampiro",
+        117=>"San Antonio De Ibarra",
+        118=>"San Miguel De Urcuqui",
+        119=>"San Pablo",
+        120=>"Tumbabiro",
         // LOJA
-        130=>"Alamor",
-        131=>"Cariamanga",
-        132=>"Catacocha",
-        133=>"Catamayo",
-        134=>"Celica",
-        135=>"Chaguarpamba",
-        136=>"Espindola",
-        137=>"Gonzanama",
-        138=>"Loja",
-        139=>"Macara",
-        140=>"Pindal",
-        141=>"Quilanga",
-        142=>"Saraguro",
-        143=>"Sozoranga",
-        144=>"Zapotillo",
+        121=>"Alamor",
+        122=>"Cariamanga",
+        123=>"Catacocha",
+        124=>"Catamayo",
+        125=>"Celica",
+        126=>"Chaguarpamba",
+        127=>"Espindola",
+        128=>"Gonzanama",
+        129=>"Loja",
+        130=>"Macara",
+        131=>"Pindal",
+        132=>"Quilanga",
+        133=>"Saraguro",
+        134=>"Sozoranga",
+        135=>"Zapotillo",
         // LOS RIOS
-        145=>"Baba",
-        146=>"Babahoyo",
-        147=>"Buena Fe",
-        148=>"Catarama",
-        149=>"Montalvo",
-        150=>"Puebloviejo",
-        151=>"Quevedo",
-        152=>"Valencia",
-        153=>"Ventanas",
-        154=>"Vinces",
+        136=>"Baba",
+        137=>"Babahoyo",
+        138=>"Buena Fe",
+        139=>"Catarama",
+        140=>"Montalvo",
+        141=>"Puebloviejo",
+        142=>"Quevedo",
+        143=>"Valencia",
+        144=>"Ventanas",
+        145=>"Vinces",
         // MANABI
-        155=>"Bahia De Caraquez",
-        156=>"Calceta",
-        157=>"Chone",
-        158=>"El Carmen",
-        159=>"Flavio Alfaro",
-        160=>"Jama",
-        161=>"Jipijapa",
-        162=>"Junin",
-        163=>"Manta",
-        164=>"Montecristi",
-        165=>"Pajan",
-        166=>"Pedernales",
-        167=>"Pichincha",
-        168=>"Portoviejo",
-        169=>"Puerto Lopez",
-        170=>"Rocafuerte",
-        171=>"San Vicente",
-        172=>"Santa Ana",
-        173=>"Tosagua",
-        174=>"Veinticuatro De Mayo",
+        145=>"Bahia De Caraquez",
+        147=>"Calceta",
+        148=>"Chone",
+        149=>"El Carmen",
+        150=>"Flavio Alfaro",
+        151=>"Jama",
+        152=>"Jipijapa",
+        153=>"Junin",
+        154=>"Manta",
+        155=>"Montecristi",
+        156=>"Pajan",
+        157=>"Pedernales",
+        158=>"Pichincha",
+        159=>"Portoviejo",
+        160=>"Puerto Lopez",
+        161=>"Rocafuerte",
+        162=>"San Vicente",
+        163=>"Santa Ana",
+        164=>"Tosagua",
+        165=>"Veinticuatro De Mayo",
         // MORONA SANTIAGO
-        175=>"Gualaquiza",
-        176=>"Limon Indanza",
-        177=>"Macas",
-        178=>"Santiago",
-        179=>"Sucua",
+        166=>"Gualaquiza",
+        167=>"Limon Indanza",
+        168=>"Macas",
+        169=>"Santiago",
+        170=>"Sucua",
         // NAPO
-        180=>"Archidona",
-        181=>"Baeza",
-        182=>"Carlos Julio Arosemena Tola",
-        183=>"El Chaco",
-        184=>"Tena",
+        171=>"Archidona",
+        172=>"Baeza",
+        173=>"Carlos Julio Arosemena Tola",
+        174=>"El Chaco",
+        175=>"Tena",
         // ORELLANA
-        185=>"Francisco De Orellana",
-        186=>"La Joya De Los Sachas",
-        187=>"Loreto",
-        188=>"Nuevo Rocafuerte",
+        176=>"Francisco De Orellana",
+        177=>"La Joya De Los Sachas",
+        178=>"Loreto",
+        179=>"Nuevo Rocafuerte",
         // PASTAZA
-        189=>"Arajuno",
-        190=>"Mera",
-        191=>"Palora",
-        192=>"Puyo",
-        193=>"Santa Clara",
-        194=>"Shell",
+        180=>"Arajuno",
+        181=>"Mera",
+        182=>"Palora",
+        183=>"Puyo",
+        184=>"Santa Clara",
+        185=>"Shell",
         // PICHINCHA
-        195=>"Alangasi",
-        196=>"Aloag",
-        197=>"Amaguaña",
-        198=>"Calderon",
-        199=>"Cayambe",
-        200=>"Conocoto",
-        201=>"Cumbaya",
-        202=>"El Coca",
-        203=>"El Quinche",
-        204=>"Guayllabamba",
-        205=>"La Merced",
-        206=>"Machachi",
-        207=>"Mindo",
-        208=>"Nayon",
-        209=>"Pedro Vicente Maldonado",
-        210=>"Pifo",
-        211=>"Pintag",
-        212=>"Pomasqui",
-        213=>"Puembo",
-        214=>"Puerto Quito",
-        215=>"Pusuqui",
-        216=>"Quito",
-        217=>"San Antonio De Pichincha",
-        218=>"San Miguel De Los Bancos",
-        219=>"San Rafael",
-        220=>"Sangolquí",
-        221=>"Santo Domingo de los Colorados",
-        222=>"Tababela",
-        223=>"Tabacundo",
-        224=>"Tambillo",
-        225=>"Tumbaco",
-        226=>"Yaruqui",
+        186=>"Alangasi",
+        187=>"Aloag",
+        188=>"Amaguaña",
+        189=>"Calderon",
+        190=>"Cayambe",
+        191=>"Conocoto",
+        192=>"Cumbaya",
+        193=>"El Coca",
+        194=>"El Quinche",
+        195=>"Guayllabamba",
+        196=>"La Merced",
+        197=>"Machachi",
+        198=>"Mindo",
+        199=>"Nayon",
+        200=>"Pedro Vicente Maldonado",
+        201=>"Pifo",
+        202=>"Pintag",
+        203=>"Pomasqui",
+        204=>"Puembo",
+        205=>"Puerto Quito",
+        206=>"Pusuqui",
+        207=>"Quito",
+        208=>"San Antonio De Pichincha",
+        209=>"San Miguel De Los Bancos",
+        210=>"San Rafael",
+        211=>"Sangolquí",
+        212=>"Santo Domingo de los Colorados",
+        213=>"Tababela",
+        214=>"Tabacundo",
+        215=>"Tambillo",
+        216=>"Tumbaco",
+        217=>"Yaruqui",
         // SANTA ELENA
-        227=>"La Libertad",
-        228=>"Salinas",
-        229=>"Santa Elena",
+        218=>"La Libertad",
+        219=>"Salinas",
+        220=>"Santa Elena",
         // SANTO DOMINGO DE LOS TSÁCHILAS
-        230=>"Alluriquin",
-        231=>"Luz De América",
-        232=>"Santo Domingo",
-        233=>"Valle Hermoso",
+        221=>"Alluriquin",
+        222=>"Luz De América",
+        223=>"Santo Domingo",
+        224=>"Valle Hermoso",
         // SUCUMBIOS
-        234=>"Cascales",
-        235=>"Cuyabeno",
-        236=>"Gonzalo Pizarro",
-        237=>"Lago Agrio",
-        238=>"Nueva Loja",
-        239=>"Putumayo",
-        240=>"Shushufindi",
-        241=>"Sucumbios",
+        225=>"Cascales",
+        226=>"Cuyabeno",
+        227=>"Gonzalo Pizarro",
+        228=>"Lago Agrio",
+        229=>"Nueva Loja",
+        230=>"Putumayo",
+        231=>"Shushufindi",
+        232=>"Sucumbios",
         // TUNGURAHUA
-        242=>"Ambato",
-        243=>"Baños",
-        244=>"Cevallos",
-        245=>"Izamba",
-        246=>"Mocha",
-        247=>"Patate",
-        248=>"Pelileo",
-        249=>"Pillaro",
-        250=>"Quero",
-        251=>"Quisapincha",
-        252=>"Tisaleo",
+        233=>"Ambato",
+        234=>"Baños",
+        235=>"Cevallos",
+        236=>"Izamba",
+        237=>"Mocha",
+        238=>"Patate",
+        239=>"Pelileo",
+        240=>"Pillaro",
+        241=>"Quero",
+        242=>"Quisapincha",
+        243=>"Tisaleo",
         // ZAMORA CHINCHIPE
-        253=>"Chinchipe",
-        254=>"Nangaritza",
-        255=>"Yacuambi",
-        256=>"Yantzaza",
-        257=>"Zamora"
+        244=>"Chinchipe",
+        245=>"Nangaritza",
+        246=>"Yacuambi",
+        247=>"Yantzaza",
+        248=>"Zamora"
     );
 
     /**
@@ -359,11 +360,13 @@ class OficioController extends Controller
             "local_direccion" => $request->ocalocal_direccion,
         ];
 
+        $usuario = $request->user()->nombres . " " . $request->user()->apellidos;
 
-
-        $pdf = PDF::loadView('oficios.contrato_arrendamiento', $datos);
-        $pdf->setPaper('A4', 'portrait');
-        return $pdf->stream();
+        if ($this->registrarLog($this->contratos[$request->oca_mo], $datos["fecha"], $usuario, json_encode($datos))) {
+            $pdf = PDF::loadView('oficios.contrato_arrendamiento', $datos);
+            $pdf->setPaper('A4', 'portrait');
+            return $pdf->stream();
+        }
     }
 
     public function pj(Request $request)
@@ -386,9 +389,14 @@ class OficioController extends Controller
             "provincia_uji" => $this->provincias[$request->opj_provinciauji],
             "juez_funcionario" => $request->opj_juez_funcionario   
         ];
-        $pdf = PDF::loadView('oficios.procuracion_judicial', $datos);
-        $pdf->setPaper('A4', 'portrait');
-        return $pdf->stream();
+
+        $usuario = $request->user()->nombres . " " . $request->user()->apellidos;
+
+        if ($this->registrarLog($this->contratos[$request->pj_mo], date('Y-m-d'), $usuario, json_encode($datos))) {
+            $pdf = PDF::loadView('oficios.procuracion_judicial', $datos);
+            $pdf->setPaper('A4', 'portrait');
+            return $pdf->stream();
+        } 
     }
 
     public function psppacj(Request $request)
@@ -418,10 +426,14 @@ class OficioController extends Controller
             "vfpago_cuota" => $request->psppacjvfpago_cuota,
             "domicilio" => $request->psppacj_domicilio,
             ];
-    
+
+        $usuario = $request->user()->nombres . " " . $request->user()->apellidos;
+
+        if ($this->registrarLog($this->contratos[$request->psppacj_mo], $request->psppacj_fecha, $usuario, json_encode($datos))) {
             $pdf = PDF::loadView('oficios.contrato_psppacj', $datos);
             $pdf->setPaper('A4', 'portrait');
             return $pdf->stream();
+        }
     }
 
     public function psp(Request $request)
@@ -450,9 +462,23 @@ class OficioController extends Controller
             "vfpago_cuota" => $request->pspvfpago_cuota,
             "domicilio" => $request->psp_domicilio,
             ];
-    
+
+        $usuario = $request->user()->nombres . " " . $request->user()->apellidos;
+
+        if ($this->registrarLog($this->contratos[$request->psp_mo], $request->psp_fecha, $usuario, json_encode($datos))) {
             $pdf = PDF::loadView('oficios.contrato_psp', $datos);
             $pdf->setPaper('A4', 'portrait');
             return $pdf->stream();
+        } 
+    }
+
+    public function registrarLog($titulo, $fecha, $usuario, $datos)
+    {
+        $oficioLog = new OficioLog;
+        $oficioLog->titulo_documento = $titulo;
+        $oficioLog->fecha = $fecha;
+        $oficioLog->usuario = $usuario;
+        $oficioLog->vista = $datos;
+        return $oficioLog->save();
     }
 }

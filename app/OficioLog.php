@@ -20,5 +20,4 @@ class OficioLog extends Model
             'usuario',
             'vista',
         ];
-
 }

@@ -29,6 +29,7 @@
                                         <div class="row">
                                             <div class="col-md-6" style="padding-bottom: 15px;">
                                                 <label>Fecha:</label>
+                                                <input class="form-control" required="required" name="oca_mo" type="hidden">
                                                 <input class="form-control" required="required" name="oca_fecha" type="date">
                                             </div>
         
@@ -158,6 +159,7 @@
                                         <div class="row ">
                                             <div class="col-md-6" style="padding-bottom: 15px;">
                                                 <label>Fecha:</label>
+                                                <input class="form-control" required="required" name="psppacj_mo" type="hidden">
                                                 <input class="form-control" required="required" name="psppacj_fecha" type="date">
                                             </div>
         
@@ -300,6 +302,7 @@
                                         <div class="row ">
                                             <div class="col-md-6" style="padding-bottom: 15px;">
                                                 <label>Fecha:</label>
+                                                <input class="form-control" required="required" name="psp_mo" type="hidden">
                                                 <input class="form-control" required="required" name="psp_fecha" type="date">
                                             </div>
         
@@ -432,6 +435,7 @@
                                         <div class="row">
                                             <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
                                                 <label>Número de Cédula:</label>
+                                                <input class="form-control" required="required" name="pj_mo" type="hidden">
                                                 <input placeholder="Ingrese el número de cédula del cliente" class="form-control" required="required" name="opj_cedula" type="tel">
                                             </div>
 
@@ -496,13 +500,13 @@
                                             </div>
 
                                             <div class="col-md-6" style="padding-bottom: 15px;">
-                                                <label>Cantón:</label>
-                                                <input placeholder="Ingrese el cantón donde está ubicada la institución" class="form-control" required="required" onkeypress="return soloLetras(event)" name="opj_cantonuji" type="text">
+                                                <label>Provincia</label>
+                                                {!! Form::select('opj_provinciauji', $provincias, null, ['class'=>'form-control', 'required' => 'required']) !!}
                                             </div>
 
                                             <div class="col-md-6" style="padding-bottom: 15px;">
-                                                <label>Provincia</label>
-                                                {!! Form::select('opj_provinciauji', $provincias, null, ['class'=>'form-control', 'required' => 'required']) !!}
+                                                <label>Cantón:</label>
+                                                <input placeholder="Ingrese el cantón donde está ubicada la institución" class="form-control" required="required" onkeypress="return soloLetras(event)" name="opj_cantonuji" type="text">
                                             </div>
 
                                             <div class="col-md-6" style="padding-bottom: 15px;">
@@ -537,37 +541,209 @@
                 $("#oficio_pj").css("display", "none"); 
                 $("#oficio_psp").css("display", "none");
                 $("#oficio_psppacj").css("display", "none");
-                $("#metodo_oficio").val(this.value);
+                $("[name=oca_mo]").val("");
+                $("[name=pj_mo]").val("");
+                $("[name=psp_mo]").val("");
+                $("[name=psppacj_mo]").val("");
             }
             if(this.value == "1"){ 
                 $("#oficio_ca").css("display", "block"); 
                 $("#oficio_pj").css("display", "none"); 
                 $("#oficio_psp").css("display", "none");
                 $("#oficio_psppacj").css("display", "none");
-                $("#metodo_oficio").val(this.value);
+                $("[name=oca_mo]").val(this.value);
             }
             if(this.value == "2"){ 
                 $("#oficio_pj").css("display", "block");
                 $("#oficio_ca").css("display", "none"); 
                 $("#oficio_psp").css("display", "none");
                 $("#oficio_psppacj").css("display", "none");
-                $("#metodo_oficio").val(this.value);
+                $("[name=pj_mo]").val(this.value);
             }
             if(this.value == "3"){ 
                 $("#oficio_psp").css("display", "block");
                 $("#oficio_ca").css("display", "none"); 
                 $("#oficio_pj").css("display", "none"); 
                 $("#oficio_psppacj").css("display", "none");
-                $("#metodo_oficio").val(this.value);
+                $("[name=psp_mo]").val(this.value);
             }
             if(this.value == "4"){ 
                 $("#oficio_psppacj").css("display", "block");
                 $("#oficio_ca").css("display", "none"); 
                 $("#oficio_pj").css("display", "none"); 
                 $("#oficio_psp").css("display", "none");
-                $("#metodo_oficio").val(this.value);
+                $("[name=psppacj_mo]").val(this.value);
             }
         });
+
+        $("[name='oca_pronvicia']").change(function(){
+            ocultarCiudadesA();
+            
+            if(this.value == "1"){ mostrarCiudadesA(1, 9); }
+            if(this.value == "2"){ mostrarCiudadesA(10, 14); }
+            if(this.value == "3"){ mostrarCiudadesA(15, 18); }
+            if(this.value == "4"){ mostrarCiudadesA(19, 26); }
+            if(this.value == "5"){ mostrarCiudadesA(27, 40); } 
+            if(this.value == "6"){ mostrarCiudadesA(41, 55); } 
+            if(this.value == "7"){ mostrarCiudadesA(56, 69); } 
+            if(this.value == "8"){ mostrarCiudadesA(70, 85); } 
+            if(this.value == "9"){ mostrarCiudadesA(86, 89); } 
+            if(this.value == "10"){ mostrarCiudadesA(90, 110); } 
+            if(this.value == "11"){ mostrarCiudadesA(111, 120); } 
+            if(this.value == "12"){ mostrarCiudadesA(121, 135); } 
+            if(this.value == "13"){ mostrarCiudadesA(136, 145); } 
+            if(this.value == "14"){ mostrarCiudadesA(146, 165); } 
+            if(this.value == "15"){ mostrarCiudadesA(166, 170); } 
+            if(this.value == "16"){ mostrarCiudadesA(171, 175); } 
+            if(this.value == "17"){ mostrarCiudadesA(176, 179); }
+            if(this.value == "18"){ mostrarCiudadesA(180, 185); } 
+            if(this.value == "19"){ mostrarCiudadesA(186, 217); } 
+            if(this.value == "20"){ mostrarCiudadesA(218, 220); } 
+            if(this.value == "21"){ mostrarCiudadesA(221, 224); } 
+            if(this.value == "22"){ mostrarCiudadesA(225, 232); } 
+            if(this.value == "23"){ mostrarCiudadesA(233, 243); } 
+            if(this.value == "24"){ mostrarCiudadesA(244, 248); } 
+        });
+
+        function mostrarCiudadesA(desde, hasta){
+            for (var index = desde; index <= hasta; index++) {
+                $("[name='oca_ciudad']").find("option:eq("+index+")").show();
+            }
+        }
+
+        function ocultarCiudadesA(){
+            for (var index = 1; index <= 257; index++) {
+                $("[name='oca_ciudad']").find("option:eq("+index+")").hide();
+            }
+        }
+
+        $("[name='psppacj_provincia']").change(function(){
+            ocultarCiudadesB();
+            
+            if(this.value == "1"){ mostrarCiudadesB(1, 9); }
+            if(this.value == "2"){ mostrarCiudadesB(10, 14); }
+            if(this.value == "3"){ mostrarCiudadesB(15, 18); }
+            if(this.value == "4"){ mostrarCiudadesB(19, 26); }
+            if(this.value == "5"){ mostrarCiudadesB(27, 40); } 
+            if(this.value == "6"){ mostrarCiudadesB(41, 55); } 
+            if(this.value == "7"){ mostrarCiudadesB(56, 69); } 
+            if(this.value == "8"){ mostrarCiudadesB(70, 85); } 
+            if(this.value == "9"){ mostrarCiudadesB(86, 89); } 
+            if(this.value == "10"){ mostrarCiudadesB(90, 110); } 
+            if(this.value == "11"){ mostrarCiudadesB(111, 120); } 
+            if(this.value == "12"){ mostrarCiudadesB(121, 135); } 
+            if(this.value == "13"){ mostrarCiudadesB(136, 145); } 
+            if(this.value == "14"){ mostrarCiudadesB(146, 165); } 
+            if(this.value == "15"){ mostrarCiudadesB(166, 170); } 
+            if(this.value == "16"){ mostrarCiudadesB(171, 175); } 
+            if(this.value == "17"){ mostrarCiudadesB(176, 179); }
+            if(this.value == "18"){ mostrarCiudadesB(180, 185); } 
+            if(this.value == "19"){ mostrarCiudadesB(186, 217); } 
+            if(this.value == "20"){ mostrarCiudadesB(218, 220); } 
+            if(this.value == "21"){ mostrarCiudadesB(221, 224); } 
+            if(this.value == "22"){ mostrarCiudadesB(225, 232); } 
+            if(this.value == "23"){ mostrarCiudadesB(233, 243); } 
+            if(this.value == "24"){ mostrarCiudadesB(244, 248); } 
+        });
+
+        function mostrarCiudadesB(desde, hasta){
+            for (var index = desde; index <= hasta; index++) {
+                $("[name='psppacj_ciudad']").find("option:eq("+index+")").show();
+            }
+        }
+
+        function ocultarCiudadesB(){
+            for (var index = 1; index <= 257; index++) {
+                $("[name='psppacj_ciudad']").find("option:eq("+index+")").hide();
+            }
+        }
+
+
+        $("[name='psp_provincia']").change(function(){
+            ocultarCiudadesC();
+            
+            if(this.value == "1"){ mostrarCiudadesC(1, 9); }
+            if(this.value == "2"){ mostrarCiudadesC(10, 14); }
+            if(this.value == "3"){ mostrarCiudadesC(15, 18); }
+            if(this.value == "4"){ mostrarCiudadesC(19, 26); }
+            if(this.value == "5"){ mostrarCiudadesC(27, 40); } 
+            if(this.value == "6"){ mostrarCiudadesC(41, 55); } 
+            if(this.value == "7"){ mostrarCiudadesC(56, 69); } 
+            if(this.value == "8"){ mostrarCiudadesC(70, 85); } 
+            if(this.value == "9"){ mostrarCiudadesC(86, 89); } 
+            if(this.value == "10"){ mostrarCiudadesC(90, 110); } 
+            if(this.value == "11"){ mostrarCiudadesC(111, 120); } 
+            if(this.value == "12"){ mostrarCiudadesC(121, 135); } 
+            if(this.value == "13"){ mostrarCiudadesC(136, 145); } 
+            if(this.value == "14"){ mostrarCiudadesC(146, 165); } 
+            if(this.value == "15"){ mostrarCiudadesC(166, 170); } 
+            if(this.value == "16"){ mostrarCiudadesC(171, 175); } 
+            if(this.value == "17"){ mostrarCiudadesC(176, 179); }
+            if(this.value == "18"){ mostrarCiudadesC(180, 185); } 
+            if(this.value == "19"){ mostrarCiudadesC(186, 217); } 
+            if(this.value == "20"){ mostrarCiudadesC(218, 220); } 
+            if(this.value == "21"){ mostrarCiudadesC(221, 224); } 
+            if(this.value == "22"){ mostrarCiudadesC(225, 232); } 
+            if(this.value == "23"){ mostrarCiudadesC(233, 243); } 
+            if(this.value == "24"){ mostrarCiudadesC(244, 248); } 
+        });
+
+        function mostrarCiudadesC(desde, hasta){
+            for (var index = desde; index <= hasta; index++) {
+                $("[name='psp_ciudad']").find("option:eq("+index+")").show();
+            }
+        }
+
+        function ocultarCiudadesC(){
+            for (var index = 1; index <= 257; index++) {
+                $("[name='psp_ciudad']").find("option:eq("+index+")").hide();
+            }
+        }
+
+        $("[name='ocalocal_provincia']").change(function(){
+            ocultarCiudadesD();
+            
+            if(this.value == "1"){ mostrarCiudadesD(1, 9); }
+            if(this.value == "2"){ mostrarCiudadesD(10, 14); }
+            if(this.value == "3"){ mostrarCiudadesD(15, 18); }
+            if(this.value == "4"){ mostrarCiudadesD(19, 26); }
+            if(this.value == "5"){ mostrarCiudadesD(27, 40); } 
+            if(this.value == "6"){ mostrarCiudadesD(41, 55); } 
+            if(this.value == "7"){ mostrarCiudadesD(56, 69); } 
+            if(this.value == "8"){ mostrarCiudadesD(70, 85); } 
+            if(this.value == "9"){ mostrarCiudadesD(86, 89); } 
+            if(this.value == "10"){ mostrarCiudadesD(90, 110); } 
+            if(this.value == "11"){ mostrarCiudadesD(111, 120); } 
+            if(this.value == "12"){ mostrarCiudadesD(121, 135); } 
+            if(this.value == "13"){ mostrarCiudadesD(136, 145); } 
+            if(this.value == "14"){ mostrarCiudadesD(146, 165); } 
+            if(this.value == "15"){ mostrarCiudadesD(166, 170); } 
+            if(this.value == "16"){ mostrarCiudadesD(171, 175); } 
+            if(this.value == "17"){ mostrarCiudadesD(176, 179); }
+            if(this.value == "18"){ mostrarCiudadesD(180, 185); } 
+            if(this.value == "19"){ mostrarCiudadesD(186, 217); } 
+            if(this.value == "20"){ mostrarCiudadesD(218, 220); } 
+            if(this.value == "21"){ mostrarCiudadesD(221, 224); } 
+            if(this.value == "22"){ mostrarCiudadesD(225, 232); } 
+            if(this.value == "23"){ mostrarCiudadesD(233, 243); } 
+            if(this.value == "24"){ mostrarCiudadesD(244, 248); } 
+        });
+
+        function mostrarCiudadesD(desde, hasta){
+            for (var index = desde; index <= hasta; index++) {
+                $("[name='ocalocal_ciudad']").find("option:eq("+index+")").show();
+            }
+        }
+
+        function ocultarCiudadesD(){
+            for (var index = 1; index <= 257; index++) {
+                $("[name='ocalocal_ciudad']").find("option:eq("+index+")").hide();
+            }
+        }
+
+
+        
+        
     </script>
 
 @endsection
