@@ -368,7 +368,7 @@
                                                             </div>
                                                             <div class="col-md-12" style="padding-bottom: 15px;">
                                                                 <label>Calidad:</label>
-                                                                <input placeholder="Ingrese la dirección domiciliaria del cliente" class="form-control" required="required" name="pspcliente__calidad" type="text">
+                                                                <input placeholder="Ingrese la cualidad del cliente" class="form-control" required="required" name="pspcliente__calidad" type="text">
                                                             </div>
                                                             <div class="col-md-12" style="padding-bottom: 15px;">
                                                                 <label>Motivo:</label>
