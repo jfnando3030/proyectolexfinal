@@ -280,7 +280,7 @@
                                         <i class="fas fa-file"></i>Agregar</a>
                                 </li>
                                 <li>
-                                    <a id="menu_letras"  href="{{route('tarifa.index')}}" onclick="return myFunction();">
+                                    <a id="menu_letras"  href="{{url('administracion/oficios')}}" onclick="return myFunction();">
                                         <i class="fas fa-table"></i>Listado</a>
                                 </li>
                                 
@@ -601,7 +601,7 @@
                                         <i class="fas fa-file"></i>Agregar</a>
                                 </li>
                                 <li>
-                                    <a id="menu_letras"  href="{{route('tarifa.index')}}" onclick="return myFunction();">
+                                    <a id="menu_letras"  href="{{url('administracion/oficios')}}" onclick="return myFunction();">
                                         <i class="fas fa-table"></i>Listado</a>
                                 </li>
                                 

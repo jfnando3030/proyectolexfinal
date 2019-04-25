@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use PDF;
 use App\OficioLog;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 
 class OficioController extends Controller
 {
@@ -316,6 +318,41 @@ class OficioController extends Controller
         247=>"Yantzaza",
         248=>"Zamora"
     );
+
+
+    public function index()
+    {
+        $oficios = DB::table('oficios_log')->orderBy('id')->paginate(5);
+        return view('oficios.index', [ 'oficios' => $oficios]);
+    }
+
+    public function generarPdf($id)
+    {
+        $_id= Crypt::decrypt($id);
+        $oficio = OficioLog::find($_id);
+        $datos = json_decode($oficio->vista, true);
+
+        if ($oficio->titulo_documento == $this->contratos[1]) {
+            $pdf = PDF::loadView('oficios.contrato_arrendamiento', $datos);
+            $pdf->setPaper('A4', 'portrait');
+            return $pdf->stream();
+        }
+        if ($oficio->titulo_documento == $this->contratos[2]) {
+            $pdf = PDF::loadView('oficios.procuracion_judicial', $datos);
+            $pdf->setPaper('A4', 'portrait');
+            return $pdf->stream();
+        }
+        if ($oficio->titulo_documento == $this->contratos[3]) {
+            $pdf = PDF::loadView('oficios.contrato_psp', $datos);
+            $pdf->setPaper('A4', 'portrait');
+            return $pdf->stream();
+        }
+        if ($oficio->titulo_documento == $this->contratos[4]) {
+            $pdf = PDF::loadView('oficios.contrato_psppacj', $datos);
+            $pdf->setPaper('A4', 'portrait');
+            return $pdf->stream();
+        }
+    }
 
     /**
      * Show the form for creating a new resource.

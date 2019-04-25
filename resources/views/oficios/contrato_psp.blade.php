@@ -139,8 +139,8 @@
         <ol type="a"><li>Por mutuo acuerdo.</li>
         <li>Por incumplimiento de las obligaciones pactadas; por una o ambas partes contratantes.</li></ol></p><br>
         
-        <p><b><u>DÉCIMO.- PERFECCIONAMIENTO:</u></b><br>
-        El presente contrato queda perfeccionado con la firma de este documento. Es válido lo escrito a mano en el texto.</p><br>
+        <p><b><u>DÉCIMO.- PERFECCIONAMIENTO:</u></b></p><br>
+        <p>El presente contrato queda perfeccionado con la firma de este documento. Es válido lo escrito a mano en el texto.</p><br>
         
         <p>Una vez cancelados los valores en su totalidad por parte de <b>EL CLIENTE</b>; <b>EL ABOGADO</b> le remitirá una <b>FACTURA</b> por concepto del presente 
         <b>CONTRATO DE PRESTACIÓN DE SERVICIOS PROFESIONALES.</b></p><br>
@@ -157,7 +157,7 @@
         <b>{{$cliente_nombre}}</b><br>
         <b>C.C. {{$cliente_cedula}}</b><br>
         <b>{{$cliente_calidad}}</b><br>
-        <b><u>EL CLIENTE.</u></b></p><br><br>
+        <b><u>EL CLIENTE.</u></b></p><br><br><br>
 
 
 

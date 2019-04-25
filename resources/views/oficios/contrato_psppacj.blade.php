@@ -50,6 +50,10 @@
         .firmas{
             text-align: center;
         }
+
+        .salto-firma{
+            page-break-before: always;
+        }
     </style>
 </head>
 <body>
@@ -116,12 +120,14 @@
         de lo Civil y Mercantil que allí ejercen jurisdicción.</p>
         
         <p>Para constancia y fe de lo actuado, las partes reconocen sus firmas y rubricas del presente documento en el cantón <b>{{$canton}}</b>, Provincia de <b>{{$provincia}}</b>, 
-        a los <b>{{$fecha[2]}}</b> días del mes de <b>{{$fecha[1]}}</b> del año <b>{{$fecha[0]}}</b>.</p><br><br><br><br>
+        a los <b>{{$fecha[2]}}</b> días del mes de <b>{{$fecha[1]}}</b> del año <b>{{$fecha[0]}}</b>.</p>
 
+        <div class="salto-firma">
+        <br><br><br>
         <p class="firmas"><b>__________________________________</b><br>
         <b>{{$cliente_nombre}}</b><br>
         <b>C.C. {{$cliente_cedula}}</b><br>
-        <b><u>EL CLIENTE.</u></b></p>
+        <b><u>EL CLIENTE.</u></b></p><br><br><br>
 
 
 
@@ -129,7 +135,7 @@
         <b>{{$abogado_nombre}}</b><br>
         <b>C.C. {{$abogado_cedula}}</b><br>
         <b>MAT. FORO DE ABOGADOS: {{$abogado_mat_foro_abogados}} DEL ESTUDIO JURÍDICO MERINO & ASOCIADOS.</b><br>
-        <b><u>EL ABOGADO.</u></b></p>
+        <b><u>EL ABOGADO.</u></b></p><br><br><br>
 
 
 
@@ -138,6 +144,7 @@
         <b>C.C. {{$perito_cedula}}</b><br>
         <b>No. de Calificación: {{$perito_calificacion}}</b><br>
         <b><u>PERITO CALIFICADO EN EL REGISTRO DE LA FUNCIÓN JUDICIAL</u></b></p>
+        <div>
 
     </section>
 

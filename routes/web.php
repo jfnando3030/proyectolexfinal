@@ -189,6 +189,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 //*******************************OFICIO********************************
 	Route::get('administracion/oficio', 'OficioController@create');
+	Route::get('administracion/oficios', 'OficioController@index');
+	Route::get('administracion/oficios/pdf/{id}', 'OficioController@generarPdf');
 	Route::post('administracion/oficio/procuracion_judicial', 'OficioController@pj');
 	Route::post('administracion/oficio/contrato_arrendamiento', 'OficioController@ca');
 	Route::post('administracion/oficio/contrato_psppacj', 'OficioController@psppacj');
