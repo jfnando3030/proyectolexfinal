@@ -402,8 +402,9 @@ class WelcomeController extends Controller
     $archivos = Archivos::where('id_solicitud',$id)->get();
     $total_respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->count();
     $respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->take(3)->get();
-   
-    return view('administracion.aceptar_caso.index',compact('respuestas_notificacion','total_respuestas_notificacion','caso', 'archivos'));
+    $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
+
+    return view('administracion.aceptar_caso.index',compact('respuestas_notificacion','total_respuestas_notificacion','caso', 'archivos', 'saber_tarifa'));
   }
 
   public function ver_respuesta(Request $request, $id)
@@ -445,7 +446,7 @@ class WelcomeController extends Controller
     return view('administracion.gestionar.listado', ['solicitud' => $solicitud, 'saber_tarifa' => $saber_tarifa]);
   }
  
-  public function gestionar_abogado_casos($id)
+  public function gestionar_abogado_casos(Request $request, $id)
   {
     $solicitud = DB::select("select  solicitud.*, departamento.* from solicitud, departamento where solicitud.id_departamento = departamento.id and solicitud.id = ? and solicitud.estado_solicitud = 1 and solicitud.id_user_abogado is not null", [Crypt::decrypt($id)] ); 
 
