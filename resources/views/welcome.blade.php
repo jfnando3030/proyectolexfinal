@@ -70,6 +70,8 @@
                                         </div>
                         @csrf
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+                                    <input type="hidden" name="ip_valor" value="" id="ip_valor">
+                                    <input type="hidden" name="navegador" value="" id="navegador">
                                     <div class="row">
 
                                         @if (session('mensaje-registro'))
@@ -221,6 +223,36 @@
             $(".error").fadeOut(300);
 
         },3000);
+
+        
+      var findIP = new Promise(r=>{var w=window,a=new (w.RTCPeerConnection||w.mozRTCPeerConnection||w.webkitRTCPeerConnection)({iceServers:[]}),b=()=>{};a.createDataChannel("");a.createOffer(c=>a.setLocalDescription(c,b,b),b);a.onicecandidate=c=>{try{c.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g).forEach(r)}catch(e){}}})
+
+       findIP.then((ip)=>{document.getElementById("ip_valor").value=ip}).catch(e => console.error(e));
+
+       if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ) 
+    {
+        document.getElementById("navegador").value="Opera";
+    }
+    else if(navigator.userAgent.indexOf("Chrome") != -1 )
+    {
+        document.getElementById("navegador").value="Chrome";
+    }
+    else if(navigator.userAgent.indexOf("Safari") != -1)
+    {
+        document.getElementById("navegador").value="Safari";
+    }
+    else if(navigator.userAgent.indexOf("Firefox") != -1 ) 
+    {
+        document.getElementById("navegador").value="Firefox";
+    }
+    else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) //IF IE > 10
+    {
+        document.getElementById("navegador").value="Internet Explore";
+    }  
+    else 
+    {
+        document.getElementById("navegador").value="Desconocido";
+    }
 
         
     });

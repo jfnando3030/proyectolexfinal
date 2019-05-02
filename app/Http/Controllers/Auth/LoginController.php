@@ -67,12 +67,14 @@ class LoginController extends Controller
             $hoy = $date->format('Y-m-d');
             $hora = $date->format('H:i:s');
 
+            $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+
             Log::create([
                 'fecha_log' => $hoy,
                 'hora_log' => $hora,
                 'estado' => 1,
                 'id_user_log' => Auth::user()->id,
-                'ip' => \Request::getClientIp(true),
+                'ip' =>  $ip_navegador,
                 'accion' => "Inicio sesión en el sistema",
                             
 

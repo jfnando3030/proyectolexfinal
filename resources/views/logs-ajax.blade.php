@@ -10,7 +10,7 @@
 
                
                 <th>Hora</th>
-                <th>IP</th>
+                <th>IP / Navegador</th>
                 <th>Acción</th>
 
               
