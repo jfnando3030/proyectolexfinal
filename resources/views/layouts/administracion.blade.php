@@ -289,6 +289,28 @@
 
                         @endif
 
+
+                        @if(Auth::user()->rol == "Administrador")
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#" id="menu_letras">
+                                <i class="far fa-file-alt"></i>Logs
+                                <span class="arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                               
+                                <li>
+                                    <a id="menu_letras"  href="{{url('administracion/ver_logs')}}" onclick="return myFunction();">
+                                        <i class="fas fa-table"></i>Ver logs</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+
+                        @endif
+
+
                         @if(Auth::user()->rol == "Administrador")
                         <li>
                             <a href="{{url('administracion/pago/aprobacion')}}" onclick="return myFunction();" id="menu_letras">

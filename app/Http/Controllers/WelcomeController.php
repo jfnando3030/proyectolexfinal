@@ -11,6 +11,7 @@ use App\Tarifa;
 use App\Departamento;
 use Carbon\Carbon;
 use App\Comisiones;
+use App\Log;
 use App\Respuesta;
 use App\ArchivosRespuesta;
 use Illuminate\Support\Facades\DB;
@@ -37,7 +38,7 @@ use Illuminate\Support\Facades\Auth;
 
 class WelcomeController extends Controller
 {
-  
+
 
   public $dias = array( ""=>"Seleccione un día" ,1=>"Lunes", 2=>"Martes", 3=>"Miércoles", 4=>"Jueves", 5=>"Viernes", 6=>"Sábado", 7=>"Domingo");
 
@@ -55,7 +56,22 @@ class WelcomeController extends Controller
 
   public function getIp()
   {
-     dd($clientIP = \Request::getClientIp());
+    $ip= \Request::getClientIp(true);
+
+     dd($ip);
+  }
+
+  public function ver_logs(Request $request){
+
+    $logs = Log::where('estado',1)->orderBy('id')->paginate(5);
+  
+    if ($request->ajax()) {
+        return view('logs-ajax', compact('logs'));
+    }
+
+    return view('administracion.logs.index',compact('logs'));
+
+
   }
 
   public function admin(Request $request)

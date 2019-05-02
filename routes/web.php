@@ -52,6 +52,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 	Route::get('administracion','WelcomeController@admin');
 	Route::get('administracion/mired','WelcomeController@mired');
+	Route::get('administracion/ver_logs','WelcomeController@ver_logs');
 
 	
 
