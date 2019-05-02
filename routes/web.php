@@ -196,7 +196,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::post('administracion/oficio/contrato_psppacj', 'OficioController@psppacj');
 	Route::post('administracion/oficio/contrato_psp', 'OficioController@psp');
 	
+// *******************************************************************************************************************
 	Route::get('/administracion/notificaciones/{id}', 'NotificacionUserController@notificacion')->name('notificacion');
+
+
+// ************************************* VISITA *******************************************************
+
+	Route::get('administracion/visita', 'VisitaController@visita');
+
+	Route::get('administracion/visita/{id}', 'VisitaController@registrar_visita');
+
+//******************************************************************************************************
 
 });
 

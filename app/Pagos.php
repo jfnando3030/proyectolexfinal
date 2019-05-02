@@ -23,5 +23,7 @@ class Pagos extends Model
         'estado',
         'comprobante_pago',
         'path',
+        'cantidad_visitas', 
+        'cantidad_consultorias'
     ];
 }

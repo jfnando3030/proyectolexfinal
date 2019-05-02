@@ -8,104 +8,102 @@
 
     @if($saber_tarifa->count() ==0  or $saber_consultoria != 0 )
 
-    <div align="center" class="col-md-12 col-12 col-xs-12 col-lg-12 col-sm-12" style="padding-top:15px; padding-bottom: 25px">
-        <h4 style="color: black; text-align:center; font-size:25px;"> Realizar solicitud </h4>
-    </div>
+        <div align="center" class="col-md-12 col-12 col-xs-12 col-lg-12 col-sm-12" style="padding-top:15px; padding-bottom: 25px">
+            <h4 style="color: black; text-align:center; font-size:25px;"> Realizar solicitud </h4>
+        </div>
 
   
-    <div class="container-fluid">
+        <div class="container-fluid">
 
-        @if (session('mensaje-registro'))
-            @include('mensajes.msj_correcto')
-        @endif
+            @if (session('mensaje-registro'))
+                @include('mensajes.msj_correcto')
+            @endif
 
-        <div class="emp-profile" style="padding: 3%;">
-            <form action="{{ route('store_solicitud') }}" method="post" enctype="multipart/form-data">
+            <div class="emp-profile" style="padding: 3%;">
+                <form action="{{ route('store_solicitud') }}" method="post" enctype="multipart/form-data">
 
-                <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-12 col-12 col-lg-12 col-sm-12 col-xs-12">
-                                <div class="tab-content profile-tab" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                        <div class="row">
-                                            <div class="col-md-6" style="padding-bottom: 15px;">
-                                                <label>Titulo de su solicitud:</label>
-                                                {!! Form::text('nombre',null,['placeholder'=>'Ingrese el título de su solicitud','class'=>'form-control', 'required']) !!}
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12 col-12 col-lg-12 col-sm-12 col-xs-12">
+                                    <div class="tab-content profile-tab" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                            <div class="row">
+                                                <div class="col-md-6" style="padding-bottom: 15px;">
+                                                    <label>Titulo de su solicitud:</label>
+                                                    {!! Form::text('nombre',null,['placeholder'=>'Ingrese el título de su solicitud','class'=>'form-control', 'required']) !!}
 
-                                                <label>Detalle su petición:</label>
-                                                <textarea name="solicitud" id="solicitud" rows="9" placeholder="Escriba más información de su solicitud...    " class="form-control" required="" style="background-color: #f2f2f2;"></textarea> 
-                                            </div>
+                                                    <label>Detalle su petición:</label>
+                                                    <textarea name="solicitud" id="solicitud" rows="9" placeholder="Escriba más información de su solicitud...    " class="form-control" required="" style="background-color: #f2f2f2;"></textarea> 
+                                                </div>
 
-                                            <div class="col-md-6" style="padding-bottom: 15px;">
-                                                <label>Seleccione el departamento:</label>
-                                                <select class="form-control" id="departamento" name="departamento" required="">
-                                                    <option value=""> Seleccione un departamento</option>
-                                                    @foreach($departamento as $departamento)
-                                                        <option value="{{ $departamento->id }}"> {{ $departamento->nombre_departamento }}</option>
-                                                    @endforeach
-                                                </select> 
-                                                <label>Cargar archivos:</label><br>
-                                                <div class="input-group control-group increment" >
-                                                    <input  type="file" name="archivo1" id="archivo1" class="form-control" accept="image/*, doc,.docx, .pdf" style="font-size: 11px;">
-                                                    <div class="input-group-btn"> 
-                                                        <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x1"><i class="fas fa-times"></i></button>
+                                                <div class="col-md-6" style="padding-bottom: 15px;">
+                                                    <label>Seleccione el departamento:</label>
+                                                    <select class="form-control" id="departamento" name="departamento" required="">
+                                                        <option value=""> Seleccione un departamento</option>
+                                                        @foreach($departamento as $departamento)
+                                                            <option value="{{ $departamento->id }}"> {{ $departamento->nombre_departamento }}</option>
+                                                        @endforeach
+                                                    </select> 
+                                                    <label>Cargar archivos:</label><br>
+                                                    <div class="input-group control-group increment" >
+                                                        <input  type="file" name="archivo1" id="archivo1" class="form-control" accept="image/*, doc,.docx, .pdf" style="font-size: 11px;">
+                                                        <div class="input-group-btn"> 
+                                                            <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x1"><i class="fas fa-times"></i></button>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="input-group control-group increment" >
-                                                    <input  type="file" name="archivo2" id="archivo2" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 11px;">
-                                                    <div class="input-group-btn"> 
-                                                        <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x2"><i class="fas fa-times"></i></button>
-                                                  </div>
-                                                </div>
-                                                <div class="input-group control-group increment" >
-                                                  <input  type="file" name="archivo3" id="archivo3" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 11px;">
-                                                  <div class="input-group-btn"> 
-                                                    <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x3"><i class="fas fa-times"></i></button>
-                                                  </div>
-                                                </div>
-                                                <div class="input-group control-group increment" >
-                                                  <input  type="file" name="archivo4" id="archivo4" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 11px;">
-                                                  <div class="input-group-btn"> 
-                                                    <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x4"><i class="fas fa-times"></i></button>
-                                                  </div>
-                                                </div>
-                                                <div class="input-group control-group increment" >
-                                                  <input  type="file" name="archivo5" id="archivo5" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 11px;">
-                                                  <div class="input-group-btn"> 
-                                                    <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x5"><i class="fas fa-times"></i></button>
-                                                  </div>
-                                                </div>
-                                            </div>                                            
+                                                    <div class="input-group control-group increment" >
+                                                        <input  type="file" name="archivo2" id="archivo2" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 11px;">
+                                                        <div class="input-group-btn"> 
+                                                            <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x2"><i class="fas fa-times"></i></button>
+                                                      </div>
+                                                    </div>
+                                                    <div class="input-group control-group increment" >
+                                                      <input  type="file" name="archivo3" id="archivo3" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 11px;">
+                                                      <div class="input-group-btn"> 
+                                                        <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x3"><i class="fas fa-times"></i></button>
+                                                      </div>
+                                                    </div>
+                                                    <div class="input-group control-group increment" >
+                                                      <input  type="file" name="archivo4" id="archivo4" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 11px;">
+                                                      <div class="input-group-btn"> 
+                                                        <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x4"><i class="fas fa-times"></i></button>
+                                                      </div>
+                                                    </div>
+                                                    <div class="input-group control-group increment" >
+                                                      <input  type="file" name="archivo5" id="archivo5" accept="image/*, doc,.docx, .pdf" class="form-control" style="font-size: 11px;">
+                                                      <div class="input-group-btn"> 
+                                                        <button class="btn btn-danger" type="button" style="color: white; background-color: #06379d; font-size: 11px;" id="x5"><i class="fas fa-times"></i></button>
+                                                      </div>
+                                                    </div>
+                                                </div>                                            
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
 
-                        </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                </div>
 
-                            <div class="row">
+                                <div class="col-md-4" style="padding-bottom: 15px;">
+                                    {!! Form::submit('Enviar solicitud',['class'=>'btn btn-primary btn-block']) !!}
+                                </div>
+
                                 <div class="col-md-4">
+                                
+                                </div>
                             </div>
-
-                            <div class="col-md-4" style="padding-bottom: 15px;">
-                                {!! Form::submit('Enviar solicitud',['class'=>'btn btn-primary btn-block']) !!}
-                            </div>
-
-                            <div class="col-md-4">
-                            
-                            </div>
-                        </div>
-                    </div>              
-                </div>
-            {!! Form::close() !!}
+                        </div>              
+                    </div>
+                {!! Form::close() !!}
+            </div>
         </div>
-    </div>
-
-
-      @else
+    @else
         @if($saber_consultoria == 0 ) 
             
             <article style="background:white">  
