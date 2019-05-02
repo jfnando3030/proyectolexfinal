@@ -10,6 +10,10 @@ use App\Documentos;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Crypt;
 
+use Carbon\Carbon;
+use App\Log;
+use Illuminate\Support\Facades\Auth;
+
 class DocumentoController extends Controller
 {
            /**
@@ -79,6 +83,22 @@ class DocumentoController extends Controller
         ]);
 
          $file->move('public/pdf', $nombre);
+
+         $date = Carbon::now();
+         $hoy = $date->format('Y-m-d');
+         $hora = $date->format('H:i:s');
+
+         Log::create([
+             'fecha_log' => $hoy,
+             'hora_log' => $hora,
+             'estado' => 1,
+             'id_user_log' => Auth::user()->id,
+             'ip' => \Request::getClientIp(true),
+             'accion' => "Insertó un nuevo registro en la tabla documento",
+                         
+
+         
+         ]);
 
             
        
@@ -172,6 +192,22 @@ class DocumentoController extends Controller
 
 
         if($documento->save()){
+
+            $date = Carbon::now();
+            $hoy = $date->format('Y-m-d');
+            $hora = $date->format('H:i:s');
+
+            Log::create([
+                'fecha_log' => $hoy,
+                'hora_log' => $hora,
+                'estado' => 1,
+                'id_user_log' => Auth::user()->id,
+                'ip' => \Request::getClientIp(true),
+                'accion' => "Modificó un registro de la tabla documentos",
+                            
+
+            
+            ]);
              
             return Redirect::to('administracion/documentos')->with('mensaje-registro', 'Actualizado Correctamente');
         }
@@ -191,6 +227,22 @@ class DocumentoController extends Controller
         $noticia = Documentos::find($id);
         $noticia->estado = 0;
         $noticia->save();
+
+        $date = Carbon::now();
+        $hoy = $date->format('Y-m-d');
+        $hora = $date->format('H:i:s');
+
+        Log::create([
+            'fecha_log' => $hoy,
+            'hora_log' => $hora,
+            'estado' => 1,
+            'id_user_log' => Auth::user()->id,
+            'ip' => \Request::getClientIp(true),
+            'accion' => "Eliminó un registro de la tabla documentos",
+                        
+
+        
+        ]);
 
         $message = "Eliminado Correctamente";
         if ($request->ajax()) {

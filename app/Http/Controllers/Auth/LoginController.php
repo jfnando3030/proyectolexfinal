@@ -13,6 +13,11 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
+
+use Carbon\Carbon;
+use App\Log;
+
+
 class LoginController extends Controller
 {
     /*
@@ -58,6 +63,24 @@ class LoginController extends Controller
 
         if (Auth::attempt(['cedula' => $cedula, 'password' => $password]))
         {
+            $date = Carbon::now();
+            $hoy = $date->format('Y-m-d');
+            $hora = $date->format('H:i:s');
+
+            $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+
+            Log::create([
+                'fecha_log' => $hoy,
+                'hora_log' => $hora,
+                'estado' => 1,
+                'id_user_log' => Auth::user()->id,
+                'ip' =>  $ip_navegador,
+                'accion' => "Inicio sesión en el sistema",
+                            
+
+            
+            ]);
+
             return Redirect::to('/administracion');
         }
         return Redirect::back()->with('mensaje-error', 'Datos incorrectos, vuelve a intentarlo.');

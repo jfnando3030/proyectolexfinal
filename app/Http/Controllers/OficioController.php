@@ -8,6 +8,10 @@ use App\OficioLog;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Crypt;
 
+use Carbon\Carbon;
+use App\Log;
+use Illuminate\Support\Facades\Auth;
+
 class OficioController extends Controller
 {
     public $datos;

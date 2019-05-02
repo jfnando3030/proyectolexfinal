@@ -17,6 +17,12 @@ use Mail;
 use Illuminate\Support\Facades\Crypt;
 
 
+use Carbon\Carbon;
+use App\Log;
+
+
+
+
 class PerfilController extends Controller
 {
      /**
@@ -184,6 +190,22 @@ class PerfilController extends Controller
       
      
         if($usuario->save()){
+
+        $date = Carbon::now();
+         $hoy = $date->format('Y-m-d');
+         $hora = $date->format('H:i:s');
+
+         Log::create([
+             'fecha_log' => $hoy,
+             'hora_log' => $hora,
+             'estado' => 1,
+             'id_user_log' => Auth::user()->id,
+             'ip' => \Request::getClientIp(true),
+             'accion' => "Modificó su perfil de usuario",
+                         
+
+         
+         ]);
             
                 return Redirect::to('administracion/perfil')->with('mensaje-registro', 'Perfil Actualizado Correctamente');
 

@@ -29,6 +29,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
+use Illuminate\Support\Facades\Auth;
+use App\Log;
+
 
 class AddMoneyController extends Controller
 {
@@ -185,7 +188,21 @@ class AddMoneyController extends Controller
               }
 
             DB::insert('insert into pagos (id_user, id_tarifa, fecha_inicio, fecha_finalizacion, modo_pago, monto_pago, activo, estado, comprobante_pago, path) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$request->user()->id, $payment->transactions[0]->description, $hoy, $finalizacion, 'P', $payment->transactions[0]->amount->total , '1', '1', 'Ninguno', 'Ninguno']);
+            $date = Carbon::now();
+            $hoy = $date->format('Y-m-d');
+            $hora = $date->format('H:i:s');
 
+            Log::create([
+                'fecha_log' => $hoy,
+                'hora_log' => $hora,
+                'estado' => 1,
+                'id_user_log' => Auth::user()->id,
+                'ip' => \Request::getClientIp(true),
+                'accion' => "Realizó un pago por paypal",
+                            
+
+            
+            ]);
             return redirect('administracion/pago/registrar')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
 
             //Session::flash('flash_message', 'Tu pago ha sido exitoso.' );
