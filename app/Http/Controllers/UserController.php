@@ -108,16 +108,18 @@ class UserController extends Controller
             $date = Carbon::now();
             $hoy = $date->format('Y-m-d');
             $hora = $date->format('H:i:s');
-
+        
+            $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+        
             Log::create([
                 'fecha_log' => $hoy,
                 'hora_log' => $hora,
                 'estado' => 1,
                 'id_user_log' => Auth::user()->id,
-                'ip' => \Request::getClientIp(true),
-                'accion' => "Insertó un nuevo registro en la tabla usuarios",
+                'ip' =>  $ip_navegador,
+                'accion' => "Ingreso un nuevo usuario al sistema",
                             
-
+        
             
             ]);
 
@@ -252,14 +254,19 @@ class UserController extends Controller
             $date = Carbon::now();
             $hoy = $date->format('Y-m-d');
             $hora = $date->format('H:i:s');
-
+        
+            $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+        
             Log::create([
                 'fecha_log' => $hoy,
                 'hora_log' => $hora,
                 'estado' => 1,
                 'id_user_log' => Auth::user()->id,
-                'ip' => \Request::getClientIp(true),
-                'accion' => "Modifico un registro de la tabla usuarios",
+                'ip' =>  $ip_navegador,
+                'accion' => "Modifico un registro de un usuario",
+                            
+        
+            
             ]);
             return Redirect::to('administracion/usuarios')->with('mensaje-registro', 'Usuario Actualizado Correctamente');
         }
@@ -279,17 +286,22 @@ class UserController extends Controller
 
 
         $date = Carbon::now();
-        $hoy = $date->format('Y-m-d');
-        $hora = $date->format('H:i:s');
+    $hoy = $date->format('Y-m-d');
+    $hora = $date->format('H:i:s');
 
-        Log::create([
-            'fecha_log' => $hoy,
-            'hora_log' => $hora,
-            'estado' => 1,
-            'id_user_log' => Auth::user()->id,
-            'ip' => \Request::getClientIp(true),
-            'accion' => "Eliminó un registro de la tabla usuarios",
-            ]);
+    $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+
+    Log::create([
+        'fecha_log' => $hoy,
+        'hora_log' => $hora,
+        'estado' => 1,
+        'id_user_log' => Auth::user()->id,
+        'ip' =>  $ip_navegador,
+        'accion' => "Elimino un registro de usuario",
+                    
+
+    
+    ]);
                         
 
         $message = "Eliminado Correctamente";

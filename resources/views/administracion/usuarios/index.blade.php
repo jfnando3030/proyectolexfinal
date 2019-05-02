@@ -61,7 +61,9 @@
        </div>
 
       {!! Form::open(['route' => ['usuarios.destroy', ':USER_ID'], 'method' => 'DELETE', 'id' => 'form-delete']) !!}
-        {!! Form::close() !!}
+            <input type="hidden" name="ip_valor" value="" id="ip_valor">
+            <input type="hidden" name="navegador" value="" id="navegador">  
+      {!! Form::close() !!}
         
        
 

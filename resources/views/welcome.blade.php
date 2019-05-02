@@ -178,6 +178,8 @@
 
     <!--mobile menu js-->
     <script src="{{url('frontend/js/jquery.slicknav.min.js')}}"></script>
+
+   
     <!-- main js-->
     <script src="{{url('frontend/js/main.js')}}"></script>
     <script type="text/javascript">
@@ -187,6 +189,8 @@
             },3000);
         });
     </script>
+
+
 
 <script type="text/javascript">
    
@@ -225,6 +229,10 @@
         },3000);
 
         
+
+
+
+        
       var findIP = new Promise(r=>{var w=window,a=new (w.RTCPeerConnection||w.mozRTCPeerConnection||w.webkitRTCPeerConnection)({iceServers:[]}),b=()=>{};a.createDataChannel("");a.createOffer(c=>a.setLocalDescription(c,b,b),b);a.onicecandidate=c=>{try{c.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g).forEach(r)}catch(e){}}})
 
        findIP.then((ip)=>{document.getElementById("ip_valor").value=ip}).catch(e => console.error(e));
@@ -249,6 +257,12 @@
     {
         document.getElementById("navegador").value="Internet Explore";
     }  
+
+    else if (window.navigator.userAgent.indexOf("Edge") > -1)
+    {
+        document.getElementById("navegador").value="Microsoft Edge";
+    }
+
     else 
     {
         document.getElementById("navegador").value="Desconocido";

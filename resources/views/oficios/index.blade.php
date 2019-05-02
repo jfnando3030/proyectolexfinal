@@ -36,7 +36,7 @@
       <td>{{ $ofi->usuario }}</td>
       <td style="text-align: center;">
       @if(Auth::user()->rol == "Administrador")
-        <a class="btn btn-primary" href="{{url('administracion/oficios/pdf', Crypt::encrypt($ofi->id) )}}">
+        <a class="btn btn-primary" onclick="return myFunction();"href="{{url('administracion/oficios/pdf', Crypt::encrypt($ofi->id) )}}">
         <i class="far fa-file-alt"></i>
         </a>
       @endif

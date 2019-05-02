@@ -4,9 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Tarifa;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Redirect;
+
+use Carbon\Carbon;
+use App\Log;
+use Illuminate\Support\Facades\Auth;
 
 class TarifaController extends Controller
 {
@@ -103,6 +107,24 @@ class TarifaController extends Controller
         $tarifa->fill($request->all());
 
         if($tarifa->save()){ 
+
+            $date = Carbon::now();
+    $hoy = $date->format('Y-m-d');
+    $hora = $date->format('H:i:s');
+
+    $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+
+    Log::create([
+        'fecha_log' => $hoy,
+        'hora_log' => $hora,
+        'estado' => 1,
+        'id_user_log' => Auth::user()->id,
+        'ip' =>  $ip_navegador,
+        'accion' => "Modifico una tarifa",
+                    
+
+    
+    ]);
             return redirect('administracion/tarifa')->with('mensaje-registro', 'Datos actualizados correctamente.');
         }
         else{

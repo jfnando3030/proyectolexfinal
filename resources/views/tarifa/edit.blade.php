@@ -13,6 +13,8 @@
             <div id="msj-success" class="alert alert-success alert-dismissible aprobado" role="alert" style="display:none">
                 <strong> Credenciales Modificados Correctamente.</strong>
             </div>
+            <input type="hidden" name="ip_valor" value="" id="ip_valor">
+            <input type="hidden" name="navegador" value="" id="navegador">
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">

@@ -404,8 +404,26 @@ class OficioController extends Controller
         $usuario = $request->user()->nombres . " " . $request->user()->apellidos;
 
         if ($this->registrarLog($this->contratos[$request->oca_mo], $datos["fecha"], $usuario, json_encode($datos))) {
+            $date = Carbon::now();
+            $hoy = $date->format('Y-m-d');
+            $hora = $date->format('H:i:s');
+        
+            $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+        
+            Log::create([
+                'fecha_log' => $hoy,
+                'hora_log' => $hora,
+                'estado' => 1,
+                'id_user_log' => Auth::user()->id,
+                'ip' =>  $ip_navegador,
+                'accion' => "Generó un pdf sobre contrato de arrendamiento",
+                            
+        
+            
+            ]);
             $pdf = PDF::loadView('oficios.contrato_arrendamiento', $datos);
             $pdf->setPaper('A4', 'portrait');
+
             return $pdf->stream();
         }
     }
@@ -434,6 +452,23 @@ class OficioController extends Controller
         $usuario = $request->user()->nombres . " " . $request->user()->apellidos;
 
         if ($this->registrarLog($this->contratos[$request->pj_mo], date('Y-m-d'), $usuario, json_encode($datos))) {
+            $date = Carbon::now();
+            $hoy = $date->format('Y-m-d');
+            $hora = $date->format('H:i:s');
+        
+            $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+        
+            Log::create([
+                'fecha_log' => $hoy,
+                'hora_log' => $hora,
+                'estado' => 1,
+                'id_user_log' => Auth::user()->id,
+                'ip' =>  $ip_navegador,
+                'accion' => "Generó un pdf de procuración judicial",
+                            
+        
+            
+            ]);
             $pdf = PDF::loadView('oficios.procuracion_judicial', $datos);
             $pdf->setPaper('A4', 'portrait');
             return $pdf->stream();
@@ -471,6 +506,23 @@ class OficioController extends Controller
         $usuario = $request->user()->nombres . " " . $request->user()->apellidos;
 
         if ($this->registrarLog($this->contratos[$request->psppacj_mo], $request->psppacj_fecha, $usuario, json_encode($datos))) {
+            $date = Carbon::now();
+            $hoy = $date->format('Y-m-d');
+            $hora = $date->format('H:i:s');
+        
+            $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+        
+            Log::create([
+                'fecha_log' => $hoy,
+                'hora_log' => $hora,
+                'estado' => 1,
+                'id_user_log' => Auth::user()->id,
+                'ip' =>  $ip_navegador,
+                'accion' => "Generó un pdf de Contrato de Prestación de Servicios Profesionales de Perito Acreditado por el Consejo de la Judicatura",
+                            
+        
+            
+            ]);
             $pdf = PDF::loadView('oficios.contrato_psppacj', $datos);
             $pdf->setPaper('A4', 'portrait');
             return $pdf->stream();
@@ -507,6 +559,24 @@ class OficioController extends Controller
         $usuario = $request->user()->nombres . " " . $request->user()->apellidos;
 
         if ($this->registrarLog($this->contratos[$request->psp_mo], $request->psp_fecha, $usuario, json_encode($datos))) {
+            $date = Carbon::now();
+            $hoy = $date->format('Y-m-d');
+            $hora = $date->format('H:i:s');
+        
+            $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+        
+            Log::create([
+                'fecha_log' => $hoy,
+                'hora_log' => $hora,
+                'estado' => 1,
+                'id_user_log' => Auth::user()->id,
+                'ip' =>  $ip_navegador,
+                'accion' => "Generó un pdf de Contrato de Prestación de Servicios Profesionales",
+                            
+        
+            
+            ]);
+
             $pdf = PDF::loadView('oficios.contrato_psp', $datos);
             $pdf->setPaper('A4', 'portrait');
             return $pdf->stream();

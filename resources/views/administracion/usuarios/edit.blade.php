@@ -29,6 +29,8 @@
 
                 {{Form::model($usuario, ['route' => ['usuarios.update',$usuario->id],'method'=>'PUT','files' => true ])}}
                 <input type="hidden" name="ruta" id ="ruta" value="{{url('')}}">
+                <input type="hidden" name="ip_valor" value="" id="ip_valor">
+                <input type="hidden" name="navegador" value="" id="navegador">
 
 
                 <div class="row" >

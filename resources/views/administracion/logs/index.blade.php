@@ -3,7 +3,7 @@
 @section('contenido')
 
 <div align="center" class="col-md-12 col-12 col-xs-12 col-lg-12 col-sm-12" style="padding-top:15px; padding-bottom: 10px">
-        <h4 style="color: black; text-align:center; font-size:25px;">Logs Registrados </h4>
+        <h4 style="color: black; text-align:center; font-size:25px;">Logs de actividades </h4>
 
     </div>
 

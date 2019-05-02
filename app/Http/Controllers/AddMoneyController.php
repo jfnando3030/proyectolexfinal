@@ -188,21 +188,24 @@ class AddMoneyController extends Controller
               }
 
             DB::insert('insert into pagos (id_user, id_tarifa, fecha_inicio, fecha_finalizacion, modo_pago, monto_pago, activo, estado, comprobante_pago, path) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [$request->user()->id, $payment->transactions[0]->description, $hoy, $finalizacion, 'P', $payment->transactions[0]->amount->total , '1', '1', 'Ninguno', 'Ninguno']);
-            $date = Carbon::now();
-            $hoy = $date->format('Y-m-d');
-            $hora = $date->format('H:i:s');
-
-            Log::create([
-                'fecha_log' => $hoy,
-                'hora_log' => $hora,
-                'estado' => 1,
-                'id_user_log' => Auth::user()->id,
-                'ip' => \Request::getClientIp(true),
-                'accion' => "Realizó un pago por paypal",
-                            
-
             
-            ]);
+            $date = Carbon::now();
+                $hoy = $date->format('Y-m-d');
+                $hora = $date->format('H:i:s');
+
+                $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+
+                Log::create([
+                    'fecha_log' => $hoy,
+                    'hora_log' => $hora,
+                    'estado' => 1,
+                    'id_user_log' => $request->user()->id,
+                    'ip' =>  $ip_navegador,
+                    'accion' => "Realizó un pago por paypal",
+                                
+
+                
+                ]);
             return redirect('administracion/pago/registrar')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
 
             //Session::flash('flash_message', 'Tu pago ha sido exitoso.' );

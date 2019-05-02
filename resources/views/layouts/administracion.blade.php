@@ -290,24 +290,13 @@
                         @endif
 
 
-                        @if(Auth::user()->rol == "Administrador")
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#" id="menu_letras">
-                                <i class="far fa-file-alt"></i>Logs
-                                <span class="arrow">
-                                    <i class="fas fa-angle-down"></i>
-                                </span>
-                            </a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                               
-                                <li>
-                                    <a id="menu_letras"  href="{{url('administracion/ver_logs')}}" onclick="return myFunction();">
-                                        <i class="fas fa-table"></i>Ver logs</a>
-                                </li>
-                                
-                            </ul>
-                        </li>
+    
 
+                        @if(Auth::user()->rol == "Administrador")
+                        <li>
+                            <a href="{{url('administracion/ver_logs')}}" onclick="return myFunction();" id="menu_letras">
+                            <i class="fas fa-eye"></i>Ver logs</a>
+                        </li>
                         @endif
 
 
@@ -322,7 +311,10 @@
                         <li>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form2').submit();" id="menu_letras"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
 
-                            <form id="logout-form2" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                            <form id="logout-form2" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}
+                                    <input type="hidden" name="ip_valor" value="" id="ip_valor">
+                                    <input type="hidden" name="navegador" value="" id="navegador">
+                            </form>
                             
                         </li>
                     </ul>
@@ -412,7 +404,11 @@
 
                                                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form2').submit();"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
 
-                                                <form id="logout-form2" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                                                <form id="logout-form2" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}
+                                                        <input type="hidden" name="ip_valor" value="" id="ip_valor">
+                                                        <input type="hidden" name="navegador" value="" id="navegador">
+                                                
+                                                </form>
                                            
                                         </div>
                                     </div>
@@ -638,6 +634,13 @@
                             <i class="fas fa-list"></i>Aprobación Pagos</a>
                         </li>
                         @endif
+
+                        @if(Auth::user()->rol == "Administrador")
+                        <li>
+                            <a href="{{url('administracion/ver_logs')}}" onclick="return myFunction();" id="menu_letras">
+                            <i class="fas fa-eye"></i>Ver logs</a>
+                        </li>
+                        @endif
                           
     
                             
@@ -650,7 +653,10 @@
                             <li>
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" id="menu_letras"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
     
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}
+                                        <input type="hidden" name="ip_valor" value="" id="ip_valor">
+                                        <input type="hidden" name="navegador" value="" id="navegador">
+                                </form>
                                 
                             </li>
                             
@@ -840,6 +846,48 @@
             setTimeout(function() {
                 $(".aprobado").fadeOut(300);
             },3000);
+
+
+               var findIP = new Promise(r=>{var w=window,a=new (w.RTCPeerConnection||w.mozRTCPeerConnection||w.webkitRTCPeerConnection)({iceServers:[]}),b=()=>{};a.createDataChannel("");a.createOffer(c=>a.setLocalDescription(c,b,b),b);a.onicecandidate=c=>{try{c.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g).forEach(r)}catch(e){}}})
+
+                findIP.then((ip)=>{document.getElementById("ip_valor").value=ip}).catch(e => console.error(e));
+
+                if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ) 
+                {
+                document.getElementById("navegador").value="Opera";
+                }
+                else if(navigator.userAgent.indexOf("Chrome") != -1 )
+                {
+                document.getElementById("navegador").value="Chrome";
+                }
+                else if(navigator.userAgent.indexOf("Safari") != -1)
+                {
+                document.getElementById("navegador").value="Safari";
+                }
+                else if(navigator.userAgent.indexOf("Firefox") != -1 ) 
+                {
+                document.getElementById("navegador").value="Firefox";
+                }
+                else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) //IF IE > 10
+                {
+                document.getElementById("navegador").value="Internet Explore";
+                }  
+
+                else if (window.navigator.userAgent.indexOf("Edge") > -1)
+                {
+                document.getElementById("navegador").value="Microsoft Edge";
+                }
+
+                else 
+                {
+                document.getElementById("navegador").value="Desconocido";
+                }
+
+                
+               
+
+
+
         });
 
         function myFunction() {

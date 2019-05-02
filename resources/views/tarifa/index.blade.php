@@ -51,9 +51,7 @@
         <a class="btn btn-primary" href="{{route('tarifa.edit', Crypt::encrypt($taf->id) )}}">
             <i class="far fa-edit"></i>
         </a>
-        <button type="submit" class="btn btn-primary">
-        <i class="far fa-trash-alt"></i>
-        </button>
+      
         </form>
       @endif
       </td>

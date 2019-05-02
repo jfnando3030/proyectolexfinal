@@ -15,6 +15,7 @@ use Validator;
 
 
 use Carbon\Carbon;
+use Session;
 use App\Log;
 
 
@@ -48,6 +49,37 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+
+    protected function logout(Request $request){
+        $date = Carbon::now();
+        $hoy = $date->format('Y-m-d');
+        $hora = $date->format('H:i:s');
+
+        $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+
+        Log::create([
+            'fecha_log' => $hoy,
+            'hora_log' => $hora,
+            'estado' => 1,
+            'id_user_log' => Auth::user()->id,
+            'ip' =>  $ip_navegador,
+            'accion' => "Cerró sesión en el sistema",
+                        
+
+        
+        ]);
+        
+        Auth::logout();
+
+        Session::flush();
+
+     
+
+        
+
+        return redirect('/');
     }
 
     public function login(Request $request) {

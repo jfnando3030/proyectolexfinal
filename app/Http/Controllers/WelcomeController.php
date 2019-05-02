@@ -36,6 +36,7 @@ use Illuminate\Notifications\NotifyLawyers;
 
 use Illuminate\Support\Facades\Auth;
 
+
 class WelcomeController extends Controller
 {
 
@@ -63,7 +64,7 @@ class WelcomeController extends Controller
 
   public function ver_logs(Request $request){
 
-    $logs = Log::where('estado',1)->orderBy('id')->paginate(5);
+    $logs = Log::where('estado',1)->orderBy('id')->paginate(10);
   
     if ($request->ajax()) {
         return view('logs-ajax', compact('logs'));
@@ -199,6 +200,7 @@ class WelcomeController extends Controller
   
 	public function listarAbogados(Request $request)
 	{
+    
   	$users = DB::table('departamento_user')
   		->join('users', 'departamento_user.user_id', '=', 'users.id')
   		->join('departamento', 'departamento_user.departamento_id', '=', 'departamento.id')
@@ -216,7 +218,9 @@ class WelcomeController extends Controller
   	$usuario = User::find($ids);
 
     $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
-  		
+   
+   
+   
   	return view('administracion.abogados.listado', ['usuario'=>$usuario, 'departamento' => $users, 'saber_tarifa' => $saber_tarifa]);
 	}
 

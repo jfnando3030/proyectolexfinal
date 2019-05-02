@@ -28,6 +28,8 @@
                 </div>
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
                 <input type="hidden" name="ruta" id ="ruta" value="{{url('')}}">
+                <input type="hidden" name="ip_valor" value="" id="ip_valor">
+                <input type="hidden" name="navegador" value="" id="navegador">
             <div class="row">
                 <div class="col-md-4">
                     <div class="profile-img">

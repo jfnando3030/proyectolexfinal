@@ -34,6 +34,7 @@
             @include('mensajes.msj_rechazado')
         @endif
     <div class="row">
+          
         <div class="col-12  col-sm-12 col-md-12 col-lg-12 col-xl-12">
             @if( $departamento->count() > 0 ) 
             <div class="row">
