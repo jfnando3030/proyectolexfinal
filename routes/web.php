@@ -44,13 +44,15 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
-
+Route::get('ip','WelcomeController@getIp');
+	
 
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
 	Route::get('administracion','WelcomeController@admin');
 	Route::get('administracion/mired','WelcomeController@mired');
+
 	
 
 // ************************** DEPARTAMENTOS *************************************** 
