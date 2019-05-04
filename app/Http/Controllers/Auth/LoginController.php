@@ -56,8 +56,23 @@ class LoginController extends Controller
         $date = Carbon::now();
         $hoy = $date->format('Y-m-d');
         $hora = $date->format('H:i:s');
+        $ip_navegador="";
+      
+        if($request['ip_valor5']!=null){
+            $ip_navegador= $request['ip_valor5']. ' - ' .$request['navegador5'];
 
-        $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+        }else 
+        if($request['ip_valor6']!=null){
+
+            $ip_navegador= $request['ip_valor6']. ' - ' .$request['navegador6'];
+
+        }else{
+
+            $ip_navegador= $request['ip_valor7']. ' - ' .$request['navegador7'];
+
+        }
+
+        
 
         Log::create([
             'fecha_log' => $hoy,

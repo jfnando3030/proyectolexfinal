@@ -6,7 +6,7 @@
 
 <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12" style="padding: 25px;">
 
-    @if($saber_tarifa->count() ==0  or $saber_consultoria != 0 )
+    @if($saber_tarifa->count() >0  or $saber_consultoria != 0 )
 
         <div align="center" class="col-md-12 col-12 col-xs-12 col-lg-12 col-sm-12" style="padding-top:15px; padding-bottom: 25px">
             <h4 style="color: black; text-align:center; font-size:25px;"> Realizar solicitud </h4>
@@ -23,6 +23,8 @@
                 <form action="{{ route('store_solicitud') }}" method="post" enctype="multipart/form-data">
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+                    <input type="hidden" name="ip_valor1" value="" id="ip_valor1">
+                    <input type="hidden" name="navegador1" value="" id="navegador1">
 
                     <div class="row">
                         <div class="col-md-12">

@@ -408,7 +408,7 @@ class OficioController extends Controller
             $hoy = $date->format('Y-m-d');
             $hora = $date->format('H:i:s');
         
-            $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+            $ip_navegador= $request['ip_valor1']. ' - ' .$request['navegador1'];
         
             Log::create([
                 'fecha_log' => $hoy,
@@ -456,7 +456,7 @@ class OficioController extends Controller
             $hoy = $date->format('Y-m-d');
             $hora = $date->format('H:i:s');
         
-            $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+            $ip_navegador= $request['ip_valor4']. ' - ' .$request['navegador4'];
         
             Log::create([
                 'fecha_log' => $hoy,
@@ -510,7 +510,7 @@ class OficioController extends Controller
             $hoy = $date->format('Y-m-d');
             $hora = $date->format('H:i:s');
         
-            $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+            $ip_navegador= $request['ip_valor2']. ' - ' .$request['navegador2'];
         
             Log::create([
                 'fecha_log' => $hoy,
@@ -563,7 +563,7 @@ class OficioController extends Controller
             $hoy = $date->format('Y-m-d');
             $hora = $date->format('H:i:s');
         
-            $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+            $ip_navegador= $request['ip_valor3']. ' - ' .$request['navegador3'];
         
             Log::create([
                 'fecha_log' => $hoy,

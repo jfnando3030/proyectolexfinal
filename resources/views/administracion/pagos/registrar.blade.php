@@ -176,6 +176,8 @@
                   
                   <form action="{{ route('store_pago') }}" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+                    <input type="hidden" name="ip_valor1" value="" id="ip_valor1">
+                    <input type="hidden" name="navegador1" value="" id="navegador1">
                     <div class="row">
                         <div class="col-md-12 col-12 col-lg-12 col-sm-12 col-xs-12">
                             <div class="tab-content profile-tab" id="myTabContent">

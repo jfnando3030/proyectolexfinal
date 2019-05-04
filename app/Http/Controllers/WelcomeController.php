@@ -34,6 +34,8 @@ use Validator;
 use Illuminate\Notifications\NotifyLawyers;
 
 
+
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -179,6 +181,24 @@ class WelcomeController extends Controller
       $departamento->hora_fin = $request->finHora;
 
       if( $departamento->save() ){
+        $date = Carbon::now();
+        $hoy = $date->format('Y-m-d');
+        $hora = $date->format('H:i:s');
+    
+        $ip_navegador= $request['ip_valor1']. ' - ' .$request['navegador1'];
+    
+        Log::create([
+            'fecha_log' => $hoy,
+            'hora_log' => $hora,
+            'estado' => 1,
+            'id_user_log' => Auth::user()->id,
+            'ip' =>  $ip_navegador,
+            'accion' => "Ingreso un nuevo registro de dapartamento al sistema",
+                        
+    
+        
+        ]);
+
         $request->flush();
         return redirect('administracion/departamento/listado/')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
       }else{
@@ -226,7 +246,8 @@ class WelcomeController extends Controller
 
   public function actualizar_departamento (Request $request, $id)
   {
-    $departamento = Departamento::findOrFail(Crypt::decrypt($id));   
+    $departamento = Departamento::findOrFail(Crypt::decrypt($id));  
+   
     return view('administracion.departamento.actualizar', ['departamento' => $departamento, 'dias' => $this->dias]);
   }
         
@@ -249,6 +270,24 @@ class WelcomeController extends Controller
       $departamento->hora_inicio = $request->inicioHora;
       $departamento->hora_fin = $request->finHora;
       if($departamento->save()){
+
+        $date = Carbon::now();
+        $hoy = $date->format('Y-m-d');
+        $hora = $date->format('H:i:s');
+    
+        $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+    
+        Log::create([
+            'fecha_log' => $hoy,
+            'hora_log' => $hora,
+            'estado' => 1,
+            'id_user_log' => Auth::user()->id,
+            'ip' =>  $ip_navegador,
+            'accion' => "Actualizó un registro de dapartamento en el sistema",
+                        
+    
+        
+        ]); 
       return redirect('administracion/departamento/listado')->with('mensaje-registro', 'Datos actualizados correctamente.');
       }
     }else{
@@ -263,6 +302,23 @@ class WelcomeController extends Controller
     $departamento->estado_departamento = "0";
 
     if($departamento->save()){
+      $date = Carbon::now();
+      $hoy = $date->format('Y-m-d');
+      $hora = $date->format('H:i:s');
+  
+      $ip_navegador= $request['ip_valor1']. ' - ' .$request['navegador1'];
+  
+      Log::create([
+          'fecha_log' => $hoy,
+          'hora_log' => $hora,
+          'estado' => 1,
+          'id_user_log' => Auth::user()->id,
+          'ip' =>  $ip_navegador,
+          'accion' => "Actualizó un registro de dapartamento en el sistema",
+                      
+  
+      
+      ]); 
       return redirect('administracion/departamento/listado')->with('mensaje-registro', 'Se ha eliminado correctamente.');
     }
   }
@@ -277,6 +333,7 @@ class WelcomeController extends Controller
     $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
 
     if(count($saber_tarifa) > 0 ){
+      
       $saber_si_cumple_condicion_tarifa_y_cantidad_solicitud = Tarifa::where('id', $saber_tarifa[0]->id_tarifa )->get();
       if( $saber_si_cumple_condicion_tarifa_y_cantidad_solicitud[0]->cantidad_consultorias <= $saber_tarifa[0]->cantidad_consultorias ){
         $saber_consultoria = 0;
@@ -284,6 +341,7 @@ class WelcomeController extends Controller
         $saber_consultoria = 1;
       }
     }else{
+     
       $saber_consultoria = 0;
     }
 
@@ -315,6 +373,24 @@ class WelcomeController extends Controller
         $bandera=false;
          
         if( $solicitud->save() ){
+
+          $date = Carbon::now();
+        $hoy = $date->format('Y-m-d');
+        $hora = $date->format('H:i:s');
+    
+        $ip_navegador= $request['ip_valor1']. ' - ' .$request['navegador1'];
+    
+        Log::create([
+            'fecha_log' => $hoy,
+            'hora_log' => $hora,
+            'estado' => 1,
+            'id_user_log' => Auth::user()->id,
+            'ip' =>  $ip_navegador,
+            'accion' => "Realizó una solicitud de un caso ",
+                        
+    
+        
+        ]);
 
           $pago_consultoria = Pagos::where('estado',1)->where('activo',1)->where('id_user', Auth::user()->id)->get();
           $pago_consultoria[0]->cantidad_consultorias =  $pago_consultoria[0]->cantidad_consultorias + 1;
@@ -418,6 +494,23 @@ class WelcomeController extends Controller
     $casos->id_user_abogado = $request->user()->id;
 
     if($casos->save()){
+      $date = Carbon::now();
+        $hoy = $date->format('Y-m-d');
+        $hora = $date->format('H:i:s');
+    
+        $ip_navegador= $request['ip_valor1']. ' - ' .$request['navegador1'];
+    
+        Log::create([
+            'fecha_log' => $hoy,
+            'hora_log' => $hora,
+            'estado' => 1,
+            'id_user_log' => Auth::user()->id,
+            'ip' =>  $ip_navegador,
+            'accion' => "Aceptó un nuevo caso",
+                        
+    
+        
+        ]);
       return redirect('administracion')->with('mensaje-registro', 'Caso aceptado exitosamente.');
     }
   
@@ -497,6 +590,26 @@ class WelcomeController extends Controller
     $cliente = User::findOrFail($casos->id_user_solicitud);  
 
     if($casos->save()){
+
+      $date = Carbon::now();
+      $hoy = $date->format('Y-m-d');
+      $hora = $date->format('H:i:s');
+  
+      $ip_navegador= $request['ip_valor1']. ' - ' .$request['navegador1'];
+  
+      Log::create([
+          'fecha_log' => $hoy,
+          'hora_log' => $hora,
+          'estado' => 1,
+          'id_user_log' => Auth::user()->id,
+          'ip' =>  $ip_navegador,
+          'accion' => "Asignó un caso a otro abogado",
+                      
+  
+      
+      ]);
+
+
       // NOTIFICA AL ABOGADO
       $emaiL_abogado =$abogado->email;
       $nombres_abogado = $abogado->nombres . ' ' . $abogado->apellidos;
@@ -674,6 +787,24 @@ class WelcomeController extends Controller
     $bandera=false;
      
     if( $respuesta->save() ){
+
+      $date = Carbon::now();
+        $hoy = $date->format('Y-m-d');
+        $hora = $date->format('H:i:s');
+    
+        $ip_navegador= $request['ip_valor1']. ' - ' .$request['navegador1'];
+    
+        Log::create([
+            'fecha_log' => $hoy,
+            'hora_log' => $hora,
+            'estado' => 1,
+            'id_user_log' => Auth::user()->id,
+            'ip' =>  $ip_navegador,
+            'accion' => "Respondió a una de las solicitudes de algún caso.",
+                        
+    
+        
+        ]);
       
       //  PARA ARCHIVO 1 
       if($request->archivo1 != ""){
@@ -839,6 +970,24 @@ class WelcomeController extends Controller
     $bandera=false;
      
     if( $respuesta->save() ){
+
+      $date = Carbon::now();
+        $hoy = $date->format('Y-m-d');
+        $hora = $date->format('H:i:s');
+    
+        $ip_navegador= $request['ip_valor1']. ' - ' .$request['navegador1'];
+    
+        Log::create([
+            'fecha_log' => $hoy,
+            'hora_log' => $hora,
+            'estado' => 1,
+            'id_user_log' => Auth::user()->id,
+            'ip' =>  $ip_navegador,
+            'accion' => "Respondió a una solicitud de algún caso",
+                        
+    
+        
+        ]);
       
       //  PARA ARCHIVO 1 
       if($request->archivo1 != ""){
@@ -996,11 +1145,28 @@ class WelcomeController extends Controller
     return view('administracion.solicitudes.listado_casos', ['solicitud' => $solicitud, 'saber_tarifa' => $saber_tarifa]);
   }
 
-  public function finalizar_casos($id)
+  public function finalizar_casos(Request $request, $id)
   {
     $casos = Solicitud::findOrFail($id);  
     $casos->finalizado_solicitud = "1";
     $casos->save();
+    $date = Carbon::now();
+        $hoy = $date->format('Y-m-d');
+        $hora = $date->format('H:i:s');
+    
+        $ip_navegador= $request['ip_valor1']. ' - ' .$request['navegador1'];
+    
+        Log::create([
+            'fecha_log' => $hoy,
+            'hora_log' => $hora,
+            'estado' => 1,
+            'id_user_log' => Auth::user()->id,
+            'ip' =>  $ip_navegador,
+            'accion' => "Finalizó un caso",
+                        
+    
+        
+        ]);
     return redirect('administracion/solicitud/casos');
   }
 
@@ -1072,6 +1238,23 @@ class WelcomeController extends Controller
 
     if( $pagos->save())
     {
+      $date = Carbon::now();
+        $hoy = $date->format('Y-m-d');
+        $hora = $date->format('H:i:s');
+    
+        $ip_navegador= $request['ip_valor1']. ' - ' .$request['navegador1'];
+    
+        Log::create([
+            'fecha_log' => $hoy,
+            'hora_log' => $hora,
+            'estado' => 1,
+            'id_user_log' => Auth::user()->id,
+            'ip' =>  $ip_navegador,
+            'accion' => "Realizó un pago por transferencia bancaria",
+                        
+    
+        
+        ]);
       return redirect('administracion/pago/registrar')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
     }else{
       return redirect('administracion/pago/registrar')->with('mensaje-error', 'Problemas al registrar los datos.');
@@ -1106,35 +1289,88 @@ class WelcomeController extends Controller
 
   }
 
-  public function aprobacion_pagos_id($id)
+  public function aprobacion_pagos_id(Request $request, $id)
   {
     $pagos =Pagos::find($id);
     
     $pagos->activo = 1;
     $pagos->estado = 1;
-    $pagos->save();      
+    $pagos->save(); 
+    
+    $date = Carbon::now();
+        $hoy = $date->format('Y-m-d');
+        $hora = $date->format('H:i:s');
+    
+        $ip_navegador= $request['ip_valor1']. ' - ' .$request['navegador1'];
+    
+        Log::create([
+            'fecha_log' => $hoy,
+            'hora_log' => $hora,
+            'estado' => 1,
+            'id_user_log' => Auth::user()->id,
+            'ip' =>  $ip_navegador,
+            'accion' => "Aprobó un pago por transferencia bancaria",
+                        
+    
+        
+        ]);
 
     return redirect('administracion/pago/aprobacion')->with('mensaje-registro', 'Pago aprobado exitosamente');
   }
 
-  public function cancelar_pagos_id($id)
+  public function cancelar_pagos_id(Request $request, $id)
   {
     $pagos =Pagos::find($id);
     
     $pagos->activo = 2;
     $pagos->estado = 0;
-    $pagos->save();      
+    $pagos->save(); 
+    $date = Carbon::now();
+        $hoy = $date->format('Y-m-d');
+        $hora = $date->format('H:i:s');
+    
+        $ip_navegador= $request['ip_valor1']. ' - ' .$request['navegador1'];
+    
+        Log::create([
+            'fecha_log' => $hoy,
+            'hora_log' => $hora,
+            'estado' => 1,
+            'id_user_log' => Auth::user()->id,
+            'ip' =>  $ip_navegador,
+            'accion' => "Canceló un pago",
+                        
+    
+        
+        ]);     
 
     return redirect('administracion/pago/aprobacion')->with('mensaje-registro', 'Pago cancelado exitosamente');;
   }
 
-  public function cancelar_pagos_id2($id)
+  public function cancelar_pagos_id2(Request $request, $id)
   {
     $pagos =Pagos::find($id);
     
     $pagos->activo = 2;
     $pagos->estado = 0;
-    $pagos->save();      
+    $pagos->save();  
+    
+    $date = Carbon::now();
+        $hoy = $date->format('Y-m-d');
+        $hora = $date->format('H:i:s');
+    
+        $ip_navegador= $request['ip_valor1']. ' - ' .$request['navegador1'];
+    
+        Log::create([
+            'fecha_log' => $hoy,
+            'hora_log' => $hora,
+            'estado' => 1,
+            'id_user_log' => Auth::user()->id,
+            'ip' =>  $ip_navegador,
+            'accion' => "Canceló un pago",
+                        
+    
+        
+        ]);
 
     return redirect('administracion/pago/historial')->with('mensaje-registro', 'Pago cancelado exitosamente');;
   }

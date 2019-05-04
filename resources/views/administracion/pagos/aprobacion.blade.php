@@ -47,6 +47,7 @@
                 <table class="table table-borderless table-striped table-earning" id="tabla">
                     <thead>
                         <tr>
+                            <th>Comprobante</th>
                             <th>Usuario</th>
                             <th>Tarifa</th>
                             <th>Monto</th>
@@ -58,6 +59,7 @@
                     <tbody>
                         @foreach($pagos as $pagos)
                             <tr>
+                                    <td><a title="Descargar comprobante de pago" class="btn btn-download btn-circle btn-lg" href="{{url('public/'.$pagos->path)}}" download="comprobante-{{$pagos->nombres}}-{{$pagos->apellidos}}" role="button"><i class="fa fa-download"></i></a></td>
                                 <td style="vertical-align:middle; font-size: 16px;"> {{$pagos->nombres}} {{$pagos->apellidos}} </td>
                                 @if ($pagos->modo_pago == "P")
                                     <td style="vertical-align:middle; font-size: 16px;"> Paypal </td>

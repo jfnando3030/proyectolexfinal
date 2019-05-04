@@ -18,6 +18,8 @@
         <div class="emp-profile" style="padding: 3%;">
             {!! Form::open(['route' => ['editar_departamento'],'method'=>'PUT']) !!}
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+                <input type="hidden" name="ip_valor" value="" id="ip_valor">
+                                        <input type="hidden" name="navegador" value="" id="navegador">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row">

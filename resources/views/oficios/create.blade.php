@@ -26,8 +26,8 @@
                                 <div class="row" id="oficio_ca" style="display:none">
                                     <form method="POST" action="{{ url('administracion/oficio/contrato_arrendamiento') }}" accept-charset="UTF-8">
                                         @csrf
-                                        <input type="hidden" name="ip_valor" value="" id="ip_valor">
-                                        <input type="hidden" name="navegador" value="" id="navegador">
+                                        <input type="hidden" name="ip_valor1" value="" id="ip_valor1">
+                                        <input type="hidden" name="navegador1" value="" id="navegador1">
                                         <div class="row">
                                             <div class="col-md-6" style="padding-bottom: 15px;">
                                                 <label>Fecha:</label>
@@ -158,8 +158,8 @@
                                 <div class="row" id="oficio_psppacj" style="display:none">
                                     <form method="POST" action="{{ url('administracion/oficio/contrato_psppacj') }}" accept-charset="UTF-8">
                                         @csrf
-                                        <input type="hidden" name="ip_valor" value="" id="ip_valor">
-                                        <input type="hidden" name="navegador" value="" id="navegador">
+                                        <input type="hidden" name="ip_valor2" value="" id="ip_valor2">
+                                        <input type="hidden" name="navegador2" value="" id="navegador2">
                                         <div class="row ">
                                             <div class="col-md-6" style="padding-bottom: 15px;">
                                                 <label>Fecha:</label>
@@ -303,8 +303,8 @@
                                 <div class="row" id="oficio_psp" style="display:none">
                                     <form method="POST" action="{{ url('administracion/oficio/contrato_psp') }}" accept-charset="UTF-8">
                                         @csrf
-                                        <input type="hidden" name="ip_valor" value="" id="ip_valor">
-                                        <input type="hidden" name="navegador" value="" id="navegador">
+                                        <input type="hidden" name="ip_valor3" value="" id="ip_valor3">
+                                        <input type="hidden" name="navegador3" value="" id="navegador3">
                                         <div class="row ">
                                             <div class="col-md-6" style="padding-bottom: 15px;">
                                                 <label>Fecha:</label>
@@ -438,8 +438,8 @@
                                 <div class="row" id="oficio_pj" style="display:none">
                                     <form method="POST" action="{{ url('administracion/oficio/procuracion_judicial') }}" accept-charset="UTF-8">
                                         @csrf
-                                        <input type="hidden" name="ip_valor" value="" id="ip_valor">
-                                        <input type="hidden" name="navegador" value="" id="navegador">
+                                        <input type="hidden" name="ip_valor4" value="" id="ip_valor4">
+                                        <input type="hidden" name="navegador4" value="" id="navegador4">
                                         <div class="row">
                                             <div class="col-md-6" style="padding-bottom: 15px; padding-top: 15px;">
                                                 <label>Número de Cédula:</label>

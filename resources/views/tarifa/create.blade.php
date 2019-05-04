@@ -8,6 +8,8 @@
 <div class="container-fluid">
     <div class="emp-profile" style="padding: 3%;">
         <form method="POST" action="{{route('tarifa.store')}}" accept-charset="UTF-8">
+            <input type="hidden" name="ip_valor1" value="" id="ip_valor1">
+            <input type="hidden" name="navegador1" value="" id="navegador1">
             @csrf
             <div id="msj-success" class="alert alert-success alert-dismissible aprobado" role="alert" style="display:none">
                 <strong> Credenciales Modificados Correctamente.</strong>
