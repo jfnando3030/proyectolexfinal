@@ -5,7 +5,7 @@
 
 <style type="text/css">
   #letras_spam{
-    font-size: 13px;
+    font-size: 18px;
     text-align: center;
     color: white;
   }
@@ -32,8 +32,115 @@
 
   
   @if(Auth::user()->rol == "Administrador")
-  <br>
-    <p style="color:black; text-align:center"> Bienvenido Súper Administrador </p>
+
+
+  
+    <div class="row" style="padding-left: 15px; padding-right: 15px;">
+      <div class="col-sm-6 col-lg-3">
+          <div class="overview-item overview-item--c1">
+              <div class="overview__inner">
+                  <div class="overview-box clearfix">
+                      <div class="icon">
+                          <i class="zmdi zmdi-account-o"></i>
+                      </div>
+                      <div class="text">
+                          <h3> {{ $total_clientes }} </h3>
+                      </div>
+                      <br>
+                      <div class="text">
+                          <span id="letras_spam">Clientes registrados</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-sm-6 col-lg-3">
+        <div class="overview-item overview-item--c1">
+            <div class="overview__inner">
+                <div class="overview-box clearfix">
+                    <div class="icon">
+                        <i class="zmdi zmdi-assignment"></i>
+                    </div>
+                    <div class="text">
+                        <h3> {{ $total_casos }} </h3>
+                    </div>
+                    <br>
+                    <div class="text">
+                        <span id="letras_spam">Casos enviados</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-3">
+      <div class="overview-item overview-item--c1">
+          <div class="overview__inner">
+              <div class="overview-box clearfix">
+                  <div class="icon">
+                      <i class="zmdi zmdi-assignment-alert"></i>
+                  </div>
+                  <div class="text">
+                      <h3> {{ $total_finalizados }} </h3>
+                  </div>
+                  <br>
+                  <div class="text">
+                      <span id="letras_spam">Casos finalizados</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+
+  <div class="col-sm-6 col-lg-3">
+    <div class="overview-item overview-item--c1">
+        <div class="overview__inner">
+            <div class="overview-box clearfix">
+                <div class="icon">
+                    <i class="zmdi zmdi-assignment-check"></i>
+                </div>
+                <div class="text">
+                    <h3> {{ $total_aceptados }} </h3>
+                </div>
+                <br>
+                <div class="text">
+                    <span id="letras_spam">Casos aceptados</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+   
+
+  </div>
+
+  <div id="estadisticas" class="row" style="padding: 10px 30px 10px 50px; margin-right: 0;">
+
+    <div class="col-12 col-md-6 col-lg-6">
+            <div class="au-card m-b-30">
+                <div class="au-card-inner">
+                    <h3 style="padding-bottom:5px" class="title-2">Estadísticas Diarias / Semanal <br> Casos aceptados</h3>
+                    <canvas id="lineChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-6">
+          <div class="au-card m-b-30">
+              <div class="au-card-inner">
+                <h3 style="padding-bottom:5px" class="title-2">Estadísticas Diarias / Semanal <br> Casos finalizados</h3>
+                  <canvas id="singelBarChart"></canvas>
+              </div>
+          </div>
+        </div>
+
+        
+
+</div>
   
   @else 
     @if(Auth::user()->rol == "Abogado")
@@ -549,5 +656,187 @@
     function myFunction2() {
       $(".loader").show();
     }
-  </script>    
+  </script>  
+  
+  <script>
+
+
+
+    function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+    }
+
+
+    
+(function ($) {
+// USE STRICT
+"use strict";
+
+
+
+if ( document.getElementById( "estadisticas" )) {
+  
+try {
+
+//line chart
+var ctx = document.getElementById("lineChart");
+if (ctx) {
+ctx.height = 160;
+
+
+
+var myChart = new Chart(ctx, {
+type: 'line',
+data: {
+  labels:  [@foreach ($fechas as $fecha) "{{ $fecha->fecha_solicitud }}",  @endforeach ],
+  defaultFontFamily: "Poppins",
+  datasets: [
+   
+    
+
+
+    {
+      label: "Casos",
+      borderWidth: "1",
+      backgroundColor: getRandomColor(),
+      data: [@foreach ($estadisticas_diarias as $estadisticas)  {{ $estadisticas->casos }},    @endforeach]
+    }
+
+       
+   
+   
+  ]
+},
+options: {
+  legend: {
+    position: 'top',
+    labels: {
+      fontFamily: 'Poppins'
+    }
+
+  },
+  responsive: true,
+  tooltips: {
+    mode: 'index',
+    intersect: false
+  },
+  hover: {
+    mode: 'nearest',
+    intersect: true
+  },
+  scales: {
+    xAxes: [{
+      scaleLabel: {
+            display: true,
+            labelString: 'Días',
+            fontFamily: "Poppins"
+
+          },
+      ticks: {
+        fontFamily: "Poppins"
+
+      }
+    }],
+    yAxes: [{
+      scaleLabel: {
+            display: true,
+            labelString: 'Casos',
+            fontFamily: "Poppins"
+
+          },
+      ticks: {
+        beginAtZero: true,
+        fontFamily: "Poppins"
+      }
+    }]
+  }
+
+}
+});
+}
+
+
+} catch (error) {
+console.log(error);
+}
+
+
+try {
+
+// single bar chart
+var ctx = document.getElementById("singelBarChart");
+if (ctx) {
+  ctx.height = 160;
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels:  [@foreach ($fechas2 as $fecha) "{{ $fecha->fecha_finalizacion_solicitud }}",  @endforeach ],
+      datasets: [
+        {
+          label: "Casos",
+          borderWidth: "1",
+          backgroundColor: getRandomColor(),
+          data: [@foreach ($estadisticas_finalizacion as $estadisticas)  {{ $estadisticas->casos }},    @endforeach]
+        }
+      ]
+    },
+    options: {
+      legend: {
+        position: 'top',
+        labels: {
+          fontFamily: 'Poppins'
+        }
+
+      },
+      scales: {
+        xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Días',
+            fontFamily: "Poppins"
+
+          },
+          ticks: {
+            fontFamily: "Poppins",
+            labelString: 'Días',
+
+          }
+        }],
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Casos',
+            fontFamily: "Poppins"
+
+          },
+          ticks: {
+            beginAtZero: true,
+            fontFamily: "Poppins"
+          }
+        }]
+      }
+    }
+  });
+}
+
+} catch (error) {
+console.log(error);
+}
+
+}
+
+
+
+
+
+})(jQuery);
+
+
+
+</script>
 @endsection

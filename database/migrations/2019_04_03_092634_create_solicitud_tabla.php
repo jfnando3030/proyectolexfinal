@@ -26,6 +26,10 @@ class CreateSolicitudTabla extends Migration
             $table->char('estado_solicitud',1)->default(1);
             $table->date('fecha_solicitud');
             $table->time('hora_solicitud');
+            $table->date('fecha_finalizacion_solicitud')->nullable();
+            $table->time('hora_finalizacion_solicitud')->nullable();
+            $table->date('fecha_aceptar_solicitud')->nullable();
+            $table->time('hora_aceptar_solicitud')->nullable();
             $table->foreign('id_user_solicitud')->references('id')->on('users')
                     ->onDelete('cascade');
         });

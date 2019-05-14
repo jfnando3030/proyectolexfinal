@@ -32,6 +32,7 @@ use Illuminate\Validation\Rule;
 use Session;
 use Validator;
 use Illuminate\Notifications\NotifyLawyers;
+use Illuminate\Support\Collection as Collection;
 
 
 
@@ -94,7 +95,24 @@ class WelcomeController extends Controller
     }
       
     if(Auth::user()->rol == "Administrador"){
-      return view('administracion.index', compact('saber_tarifa', 'saber_consultoria'));
+      $fechas=DB::table('solicitud')->where('leido_solicitud', 1)->orderBy('fecha_solicitud', 'asc')->distinct()->get(['fecha_solicitud']);
+      $fechas2=DB::table('solicitud')->where('finalizado_solicitud', 1)->orderBy('fecha_finalizacion_solicitud', 'asc')->distinct()->get(['fecha_finalizacion_solicitud']);
+      
+      
+      $estadisticas = DB::select('select fecha_solicitud, count(*) as casos  from lex_backoffice.solicitud where lex_backoffice.solicitud.leido_solicitud = 1 group by fecha_solicitud order by fecha_solicitud asc;');
+      $estadisticas2 = DB::select('select fecha_finalizacion_solicitud, count(*) as casos  from lex_backoffice.solicitud where lex_backoffice.solicitud.finalizado_solicitud = 1 group by fecha_finalizacion_solicitud order by fecha_finalizacion_solicitud asc;');
+      
+
+      $estadisticas_diarias = Collection::make($estadisticas);
+      $estadisticas_finalizacion = Collection::make($estadisticas2);
+     
+      
+        $total_clientes = User::where('estado',1)->where('rol',"Registrado")->count();
+        $total_aceptados = Solicitud::where('estado_solicitud',1)->where('leido_solicitud',1)->count();
+
+        $total_casos = Solicitud::where('estado_solicitud',1)->count();
+        $total_finalizados = Solicitud::where('estado_solicitud',1)->where('finalizado_solicitud',1)->count();
+      return view('administracion.index', compact('fechas2','estadisticas_finalizacion','total_aceptados','fechas','estadisticas_diarias','casos','saber_tarifa', 'saber_consultoria', 'total_clientes', 'total_casos', 'total_finalizados'));
   
     }else {
       if(Auth::user()->rol == "Abogado"){
@@ -105,6 +123,16 @@ class WelcomeController extends Controller
         $total_finalizados_usuario = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->where('finalizado_solicitud', 1)->count();
         $total_solicitudes_nuevos = Solicitud::where('estado_solicitud',1)->where('leido_solicitud',0)->count();
        
+        $fechas=DB::table('solicitud')->where('leido_solicitud', 1)->orderBy('fecha_solicitud', 'asc')->distinct()->get(['fecha_solicitud']);
+        $fechas2=DB::table('solicitud')->where('finalizado_solicitud', 1)->orderBy('fecha_finalizacion_solicitud', 'asc')->distinct()->get(['fecha_finalizacion_solicitud']);
+        
+        
+        $estadisticas = DB::select('select fecha_solicitud, count(*) as casos  from lex_backoffice.solicitud where lex_backoffice.solicitud.leido_solicitud = 1 group by fecha_solicitud order by fecha_solicitud asc;');
+        $estadisticas2 = DB::select('select fecha_finalizacion_solicitud, count(*) as casos  from lex_backoffice.solicitud where lex_backoffice.solicitud.finalizado_solicitud = 1 group by fecha_finalizacion_solicitud order by fecha_finalizacion_solicitud asc;');
+        
+  
+        $estadisticas_diarias = Collection::make($estadisticas);
+        $estadisticas_finalizacion = Collection::make($estadisticas2);
       
   
         $solicitudes_usuario = Solicitud::where('estado_solicitud',1)->where('id_user_abogado', Auth::user()->id )->get();
@@ -116,9 +144,22 @@ class WelcomeController extends Controller
         $total_respuestas = Respuesta::where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
         
         
-        return view('administracion.index', compact('total_respuestas','respuestas','user_departamentos','finalizados_usuarios', 'total_solicitudes_usuario', 'total_finalizados_usuario','total_solicitudes_nuevos', 'solicitudes_nuevos', 'solicitudes_usuario', 'saber_tarifa', 'saber_consultoria'));
+        return view('administracion.index', compact('estadisticas_finalizacion','estadisticas_diarias','estadisticas2','estadisticas','fechas2','fechas','total_respuestas','respuestas','user_departamentos','finalizados_usuarios', 'total_solicitudes_usuario', 'total_finalizados_usuario','total_solicitudes_nuevos', 'solicitudes_nuevos', 'solicitudes_usuario', 'saber_tarifa', 'saber_consultoria'));
   
       }else{
+
+        $fechas=DB::table('solicitud')->where('leido_solicitud', 1)->orderBy('fecha_solicitud', 'asc')->distinct()->get(['fecha_solicitud']);
+        $fechas2=DB::table('solicitud')->where('finalizado_solicitud', 1)->orderBy('fecha_finalizacion_solicitud', 'asc')->distinct()->get(['fecha_finalizacion_solicitud']);
+        
+        
+        $estadisticas = DB::select('select fecha_solicitud, count(*) as casos  from lex_backoffice.solicitud where lex_backoffice.solicitud.leido_solicitud = 1 group by fecha_solicitud order by fecha_solicitud asc;');
+        $estadisticas2 = DB::select('select fecha_finalizacion_solicitud, count(*) as casos  from lex_backoffice.solicitud where lex_backoffice.solicitud.finalizado_solicitud = 1 group by fecha_finalizacion_solicitud order by fecha_finalizacion_solicitud asc;');
+        
+  
+        $estadisticas_diarias = Collection::make($estadisticas);
+        $estadisticas_finalizacion = Collection::make($estadisticas2);
+
+
   
         $total_solicitudes_registrados = Solicitud::where('estado_solicitud',1)->where('id_user_solicitud', Auth::user()->id )->count();
         $solicitudes_registrados = Solicitud::where('estado_solicitud',1)->where('id_user_solicitud', Auth::user()->id )->orderBy('fecha_solicitud', 'desc')->orderBy('hora_solicitud', 'desc')->get();
@@ -133,7 +174,7 @@ class WelcomeController extends Controller
         
 
   
-        return view('administracion.index', compact('respuestas_notificacion','total_respuestas_notificacion','total_respuestas','respuestas','total_solicitudes_registrados','solicitudes_registrados', 'saber_tarifa', 'saber_consultoria'));
+        return view('administracion.index', compact('estadisticas_finalizacion','estadisticas_diarias','estadisticas2','estadisticas','fechas2','fechas','respuestas_notificacion','total_respuestas_notificacion','total_respuestas','respuestas','total_solicitudes_registrados','solicitudes_registrados', 'saber_tarifa', 'saber_consultoria'));
   
       }
     }    
@@ -489,14 +530,17 @@ class WelcomeController extends Controller
 
   public function aceptar_casos(Request $request, $id)
   {
+    $date = Carbon::now();
+    $hoy = $date->format('Y-m-d');
+    $hora = $date->format('H:i:s');
     $casos = Solicitud::findOrFail($id);  
     $casos->leido_solicitud = "1";
     $casos->id_user_abogado = $request->user()->id;
+    $casos->fecha_aceptar_solicitud= $hoy;
+    $casos->hora_aceptar_solicitud= $hora;
 
     if($casos->save()){
-      $date = Carbon::now();
-        $hoy = $date->format('Y-m-d');
-        $hora = $date->format('H:i:s');
+     
     
         $ip_navegador= $request['ip_valor1']. ' - ' .$request['navegador1'];
     
@@ -1147,12 +1191,15 @@ class WelcomeController extends Controller
 
   public function finalizar_casos(Request $request, $id)
   {
-    $casos = Solicitud::findOrFail($id);  
-    $casos->finalizado_solicitud = "1";
-    $casos->save();
     $date = Carbon::now();
         $hoy = $date->format('Y-m-d');
         $hora = $date->format('H:i:s');
+    $casos = Solicitud::findOrFail($id);  
+    $casos->finalizado_solicitud = "1";
+    $casos->fecha_finalizacion_solicitud= $hoy;
+    $casos->hora_finalizacion_solicitud= $hora;
+    $casos->save();
+    
     
         $ip_navegador= $request['ip_valor1']. ' - ' .$request['navegador1'];
     

@@ -15,6 +15,7 @@ class CreateVisitasRespuestasTable extends Migration
     {
         Schema::create('visitas_respuestas', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('respuesta');
             $table->date('fecha');
             $table->string('id_visita');
         });

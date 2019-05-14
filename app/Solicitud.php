@@ -21,6 +21,10 @@ class Solicitud extends Model
         'estado_solicitud',
         'fecha_solicitud',
         'hora_solicitud',
+        'fecha_finalizacion_solicitud',
+        'hora_finalizacion_solicitud',
+        'fecha_aceptar_solicitud',
+        'hora_aceptar_solicitud',
         'tiene_archivo_adjunto',
     ];
 

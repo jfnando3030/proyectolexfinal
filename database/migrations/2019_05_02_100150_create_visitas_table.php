@@ -15,6 +15,7 @@ class CreateVisitasTable extends Migration
     {
         Schema::create('visitas', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nombre_solicitud');
             $table->date('fecha');
             $table->string('id_caso');
         });

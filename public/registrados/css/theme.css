@@ -109,7 +109,7 @@ h2 {
 }
 
 h3 {
-    font-size: 30px;
+    font-size: 40px;
 }
 
 h4 {
@@ -148,9 +148,11 @@ strong {
 
 .title-2 {
     text-transform: capitalize;
-    font-weight: 400;
+    font-weight: bold;
     font-size: 24px;
     line-height: 1;
+    text-align: center;
+    color: #1a73e8;
 }
 
 .title-3 {
@@ -3107,7 +3109,7 @@ section {
     -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 
 @media (min-width: 992px) and (max-width: 1519px) {
@@ -3119,25 +3121,25 @@ section {
 
 .overview-item--c1 {
     background-image: -moz-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
-    background-image: -webkit-linear-gradient(90deg, #323643 0%, #e11a20 3%);
+    background-image: -webkit-linear-gradient(90deg, #323643 0%, #1a73e8 3%);
     background-image: -ms-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
 }
 
 .overview-item--c2 {
     background-image: -moz-linear-gradient(90deg, #dd0a35 0%, #38ef7d 100%);
-    background-image: -webkit-linear-gradient(90deg, #323643 0%, #e11a20 3%);
+    background-image: -webkit-linear-gradient(90deg, #323643 0%, #1a73e8 3%);
     background-image: -ms-linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
 }
 
 .overview-item--c3 {
     background-image: -moz-linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
-    background-image: -webkit-linear-gradient(90deg, #323643 0%, #e11a20 3%);
+    background-image: -webkit-linear-gradient(90deg, #323643 0%, #1a73e8 3%);
     background-image: -ms-linear-gradient(90deg, #ee0979 0%, #ff6a00 100%);
 }
 
 .overview-item--c4 {
     background-image: -moz-linear-gradient(90deg, #45b649 0%, #dce35b 100%);
-    background-image: -webkit-linear-gradient(90deg, #323643 0%, #e11a20 3%);
+    background-image: -webkit-linear-gradient(90deg, #323643 0%, #1a73e8 3%);
     background-image: -ms-linear-gradient(90deg, #45b649 0%, #dce35b 100%);
 }
 
@@ -3225,8 +3227,8 @@ section {
     -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
-    padding: 40px;
-    padding-right: 35px;
+    padding: 20px;
+
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
@@ -6150,7 +6152,7 @@ tr:hover {
 }
 
 .m-b-30 {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .m-t-30 {
