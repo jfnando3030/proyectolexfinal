@@ -290,8 +290,6 @@
                         @endif
 
 
-    
-
                         @if(Auth::user()->rol == "Administrador")
                         <li>
                             <a href="{{url('administracion/ver_logs')}}" onclick="return myFunction();" id="menu_letras">
@@ -304,6 +302,12 @@
                         <li>
                             <a href="{{url('administracion/pago/aprobacion')}}" onclick="return myFunction();" id="menu_letras">
                             <i class="fas fa-list"></i>Aprobación Pagos</a>
+                        </li>
+                        @endif
+                        @if(Auth::user()->rol == "Abogado" or  Auth::user()->rol == "Registrado" )
+                        <li>
+                            <a href="{{url('administracion/visita')}}" onclick="return myFunction();" id="menu_letras">
+                            <i class="fas fa-list"></i>Visitas</a>
                         </li>
                         @endif
 

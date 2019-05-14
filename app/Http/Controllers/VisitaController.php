@@ -40,15 +40,27 @@ class VisitaController extends Controller
 {
     public function visita(Request $request)
   	{
-	    $casos = Solicitud::where('id_user_solicitud', $request->user()->id)->where('estado_solicitud', '1')->get();
-	    $pagos = Pagos::where('id_user', $request->user()->id)->get();
-	    $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
-	    $total_respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
+  		if (Auth::user()->rol == "Abogado"){	
+	  		$casos = Solicitud::where('id_user_abogado', Auth::user()->id)->where('estado_solicitud', '1')->get();
 
-	    $solicitud = DB::select("select  visitas.* from visitas where id_caso in (select id from solicitud)"); 
+		    $pagos = Pagos::where('id_user', $request->user()->id)->get();
+		    $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
+		    $total_respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
 
+		    $solicitud = DB::select("select  visitas.* from visitas where id_caso in (select id from solicitud)"); 
+
+
+  		}else{
+
+	  		$casos = Solicitud::where('id_user_solicitud', $request->user()->id)->where('estado_solicitud', '1')->get();
+		    $pagos = Pagos::where('id_user', $request->user()->id)->get();
+		    $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
+		    $total_respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
+
+		    $solicitud = DB::select("select  visitas.* from visitas where id_caso in (select id from solicitud)"); 
+
+  		}
 	    
-
 	    return view('administracion.visita.listado_casos_visita', compact('casos', 'pagos', 'saber_tarifa', 'total_respuestas_notificacion'));
 	}
 
@@ -59,16 +71,34 @@ class VisitaController extends Controller
 		$date = Carbon::now();
 
 		$visitas = new Visitas();
-	    $visitas->fecha = $date;
+	    $visitas->fecha = $date;	
 	    $visitas->id_caso = $id;
 
 	    if( $visitas->save() ){
+	    	
+	    	$pago_visita = Pagos::where('estado',1)->where('activo',1)->where('id_user', Auth::user()->id)->get();
+          	$pago_visita[0]->cantidad_visitas =  $pago_visita[0]->cantidad_visitas + 1;
+          	$pago_visita[0]->save();
+	    	
 	    	$request->flush();
 	    	return redirect('/administracion/visita')->with('mensaje-registro', 'Los datos se han guardado satisfactoriamente.');
 	    }else{
 	        $request->flush();
 	        return redirect('/administracion/visita')->with('mensaje-error', 'Problemas al registrar los datos.');
 	    }
+	}
+
+	public function visita_responder(Request $request)
+  	{
+  		$casos = Solicitud::where('id_user_abogado', Auth::user()->id)->where('estado_solicitud', '1')->get();
+
+	    $pagos = Pagos::where('id_user', $request->user()->id)->get();
+	    $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
+	    $total_respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
+
+	    $solicitud = DB::select("select  visitas.* from visitas where id_caso in (select id from solicitud)"); 
+	    
+	    return view('administracion.visita.registrar', compact('casos', 'pagos', 'saber_tarifa', 'total_respuestas_notificacion'));
 	}
 
 }

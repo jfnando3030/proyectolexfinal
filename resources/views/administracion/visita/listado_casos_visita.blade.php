@@ -32,7 +32,7 @@
     @endif
     <div class="row">
         <div class="col-12  col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            @if( $pagos->count() > 0 ) 
+            @if( $pagos->count() > 0  ) 
             <div class="row">
                 <div class="col-md-6">
 
@@ -87,6 +87,61 @@
                 </table>
             </div>
             @else
+              @if(auth()->user()->rol == "Abogado")
+                <div class="row">
+                  <div class="col-md-6">
+
+                  </div>
+              
+                  <div class="col-md-6">
+                  
+                  </div>
+                </div>
+             
+              <div class="table-responsive table--no-card m-b-30">
+                  <table class="table table-borderless table-striped table-earning" id="tabla">
+                      <thead>
+                          <tr>
+                              <th>Nombre del caso</th>
+                              <th>Fecha</th>
+                              <th>Acción</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          @foreach($casos as $casos)
+                              <tr>
+                                 
+                                  <td style="vertical-align:middle; font-size: 16px;"> {{$casos->nombre_solicitud}}</td>
+                                  <td style="vertical-align:middle; font-size: 16px;"> {{$casos->fecha_solicitud}} </td>
+                                  <td width="10%">
+                                    <center>  
+                                      <a href="#" id="visita-{{ $casos->id }}" class="btn btn-sm btn-primary" style="background-color: #06379d; border-color: #06379d;"> Responder </a>
+                                      <script>
+                                      $("#visita-"+{{ $casos->id }}).click(function(e){
+                                          swal({
+                                            title: "Atención",
+                                            text: "¿Estas seguro de Solicitar visita?",
+                                            type: "warning",
+                                            showCancelButton: true,
+                                            confirmButtonClass: "btn-primary",
+                                            confirmButtonText: "Sí, Solicitar!",
+                                            closeOnConfirm: false
+                                          },
+                                          function(){
+                                              window.location="{{ url('administracion/visita/') }}/{{ $casos->id }}";
+                                              swal("!Eliminado!", "Se ha registrado correctamente la visita.", "success");
+                                          });
+                                      });
+                                      </script>
+                                    </center>
+                                  </td>
+                                  
+                             </tr>
+                          @endforeach
+                      </tbody>
+                  </table>
+              </div>
+              @else
                 <div class="col-md-12 col-lg-12">
                     <div class="statistic__item">
                         <h2 class="number">Oh no!</h2>
@@ -96,6 +151,7 @@
                         </div>
                     </div>
                 </div>
+              @endif
             @endif
         </div>
     </div>
