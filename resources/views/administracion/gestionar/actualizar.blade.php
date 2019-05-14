@@ -16,6 +16,8 @@
         <div class="emp-profile" style="padding: 3%;">
             <form action="{{ route('actualizar_abogado_caso') }}" method="get">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+                <input type="hidden" name="ip_valor1" value="" id="ip_valor1">
+                <input type="hidden" name="navegador1" value="" id="navegador1">
 
                 <div class="row">
                     <div class="col-md-12">

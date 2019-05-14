@@ -316,8 +316,8 @@
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form2').submit();" id="menu_letras"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
 
                             <form id="logout-form2" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}
-                                    <input type="hidden" name="ip_valor" value="" id="ip_valor">
-                                    <input type="hidden" name="navegador" value="" id="navegador">
+                                    <input type="hidden" name="ip_valor5" value="" id="ip_valor5">
+                                    <input type="hidden" name="navegador5" value="" id="navegador5">
                             </form>
                             
                         </li>
@@ -409,8 +409,8 @@
                                                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form2').submit();"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
 
                                                 <form id="logout-form2" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}
-                                                        <input type="hidden" name="ip_valor" value="" id="ip_valor">
-                                                        <input type="hidden" name="navegador" value="" id="navegador">
+                                                        <input type="hidden" name="ip_valor6" value="" id="ip_valor6">
+                                                        <input type="hidden" name="navegador6" value="" id="navegador6">
                                                 
                                                 </form>
                                            
@@ -658,8 +658,8 @@
                                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" id="menu_letras"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
     
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}
-                                        <input type="hidden" name="ip_valor" value="" id="ip_valor">
-                                        <input type="hidden" name="navegador" value="" id="navegador">
+                                        <input type="hidden" name="ip_valor7" value="" id="ip_valor7">
+                                        <input type="hidden" name="navegador7" value="" id="navegador7">
                                 </form>
                                 
                             </li>
@@ -854,37 +854,297 @@
 
                var findIP = new Promise(r=>{var w=window,a=new (w.RTCPeerConnection||w.mozRTCPeerConnection||w.webkitRTCPeerConnection)({iceServers:[]}),b=()=>{};a.createDataChannel("");a.createOffer(c=>a.setLocalDescription(c,b,b),b);a.onicecandidate=c=>{try{c.candidate.candidate.match(/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/g).forEach(r)}catch(e){}}})
 
-                findIP.then((ip)=>{document.getElementById("ip_valor").value=ip}).catch(e => console.error(e));
+                findIP.then((ip)=>{
+                    
+                    if ( document.getElementById( "ip_valor" )) {
+                        document.getElementById("ip_valor").value=ip;
+                    }
+
+                    if ( document.getElementById( "ip_valor1" )) {
+                        document.getElementById("ip_valor1").value=ip;
+                    }
+
+                    if ( document.getElementById( "ip_valor2" )) {
+                        document.getElementById("ip_valor2").value=ip;
+                    }
+
+                    if ( document.getElementById( "ip_valor3" )) {
+                        document.getElementById("ip_valor3").value=ip;
+                    }
+
+                    if ( document.getElementById( "ip_valor4" )) {
+                        document.getElementById("ip_valor4").value=ip;
+                    }
+
+                    if ( document.getElementById( "ip_valor5" )) {
+                        document.getElementById("ip_valor5").value=ip;
+                    }
+
+                    if ( document.getElementById( "ip_valor6" )) {
+                        document.getElementById("ip_valor6").value=ip;
+                    }
+
+                    if ( document.getElementById( "ip_valor7" )) {
+                        document.getElementById("ip_valor7").value=ip;
+                    }
+                }
+                
+                ).catch(e => console.error(e));
 
                 if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ) 
                 {
-                document.getElementById("navegador").value="Opera";
+
+                    if ( document.getElementById( "navegador1" )) {
+                        document.getElementById("navegador1").value="Opera";
+                    }
+
+                    if ( document.getElementById( "navegador" )) {
+                        document.getElementById("navegador").value="Opera";
+                    }
+
+                    if ( document.getElementById( "navegador2" )) {
+                        document.getElementById("navegador2").value="Opera";
+                    }
+
+                    if ( document.getElementById( "navegador3" )) {
+                        document.getElementById("navegador3").value="Opera";
+                    }
+
+                    if ( document.getElementById( "navegador4" )) {
+                        document.getElementById("navegador4").value="Opera";
+                    }
+
+                    if ( document.getElementById( "navegador5" )) {
+                        document.getElementById("navegador5").value="Opera";
+                    }
+
+                    if ( document.getElementById( "navegador6" )) {
+                        document.getElementById("navegador6").value="Opera";
+                    }
+
+                    if ( document.getElementById( "navegador7" )) {
+                        document.getElementById("navegador7").value="Opera";
+                    }
+
+
                 }
                 else if(navigator.userAgent.indexOf("Chrome") != -1 )
                 {
-                document.getElementById("navegador").value="Chrome";
+
+                    if ( document.getElementById( "navegador" )) {
+                        document.getElementById("navegador").value="Chrome";
+                    }
+
+                    if ( document.getElementById( "navegador1" )) {
+                        document.getElementById("navegador1").value="Chrome";
+                    }
+
+                    if ( document.getElementById( "navegador2" )) {
+                        document.getElementById("navegador2").value="Chrome";
+                    }
+
+                    if ( document.getElementById( "navegador3" )) {
+                        document.getElementById("navegador3").value="Chrome";
+                    }
+
+                    if ( document.getElementById( "navegado4" )) {
+                        document.getElementById("navegador4").value="Chrome";
+                    }
+
+                    if ( document.getElementById( "navegador5" )) {
+                        document.getElementById("navegador5").value="Chrome";
+                    }
+
+                    if ( document.getElementById( "navegador6" )) {
+                        document.getElementById("navegador6").value="Chrome";
+                    }
+
+                    if ( document.getElementById( "navegador7" )) {
+                        document.getElementById("navegador7").value="Chrome";
+                    }
+               
                 }
                 else if(navigator.userAgent.indexOf("Safari") != -1)
                 {
-                document.getElementById("navegador").value="Safari";
+
+                    if ( document.getElementById( "navegador" )) {
+                        document.getElementById("navegador").value="Safari";
+                    }
+
+                    if ( document.getElementById( "navegador1" )) {
+                        document.getElementById("navegador1").value="Safari";
+                    }
+
+                    if ( document.getElementById( "navegador2" )) {
+                        document.getElementById("navegador2").value="Safari";
+                    }
+
+                    if ( document.getElementById( "navegador3" )) {
+                        document.getElementById("navegador3").value="Safari";
+                    }
+
+                    if ( document.getElementById( "navegador4" )) {
+                        document.getElementById("navegador4").value="Safari";
+                    }
+
+                    if ( document.getElementById( "navegador5" )) {
+                        document.getElementById("navegador5").value="Safari";
+                    }
+
+                    if ( document.getElementById( "navegador6" )) {
+                        document.getElementById("navegador6").value="Safari";
+                    }
+
+                    if ( document.getElementById( "navegador7" )) {
+                        document.getElementById("navegador7").value="Safari";
+                    }
+
+
+              
                 }
                 else if(navigator.userAgent.indexOf("Firefox") != -1 ) 
                 {
-                document.getElementById("navegador").value="Firefox";
+
+                    if ( document.getElementById( "navegador" )) {
+                        document.getElementById("navegador").value="Firefox";
+                    }
+
+                    if ( document.getElementById( "navegador1" )) {
+                        document.getElementById("navegador1").value="Firefox";
+                    }
+                    if ( document.getElementById( "navegador2" )) {
+                        document.getElementById("navegador2").value="Firefox";
+                    }
+                    if ( document.getElementById( "navegador3" )) {
+                        document.getElementById("navegador3").value="Firefox";
+                    }
+                    if ( document.getElementById( "navegador4" )) {
+                        document.getElementById("navegador4").value="Firefox";
+                    }
+
+
+                    if ( document.getElementById( "navegador5" )) {
+                        document.getElementById("navegador5").value="Firefox";
+                    }
+
+
+                    if ( document.getElementById( "navegador6" )) {
+                        document.getElementById("navegador6").value="Firefox";
+                    }
+
+                    if ( document.getElementById( "navegador7" )) {
+                        document.getElementById("navegador7").value="Firefox";
+                    }
+
                 }
                 else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) //IF IE > 10
                 {
-                document.getElementById("navegador").value="Internet Explore";
+
+                    if ( document.getElementById( "navegador" )) {
+                        document.getElementById("navegador").value="Internet Explore";
+                    }
+
+                    if ( document.getElementById( "navegador1" )) {
+                        document.getElementById("navegador1").value="Internet Explore";
+                    }
+                    if ( document.getElementById( "navegador2" )) {
+                        document.getElementById("navegador2").value="Internet Explore";
+                    }
+                    if ( document.getElementById( "navegador3" )) {
+                        document.getElementById("navegador3").value="Internet Explore";
+                    }
+                    if ( document.getElementById( "navegador4" )) {
+                        document.getElementById("navegador4").value="Internet Explore";
+                    }
+
+                    if ( document.getElementById( "navegador5" )) {
+                        document.getElementById("navegador5").value="Internet Explore";
+                    }
+
+                    if ( document.getElementById( "navegador6" )) {
+                        document.getElementById("navegador6").value="Internet Explore";
+                    }
+
+                    if ( document.getElementById( "navegador7" )) {
+                        document.getElementById("navegador7").value="Internet Explore";
+                    }
+
+               
+
                 }  
 
                 else if (window.navigator.userAgent.indexOf("Edge") > -1)
                 {
-                document.getElementById("navegador").value="Microsoft Edge";
+
+                    if ( document.getElementById( "navegador" )) {
+                        document.getElementById("navegador").value="Microsoft Edge";
+                    }
+
+                    if ( document.getElementById( "navegador1" )) {
+                        document.getElementById("navegador1").value="Microsoft Edge";
+                    }
+                    if ( document.getElementById( "navegador2" )) {
+                        document.getElementById("navegador2").value="Microsoft Edge";
+                    }
+                    if ( document.getElementById( "navegador3" )) {
+                        document.getElementById("navegador3").value="Microsoft Edge";
+                    }
+                    if ( document.getElementById( "navegador4" )) {
+                        document.getElementById("navegador4").value="Microsoft Edge";
+                    }
+
+                    if ( document.getElementById( "navegador5" )) {
+                        document.getElementById("navegador5").value="Microsoft Edge";
+                    }
+
+                    if ( document.getElementById( "navegador6" )) {
+                        document.getElementById("navegador6").value="Microsoft Edge";
+                    }
+
+                    if ( document.getElementById( "navegador7" )) {
+                        document.getElementById("navegador7").value="Microsoft Edge";
+                    }
+
+
+                
+
                 }
 
                 else 
                 {
-                document.getElementById("navegador").value="Desconocido";
+                    if ( document.getElementById( "navegador" )) {
+                        document.getElementById("navegador").value="Desconocido";
+                    }
+                    if ( document.getElementById( "navegador1" )) {
+                        document.getElementById("navegador1").value="Desconocido";
+                    }
+                    if ( document.getElementById( "navegador2" )) {
+                        document.getElementById("navegador2").value="Desconocido";
+                    }
+                    if ( document.getElementById( "navegador3" )) {
+                        document.getElementById("navegador3").value="Desconocido";
+                    }
+                    if ( document.getElementById( "navegador4" )) {
+                        document.getElementById("navegador4").value="Desconocido";
+                    }
+
+                    if ( document.getElementById( "navegador5" )) {
+                        document.getElementById("navegador5").value="Desconocido";
+                    }
+
+
+                    if ( document.getElementById( "navegador6" )) {
+                        document.getElementById("navegador6").value="Desconocido";
+                    }
+
+
+                    if ( document.getElementById( "navegador7" )) {
+                        document.getElementById("navegador7").value="Desconocido";
+                    }
+
+
+               
+             
                 }
 
                 

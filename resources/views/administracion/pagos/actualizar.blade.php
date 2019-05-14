@@ -17,6 +17,8 @@
             {!! Form::open(['route' => ['editar_departamento'],'method'=>'PUT']) !!}
 
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+                <input type="hidden" name="ip_valor1" value="" id="ip_valor1">
+                <input type="hidden" name="navegador1" value="" id="navegador1">
 
                 <div class="row">
                     <div class="col-md-12">
