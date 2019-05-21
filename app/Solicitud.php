@@ -17,6 +17,8 @@ class Solicitud extends Model
         'finalizado_solicitud',
         'id_user_solicitud',
         'leido_solicitud',
+        'visita',
+        'visita_respuesta',
         'id_user_abogado',
         'estado_solicitud',
         'fecha_solicitud',

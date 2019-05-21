@@ -13,7 +13,10 @@ class VisitasRespuestas extends Model
 
     protected $fillable = [
         'id', 
+        'asunto',
+        'respuesta',
         'fecha',
+        'hora',
         'id_visita'
     ];
 }

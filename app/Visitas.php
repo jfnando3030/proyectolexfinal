@@ -13,7 +13,8 @@ class Visitas extends Model
 
     protected $fillable = [
         'id', 
-        'id_user',
-        'fecha'
+        'nombre_solicitud',
+        'fecha',
+        'id_caso'
     ];
 }

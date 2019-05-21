@@ -20,9 +20,10 @@
             @endif
 
             <div class="emp-profile" style="padding: 3%;">
-                <form action="{{ route('store_solicitud') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('store_visita_respuesta') }}" method="post" enctype="multipart/form-data">
 
                     <input type="hidden" name="_token" value="{{ csrf_token() }}" id="token">
+                <input type="hidden" name="caso" value="{{$id_caso}}" id="caso">
 
                     <div class="row">
                         <div class="col-md-12">
@@ -33,7 +34,7 @@
                                             <div class="row">
                                                 <div class="col-md-6" style="padding-bottom: 15px;">
                                                     <label>Asunto:</label>
-                                                    {!! Form::text('nombre',null,['placeholder'=>'Ingrese el título de su solicitud','class'=>'form-control', 'required']) !!}
+                                                    {!! Form::text('asunto',null,['placeholder'=>'Ingrese el título de su solicitud','class'=>'form-control', 'required']) !!}
                                                 </div>
                                                 <div class="col-md-6" style="padding-bottom: 15px;">
                                                     <br>
@@ -44,6 +45,12 @@
                                                     <input type="time" name="hora" id="hora">
                                                 </div>
                                           
+                                            </div>
+                                            <div class="col-md-12">
+
+                                                    <label>Detalle su respuesta:</label>
+                                                    <textarea name="respuesta" id="respuesta" rows="9" placeholder="Escriba más información acerca de su visita al cliente" class="form-control" required="" style="background-color: #f2f2f2;"></textarea> 
+
                                             </div>
                                         </div>
                                     </div>

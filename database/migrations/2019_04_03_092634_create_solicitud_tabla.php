@@ -26,6 +26,8 @@ class CreateSolicitudTabla extends Migration
             $table->char('estado_solicitud',1)->default(1);
             $table->date('fecha_solicitud');
             $table->time('hora_solicitud');
+            $table->char('visita',1)->default(0);
+            $table->char('visita_respuesta',1)->default(0);
             $table->date('fecha_finalizacion_solicitud')->nullable();
             $table->time('hora_finalizacion_solicitud')->nullable();
             $table->date('fecha_aceptar_solicitud')->nullable();

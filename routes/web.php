@@ -209,7 +209,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 	Route::get('administracion/visita/{id}', 'VisitaController@registrar_visita');
 
-	Route::get('administracion/visitas/registrar', 'VisitaController@visita_responder');
+	Route::get('administracion/visitas/registrar/{id}', 'VisitaController@visita_responder');
+	Route::post('administracion/visitas/registrar_visita_respuesta', 'VisitaController@visita_responder_post')->name('store_visita_respuesta');
 
 //******************************************************************************************************
 

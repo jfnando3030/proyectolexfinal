@@ -112,7 +112,7 @@ class WelcomeController extends Controller
 
         $total_casos = Solicitud::where('estado_solicitud',1)->count();
         $total_finalizados = Solicitud::where('estado_solicitud',1)->where('finalizado_solicitud',1)->count();
-      return view('administracion.index', compact('fechas2','estadisticas_finalizacion','total_aceptados','fechas','estadisticas_diarias','casos','saber_tarifa', 'saber_consultoria', 'total_clientes', 'total_casos', 'total_finalizados'));
+      return view('administracion.index', compact('fechas2','estadisticas_finalizacion','total_aceptados','fechas','estadisticas_diarias','saber_tarifa', 'saber_consultoria', 'total_clientes', 'total_casos', 'total_finalizados'));
   
     }else {
       if(Auth::user()->rol == "Abogado"){
@@ -563,7 +563,8 @@ class WelcomeController extends Controller
   public function ver_caso(Request $request, $id)
   {
     $caso = Solicitud::findOrFail(Crypt::decrypt($id));  
-    $archivos = Archivos::where('id_solicitud',$id)->get();
+    $archivos = Archivos::where('id_solicitud',Crypt::decrypt($id))->get();
+  
     $total_respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->count();
     $respuestas_notificacion = Respuesta::where('leido',0)->where('id_user_receptor', Auth::user()->id)->take(3)->get();
     $saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
