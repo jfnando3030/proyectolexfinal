@@ -132,6 +132,19 @@ class VisitaController extends Controller
 	    return view('administracion.visita.registrar', compact('id_caso','casos', 'pagos', 'saber_tarifa', 'total_respuestas_notificacion'));
 	}
 
+	public function respuestas_visita(Request $request){
+
+		$casos = Solicitud::where('id_user_solicitud', $request->user()->id)->where('estado_solicitud', '1')->where('leido_solicitud', '1')->where('finalizado_solicitud', '0')->get();
+		$respuestas_visitas= VisitasRespuestas::all();
+		$saber_tarifa = Pagos::where('id_user',$request->user()->id)->where('activo',1)->where('estado',1)->get();
+		$total_respuestas_notificacion = Respuesta::where('leido',0)->where('estado',1)->where('id_user_receptor', Auth::user()->id)->count();
+
+	
+		return view('administracion.visita.listado', compact('casos','respuestas_visitas', 'saber_tarifa', 'total_respuestas_notificacion'));
+	
+
+	}
+
 	public function visita_responder_post(VisitaRespuestaRequest $request)
   	{
 		 

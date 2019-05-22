@@ -305,10 +305,29 @@
                         </li>
                         @endif
                         @if(Auth::user()->rol == "Abogado" or  Auth::user()->rol == "Registrado" )
-                        <li>
-                            <a href="{{url('administracion/visita')}}" onclick="return myFunction();" id="menu_letras">
-                            <i class="fas fa-list"></i>Visitas</a>
+
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#" id="menu_letras">
+                                <i class="far fa-file-alt"></i>Visitas
+                                <span class="arrow">
+                                    <i class="fas fa-angle-down"></i>
+                                </span>
+                            </a>
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a id="menu_letras" href="{{url('administracion/visita')}}" onclick="return myFunction();">
+                                        <i class="fas fa-file"></i>Generar Visita</a>
+                                </li>
+                                <li>
+                                    <a id="menu_letras"  href="{{url('administracion/respuestas_visitas')}}" onclick="return myFunction();">
+                                        <i class="fas fa-table"></i>Respuestas</a>
+                                </li>
+                                
+                            </ul>
                         </li>
+
+
+ 
                         @endif
 
 

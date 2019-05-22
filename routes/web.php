@@ -206,6 +206,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 // ************************************* VISITA *******************************************************
 
 	Route::get('administracion/visita', 'VisitaController@visita');
+	Route::get('administracion/respuestas_visitas', 'VisitaController@respuestas_visita');
 
 	Route::get('administracion/visita/{id}', 'VisitaController@registrar_visita');
 
