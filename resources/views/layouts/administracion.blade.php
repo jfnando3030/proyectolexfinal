@@ -134,7 +134,7 @@
                         </li>
                         @endif
 
-                        @if(Auth::user()->rol == "Administrador")
+                        @if(Auth::user()->rol == "Administrador" or Auth::user()->rol == "Secretaria")
                         <li class="has-sub">
                             <a class="js-arrow" href="#" id="menu_letras">
                                 <i class="fas fa-user"></i>Usuarios
@@ -159,7 +159,7 @@
 
 
 
-                        @if(Auth::user()->rol == "Administrador")
+                        @if(Auth::user()->rol == "Administrador" or Auth::user()->rol == "Secretaria")
                         <li class="has-sub">
                             <a id="menu_letras" class="js-arrow" href="#">
                                     <i class="fas fa-wrench"></i>Departamentos
@@ -229,7 +229,7 @@
                         </li>
                         @endif
                         
-                        @if(Auth::user()->rol == "Administrador")
+                        @if(Auth::user()->rol == "Administrador" or Auth::user()->rol == "Secretaria")
                         <li class="has-sub">
                             <a class="js-arrow" href="#" id="menu_letras">
                                 <i class="fas fa-credit-card"></i>Tarifas
@@ -248,7 +248,7 @@
 
                         @endif
 
-                        @if(Auth::user()->rol == "Administrador")
+                        @if(Auth::user()->rol == "Administrador" )
                         <li class="has-sub">
                             <a class="js-arrow" href="#" id="menu_letras">
                                 <i class="fas fa-folder"></i>Gestion
@@ -266,7 +266,7 @@
 
                         @endif
 
-                        @if(Auth::user()->rol == "Administrador")
+                        @if(Auth::user()->rol == "Administrador" or Auth::user()->rol == "Abogado")
                         <li class="has-sub">
                             <a class="js-arrow" href="#" id="menu_letras">
                                 <i class="far fa-file-alt"></i>Oficios
@@ -496,7 +496,7 @@
                         </li>
                         @endif
 
-                        @if(Auth::user()->rol == "Administrador")
+                        @if(Auth::user()->rol == "Administrador"  or Auth::user()->rol == "Secretaria")
                         <li class="has-sub">
                             <a class="js-arrow" href="#" id="menu_letras">
                                 <i class="fas fa-user"></i>Usuarios
@@ -521,7 +521,7 @@
 
 
 
-                        @if(Auth::user()->rol == "Administrador")
+                        @if(Auth::user()->rol == "Administrador"  or Auth::user()->rol == "Secretaria")
                         <li class="has-sub">
                             <a id="menu_letras" class="js-arrow" href="#">
                                     <i class="fas fa-wrench"></i>Departamentos
@@ -591,7 +591,7 @@
                         </li>
                         @endif
                         
-                        @if(Auth::user()->rol == "Administrador")
+                        @if(Auth::user()->rol == "Administrador"  or Auth::user()->rol == "Secretaria")
                         <li class="has-sub">
                             <a class="js-arrow" href="#" id="menu_letras">
                                 <i class="fas fa-credit-card"></i>Tarifas
@@ -628,7 +628,7 @@
 
                         @endif
 
-                        @if(Auth::user()->rol == "Administrador")
+                        @if(Auth::user()->rol == "Administrador" or Auth::user()->rol == "Abogado")
                         <li class="has-sub">
                             <a class="js-arrow" href="#" id="menu_letras">
                                 <i class="far fa-file-alt"></i>Oficios

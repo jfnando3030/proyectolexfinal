@@ -109,25 +109,22 @@ class TarifaController extends Controller
         if($tarifa->save()){ 
 
             $date = Carbon::now();
-    $hoy = $date->format('Y-m-d');
-    $hora = $date->format('H:i:s');
+            $hoy = $date->format('Y-m-d');
+            $hora = $date->format('H:i:s');
 
-    $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
+            $ip_navegador= $request['ip_valor']. ' - ' .$request['navegador'];
 
-    Log::create([
-        'fecha_log' => $hoy,
-        'hora_log' => $hora,
-        'estado' => 1,
-        'id_user_log' => Auth::user()->id,
-        'ip' =>  $ip_navegador,
-        'accion' => "Modifico una tarifa",
-                    
+            Log::create([
+                'fecha_log' => $hoy,
+                'hora_log' => $hora,
+                'estado' => 1,
+                'id_user_log' => Auth::user()->id,
+                'ip' =>  $ip_navegador,
+                'accion' => "Modifico una tarifa",                
+            ]);
 
-    
-    ]);
             return redirect('administracion/tarifa')->with('mensaje-registro', 'Datos actualizados correctamente.');
-        }
-        else{
+        }else{
             $request->flash();
             return redirect('administracion/tarifa/'. Crypt::encrypt($tarifa->id).'/edit')->with('mensaje-error', 'Error al actualizar datos.');
         }

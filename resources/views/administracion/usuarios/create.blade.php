@@ -108,6 +108,7 @@
                                                   <option value="Administrador">  Administrador </option>
                                                   <option value="Abogado">  Abogado </option>
                                                   <option value="Registrado">  Registrado </option>
+                                                  <option value="Secretaria">  Secretaria </option>
 
                                                 
                                                             

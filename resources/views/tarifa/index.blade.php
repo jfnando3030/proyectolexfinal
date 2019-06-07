@@ -44,7 +44,7 @@
           @endif
       </td>  -->
       <td style="text-align: center;">
-      @if(Auth::user()->rol == "Administrador")
+      @if(Auth::user()->rol == "Administrador" or Auth::user()->rol == "Secretaria")
         <form action="{{route('tarifa.destroy', Crypt::encrypt($taf->id))}}" method="POST">
         @csrf
         @method('DELETE')
