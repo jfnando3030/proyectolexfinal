@@ -2119,7 +2119,7 @@ a.gradient-btn:hover:after{
     width: 100%;
   margin-top: auto;
   margin-bottom: auto;
-  background: #003364;
+  background: #131c34;
   position: relative;
   display: flex;
   justify-content: center;
@@ -2272,7 +2272,7 @@ a.gradient-btn:hover:after{
   width: 170px;
   top: -75px;
   border-radius: 50%;
-  background: #003364;
+  background: #ca9015;
   padding: 10px;
   text-align: center;
 }

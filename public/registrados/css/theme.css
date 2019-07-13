@@ -2112,7 +2112,7 @@ section {
     -moz-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    background: white;
+    background: #131c34;
     padding: 0 15px;
 }
 
@@ -2277,7 +2277,7 @@ section {
 
 .header-desktop2 {
     height: 75px;
-    background: #1a73e8;
+    background: #131c34;
     position: fixed;
     z-index: 1001;
     top: 0;
@@ -2293,7 +2293,7 @@ section {
     .header-desktop2 {
         left: 0;
         position: relative;
-        background: white;
+        background: #131c34;
     }
     .header-button-item{
         color: #000;
@@ -3120,9 +3120,9 @@ section {
 }
 
 .overview-item--c1 {
-    background-image: -moz-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
-    background-image: -webkit-linear-gradient(90deg, #323643 0%, #1a73e8 3%);
-    background-image: -ms-linear-gradient(90deg, #3f5efb 0%, #fc466b 100%);
+    background-image: -moz-linear-gradient(90deg, #131c34 0%, #fc466b 100%);
+    background-image: -webkit-linear-gradient(90deg, #323643 0%, #131c34 3%);
+    background-image: -ms-linear-gradient(90deg, #131c34 0%, #fc466b 100%);
 }
 
 .overview-item--c2 {
